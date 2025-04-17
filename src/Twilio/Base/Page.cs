@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using Twilio.Rest;
 using static System.String;
 
@@ -120,47 +118,43 @@ namespace Twilio.Base
         /// <returns>Page of results</returns>
         public static Page<T> FromJson(string recordKey, string json)
         {
-            var root = JObject.Parse(json);
-            var records = root[recordKey];
-            var parsedRecords = records.Children().Select(
-                record => JsonConvert.DeserializeObject<T>(record.ToString())
-            ).ToList();
-            
-            if(root["uri"] != null){
-                var uriNode = root["uri"];
-                if (uriNode != null)
+            using (var doc = JsonDocument.Parse(json))
+            {
+                var root = doc.RootElement;
+                var recordsElement = root.GetProperty(recordKey);
+                var parsedRecords = recordsElement
+                    .EnumerateArray()
+                    .Select(record => record.Deserialize<T>())
+                    .ToList();
+                JsonElement uriNode;
+                if (root.TryGetProperty("uri", out uriNode))
                 {
-                    JToken pageSize;
-                    JToken firstPageUri;
-                    JToken nextPageUri;
-                    JToken previousPageUri;
+                    JsonElement pageSize;
+                    JsonElement firstPageUri;
+                    JsonElement nextPageUri;
+                    JsonElement previousPageUri;
 
                     // v2010 API
                     return new Page<T>(
                         parsedRecords,
-                        root.TryGetValue("page_size", out pageSize) ? root["page_size"].Value<int>() : parsedRecords.Count,
-                        uri: uriNode.Value<string>(),
-                        firstPageUri: root.TryGetValue("first_page_uri", out firstPageUri) ? root["first_page_uri"].Value<string>() : null,
-                        nextPageUri: root.TryGetValue("next_page_uri", out nextPageUri) ? root["next_page_uri"].Value<string>() : null,
-                        previousPageUri: root.TryGetValue("previous_page_uri", out previousPageUri) ? root["previous_page_uri"].Value<string>() : null
+                        root.TryGetProperty("page_size", out pageSize) ? pageSize.GetInt32() : parsedRecords.Count,
+                        uri: uriNode.GetString(),
+                        firstPageUri: root.TryGetProperty("first_page_uri", out firstPageUri) ? firstPageUri.GetString() : null,
+                        nextPageUri: root.TryGetProperty("next_page_uri", out nextPageUri) ? nextPageUri.GetString() : null,
+                        previousPageUri: root.TryGetProperty("previous_page_uri", out previousPageUri) ? previousPageUri.GetString() : null
                     );
-                }
-            }
 
-            // next-gen API
-            if(root["meta"] != null){
-                var meta = root["meta"];
+                }
+                JsonElement meta = root.GetProperty("meta");
                 return new Page<T>(
                     parsedRecords,
-                    meta["page_size"].Value<int>(),
-                    url: meta["url"].Value<string>(),
-                    firstPageUrl: meta["first_page_url"].Value<string>(),
-                    nextPageUrl: meta["next_page_url"].Value<string>(),
-                    previousPageUrl: meta["previous_page_url"].Value<string>()
+                    meta.GetProperty("page_size").GetInt32(),
+                    url: meta.GetProperty("url").GetString(),
+                    firstPageUrl: meta.GetProperty("first_page_uri").GetString(),
+                    nextPageUrl: meta.GetProperty("next_page_uri").GetString(),
+                    previousPageUrl: meta.GetProperty("previous_page_uri").GetString()
                 );
             }
-
-            return new Page<T>(parsedRecords, 0, null, null, null, null);
 
         }
     }

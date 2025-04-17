@@ -2,17 +2,22 @@
 
 namespace Twilio.Types
 {
+    public interface IStringEnum
+    {
+    }
+
+
     /// <summary>
     /// Enum object for strings
     /// </summary>
-    public abstract class StringEnum
+    public class StringEnum : IStringEnum, IComparable<StringEnum>
     {
-        private string _value;
+        private readonly string _value;
 
         /// <summary>
         /// Generic constructor
         /// </summary>
-        protected StringEnum() {}
+        protected StringEnum() { }
 
         /// <summary>
         /// Create from string
@@ -23,14 +28,7 @@ namespace Twilio.Types
             _value = value;
         }
 
-        /// <summary>
-        /// Generate from string
-        /// </summary>
-        /// <param name="value">String value</param>
-        public void FromString(string value)
-        {
-            _value = value;
-        }
+        
 
         /// <summary>
         /// Convert to string
@@ -53,7 +51,7 @@ namespace Twilio.Types
                 return false;
             }
 
-            var o = (StringEnum) Convert.ChangeType(obj, GetType());
+            var o = (StringEnum)Convert.ChangeType(obj, GetType());
             if (o == null)
             {
                 return false;
@@ -61,6 +59,12 @@ namespace Twilio.Types
 
             return o._value.Equals(_value);
         }
+
+        public int CompareTo(StringEnum other)
+        {
+            return _value.CompareTo(other._value);
+        }
+
 
         public static bool operator ==(StringEnum a, StringEnum b)
         {
@@ -73,15 +77,20 @@ namespace Twilio.Types
             {
                 return false;
             }
-            
+
+
             return a.Equals(b);
         }
 
-        public static bool operator!=(StringEnum a, StringEnum b)
+        public static bool operator !=(StringEnum a, StringEnum b)
         {
             return !(a == b);
         }
 
+        public static implicit operator StringEnum(string value)
+        {
+            return new StringEnum(value);
+        }
     }
 }
 

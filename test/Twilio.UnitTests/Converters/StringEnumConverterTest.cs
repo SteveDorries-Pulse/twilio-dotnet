@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Twilio.Converters;
 using Twilio.Types;
@@ -11,33 +12,30 @@ namespace Twilio.UnitTests.Converters
     {
         class StatusClass
         {
-            [JsonProperty("status")]
+            [JsonPropertyName("status")]
             [JsonConverter(typeof(StringEnumConverter))]
-            public StatusEnum? Status { get; private set; }
+            public StatusEnum? Status { get; set; }
 
-            [JsonProperty("status_list")]
+            [JsonPropertyName("status_list")]
             [JsonConverter(typeof(StringEnumConverter))]
-            public List<StatusEnum>? StatusList { get; private set; }
+            public List<StatusEnum>? StatusList { get; set; }
         }
 
+        
         class StatusEnum : StringEnum
         {
-            private StatusEnum(string value) : base(value) { }
+            public StatusEnum(string value) : base(value) { }
             public StatusEnum() { }
-            public static implicit operator StatusEnum(string value)
-            {
-                return new StatusEnum(value);
-            }
-
-            public static readonly StatusEnum Awe = new StatusEnum("awe");
-            public static readonly StatusEnum Some = new StatusEnum("some");
+            
+            public static readonly StatusEnum Awe = new("awe");
+            public static readonly StatusEnum Some = new("some");
         }
 
         [Fact]
         public void TestBasicDeserialize()
         {
             var input = "{\"status\":\"awe\",\"status_list\":[\"some\"]}";
-            var result = JsonConvert.DeserializeObject<StatusClass>(input);
+            var result = JsonSerializer.Deserialize<StatusClass>(input);
             Assert.Equal(StatusEnum.Awe, result!.Status);
             Assert.Equal(new[] { StatusEnum.Some }, result.StatusList);
         }
@@ -46,7 +44,7 @@ namespace Twilio.UnitTests.Converters
         public void TestNullDeserialize()
         {
             var input = "{\"status\":null,\"status_list\":null}";
-            var result = JsonConvert.DeserializeObject<StatusClass>(input);
+            var result = JsonSerializer.Deserialize<StatusClass>(input);
             Assert.Null(result!.Status);
             Assert.Null(result.StatusList);
         }

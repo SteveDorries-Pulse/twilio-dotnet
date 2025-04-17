@@ -1,26 +1,29 @@
 ﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using Twilio.Types;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace Twilio.Converters
 {
     /// <summary>
     /// Converts between enums and strings
     /// </summary>
-    public class StringEnumConverter : JsonConverter
+    public class StringEnumConverter : JsonConverter<object>
     {
+
+
         /// <summary>
         /// Writes value to a JsonWriter
         /// </summary>
         /// <param name="writer">JsonWriter to use</param>
         /// <param name="value">value to write</param>
         /// <param name="serializer">unused</param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {
-            var t = JToken.FromObject(value.ToString());
+            var t = JsonNode.Parse(value.ToString());
             t.WriteTo(writer);
         }
 
@@ -32,36 +35,32 @@ namespace Twilio.Converters
         /// <param name="existingValue">unused</param>
         /// <param name="serializer">unused</param>
         /// <returns>Converted object</returns>
-        public override object ReadJson(
-            JsonReader reader,
+        public override object Read(
+            ref Utf8JsonReader reader,
             Type objectType,
-            object existingValue,
-            JsonSerializer serializer
+            JsonSerializerOptions options
         )
         {
-            if (reader.Value == null)
+
+            // Value is null for 'Null' tokens and 'StartArray' tokens. If it's the former, stop now!
+            if (reader.TokenType == JsonTokenType.Null)
             {
-                // Value is null for 'Null' tokens and 'StartArray' tokens. If it's the former, stop now!
-                if (reader.TokenType == JsonToken.Null)
-                {
-                    return null;
-                }
-#if !NET35
+                return null;
+            }
+            if (reader.TokenType == JsonTokenType.StartArray)
+            {
                 if (objectType.GenericTypeArguments.Length == 0)
-#else
-                if (objectType.GetGenericArguments().Length == 0)
-#endif
                 {
                     return null;
                 }
+
                 var constructedListType = MakeGenericType(objectType);
-                var results = (IList) Activator.CreateInstance(constructedListType);
+                var results = (IList)Activator.CreateInstance(constructedListType);
                 reader.Read();
 
-                while (reader.Value != null)
+                while (reader.TokenType != JsonTokenType.EndArray)
                 {
-                    var e = CreateEnum(objectType);
-                    e.FromString(reader.Value as string);
+                    var e = CreateEnum(objectType, reader.GetString());
                     results.Add(e);
                     reader.Read();
                 }
@@ -69,8 +68,7 @@ namespace Twilio.Converters
                 return results;
             }
 
-            var instance = (StringEnum) Activator.CreateInstance(objectType);
-            instance.FromString(reader.Value as string);
+            var instance = (StringEnum)Activator.CreateInstance(objectType, reader.GetString());
 
             return instance;
         }
@@ -82,28 +80,24 @@ namespace Twilio.Converters
         /// <returns>true if it can be converted; false otherwise</returns>
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(Enum);
+            return true;
         }
 
-        private static Type MakeGenericType(Type objectType)
+        private Type MakeGenericType(Type objectType)
         {
             var listType = typeof(List<>);
 
-#if !NET35
             return listType.MakeGenericType(objectType.GenericTypeArguments[0]);
-#else
-            return listType.MakeGenericType(objectType.GetGenericArguments()[0]);
-#endif
         }
 
-        private static StringEnum CreateEnum(Type objectType)
+        private StringEnum CreateEnum(Type objectType, string value)
         {
-#if !NET35
-            return (StringEnum) Activator.CreateInstance(objectType.GenericTypeArguments[0]);
-#else
-            return (StringEnum) Activator.CreateInstance(objectType.GetGenericArguments()[0]);
-#endif
+
+            return (StringEnum)Activator.CreateInstance(objectType.GenericTypeArguments[0], value);
+
         }
+
+
     }
 
 }

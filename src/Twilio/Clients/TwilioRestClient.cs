@@ -1,18 +1,16 @@
 ﻿
 using System;
 using System.Net;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Twilio.Exceptions;
 using Twilio.AuthStrategies;
 
-#if !NET35
+
 using System.Threading.Tasks;
-#endif
+
 
 using Twilio.Http;
-#if NET35
-using Twilio.Http.Net35;
-#endif
+
 
 namespace Twilio.Clients
 {
@@ -231,7 +229,7 @@ namespace Twilio.Clients
             {
                 restException = RestException.FromJson(response.Content);
             }
-            catch (JsonReaderException) { /* Allow null check below to handle */ }
+            catch (JsonException) { /* Allow null check below to handle */ }
 
             if (restException == null)
             {

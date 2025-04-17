@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Twilio.Exceptions;
 using Twilio.Http.BearerToken;
 using Twilio.Annotations;
@@ -285,7 +285,7 @@ namespace Twilio.Clients.BearerToken
             {
                 restException = RestException.FromJson(response.Content);
             }
-            catch (JsonReaderException) { /* Allow null check below to handle */ }
+            catch (JsonException) { /* Allow null check below to handle */ }
 
             if (restException == null)
             {

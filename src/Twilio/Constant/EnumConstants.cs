@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using Twilio.Converters;
 using Twilio.Types;
 
