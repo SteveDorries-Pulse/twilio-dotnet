@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Twilio.Types
 {
@@ -11,25 +11,25 @@ namespace Twilio.Types
         /// <summary>
         /// SMS mcc
         /// </summary>
-        [JsonProperty("mcc")]
+        [JsonPropertyName("mcc")]
         public string Mcc { get; }
 
         /// <summary>
         /// SMS mnc
         /// </summary>
-        [JsonProperty("mnc")]
+        [JsonPropertyName("mnc")]
         public string Mnc { get; }
 
         /// <summary>
         /// Carrier name
         /// </summary>
-        [JsonProperty("carrier")]
+        [JsonPropertyName("carrier")]
         public string Carrier { get; }
 
         /// <summary>
         /// List of prices
         /// </summary>
-        [JsonProperty("prices")]
+        [JsonPropertyName("prices")]
         public List<InboundSmsPrice> Prices { get; }
 
         /// <summary>

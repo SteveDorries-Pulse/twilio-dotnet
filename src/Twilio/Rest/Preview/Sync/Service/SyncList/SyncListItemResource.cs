@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -529,7 +529,7 @@ namespace Twilio.Rest.Preview.Sync.Service.SyncList
         {
             try
             {
-                return JsonConvert.DeserializeObject<SyncListItemResource>(json);
+                return JsonSerializer.Deserialize<SyncListItemResource>(json);
             }
             catch (JsonException e)
             {
@@ -545,7 +545,7 @@ namespace Twilio.Rest.Preview.Sync.Service.SyncList
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -555,43 +555,43 @@ namespace Twilio.Rest.Preview.Sync.Service.SyncList
 
     
         ///<summary> The index </summary> 
-        [JsonProperty("index")]
+        [JsonPropertyName("index")]
         public int? Index { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The service_sid </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The list_sid </summary> 
-        [JsonProperty("list_sid")]
+        [JsonPropertyName("list_sid")]
         public string ListSid { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The revision </summary> 
-        [JsonProperty("revision")]
+        [JsonPropertyName("revision")]
         public string Revision { get; private set; }
 
         ///<summary> The data </summary> 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public object Data { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The created_by </summary> 
-        [JsonProperty("created_by")]
+        [JsonPropertyName("created_by")]
         public string CreatedBy { get; private set; }
 
 

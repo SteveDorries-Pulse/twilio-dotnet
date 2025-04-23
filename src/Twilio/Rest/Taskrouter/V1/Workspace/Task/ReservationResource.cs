@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -620,7 +620,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Task
         {
             try
             {
-                return JsonConvert.DeserializeObject<ReservationResource>(json);
+                return JsonSerializer.Deserialize<ReservationResource>(json);
             }
             catch (JsonException e)
             {
@@ -636,7 +636,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Task
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -646,47 +646,47 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Task
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskReservation resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         
-        [JsonProperty("reservation_status")]
+        [JsonPropertyName("reservation_status")]
         public ReservationResource.StatusEnum ReservationStatus { get; private set; }
 
         ///<summary> The unique string that we created to identify the TaskReservation resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the reserved Task resource. </summary> 
-        [JsonProperty("task_sid")]
+        [JsonPropertyName("task_sid")]
         public string TaskSid { get; private set; }
 
         ///<summary> The `friendly_name` of the Worker that is reserved. </summary> 
-        [JsonProperty("worker_name")]
+        [JsonPropertyName("worker_name")]
         public string WorkerName { get; private set; }
 
         ///<summary> The SID of the reserved Worker resource. </summary> 
-        [JsonProperty("worker_sid")]
+        [JsonPropertyName("worker_sid")]
         public string WorkerSid { get; private set; }
 
         ///<summary> The SID of the Workspace that this task is contained within. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The absolute URL of the TaskReservation reservation. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

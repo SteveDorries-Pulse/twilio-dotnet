@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -541,7 +541,7 @@ namespace Twilio.Rest.Notify.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ServiceResource>(json);
+                return JsonSerializer.Deserialize<ServiceResource>(json);
             }
             catch (JsonException e)
             {
@@ -557,7 +557,7 @@ namespace Twilio.Rest.Notify.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -567,83 +567,83 @@ namespace Twilio.Rest.Notify.V1
 
     
         ///<summary> The unique string that we created to identify the Service resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The SID of the [Credential](https://www.twilio.com/docs/notify/api/credential-resource) to use for APN Bindings. </summary> 
-        [JsonProperty("apn_credential_sid")]
+        [JsonPropertyName("apn_credential_sid")]
         public string ApnCredentialSid { get; private set; }
 
         ///<summary> The SID of the [Credential](https://www.twilio.com/docs/notify/api/credential-resource) to use for GCM Bindings. </summary> 
-        [JsonProperty("gcm_credential_sid")]
+        [JsonPropertyName("gcm_credential_sid")]
         public string GcmCredentialSid { get; private set; }
 
         ///<summary> The SID of the [Credential](https://www.twilio.com/docs/notify/api/credential-resource) to use for FCM Bindings. </summary> 
-        [JsonProperty("fcm_credential_sid")]
+        [JsonPropertyName("fcm_credential_sid")]
         public string FcmCredentialSid { get; private set; }
 
         ///<summary> The SID of the [Messaging Service](https://www.twilio.com/docs/sms/quickstart#messaging-services) to use for SMS Bindings. In order to send SMS notifications this parameter has to be set. </summary> 
-        [JsonProperty("messaging_service_sid")]
+        [JsonPropertyName("messaging_service_sid")]
         public string MessagingServiceSid { get; private set; }
 
         ///<summary> Deprecated. </summary> 
-        [JsonProperty("facebook_messenger_page_id")]
+        [JsonPropertyName("facebook_messenger_page_id")]
         public string FacebookMessengerPageId { get; private set; }
 
         ///<summary> The protocol version to use for sending APNS notifications. Can be overridden on a Binding by Binding basis when creating a [Binding](https://www.twilio.com/docs/notify/api/binding-resource) resource. </summary> 
-        [JsonProperty("default_apn_notification_protocol_version")]
+        [JsonPropertyName("default_apn_notification_protocol_version")]
         public string DefaultApnNotificationProtocolVersion { get; private set; }
 
         ///<summary> The protocol version to use for sending GCM notifications. Can be overridden on a Binding by Binding basis when creating a [Binding](https://www.twilio.com/docs/notify/api/binding-resource) resource. </summary> 
-        [JsonProperty("default_gcm_notification_protocol_version")]
+        [JsonPropertyName("default_gcm_notification_protocol_version")]
         public string DefaultGcmNotificationProtocolVersion { get; private set; }
 
         ///<summary> The protocol version to use for sending FCM notifications. Can be overridden on a Binding by Binding basis when creating a [Binding](https://www.twilio.com/docs/notify/api/binding-resource) resource. </summary> 
-        [JsonProperty("default_fcm_notification_protocol_version")]
+        [JsonPropertyName("default_fcm_notification_protocol_version")]
         public string DefaultFcmNotificationProtocolVersion { get; private set; }
 
         ///<summary> Whether to log notifications. Can be: `true` or `false` and the default is `true`. </summary> 
-        [JsonProperty("log_enabled")]
+        [JsonPropertyName("log_enabled")]
         public bool? LogEnabled { get; private set; }
 
         ///<summary> The absolute URL of the Service resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of the Binding, Notification, Segment, and User resources related to the service. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> Deprecated. </summary> 
-        [JsonProperty("alexa_skill_id")]
+        [JsonPropertyName("alexa_skill_id")]
         public string AlexaSkillId { get; private set; }
 
         ///<summary> Deprecated. </summary> 
-        [JsonProperty("default_alexa_notification_protocol_version")]
+        [JsonPropertyName("default_alexa_notification_protocol_version")]
         public string DefaultAlexaNotificationProtocolVersion { get; private set; }
 
         ///<summary> URL to send delivery status callback. </summary> 
-        [JsonProperty("delivery_callback_url")]
+        [JsonPropertyName("delivery_callback_url")]
         public string DeliveryCallbackUrl { get; private set; }
 
         ///<summary> Callback configuration that enables delivery callbacks, default false </summary> 
-        [JsonProperty("delivery_callback_enabled")]
+        [JsonPropertyName("delivery_callback_enabled")]
         public bool? DeliveryCallbackEnabled { get; private set; }
 
 

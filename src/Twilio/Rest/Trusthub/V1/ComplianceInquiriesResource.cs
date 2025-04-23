@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -194,7 +194,7 @@ namespace Twilio.Rest.Trusthub.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ComplianceInquiriesResource>(json);
+                return JsonSerializer.Deserialize<ComplianceInquiriesResource>(json);
             }
             catch (JsonException e)
             {
@@ -210,7 +210,7 @@ namespace Twilio.Rest.Trusthub.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -220,19 +220,19 @@ namespace Twilio.Rest.Trusthub.V1
 
     
         ///<summary> The unique ID used to start an embedded compliance registration session. </summary> 
-        [JsonProperty("inquiry_id")]
+        [JsonPropertyName("inquiry_id")]
         public string InquiryId { get; private set; }
 
         ///<summary> The session token used to start an embedded compliance registration session. </summary> 
-        [JsonProperty("inquiry_session_token")]
+        [JsonPropertyName("inquiry_session_token")]
         public string InquirySessionToken { get; private set; }
 
         ///<summary> The CustomerID matching the Customer Profile that should be resumed or resubmitted for editing. </summary> 
-        [JsonProperty("customer_id")]
+        [JsonPropertyName("customer_id")]
         public string CustomerId { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

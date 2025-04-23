@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -410,7 +410,7 @@ namespace Twilio.Rest.Chat.V2.Service.Channel
         {
             try
             {
-                return JsonConvert.DeserializeObject<InviteResource>(json);
+                return JsonSerializer.Deserialize<InviteResource>(json);
             }
             catch (JsonException e)
             {
@@ -426,7 +426,7 @@ namespace Twilio.Rest.Chat.V2.Service.Channel
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -436,43 +436,43 @@ namespace Twilio.Rest.Chat.V2.Service.Channel
 
     
         ///<summary> The unique string that we created to identify the Invite resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Invite resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Channel](https://www.twilio.com/docs/chat/channels) the Invite resource belongs to. </summary> 
-        [JsonProperty("channel_sid")]
+        [JsonPropertyName("channel_sid")]
         public string ChannelSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the Invite resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The application-defined string that uniquely identifies the resource's [User](https://www.twilio.com/docs/chat/rest/user-resource) within the [Service](https://www.twilio.com/docs/chat/rest/service-resource). See [access tokens](https://www.twilio.com/docs/chat/create-tokens) for more info. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The SID of the [Role](https://www.twilio.com/docs/chat/rest/role-resource) assigned to the resource. </summary> 
-        [JsonProperty("role_sid")]
+        [JsonPropertyName("role_sid")]
         public string RoleSid { get; private set; }
 
         ///<summary> The `identity` of the User that created the invite. </summary> 
-        [JsonProperty("created_by")]
+        [JsonPropertyName("created_by")]
         public string CreatedBy { get; private set; }
 
         ///<summary> The absolute URL of the Invite resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

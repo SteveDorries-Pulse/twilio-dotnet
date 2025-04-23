@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -414,7 +414,7 @@ namespace Twilio.Rest.Proxy.V1.Service.Session
         {
             try
             {
-                return JsonConvert.DeserializeObject<ParticipantResource>(json);
+                return JsonSerializer.Deserialize<ParticipantResource>(json);
             }
             catch (JsonException e)
             {
@@ -430,7 +430,7 @@ namespace Twilio.Rest.Proxy.V1.Service.Session
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -440,55 +440,55 @@ namespace Twilio.Rest.Proxy.V1.Service.Session
 
     
         ///<summary> The unique string that we created to identify the Participant resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the parent [Session](https://www.twilio.com/docs/proxy/api/session) resource. </summary> 
-        [JsonProperty("session_sid")]
+        [JsonPropertyName("session_sid")]
         public string SessionSid { get; private set; }
 
         ///<summary> The SID of the resource's parent [Service](https://www.twilio.com/docs/proxy/api/service) resource. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Participant resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the participant. This value must be 255 characters or fewer. Supports UTF-8 characters. **This value should not have PII.** </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The phone number or channel identifier of the Participant. This value must be 191 characters or fewer. Supports UTF-8 characters. </summary> 
-        [JsonProperty("identifier")]
+        [JsonPropertyName("identifier")]
         public string Identifier { get; private set; }
 
         ///<summary> The phone number or short code (masked number) of the participant's partner. The participant will call or message the partner participant at this number. </summary> 
-        [JsonProperty("proxy_identifier")]
+        [JsonPropertyName("proxy_identifier")]
         public string ProxyIdentifier { get; private set; }
 
         ///<summary> The SID of the Proxy Identifier assigned to the Participant. </summary> 
-        [JsonProperty("proxy_identifier_sid")]
+        [JsonPropertyName("proxy_identifier_sid")]
         public string ProxyIdentifierSid { get; private set; }
 
         ///<summary> The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the Participant was removed from the session. </summary> 
-        [JsonProperty("date_deleted")]
+        [JsonPropertyName("date_deleted")]
         public DateTime? DateDeleted { get; private set; }
 
         ///<summary> The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was created. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the Participant resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs to resources related the participant. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

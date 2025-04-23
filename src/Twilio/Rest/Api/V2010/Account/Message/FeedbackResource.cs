@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -134,7 +134,7 @@ namespace Twilio.Rest.Api.V2010.Account.Message
         {
             try
             {
-                return JsonConvert.DeserializeObject<FeedbackResource>(json);
+                return JsonSerializer.Deserialize<FeedbackResource>(json);
             }
             catch (JsonException e)
             {
@@ -150,7 +150,7 @@ namespace Twilio.Rest.Api.V2010.Account.Message
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -160,27 +160,27 @@ namespace Twilio.Rest.Api.V2010.Account.Message
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) associated with this MessageFeedback resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Message resource associated with this MessageFeedback resource. </summary> 
-        [JsonProperty("message_sid")]
+        [JsonPropertyName("message_sid")]
         public string MessageSid { get; private set; }
 
         
-        [JsonProperty("outcome")]
+        [JsonPropertyName("outcome")]
         public FeedbackResource.OutcomeEnum Outcome { get; private set; }
 
         ///<summary> The date and time in GMT when this MessageFeedback resource was created, specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when this MessageFeedback resource was last updated, specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

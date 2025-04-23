@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -181,7 +181,7 @@ namespace Twilio.Rest.Supersim.V1.Sim
         {
             try
             {
-                return JsonConvert.DeserializeObject<SimIpAddressResource>(json);
+                return JsonSerializer.Deserialize<SimIpAddressResource>(json);
             }
             catch (JsonException e)
             {
@@ -197,7 +197,7 @@ namespace Twilio.Rest.Supersim.V1.Sim
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -207,11 +207,11 @@ namespace Twilio.Rest.Supersim.V1.Sim
 
     
         ///<summary> IP address assigned to the given Super SIM </summary> 
-        [JsonProperty("ip_address")]
+        [JsonPropertyName("ip_address")]
         public string IpAddress { get; private set; }
 
         
-        [JsonProperty("ip_address_version")]
+        [JsonPropertyName("ip_address_version")]
         public SimIpAddressResource.IpAddressVersionEnum IpAddressVersion { get; private set; }
 
 

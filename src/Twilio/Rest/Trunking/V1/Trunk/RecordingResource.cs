@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -213,7 +213,7 @@ namespace Twilio.Rest.Trunking.V1.Trunk
         {
             try
             {
-                return JsonConvert.DeserializeObject<RecordingResource>(json);
+                return JsonSerializer.Deserialize<RecordingResource>(json);
             }
             catch (JsonException e)
             {
@@ -229,7 +229,7 @@ namespace Twilio.Rest.Trunking.V1.Trunk
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -239,11 +239,11 @@ namespace Twilio.Rest.Trunking.V1.Trunk
 
     
         
-        [JsonProperty("mode")]
+        [JsonPropertyName("mode")]
         public RecordingResource.RecordingModeEnum Mode { get; private set; }
 
         
-        [JsonProperty("trim")]
+        [JsonPropertyName("trim")]
         public RecordingResource.RecordingTrimEnum Trim { get; private set; }
 
 

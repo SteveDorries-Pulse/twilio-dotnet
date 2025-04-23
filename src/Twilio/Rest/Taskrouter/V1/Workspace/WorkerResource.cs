@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -518,7 +518,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
         {
             try
             {
-                return JsonConvert.DeserializeObject<WorkerResource>(json);
+                return JsonSerializer.Deserialize<WorkerResource>(json);
             }
             catch (JsonException e)
             {
@@ -534,7 +534,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -544,55 +544,55 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The `friendly_name` of the Worker's current Activity. </summary> 
-        [JsonProperty("activity_name")]
+        [JsonPropertyName("activity_name")]
         public string ActivityName { get; private set; }
 
         ///<summary> The SID of the Worker's current Activity. </summary> 
-        [JsonProperty("activity_sid")]
+        [JsonPropertyName("activity_sid")]
         public string ActivitySid { get; private set; }
 
         ///<summary> The JSON string that describes the Worker. For example: `{ \"email\": \"Bob@example.com\", \"phone\": \"+5095551234\" }`. **Note** If this property has been assigned a value, it will only be displayed in FETCH actions that return a single resource. Otherwise, this property will be null, even if it has a value. This data is passed to the `assignment_callback_url` when TaskRouter assigns a Task to the Worker. </summary> 
-        [JsonProperty("attributes")]
+        [JsonPropertyName("attributes")]
         public string Attributes { get; private set; }
 
         ///<summary> Whether the Worker is available to perform tasks. </summary> 
-        [JsonProperty("available")]
+        [JsonPropertyName("available")]
         public bool? Available { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT of the last change to the Worker's activity specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Used to calculate Workflow statistics. </summary> 
-        [JsonProperty("date_status_changed")]
+        [JsonPropertyName("date_status_changed")]
         public DateTime? DateStatusChanged { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. Friendly names are case insensitive, and unique within the TaskRouter Workspace. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The unique string that we created to identify the Worker resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the Workspace that contains the Worker. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The absolute URL of the Worker resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

@@ -11,17 +11,17 @@ namespace Twilio.Exceptions
         /// <summary>
         /// Twilio error code
         /// </summary>
-        public int Code { get; }
+        public int Code { get;set; }
 
         /// <summary>
         /// HTTP status code
         /// </summary>
-        public int Status { get; }
+        public int Status { get;set; }
 
         /// <summary>
         /// More info if any was provided
         /// </summary>
-        public string MoreInfo { get; }
+        public string MoreInfo { get;set;}
 
         /// <summary>
         /// Any more details about the error, if any were provided

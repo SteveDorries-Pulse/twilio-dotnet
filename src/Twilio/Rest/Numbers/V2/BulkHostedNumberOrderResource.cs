@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -187,7 +187,7 @@ namespace Twilio.Rest.Numbers.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<BulkHostedNumberOrderResource>(json);
+                return JsonSerializer.Deserialize<BulkHostedNumberOrderResource>(json);
             }
             catch (JsonException e)
             {
@@ -203,7 +203,7 @@ namespace Twilio.Rest.Numbers.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -213,39 +213,39 @@ namespace Twilio.Rest.Numbers.V2
 
     
         ///<summary> A 34 character string that uniquely identifies this BulkHostedNumberOrder. </summary> 
-        [JsonProperty("bulk_hosting_sid")]
+        [JsonPropertyName("bulk_hosting_sid")]
         public string BulkHostingSid { get; private set; }
 
         
-        [JsonProperty("request_status")]
+        [JsonPropertyName("request_status")]
         public BulkHostedNumberOrderResource.RequestStatusEnum RequestStatus { get; private set; }
 
         ///<summary> A 128 character string that is a human-readable text that describes this resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> Email address used for send notifications about this Bulk hosted number request. </summary> 
-        [JsonProperty("notification_email")]
+        [JsonPropertyName("notification_email")]
         public string NotificationEmail { get; private set; }
 
         ///<summary> The date this resource was created, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was completed, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_completed")]
+        [JsonPropertyName("date_completed")]
         public DateTime? DateCompleted { get; private set; }
 
         ///<summary> The URL of this BulkHostedNumberOrder resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The total count of phone numbers in this Bulk hosting request. </summary> 
-        [JsonProperty("total_count")]
+        [JsonPropertyName("total_count")]
         public int? TotalCount { get; private set; }
 
         ///<summary> Contains a list of all the individual hosting orders and their information, for this Bulk request. Each result object is grouped by its order status. To see a complete list of order status, please check 'https://www.twilio.com/docs/phone-numbers/hosted-numbers/hosted-numbers-api/hosted-number-order-resource#status-values'. </summary> 
-        [JsonProperty("results")]
+        [JsonPropertyName("results")]
         public List<object> Results { get; private set; }
 
 

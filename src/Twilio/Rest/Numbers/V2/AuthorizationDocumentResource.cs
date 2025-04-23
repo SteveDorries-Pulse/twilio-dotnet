@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -404,7 +404,7 @@ namespace Twilio.Rest.Numbers.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<AuthorizationDocumentResource>(json);
+                return JsonSerializer.Deserialize<AuthorizationDocumentResource>(json);
             }
             catch (JsonException e)
             {
@@ -420,7 +420,7 @@ namespace Twilio.Rest.Numbers.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -430,39 +430,39 @@ namespace Twilio.Rest.Numbers.V2
 
     
         ///<summary> A 34 character string that uniquely identifies this AuthorizationDocument. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies the Address resource that is associated with this AuthorizationDocument. </summary> 
-        [JsonProperty("address_sid")]
+        [JsonPropertyName("address_sid")]
         public string AddressSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public AuthorizationDocumentResource.StatusEnum Status { get; private set; }
 
         ///<summary> Email that this AuthorizationDocument will be sent to for signing. </summary> 
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; private set; }
 
         ///<summary> Email recipients who will be informed when an Authorization Document has been sent and signed. </summary> 
-        [JsonProperty("cc_emails")]
+        [JsonPropertyName("cc_emails")]
         public List<string> CcEmails { get; private set; }
 
         ///<summary> The date this resource was created, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was updated, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

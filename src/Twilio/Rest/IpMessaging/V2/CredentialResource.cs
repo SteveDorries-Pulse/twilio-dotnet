@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -491,7 +491,7 @@ namespace Twilio.Rest.IpMessaging.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<CredentialResource>(json);
+                return JsonSerializer.Deserialize<CredentialResource>(json);
             }
             catch (JsonException e)
             {
@@ -507,7 +507,7 @@ namespace Twilio.Rest.IpMessaging.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -517,35 +517,35 @@ namespace Twilio.Rest.IpMessaging.V2
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The friendly_name </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public CredentialResource.PushServiceEnum Type { get; private set; }
 
         ///<summary> The sandbox </summary> 
-        [JsonProperty("sandbox")]
+        [JsonPropertyName("sandbox")]
         public string Sandbox { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

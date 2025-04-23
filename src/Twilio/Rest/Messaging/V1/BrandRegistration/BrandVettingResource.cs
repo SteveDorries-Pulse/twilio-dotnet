@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -329,7 +329,7 @@ namespace Twilio.Rest.Messaging.V1.BrandRegistration
         {
             try
             {
-                return JsonConvert.DeserializeObject<BrandVettingResource>(json);
+                return JsonSerializer.Deserialize<BrandVettingResource>(json);
             }
             catch (JsonException e)
             {
@@ -345,7 +345,7 @@ namespace Twilio.Rest.Messaging.V1.BrandRegistration
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -355,43 +355,43 @@ namespace Twilio.Rest.Messaging.V1.BrandRegistration
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the vetting record. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique string to identify Brand Registration. </summary> 
-        [JsonProperty("brand_sid")]
+        [JsonPropertyName("brand_sid")]
         public string BrandSid { get; private set; }
 
         ///<summary> The Twilio SID of the third-party vetting record. </summary> 
-        [JsonProperty("brand_vetting_sid")]
+        [JsonPropertyName("brand_vetting_sid")]
         public string BrandVettingSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The unique identifier of the vetting from the third-party provider. </summary> 
-        [JsonProperty("vetting_id")]
+        [JsonPropertyName("vetting_id")]
         public string VettingId { get; private set; }
 
         ///<summary> The type of vetting that has been conducted. One of “STANDARD” (Aegis) or “POLITICAL” (Campaign Verify). </summary> 
-        [JsonProperty("vetting_class")]
+        [JsonPropertyName("vetting_class")]
         public string VettingClass { get; private set; }
 
         ///<summary> The status of the import vetting attempt. One of “PENDING,” “SUCCESS,” or “FAILED”. </summary> 
-        [JsonProperty("vetting_status")]
+        [JsonPropertyName("vetting_status")]
         public string VettingStatus { get; private set; }
 
         
-        [JsonProperty("vetting_provider")]
+        [JsonPropertyName("vetting_provider")]
         public BrandVettingResource.VettingProviderEnum VettingProvider { get; private set; }
 
         ///<summary> The absolute URL of the Brand Vetting resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

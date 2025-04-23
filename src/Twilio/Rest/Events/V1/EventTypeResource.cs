@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -230,7 +230,7 @@ namespace Twilio.Rest.Events.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<EventTypeResource>(json);
+                return JsonSerializer.Deserialize<EventTypeResource>(json);
             }
             catch (JsonException e)
             {
@@ -246,7 +246,7 @@ namespace Twilio.Rest.Events.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -256,39 +256,39 @@ namespace Twilio.Rest.Events.V1
 
     
         ///<summary> A string that uniquely identifies this Event Type. </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; private set; }
 
         ///<summary> A string that uniquely identifies the Schema this Event Type adheres to. </summary> 
-        [JsonProperty("schema_id")]
+        [JsonPropertyName("schema_id")]
         public string SchemaId { get; private set; }
 
         ///<summary> The date that this Event Type was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Event Type was updated, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> A human readable description for this Event Type. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> A string that describes how this Event Type can be used. For example: `available`, `deprecated`, `restricted`, `discontinued`. When the status is `available`, the Event Type can be used normally. </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; private set; }
 
         ///<summary> The URL to the documentation or to the most relevant Twilio Changelog entry of this Event Type. </summary> 
-        [JsonProperty("documentation_url")]
+        [JsonPropertyName("documentation_url")]
         public string DocumentationUrl { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

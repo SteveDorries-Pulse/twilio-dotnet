@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace Twilio.Types
 {
@@ -10,14 +10,14 @@ namespace Twilio.Types
         /// <summary>
         /// Base price of outbound call
         /// </summary>
-        [JsonProperty("base_price")]
+        [JsonPropertyName("base_price")]
         public double? BasePrice { get; }
 
         /// <summary>
         /// Current price of outbound call
         /// </summary>
         /// <returns></returns>
-        [JsonProperty("current_price")]
+        [JsonPropertyName("current_price")]
         public double? CurrentPrice { get; }
 
         /// <summary>

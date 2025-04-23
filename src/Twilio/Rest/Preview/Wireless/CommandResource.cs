@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -332,7 +332,7 @@ namespace Twilio.Rest.Preview.Wireless
         {
             try
             {
-                return JsonConvert.DeserializeObject<CommandResource>(json);
+                return JsonSerializer.Deserialize<CommandResource>(json);
             }
             catch (JsonException e)
             {
@@ -348,7 +348,7 @@ namespace Twilio.Rest.Preview.Wireless
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -358,47 +358,47 @@ namespace Twilio.Rest.Preview.Wireless
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The device_sid </summary> 
-        [JsonProperty("device_sid")]
+        [JsonPropertyName("device_sid")]
         public string DeviceSid { get; private set; }
 
         ///<summary> The sim_sid </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         ///<summary> The command </summary> 
-        [JsonProperty("command")]
+        [JsonPropertyName("command")]
         public string Command { get; private set; }
 
         ///<summary> The command_mode </summary> 
-        [JsonProperty("command_mode")]
+        [JsonPropertyName("command_mode")]
         public string CommandMode { get; private set; }
 
         ///<summary> The status </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; private set; }
 
         ///<summary> The direction </summary> 
-        [JsonProperty("direction")]
+        [JsonPropertyName("direction")]
         public string Direction { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -480,7 +480,7 @@ namespace Twilio.Rest.Chat.V1.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<UserResource>(json);
+                return JsonSerializer.Deserialize<UserResource>(json);
             }
             catch (JsonException e)
             {
@@ -496,7 +496,7 @@ namespace Twilio.Rest.Chat.V1.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -506,59 +506,59 @@ namespace Twilio.Rest.Chat.V1.Service
 
     
         ///<summary> The unique string that we created to identify the User resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the User resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The JSON string that stores application-specific data. **Note** If this property has been assigned a value, it's only  displayed in a FETCH action that returns a single resource; otherwise, it's null. If the attributes have not been set, `{}` is returned. </summary> 
-        [JsonProperty("attributes")]
+        [JsonPropertyName("attributes")]
         public string Attributes { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) assigned to the user. </summary> 
-        [JsonProperty("role_sid")]
+        [JsonPropertyName("role_sid")]
         public string RoleSid { get; private set; }
 
         ///<summary> The application-defined string that uniquely identifies the resource's User within the [Service](https://www.twilio.com/docs/api/chat/rest/services). This value is often a username or an email address. See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more info. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> Whether the User is actively connected to the Service instance and online. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, if the User has never been online for the Service instance, even if the Service's `reachability_enabled` is `true`. </summary> 
-        [JsonProperty("is_online")]
+        [JsonPropertyName("is_online")]
         public bool? IsOnline { get; private set; }
 
         ///<summary> Whether the User has a potentially valid Push Notification registration (APN or GCM) for the Service instance. If at least one registration exists, `true`; otherwise `false`. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, and if the User has never had a notification registration, even if the Service's `reachability_enabled` is `true`. </summary> 
-        [JsonProperty("is_notifiable")]
+        [JsonPropertyName("is_notifiable")]
         public bool? IsNotifiable { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The number of Channels this User is a Member of. </summary> 
-        [JsonProperty("joined_channels_count")]
+        [JsonPropertyName("joined_channels_count")]
         public int? JoinedChannelsCount { get; private set; }
 
         ///<summary> The absolute URLs of the [Channel](https://www.twilio.com/docs/chat/api/channels) and [Binding](https://www.twilio.com/docs/chat/rest/bindings-resource) resources related to the user. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> The absolute URL of the User resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

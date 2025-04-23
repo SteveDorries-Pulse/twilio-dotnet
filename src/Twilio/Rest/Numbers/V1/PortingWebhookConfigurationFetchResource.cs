@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -102,7 +102,7 @@ namespace Twilio.Rest.Numbers.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PortingWebhookConfigurationFetchResource>(json);
+                return JsonSerializer.Deserialize<PortingWebhookConfigurationFetchResource>(json);
             }
             catch (JsonException e)
             {
@@ -118,7 +118,7 @@ namespace Twilio.Rest.Numbers.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -128,27 +128,27 @@ namespace Twilio.Rest.Numbers.V1
 
     
         ///<summary> The URL of the webhook configuration request </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The complete webhook url that will be called when a notification event for port in request or port in phone number happens </summary> 
-        [JsonProperty("port_in_target_url")]
+        [JsonPropertyName("port_in_target_url")]
         public Uri PortInTargetUrl { get; private set; }
 
         ///<summary> The complete webhook url that will be called when a notification event for a port out phone number happens. </summary> 
-        [JsonProperty("port_out_target_url")]
+        [JsonPropertyName("port_out_target_url")]
         public Uri PortOutTargetUrl { get; private set; }
 
         ///<summary> A list to filter what notification events to receive for this account and its sub accounts. If it is an empty list, then it means that there are no filters for the notifications events to send in each webhook and all events will get sent. </summary> 
-        [JsonProperty("notifications_of")]
+        [JsonPropertyName("notifications_of")]
         public List<string> NotificationsOf { get; private set; }
 
         ///<summary> Creation date for the port in webhook configuration </summary> 
-        [JsonProperty("port_in_target_date_created")]
+        [JsonPropertyName("port_in_target_date_created")]
         public DateTime? PortInTargetDateCreated { get; private set; }
 
         ///<summary> Creation date for the port out webhook configuration </summary> 
-        [JsonProperty("port_out_target_date_created")]
+        [JsonPropertyName("port_out_target_date_created")]
         public DateTime? PortOutTargetDateCreated { get; private set; }
 
 

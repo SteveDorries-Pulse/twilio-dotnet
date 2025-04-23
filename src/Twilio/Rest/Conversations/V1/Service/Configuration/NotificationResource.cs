@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -228,7 +228,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Configuration
         {
             try
             {
-                return JsonConvert.DeserializeObject<NotificationResource>(json);
+                return JsonSerializer.Deserialize<NotificationResource>(json);
             }
             catch (JsonException e)
             {
@@ -244,7 +244,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Configuration
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -254,31 +254,31 @@ namespace Twilio.Rest.Conversations.V1.Service.Configuration
 
     
         ///<summary> The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this configuration. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Configuration applies to. </summary> 
-        [JsonProperty("chat_service_sid")]
+        [JsonPropertyName("chat_service_sid")]
         public string ChatServiceSid { get; private set; }
 
         ///<summary> The Push Notification configuration for New Messages. </summary> 
-        [JsonProperty("new_message")]
+        [JsonPropertyName("new_message")]
         public object NewMessage { get; private set; }
 
         ///<summary> The Push Notification configuration for being added to a Conversation. </summary> 
-        [JsonProperty("added_to_conversation")]
+        [JsonPropertyName("added_to_conversation")]
         public object AddedToConversation { get; private set; }
 
         ///<summary> The Push Notification configuration for being removed from a Conversation. </summary> 
-        [JsonProperty("removed_from_conversation")]
+        [JsonPropertyName("removed_from_conversation")]
         public object RemovedFromConversation { get; private set; }
 
         ///<summary> Weather the notification logging is enabled. </summary> 
-        [JsonProperty("log_enabled")]
+        [JsonPropertyName("log_enabled")]
         public bool? LogEnabled { get; private set; }
 
         ///<summary> An absolute API resource URL for this configuration. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

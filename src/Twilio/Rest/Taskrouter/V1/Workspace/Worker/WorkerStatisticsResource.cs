@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -124,7 +124,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Worker
         {
             try
             {
-                return JsonConvert.DeserializeObject<WorkerStatisticsResource>(json);
+                return JsonSerializer.Deserialize<WorkerStatisticsResource>(json);
             }
             catch (JsonException e)
             {
@@ -140,7 +140,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Worker
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -150,23 +150,23 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Worker
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> An object that contains the cumulative statistics for the Worker. </summary> 
-        [JsonProperty("cumulative")]
+        [JsonPropertyName("cumulative")]
         public object Cumulative { get; private set; }
 
         ///<summary> The SID of the Worker that contains the WorkerChannel. </summary> 
-        [JsonProperty("worker_sid")]
+        [JsonPropertyName("worker_sid")]
         public string WorkerSid { get; private set; }
 
         ///<summary> The SID of the Workspace that contains the WorkerChannel. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The absolute URL of the WorkerChannel statistics resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -193,7 +193,7 @@ namespace Twilio.Rest.Wireless.V1.Sim
         {
             try
             {
-                return JsonConvert.DeserializeObject<UsageRecordResource>(json);
+                return JsonSerializer.Deserialize<UsageRecordResource>(json);
             }
             catch (JsonException e)
             {
@@ -209,7 +209,7 @@ namespace Twilio.Rest.Wireless.V1.Sim
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -219,23 +219,23 @@ namespace Twilio.Rest.Wireless.V1.Sim
 
     
         ///<summary> The SID of the [Sim resource](https://www.twilio.com/docs/iot/wireless/api/sim-resource) that this Usage Record is for. </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the UsageRecord resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The time period for which the usage is reported. Contains `start` and `end` datetime values given as GMT in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. </summary> 
-        [JsonProperty("period")]
+        [JsonPropertyName("period")]
         public object Period { get; private set; }
 
         ///<summary> An object that describes the SIM's usage of Commands during the specified period. See [Commands Usage Object](https://www.twilio.com/docs/iot/wireless/api/sim-usagerecord-resource#commands-usage-object). </summary> 
-        [JsonProperty("commands")]
+        [JsonPropertyName("commands")]
         public object Commands { get; private set; }
 
         ///<summary> An object that describes the SIM's data usage during the specified period. See [Data Usage Object](https://www.twilio.com/docs/iot/wireless/api/sim-usagerecord-resource#data-usage-object). </summary> 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public object Data { get; private set; }
 
 

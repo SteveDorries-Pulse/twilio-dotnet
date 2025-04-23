@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -373,7 +373,7 @@ namespace Twilio.Rest.FlexApi.V1.Interaction.InteractionChannel
         {
             try
             {
-                return JsonConvert.DeserializeObject<InteractionChannelParticipantResource>(json);
+                return JsonSerializer.Deserialize<InteractionChannelParticipantResource>(json);
             }
             catch (JsonException e)
             {
@@ -389,7 +389,7 @@ namespace Twilio.Rest.FlexApi.V1.Interaction.InteractionChannel
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -399,27 +399,27 @@ namespace Twilio.Rest.FlexApi.V1.Interaction.InteractionChannel
 
     
         ///<summary> The unique string created by Twilio to identify an Interaction Channel Participant resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public InteractionChannelParticipantResource.TypeEnum Type { get; private set; }
 
         ///<summary> The Interaction Sid for this channel. </summary> 
-        [JsonProperty("interaction_sid")]
+        [JsonPropertyName("interaction_sid")]
         public string InteractionSid { get; private set; }
 
         ///<summary> The Channel Sid for this Participant. </summary> 
-        [JsonProperty("channel_sid")]
+        [JsonPropertyName("channel_sid")]
         public string ChannelSid { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The Participant's routing properties. </summary> 
-        [JsonProperty("routing_properties")]
+        [JsonPropertyName("routing_properties")]
         public object RoutingProperties { get; private set; }
 
 

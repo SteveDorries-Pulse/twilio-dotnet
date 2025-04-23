@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -192,7 +192,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<DomainConfigResource>(json);
+                return JsonSerializer.Deserialize<DomainConfigResource>(json);
             }
             catch (JsonException e)
             {
@@ -208,7 +208,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -218,39 +218,39 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> The unique string that we created to identify the Domain resource. </summary> 
-        [JsonProperty("domain_sid")]
+        [JsonPropertyName("domain_sid")]
         public string DomainSid { get; private set; }
 
         ///<summary> The unique string that we created to identify the Domain config (prefix ZK). </summary> 
-        [JsonProperty("config_sid")]
+        [JsonPropertyName("config_sid")]
         public string ConfigSid { get; private set; }
 
         ///<summary> Any requests we receive to this domain that do not match an existing shortened message will be redirected to the fallback url. These will likely be either expired messages, random misdirected traffic, or intentional scraping. </summary> 
-        [JsonProperty("fallback_url")]
+        [JsonPropertyName("fallback_url")]
         public Uri FallbackUrl { get; private set; }
 
         ///<summary> URL to receive click events to your webhook whenever the recipients click on the shortened links. </summary> 
-        [JsonProperty("callback_url")]
+        [JsonPropertyName("callback_url")]
         public Uri CallbackUrl { get; private set; }
 
         ///<summary> Boolean field to set customer delivery preference when there is a failure in linkShortening service </summary> 
-        [JsonProperty("continue_on_failure")]
+        [JsonPropertyName("continue_on_failure")]
         public bool? ContinueOnFailure { get; private set; }
 
         ///<summary> Date this Domain Config was created. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> Date that this Domain Config was last updated. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Customer's choice to send links with/without \"https://\" attached to shortened url. If true, messages will not be sent with https:// at the beginning of the url. If false, messages will be sent with https:// at the beginning of the url. False is the default behavior if it is not specified. </summary> 
-        [JsonProperty("disable_https")]
+        [JsonPropertyName("disable_https")]
         public bool? DisableHttps { get; private set; }
 
 

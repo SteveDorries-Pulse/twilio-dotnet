@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Microvisor.V1.App
         {
             try
             {
-                return JsonConvert.DeserializeObject<AppManifestResource>(json);
+                return JsonSerializer.Deserialize<AppManifestResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Microvisor.V1.App
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,19 +133,19 @@ namespace Twilio.Rest.Microvisor.V1.App
 
     
         ///<summary> A 34-character string that uniquely identifies this App. </summary> 
-        [JsonProperty("app_sid")]
+        [JsonPropertyName("app_sid")]
         public string AppSid { get; private set; }
 
         ///<summary> App manifest hash represented as `hash_algorithm:hash_value`. </summary> 
-        [JsonProperty("hash")]
+        [JsonPropertyName("hash")]
         public string Hash { get; private set; }
 
         ///<summary> The base-64 encoded manifest </summary> 
-        [JsonProperty("encoded_bytes")]
+        [JsonPropertyName("encoded_bytes")]
         public string EncodedBytes { get; private set; }
 
         ///<summary> The absolute URL of this Manifest. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

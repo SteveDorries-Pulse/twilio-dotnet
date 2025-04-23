@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -110,7 +110,7 @@ namespace Twilio.Rest.Messaging.V1.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<UsAppToPersonUsecaseResource>(json);
+                return JsonSerializer.Deserialize<UsAppToPersonUsecaseResource>(json);
             }
             catch (JsonException e)
             {
@@ -126,7 +126,7 @@ namespace Twilio.Rest.Messaging.V1.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -136,7 +136,7 @@ namespace Twilio.Rest.Messaging.V1.Service
 
     
         ///<summary> Human readable name, code, description and post_approval_required (indicates whether or not post approval is required for this Use Case) of A2P Campaign Use Cases. </summary> 
-        [JsonProperty("us_app_to_person_usecases")]
+        [JsonPropertyName("us_app_to_person_usecases")]
         public List<object> UsAppToPersonUsecases { get; private set; }
 
 

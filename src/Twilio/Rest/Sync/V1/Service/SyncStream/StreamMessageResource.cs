@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -121,7 +121,7 @@ namespace Twilio.Rest.Sync.V1.Service.SyncStream
         {
             try
             {
-                return JsonConvert.DeserializeObject<StreamMessageResource>(json);
+                return JsonSerializer.Deserialize<StreamMessageResource>(json);
             }
             catch (JsonException e)
             {
@@ -137,7 +137,7 @@ namespace Twilio.Rest.Sync.V1.Service.SyncStream
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -147,11 +147,11 @@ namespace Twilio.Rest.Sync.V1.Service.SyncStream
 
     
         ///<summary> The unique string that we created to identify the Stream Message resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> An arbitrary, schema-less object that contains the Stream Message body. Can be up to 4 KiB in length. </summary> 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public object Data { get; private set; }
 
 

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using Twilio.Converters;
 
 namespace Twilio.Types
@@ -48,19 +48,19 @@ namespace Twilio.Types
         /// <summary>
         /// Base price for SMS
         /// </summary>
-        [JsonProperty("base_price")]
+        [JsonPropertyName("base_price")]
         public double? BasePrice { get; private set; }
 
         /// <summary>
         /// Current price for SMS
         /// </summary>
-        [JsonProperty("current_price")]
+        [JsonPropertyName("current_price")]
         public double? CurrentPrice { get; private set; }
 
         /// <summary>
         /// Type of number
         /// </summary>
-        [JsonProperty("number_type")]
+        [JsonPropertyName("number_type")]
         [JsonConverter(typeof(StringEnumConverter))]
         public TypeEnum NumberType { get; private set; }
 
@@ -70,11 +70,8 @@ namespace Twilio.Types
         public InboundSmsPrice() {}
 
         private InboundSmsPrice(
-            [JsonProperty("base_price")]
             double? basePrice,
-            [JsonProperty("current_priece")]
             double? currentPrice,
-            [JsonProperty("number_type")]
             TypeEnum numberType
         )
         {

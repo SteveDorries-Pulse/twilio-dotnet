@@ -34,8 +34,8 @@ namespace Twilio.UnitTests.Jwt
         {
             var encoded = new TestJwt(TEST_TIME).ToJwt();
             var decoded = new DecodedJwt(encoded, TestJwt.SECRET);
-
-            Assert.Equal(TEST_TIMESTAMP, decoded.Payload["exp"]);
+            var decodedExp = long.Parse(decoded.Payload["exp"].ToString());
+            Assert.Equal(TEST_TIMESTAMP, decodedExp);
         }
         
         [Fact]
@@ -47,7 +47,7 @@ namespace Twilio.UnitTests.Jwt
             var encoded = new TestJwt(exp).ToJwt();
             var decoded = new DecodedJwt(encoded, TestJwt.SECRET);
 
-            Assert.Equal(TEST_TIMESTAMP, decoded.Payload["exp"]);
+            Assert.Equal(TEST_TIMESTAMP, long.Parse(decoded.Payload["exp"].ToString()));
         }
         
         [Fact]
@@ -56,7 +56,7 @@ namespace Twilio.UnitTests.Jwt
             var encoded = new TestJwt(DateTime.UtcNow.AddHours(1), TEST_TIME).ToJwt();
             var decoded = new DecodedJwt(encoded, TestJwt.SECRET);
 
-            Assert.Equal(TEST_TIMESTAMP, decoded.Payload["nbf"]);
+            Assert.Equal(TEST_TIMESTAMP, long.Parse(decoded.Payload["nbf"].ToString()));
         }
         
         [Fact]
@@ -67,7 +67,7 @@ namespace Twilio.UnitTests.Jwt
             var encoded = new TestJwt(DateTime.UtcNow.AddHours(1), nbf).ToJwt();
             var decoded = new DecodedJwt(encoded, TestJwt.SECRET);
 
-            Assert.Equal(TEST_TIMESTAMP, decoded.Payload["nbf"]);
+            Assert.Equal(TEST_TIMESTAMP, long.Parse(decoded.Payload["nbf"].ToString()));
         }
     }
 }

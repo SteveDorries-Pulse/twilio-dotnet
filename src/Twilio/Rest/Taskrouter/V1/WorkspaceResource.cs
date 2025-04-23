@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -494,7 +494,7 @@ namespace Twilio.Rest.Taskrouter.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<WorkspaceResource>(json);
+                return JsonSerializer.Deserialize<WorkspaceResource>(json);
             }
             catch (JsonException e)
             {
@@ -510,7 +510,7 @@ namespace Twilio.Rest.Taskrouter.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -520,63 +520,63 @@ namespace Twilio.Rest.Taskrouter.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workspace resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The name of the default activity. </summary> 
-        [JsonProperty("default_activity_name")]
+        [JsonPropertyName("default_activity_name")]
         public string DefaultActivityName { get; private set; }
 
         ///<summary> The SID of the Activity that will be used when new Workers are created in the Workspace. </summary> 
-        [JsonProperty("default_activity_sid")]
+        [JsonPropertyName("default_activity_sid")]
         public string DefaultActivitySid { get; private set; }
 
         ///<summary> The URL we call when an event occurs. If provided, the Workspace will publish events to this URL, for example, to collect data for reporting. See [Workspace Events](https://www.twilio.com/docs/taskrouter/api/event) for more information. This parameter supports Twilio's [Webhooks (HTTP callbacks) Connection Overrides](https://www.twilio.com/docs/usage/webhooks/webhooks-connection-overrides). </summary> 
-        [JsonProperty("event_callback_url")]
+        [JsonPropertyName("event_callback_url")]
         public Uri EventCallbackUrl { get; private set; }
 
         ///<summary> The list of Workspace events for which to call `event_callback_url`. For example, if `EventsFilter=task.created, task.canceled, worker.activity.update`, then TaskRouter will call event_callback_url only when a task is created, canceled, or a Worker activity is updated. </summary> 
-        [JsonProperty("events_filter")]
+        [JsonPropertyName("events_filter")]
         public string EventsFilter { get; private set; }
 
         ///<summary> The string that you assigned to describe the Workspace resource. For example `Customer Support` or `2014 Election Campaign`. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> Whether multi-tasking is enabled. The default is `true`, which enables multi-tasking. Multi-tasking allows Workers to handle multiple Tasks simultaneously. When enabled (`true`), each Worker can receive parallel reservations up to the per-channel maximums defined in the Workers section. In single-tasking each Worker would only receive a new reservation when the previous task is completed. Learn more at [Multitasking](https://www.twilio.com/docs/taskrouter/multitasking). </summary> 
-        [JsonProperty("multi_task_enabled")]
+        [JsonPropertyName("multi_task_enabled")]
         public bool? MultiTaskEnabled { get; private set; }
 
         ///<summary> The unique string that we created to identify the Workspace resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The name of the timeout activity. </summary> 
-        [JsonProperty("timeout_activity_name")]
+        [JsonPropertyName("timeout_activity_name")]
         public string TimeoutActivityName { get; private set; }
 
         ///<summary> The SID of the Activity that will be assigned to a Worker when a Task reservation times out without a response. </summary> 
-        [JsonProperty("timeout_activity_sid")]
+        [JsonPropertyName("timeout_activity_sid")]
         public string TimeoutActivitySid { get; private set; }
 
         
-        [JsonProperty("prioritize_queue_order")]
+        [JsonPropertyName("prioritize_queue_order")]
         public WorkspaceResource.QueueOrderEnum PrioritizeQueueOrder { get; private set; }
 
         ///<summary> The absolute URL of the Workspace resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

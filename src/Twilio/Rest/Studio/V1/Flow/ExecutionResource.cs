@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -489,7 +489,7 @@ namespace Twilio.Rest.Studio.V1.Flow
         {
             try
             {
-                return JsonConvert.DeserializeObject<ExecutionResource>(json);
+                return JsonSerializer.Deserialize<ExecutionResource>(json);
             }
             catch (JsonException e)
             {
@@ -505,7 +505,7 @@ namespace Twilio.Rest.Studio.V1.Flow
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -515,47 +515,47 @@ namespace Twilio.Rest.Studio.V1.Flow
 
     
         ///<summary> The unique string that we created to identify the Execution resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Execution resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Flow. </summary> 
-        [JsonProperty("flow_sid")]
+        [JsonPropertyName("flow_sid")]
         public string FlowSid { get; private set; }
 
         ///<summary> The SID of the Contact. </summary> 
-        [JsonProperty("contact_sid")]
+        [JsonPropertyName("contact_sid")]
         public string ContactSid { get; private set; }
 
         ///<summary> The phone number, SIP address or Client identifier that triggered the Execution. Phone numbers are in E.164 format (e.g. +16175551212). SIP addresses are formatted as `name@company.com`. Client identifiers are formatted `client:name`. </summary> 
-        [JsonProperty("contact_channel_address")]
+        [JsonPropertyName("contact_channel_address")]
         public string ContactChannelAddress { get; private set; }
 
         ///<summary> The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution. </summary> 
-        [JsonProperty("context")]
+        [JsonPropertyName("context")]
         public object Context { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public ExecutionResource.StatusEnum Status { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of nested resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

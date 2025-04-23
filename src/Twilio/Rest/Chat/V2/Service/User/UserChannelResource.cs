@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -458,7 +458,7 @@ namespace Twilio.Rest.Chat.V2.Service.User
         {
             try
             {
-                return JsonConvert.DeserializeObject<UserChannelResource>(json);
+                return JsonSerializer.Deserialize<UserChannelResource>(json);
             }
             catch (JsonException e)
             {
@@ -474,7 +474,7 @@ namespace Twilio.Rest.Chat.V2.Service.User
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -484,47 +484,47 @@ namespace Twilio.Rest.Chat.V2.Service.User
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the User Channel resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the User Channel resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the [Channel](https://www.twilio.com/docs/chat/channels) the User Channel resource belongs to. </summary> 
-        [JsonProperty("channel_sid")]
+        [JsonPropertyName("channel_sid")]
         public string ChannelSid { get; private set; }
 
         ///<summary> The SID of the [User](https://www.twilio.com/docs/chat/rest/user-resource) the User Channel belongs to. </summary> 
-        [JsonProperty("user_sid")]
+        [JsonPropertyName("user_sid")]
         public string UserSid { get; private set; }
 
         ///<summary> The SID of a [Member](https://www.twilio.com/docs/chat/rest/member-resource) that represents the User on the Channel. </summary> 
-        [JsonProperty("member_sid")]
+        [JsonPropertyName("member_sid")]
         public string MemberSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public UserChannelResource.ChannelStatusEnum Status { get; private set; }
 
         ///<summary> The index of the last [Message](https://www.twilio.com/docs/chat/rest/message-resource) in the [Channel](https://www.twilio.com/docs/chat/channels) that the Member has read. </summary> 
-        [JsonProperty("last_consumed_message_index")]
+        [JsonPropertyName("last_consumed_message_index")]
         public int? LastConsumedMessageIndex { get; private set; }
 
         ///<summary> The number of unread Messages in the Channel for the User. Note that retrieving messages on a client endpoint does not mean that messages are consumed or read. See [Consumption Horizon feature](https://www.twilio.com/docs/chat/consumption-horizon) to learn how to mark messages as consumed. </summary> 
-        [JsonProperty("unread_messages_count")]
+        [JsonPropertyName("unread_messages_count")]
         public int? UnreadMessagesCount { get; private set; }
 
         ///<summary> The absolute URLs of the [Members](https://www.twilio.com/docs/chat/rest/member-resource), [Messages](https://www.twilio.com/docs/chat/rest/message-resource) , [Invites](https://www.twilio.com/docs/chat/rest/invite-resource) and, if it exists, the last [Message](https://www.twilio.com/docs/chat/rest/message-resource) for the Channel. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> The absolute URL of the User Channel resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         
-        [JsonProperty("notification_level")]
+        [JsonPropertyName("notification_level")]
         public UserChannelResource.NotificationLevelEnum NotificationLevel { get; private set; }
 
 

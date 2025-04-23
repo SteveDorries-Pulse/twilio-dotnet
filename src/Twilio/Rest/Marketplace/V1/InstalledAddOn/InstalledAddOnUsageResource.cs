@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,11 +32,11 @@ namespace Twilio.Rest.Marketplace.V1.InstalledAddOn
     
         public class MarketplaceV1InstalledAddOnInstalledAddOnUsageBillableItems
         {
-            [JsonProperty("quantity")]
+            [JsonPropertyName("quantity")]
             private decimal? Quantity {get; set;}
-            [JsonProperty("sid")]
+            [JsonPropertyName("sid")]
             private string Sid {get; set;}
-            [JsonProperty("submitted")]
+            [JsonPropertyName("submitted")]
             private bool? Submitted {get; set;}
             public MarketplaceV1InstalledAddOnInstalledAddOnUsageBillableItems() { }
             public class Builder
@@ -68,9 +68,9 @@ namespace Twilio.Rest.Marketplace.V1.InstalledAddOn
         }
         public class MarketplaceV1InstalledAddOnInstalledAddOnUsage
         {
-            [JsonProperty("total_submitted")]
+            [JsonPropertyName("total_submitted")]
             private decimal? TotalSubmitted {get; set;}
-            [JsonProperty("billable_items")]
+            [JsonPropertyName("billable_items")]
             private List<MarketplaceV1InstalledAddOnInstalledAddOnUsageBillableItems> BillableItems {get; set;}
             public MarketplaceV1InstalledAddOnInstalledAddOnUsage() { }
             public class Builder
@@ -181,7 +181,7 @@ namespace Twilio.Rest.Marketplace.V1.InstalledAddOn
         {
             try
             {
-                return JsonConvert.DeserializeObject<InstalledAddOnUsageResource>(json);
+                return JsonSerializer.Deserialize<InstalledAddOnUsageResource>(json);
             }
             catch (JsonException e)
             {
@@ -197,7 +197,7 @@ namespace Twilio.Rest.Marketplace.V1.InstalledAddOn
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -207,11 +207,11 @@ namespace Twilio.Rest.Marketplace.V1.InstalledAddOn
 
     
         ///<summary> Total amount in local currency that was billed in this request. Aggregates all billable_items that were successfully submitted. </summary> 
-        [JsonProperty("total_submitted")]
+        [JsonPropertyName("total_submitted")]
         public decimal? TotalSubmitted { get; private set; }
 
         ///<summary> The billable_items </summary> 
-        [JsonProperty("billable_items")]
+        [JsonPropertyName("billable_items")]
         public List<MarketplaceV1InstalledAddOnInstalledAddOnUsageBillableItems> BillableItems { get; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -137,7 +137,7 @@ namespace Twilio.Rest.Oauth.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<TokenResource>(json);
+                return JsonSerializer.Deserialize<TokenResource>(json);
             }
             catch (JsonException e)
             {
@@ -153,7 +153,7 @@ namespace Twilio.Rest.Oauth.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -163,23 +163,23 @@ namespace Twilio.Rest.Oauth.V1
 
     
         ///<summary> Token which carries the necessary information to access a Twilio resource directly. </summary> 
-        [JsonProperty("access_token")]
+        [JsonPropertyName("access_token")]
         public string AccessToken { get; private set; }
 
         ///<summary> Token which carries the information necessary to get a new access token. </summary> 
-        [JsonProperty("refresh_token")]
+        [JsonPropertyName("refresh_token")]
         public string RefreshToken { get; private set; }
 
         ///<summary> Token which carries the information necessary of user profile. </summary> 
-        [JsonProperty("id_token")]
+        [JsonPropertyName("id_token")]
         public string IdToken { get; private set; }
 
         ///<summary> Token type </summary> 
-        [JsonProperty("token_type")]
+        [JsonPropertyName("token_type")]
         public string TokenType { get; private set; }
 
         ///<summary> The expires_in </summary> 
-        [JsonProperty("expires_in")]
+        [JsonPropertyName("expires_in")]
         public long? ExpiresIn { get; private set; }
 
 

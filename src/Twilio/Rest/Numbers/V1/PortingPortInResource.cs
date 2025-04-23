@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -238,7 +238,7 @@ namespace Twilio.Rest.Numbers.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PortingPortInResource>(json);
+                return JsonSerializer.Deserialize<PortingPortInResource>(json);
             }
             catch (JsonException e)
             {
@@ -254,7 +254,7 @@ namespace Twilio.Rest.Numbers.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -264,51 +264,51 @@ namespace Twilio.Rest.Numbers.V1
 
     
         ///<summary> The SID of the Port In request. This is a unique identifier of the port in request. </summary> 
-        [JsonProperty("port_in_request_sid")]
+        [JsonPropertyName("port_in_request_sid")]
         public string PortInRequestSid { get; private set; }
 
         ///<summary> The URL of this Port In request </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Account Sid or subaccount where the phone number(s) will be Ported </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Additional emails to send a copy of the signed LOA to. </summary> 
-        [JsonProperty("notification_emails")]
+        [JsonPropertyName("notification_emails")]
         public List<string> NotificationEmails { get; private set; }
 
         ///<summary> Target date to port the number. We cannot guarantee that this date will be honored by the other carriers, please work with Ops to get a confirmation of the firm order commitment (FOC) date. Expected format is ISO Local Date, example: ‘2011-12-03`. This date must be at least 7 days in the future for US ports and 10 days in the future for Japanese ports. (This value is only available for custom porting customers.) </summary> 
-        [JsonProperty("target_port_in_date")]
+        [JsonPropertyName("target_port_in_date")]
         public DateTime? TargetPortInDate { get; private set; }
 
         ///<summary> The earliest time that the port should occur on the target port in date. Expected format is ISO Offset Time, example: ‘10:15:00-08:00'. (This value is only available for custom porting customers.) </summary> 
-        [JsonProperty("target_port_in_time_range_start")]
+        [JsonPropertyName("target_port_in_time_range_start")]
         public string TargetPortInTimeRangeStart { get; private set; }
 
         ///<summary> The latest time that the port should occur on the target port in date. Expected format is ISO Offset Time, example: ‘10:15:00-08:00'.  (This value is only available for custom porting customers.) </summary> 
-        [JsonProperty("target_port_in_time_range_end")]
+        [JsonPropertyName("target_port_in_time_range_end")]
         public string TargetPortInTimeRangeEnd { get; private set; }
 
         ///<summary> The status of the port in request. The possible values are: In progress, Completed, Expired, In review, Waiting for Signature, Action Required, and Canceled. </summary> 
-        [JsonProperty("port_in_request_status")]
+        [JsonPropertyName("port_in_request_status")]
         public string PortInRequestStatus { get; private set; }
 
         ///<summary> Details regarding the customer’s information with the losing carrier. These values will be used to generate the letter of authorization and should match the losing carrier’s data as closely as possible to ensure the port is accepted. </summary> 
-        [JsonProperty("losing_carrier_information")]
+        [JsonPropertyName("losing_carrier_information")]
         public object LosingCarrierInformation { get; private set; }
 
         ///<summary> The phone_numbers </summary> 
-        [JsonProperty("phone_numbers")]
+        [JsonPropertyName("phone_numbers")]
         public List<object> PhoneNumbers { get; private set; }
 
         ///<summary> List of document SIDs for all phone numbers included in the port in request. At least one document SID referring to a document of the type Utility Bill is required. </summary> 
-        [JsonProperty("documents")]
+        [JsonPropertyName("documents")]
         public List<string> Documents { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
 

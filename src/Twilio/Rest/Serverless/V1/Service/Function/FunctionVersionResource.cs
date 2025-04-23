@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -262,7 +262,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Function
         {
             try
             {
-                return JsonConvert.DeserializeObject<FunctionVersionResource>(json);
+                return JsonSerializer.Deserialize<FunctionVersionResource>(json);
             }
             catch (JsonException e)
             {
@@ -278,7 +278,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Function
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -288,39 +288,39 @@ namespace Twilio.Rest.Serverless.V1.Service.Function
 
     
         ///<summary> The unique string that we created to identify the Function Version resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Function Version resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Service that the Function Version resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the Function resource that is the parent of the Function Version resource. </summary> 
-        [JsonProperty("function_sid")]
+        [JsonPropertyName("function_sid")]
         public string FunctionSid { get; private set; }
 
         ///<summary> The URL-friendly string by which the Function Version resource can be referenced. It can be a maximum of 255 characters. All paths begin with a forward slash ('/'). If a Function Version creation request is submitted with a path not containing a leading slash, the path will automatically be prepended with one. </summary> 
-        [JsonProperty("path")]
+        [JsonPropertyName("path")]
         public string Path { get; private set; }
 
         
-        [JsonProperty("visibility")]
+        [JsonPropertyName("visibility")]
         public FunctionVersionResource.VisibilityEnum Visibility { get; private set; }
 
         ///<summary> The date and time in GMT when the Function Version resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The absolute URL of the Function Version resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

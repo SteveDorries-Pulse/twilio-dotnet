@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -437,7 +437,7 @@ namespace Twilio.Rest.Voice.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SourceIpMappingResource>(json);
+                return JsonSerializer.Deserialize<SourceIpMappingResource>(json);
             }
             catch (JsonException e)
             {
@@ -453,7 +453,7 @@ namespace Twilio.Rest.Voice.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -463,27 +463,27 @@ namespace Twilio.Rest.Voice.V1
 
     
         ///<summary> The unique string that we created to identify the IP Record resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The Twilio-provided string that uniquely identifies the IP Record resource to map from. </summary> 
-        [JsonProperty("ip_record_sid")]
+        [JsonPropertyName("ip_record_sid")]
         public string IpRecordSid { get; private set; }
 
         ///<summary> The SID of the SIP Domain that the IP Record is mapped to. </summary> 
-        [JsonProperty("sip_domain_sid")]
+        [JsonPropertyName("sip_domain_sid")]
         public string SipDomainSid { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

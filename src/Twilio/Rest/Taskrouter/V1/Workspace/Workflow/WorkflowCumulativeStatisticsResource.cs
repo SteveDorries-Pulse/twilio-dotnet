@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -127,7 +127,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Workflow
         {
             try
             {
-                return JsonConvert.DeserializeObject<WorkflowCumulativeStatisticsResource>(json);
+                return JsonSerializer.Deserialize<WorkflowCumulativeStatisticsResource>(json);
             }
             catch (JsonException e)
             {
@@ -143,7 +143,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Workflow
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -153,91 +153,91 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Workflow
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workflow resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The average time in seconds between Task creation and acceptance. </summary> 
-        [JsonProperty("avg_task_acceptance_time")]
+        [JsonPropertyName("avg_task_acceptance_time")]
         public int? AvgTaskAcceptanceTime { get; private set; }
 
         ///<summary> The beginning of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public DateTime? StartTime { get; private set; }
 
         ///<summary> The end of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public DateTime? EndTime { get; private set; }
 
         ///<summary> The total number of Reservations that were created for Workers. </summary> 
-        [JsonProperty("reservations_created")]
+        [JsonPropertyName("reservations_created")]
         public int? ReservationsCreated { get; private set; }
 
         ///<summary> The total number of Reservations accepted by Workers. </summary> 
-        [JsonProperty("reservations_accepted")]
+        [JsonPropertyName("reservations_accepted")]
         public int? ReservationsAccepted { get; private set; }
 
         ///<summary> The total number of Reservations that were rejected. </summary> 
-        [JsonProperty("reservations_rejected")]
+        [JsonPropertyName("reservations_rejected")]
         public int? ReservationsRejected { get; private set; }
 
         ///<summary> The total number of Reservations that were timed out. </summary> 
-        [JsonProperty("reservations_timed_out")]
+        [JsonPropertyName("reservations_timed_out")]
         public int? ReservationsTimedOut { get; private set; }
 
         ///<summary> The total number of Reservations that were canceled. </summary> 
-        [JsonProperty("reservations_canceled")]
+        [JsonPropertyName("reservations_canceled")]
         public int? ReservationsCanceled { get; private set; }
 
         ///<summary> The total number of Reservations that were rescinded. </summary> 
-        [JsonProperty("reservations_rescinded")]
+        [JsonPropertyName("reservations_rescinded")]
         public int? ReservationsRescinded { get; private set; }
 
         ///<summary> A list of objects that describe the number of Tasks canceled and reservations accepted above and below the thresholds specified in seconds. </summary> 
-        [JsonProperty("split_by_wait_time")]
+        [JsonPropertyName("split_by_wait_time")]
         public object SplitByWaitTime { get; private set; }
 
         ///<summary> The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks that were accepted. </summary> 
-        [JsonProperty("wait_duration_until_accepted")]
+        [JsonPropertyName("wait_duration_until_accepted")]
         public object WaitDurationUntilAccepted { get; private set; }
 
         ///<summary> The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks that were canceled. </summary> 
-        [JsonProperty("wait_duration_until_canceled")]
+        [JsonPropertyName("wait_duration_until_canceled")]
         public object WaitDurationUntilCanceled { get; private set; }
 
         ///<summary> The total number of Tasks that were canceled. </summary> 
-        [JsonProperty("tasks_canceled")]
+        [JsonPropertyName("tasks_canceled")]
         public int? TasksCanceled { get; private set; }
 
         ///<summary> The total number of Tasks that were completed. </summary> 
-        [JsonProperty("tasks_completed")]
+        [JsonPropertyName("tasks_completed")]
         public int? TasksCompleted { get; private set; }
 
         ///<summary> The total number of Tasks that entered the Workflow. </summary> 
-        [JsonProperty("tasks_entered")]
+        [JsonPropertyName("tasks_entered")]
         public int? TasksEntered { get; private set; }
 
         ///<summary> The total number of Tasks that were deleted. </summary> 
-        [JsonProperty("tasks_deleted")]
+        [JsonPropertyName("tasks_deleted")]
         public int? TasksDeleted { get; private set; }
 
         ///<summary> The total number of Tasks that were moved from one queue to another. </summary> 
-        [JsonProperty("tasks_moved")]
+        [JsonPropertyName("tasks_moved")]
         public int? TasksMoved { get; private set; }
 
         ///<summary> The total number of Tasks that were timed out of their Workflows (and deleted). </summary> 
-        [JsonProperty("tasks_timed_out_in_workflow")]
+        [JsonPropertyName("tasks_timed_out_in_workflow")]
         public int? TasksTimedOutInWorkflow { get; private set; }
 
         ///<summary> Returns the list of Tasks that are being controlled by the Workflow with the specified Sid value. </summary> 
-        [JsonProperty("workflow_sid")]
+        [JsonPropertyName("workflow_sid")]
         public string WorkflowSid { get; private set; }
 
         ///<summary> The SID of the Workspace that contains the Workflow. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The absolute URL of the Workflow statistics resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

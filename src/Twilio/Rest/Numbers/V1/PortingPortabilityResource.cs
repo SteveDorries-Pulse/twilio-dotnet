@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -128,7 +128,7 @@ namespace Twilio.Rest.Numbers.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PortingPortabilityResource>(json);
+                return JsonSerializer.Deserialize<PortingPortabilityResource>(json);
             }
             catch (JsonException e)
             {
@@ -144,7 +144,7 @@ namespace Twilio.Rest.Numbers.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -154,40 +154,40 @@ namespace Twilio.Rest.Numbers.V1
 
     
         ///<summary> The phone number which portability is to be checked. Phone numbers are in E.164 format (e.g. +16175551212). </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber PhoneNumber { get; private set; }
 
         ///<summary> Account Sid that the phone number belongs to in Twilio. This is only returned for phone numbers that already exist in Twilio’s inventory and belong to your account or sub account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Boolean flag indicates if the phone number can be ported into Twilio through the Porting API or not. </summary> 
-        [JsonProperty("portable")]
+        [JsonPropertyName("portable")]
         public bool? Portable { get; private set; }
 
         ///<summary> Indicates if the port in process will require a personal identification number (PIN) and an account number for this phone number. If this is true you will be required to submit both a PIN and account number from the losing carrier for this number when opening a port in request. These fields will be required in order to complete the port in process to Twilio. </summary> 
-        [JsonProperty("pin_and_account_number_required")]
+        [JsonPropertyName("pin_and_account_number_required")]
         public bool? PinAndAccountNumberRequired { get; private set; }
 
         ///<summary> Reason why the phone number cannot be ported into Twilio, `null` otherwise. </summary> 
-        [JsonProperty("not_portable_reason")]
+        [JsonPropertyName("not_portable_reason")]
         public string NotPortableReason { get; private set; }
 
         ///<summary> The Portability Reason Code for the phone number if it cannot be ported into Twilio, `null` otherwise. </summary> 
-        [JsonProperty("not_portable_reason_code")]
+        [JsonPropertyName("not_portable_reason_code")]
         public int? NotPortableReasonCode { get; private set; }
 
         
-        [JsonProperty("number_type")]
+        [JsonPropertyName("number_type")]
         public PortingPortabilityResource.NumberTypeEnum NumberType { get; private set; }
 
         ///<summary> Country the phone number belongs to. </summary> 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; private set; }
 
         ///<summary> This is the url of the request that you're trying to reach out to locate the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

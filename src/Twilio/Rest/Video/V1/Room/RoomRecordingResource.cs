@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -382,7 +382,7 @@ namespace Twilio.Rest.Video.V1.Room
         {
             try
             {
-                return JsonConvert.DeserializeObject<RoomRecordingResource>(json);
+                return JsonSerializer.Deserialize<RoomRecordingResource>(json);
             }
             catch (JsonException e)
             {
@@ -398,7 +398,7 @@ namespace Twilio.Rest.Video.V1.Room
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -408,71 +408,71 @@ namespace Twilio.Rest.Video.V1.Room
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the RoomRecording resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public RoomRecordingResource.StatusEnum Status { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The unique string that we created to identify the RoomRecording resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the recording source. For a Room Recording, this value is a `track_sid`. </summary> 
-        [JsonProperty("source_sid")]
+        [JsonPropertyName("source_sid")]
         public string SourceSid { get; private set; }
 
         ///<summary> The size of the recorded track in bytes. </summary> 
-        [JsonProperty("size")]
+        [JsonPropertyName("size")]
         public long? Size { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public RoomRecordingResource.TypeEnum Type { get; private set; }
 
         ///<summary> The duration of the recording rounded to the nearest second. Sub-second duration tracks have a `duration` of 1 second </summary> 
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int? Duration { get; private set; }
 
         
-        [JsonProperty("container_format")]
+        [JsonPropertyName("container_format")]
         public RoomRecordingResource.FormatEnum ContainerFormat { get; private set; }
 
         
-        [JsonProperty("codec")]
+        [JsonPropertyName("codec")]
         public RoomRecordingResource.CodecEnum Codec { get; private set; }
 
         ///<summary> A list of SIDs related to the Recording. Includes the `room_sid` and `participant_sid`. </summary> 
-        [JsonProperty("grouping_sids")]
+        [JsonPropertyName("grouping_sids")]
         public object GroupingSids { get; private set; }
 
         ///<summary> The name that was given to the source track of the recording. If no name is given, the `source_sid` is used. </summary> 
-        [JsonProperty("track_name")]
+        [JsonPropertyName("track_name")]
         public string TrackName { get; private set; }
 
         ///<summary> The time in milliseconds elapsed between an arbitrary point in time, common to all group rooms, and the moment when the source room of this track started. This information provides a synchronization mechanism for recordings belonging to the same room. </summary> 
-        [JsonProperty("offset")]
+        [JsonPropertyName("offset")]
         public long? Offset { get; private set; }
 
         ///<summary> The URL of the media file associated with the recording when stored externally. See [External S3 Recordings](/docs/video/api/external-s3-recordings) for more details. </summary> 
-        [JsonProperty("media_external_location")]
+        [JsonPropertyName("media_external_location")]
         public Uri MediaExternalLocation { get; private set; }
 
         ///<summary> The SID of the Room resource the recording is associated with. </summary> 
-        [JsonProperty("room_sid")]
+        [JsonPropertyName("room_sid")]
         public string RoomSid { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Twilio.Converters;
 
 /// <summary>
@@ -30,33 +30,28 @@ namespace Twilio.Types
             public static readonly KindEnum Video = new KindEnum("video");
         }
 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         [JsonConverter(typeof(StringEnumConverter))]
         public TypeEnum Type { get; private set; }
 
-        [JsonProperty("all")]
+        [JsonPropertyName("all")]
         public bool? All { get; private set; }
 
-        [JsonProperty("publisher")]
+        [JsonPropertyName("publisher")]
         public string Publisher { get; private set; }
 
-        [JsonProperty("track")]
+        [JsonPropertyName("track")]
         public string Track { get; private set; }
 
-        [JsonProperty("kind")]
+        [JsonPropertyName("kind")]
         [JsonConverter(typeof(StringEnumConverter))]
         public KindEnum Kind { get; private set; }
 
         public RecordingRule (
-                [JsonProperty("type")]
                 TypeEnum type,
-                [JsonProperty("all")]
                 bool? all,
-                [JsonProperty("publisher")]
                 string publisher,
-                [JsonProperty("track")]
                 string track,
-                [JsonProperty("kind")]
                 KindEnum kind
                 )
         {

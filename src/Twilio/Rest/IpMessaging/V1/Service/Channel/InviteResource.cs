@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -410,7 +410,7 @@ namespace Twilio.Rest.IpMessaging.V1.Service.Channel
         {
             try
             {
-                return JsonConvert.DeserializeObject<InviteResource>(json);
+                return JsonSerializer.Deserialize<InviteResource>(json);
             }
             catch (JsonException e)
             {
@@ -426,7 +426,7 @@ namespace Twilio.Rest.IpMessaging.V1.Service.Channel
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -436,43 +436,43 @@ namespace Twilio.Rest.IpMessaging.V1.Service.Channel
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The channel_sid </summary> 
-        [JsonProperty("channel_sid")]
+        [JsonPropertyName("channel_sid")]
         public string ChannelSid { get; private set; }
 
         ///<summary> The service_sid </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The identity </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The role_sid </summary> 
-        [JsonProperty("role_sid")]
+        [JsonPropertyName("role_sid")]
         public string RoleSid { get; private set; }
 
         ///<summary> The created_by </summary> 
-        [JsonProperty("created_by")]
+        [JsonPropertyName("created_by")]
         public string CreatedBy { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

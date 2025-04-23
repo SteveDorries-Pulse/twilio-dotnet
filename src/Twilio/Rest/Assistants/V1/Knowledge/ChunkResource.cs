@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -168,7 +168,7 @@ namespace Twilio.Rest.Assistants.V1.Knowledge
         {
             try
             {
-                return JsonConvert.DeserializeObject<ChunkResource>(json);
+                return JsonSerializer.Deserialize<ChunkResource>(json);
             }
             catch (JsonException e)
             {
@@ -184,7 +184,7 @@ namespace Twilio.Rest.Assistants.V1.Knowledge
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -194,23 +194,23 @@ namespace Twilio.Rest.Assistants.V1.Knowledge
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Knowledge resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The chunk content. </summary> 
-        [JsonProperty("content")]
+        [JsonPropertyName("content")]
         public string Content { get; private set; }
 
         ///<summary> The metadata of the chunk. </summary> 
-        [JsonProperty("metadata")]
+        [JsonPropertyName("metadata")]
         public object Metadata { get; private set; }
 
         ///<summary> The date and time in GMT when the Chunk was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Chunk was updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

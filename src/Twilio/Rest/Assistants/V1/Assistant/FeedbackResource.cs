@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,13 +32,13 @@ namespace Twilio.Rest.Assistants.V1.Assistant
     
         public class AssistantsV1ServiceCreateFeedbackRequest
         {
-            [JsonProperty("message_id")]
+            [JsonPropertyName("message_id")]
             private string MessageId {get; set;}
-            [JsonProperty("score")]
+            [JsonPropertyName("score")]
             private float Score {get; set;}
-            [JsonProperty("session_id")]
+            [JsonPropertyName("session_id")]
             private string SessionId {get; set;}
-            [JsonProperty("text")]
+            [JsonPropertyName("text")]
             private string Text {get; set;}
             public AssistantsV1ServiceCreateFeedbackRequest() { }
             public class Builder
@@ -284,7 +284,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
         {
             try
             {
-                return JsonConvert.DeserializeObject<FeedbackResource>(json);
+                return JsonSerializer.Deserialize<FeedbackResource>(json);
             }
             catch (JsonException e)
             {
@@ -300,7 +300,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -310,43 +310,43 @@ namespace Twilio.Rest.Assistants.V1.Assistant
 
     
         ///<summary> The Assistant ID. </summary> 
-        [JsonProperty("assistant_id")]
+        [JsonPropertyName("assistant_id")]
         public string AssistantId { get; }
 
         ///<summary> The Feedback ID. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Feedback. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the User created the Feedback. </summary> 
-        [JsonProperty("user_sid")]
+        [JsonPropertyName("user_sid")]
         public string UserSid { get; private set; }
 
         ///<summary> The Message ID. </summary> 
-        [JsonProperty("message_id")]
+        [JsonPropertyName("message_id")]
         public string MessageId { get; }
 
         ///<summary> The Score to provide as Feedback (0-1) </summary> 
-        [JsonProperty("score")]
+        [JsonPropertyName("score")]
         public float Score { get; }
 
         ///<summary> The Session ID. </summary> 
-        [JsonProperty("session_id")]
+        [JsonPropertyName("session_id")]
         public string SessionId { get; }
 
         ///<summary> The text to be given as feedback. </summary> 
-        [JsonProperty("text")]
+        [JsonPropertyName("text")]
         public string Text { get; }
 
         ///<summary> The date and time in GMT when the Feedback was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; }
 
         ///<summary> The date and time in GMT when the Feedback was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; }
 
 

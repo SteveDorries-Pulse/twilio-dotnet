@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -345,7 +345,7 @@ namespace Twilio.Rest.Video.V1.Room
         {
             try
             {
-                return JsonConvert.DeserializeObject<ParticipantResource>(json);
+                return JsonSerializer.Deserialize<ParticipantResource>(json);
             }
             catch (JsonException e)
             {
@@ -361,7 +361,7 @@ namespace Twilio.Rest.Video.V1.Room
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -371,51 +371,51 @@ namespace Twilio.Rest.Video.V1.Room
 
     
         ///<summary> The unique string that we created to identify the RoomParticipant resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the participant's room. </summary> 
-        [JsonProperty("room_sid")]
+        [JsonPropertyName("room_sid")]
         public string RoomSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the RoomParticipant resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public ParticipantResource.StatusEnum Status { get; private set; }
 
         ///<summary> The application-defined string that uniquely identifies the resource's User within a Room. If a client joins with an existing Identity, the existing client is disconnected. See [access tokens](https://www.twilio.com/docs/video/tutorials/user-identity-access-tokens) and [limits](https://www.twilio.com/docs/video/programmable-video-limits) for more info.  </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The time of participant connected to the room in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#UTC) format. </summary> 
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public DateTime? StartTime { get; private set; }
 
         ///<summary> The time when the participant disconnected from the room in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#UTC) format. </summary> 
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public DateTime? EndTime { get; private set; }
 
         ///<summary> The duration in seconds that the participant was `connected`. Populated only after the participant is `disconnected`. </summary> 
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int? Duration { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

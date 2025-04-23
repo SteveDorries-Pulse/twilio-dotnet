@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -175,7 +175,7 @@ namespace Twilio.Rest.Insights.V1.Call
         {
             try
             {
-                return JsonConvert.DeserializeObject<CallSummaryResource>(json);
+                return JsonSerializer.Deserialize<CallSummaryResource>(json);
             }
             catch (JsonException e)
             {
@@ -191,7 +191,7 @@ namespace Twilio.Rest.Insights.V1.Call
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -201,95 +201,95 @@ namespace Twilio.Rest.Insights.V1.Call
 
     
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Call. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         
-        [JsonProperty("call_type")]
+        [JsonPropertyName("call_type")]
         public CallSummaryResource.CallTypeEnum CallType { get; private set; }
 
         
-        [JsonProperty("call_state")]
+        [JsonPropertyName("call_state")]
         public CallSummaryResource.CallStateEnum CallState { get; private set; }
 
         
-        [JsonProperty("answered_by")]
+        [JsonPropertyName("answered_by")]
         public CallSummaryResource.AnsweredByEnum AnsweredBy { get; private set; }
 
         
-        [JsonProperty("processing_state")]
+        [JsonPropertyName("processing_state")]
         public CallSummaryResource.ProcessingStateEnum ProcessingState { get; private set; }
 
         ///<summary> The time at which the Call was created, given in ISO 8601 format. Can be different from `start_time` in the event of queueing due to CPS </summary> 
-        [JsonProperty("created_time")]
+        [JsonPropertyName("created_time")]
         public DateTime? CreatedTime { get; private set; }
 
         ///<summary> The time at which the Call was started, given in ISO 8601 format. </summary> 
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public DateTime? StartTime { get; private set; }
 
         ///<summary> The time at which the Call was ended, given in ISO 8601 format. </summary> 
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public DateTime? EndTime { get; private set; }
 
         ///<summary> Duration between when the call was initiated and the call was ended </summary> 
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int? Duration { get; private set; }
 
         ///<summary> Duration between when the call was answered and when it ended </summary> 
-        [JsonProperty("connect_duration")]
+        [JsonPropertyName("connect_duration")]
         public int? ConnectDuration { get; private set; }
 
         ///<summary> The calling party. </summary> 
-        [JsonProperty("from")]
+        [JsonPropertyName("from")]
         public object From { get; private set; }
 
         ///<summary> The called party. </summary> 
-        [JsonProperty("to")]
+        [JsonPropertyName("to")]
         public object To { get; private set; }
 
         ///<summary> Contains metrics and properties for the Twilio media gateway of a PSTN call. </summary> 
-        [JsonProperty("carrier_edge")]
+        [JsonPropertyName("carrier_edge")]
         public object CarrierEdge { get; private set; }
 
         ///<summary> Contains metrics and properties for the Twilio media gateway of a Client call. </summary> 
-        [JsonProperty("client_edge")]
+        [JsonPropertyName("client_edge")]
         public object ClientEdge { get; private set; }
 
         ///<summary> Contains metrics and properties for the SDK sensor library for Client calls. </summary> 
-        [JsonProperty("sdk_edge")]
+        [JsonPropertyName("sdk_edge")]
         public object SdkEdge { get; private set; }
 
         ///<summary> Contains metrics and properties for the Twilio media gateway of a SIP Interface or Trunking call. </summary> 
-        [JsonProperty("sip_edge")]
+        [JsonPropertyName("sip_edge")]
         public object SipEdge { get; private set; }
 
         ///<summary> Tags applied to calls by Voice Insights analysis indicating a condition that could result in subjective degradation of the call quality. </summary> 
-        [JsonProperty("tags")]
+        [JsonPropertyName("tags")]
         public List<string> Tags { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Attributes capturing call-flow-specific details. </summary> 
-        [JsonProperty("attributes")]
+        [JsonPropertyName("attributes")]
         public object Attributes { get; private set; }
 
         ///<summary> Contains edge-agnostic call-level details. </summary> 
-        [JsonProperty("properties")]
+        [JsonPropertyName("properties")]
         public object Properties { get; private set; }
 
         ///<summary> Contains trusted communications details including Branded Call and verified caller ID. </summary> 
-        [JsonProperty("trust")]
+        [JsonPropertyName("trust")]
         public object Trust { get; private set; }
 
         ///<summary> Programmatically labeled annotations for the Call. Developers can update the Call Summary records with Annotation during or after a Call. Annotations can be updated as long as the Call Summary record is addressable via the API. </summary> 
-        [JsonProperty("annotation")]
+        [JsonPropertyName("annotation")]
         public object Annotation { get; private set; }
 
 

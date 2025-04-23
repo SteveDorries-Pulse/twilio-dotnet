@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -311,7 +311,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PluginConfigurationResource>(json);
+                return JsonSerializer.Deserialize<PluginConfigurationResource>(json);
             }
             catch (JsonException e)
             {
@@ -327,7 +327,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -337,35 +337,35 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> The unique string that we created to identify the Flex Plugin Configuration resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Plugin Configuration resource and owns this resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The name of this Flex Plugin Configuration. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> The description of the Flex Plugin Configuration resource. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> Whether the Flex Plugin Configuration is archived. The default value is false. </summary> 
-        [JsonProperty("archived")]
+        [JsonPropertyName("archived")]
         public bool? Archived { get; private set; }
 
         ///<summary> The date and time in GMT when the Flex Plugin Configuration was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The absolute URL of the Flex Plugin Configuration resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

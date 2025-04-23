@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -237,7 +237,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<AvailablePhoneNumberCountryResource>(json);
+                return JsonSerializer.Deserialize<AvailablePhoneNumberCountryResource>(json);
             }
             catch (JsonException e)
             {
@@ -253,7 +253,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -263,23 +263,23 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the country. </summary> 
-        [JsonProperty("country_code")]
+        [JsonPropertyName("country_code")]
         public string CountryCode { get; private set; }
 
         ///<summary> The name of the country. </summary> 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; private set; }
 
         ///<summary> The URI of the Country resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public Uri Uri { get; private set; }
 
         ///<summary> Whether all phone numbers available in the country are new to the Twilio platform. `true` if they are and `false` if all numbers are not in the Twilio Phone Number Beta program. </summary> 
-        [JsonProperty("beta")]
+        [JsonPropertyName("beta")]
         public bool? Beta { get; private set; }
 
         ///<summary> A list of related AvailablePhoneNumber resources identified by their URIs relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("subresource_uris")]
+        [JsonPropertyName("subresource_uris")]
         public Dictionary<string, string> SubresourceUris { get; private set; }
 
 

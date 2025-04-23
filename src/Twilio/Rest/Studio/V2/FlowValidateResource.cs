@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -134,7 +134,7 @@ namespace Twilio.Rest.Studio.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<FlowValidateResource>(json);
+                return JsonSerializer.Deserialize<FlowValidateResource>(json);
             }
             catch (JsonException e)
             {
@@ -150,7 +150,7 @@ namespace Twilio.Rest.Studio.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -160,7 +160,7 @@ namespace Twilio.Rest.Studio.V2
 
     
         ///<summary> Boolean if the flow definition is valid. </summary> 
-        [JsonProperty("valid")]
+        [JsonPropertyName("valid")]
         public bool? Valid { get; private set; }
 
 

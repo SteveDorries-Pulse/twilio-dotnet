@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Twilio.Converters
 {
@@ -17,7 +18,7 @@ namespace Twilio.Converters
         /// <returns>A json string</returns>
         public static string JsonObject(object input)
         {
-            return (input is string) ? (string) input : JsonConvert.SerializeObject(input);
+            return (input is string) ? (string) input : JsonSerializer.Serialize(input);
         }
 
         /// <summary>

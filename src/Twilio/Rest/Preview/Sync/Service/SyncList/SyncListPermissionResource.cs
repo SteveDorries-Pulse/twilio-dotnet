@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -417,7 +417,7 @@ namespace Twilio.Rest.Preview.Sync.Service.SyncList
         {
             try
             {
-                return JsonConvert.DeserializeObject<SyncListPermissionResource>(json);
+                return JsonSerializer.Deserialize<SyncListPermissionResource>(json);
             }
             catch (JsonException e)
             {
@@ -433,7 +433,7 @@ namespace Twilio.Rest.Preview.Sync.Service.SyncList
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -443,35 +443,35 @@ namespace Twilio.Rest.Preview.Sync.Service.SyncList
 
     
         ///<summary> The unique SID identifier of the Twilio Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Sync Service Instance. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Sync List to which the Permission applies. </summary> 
-        [JsonProperty("list_sid")]
+        [JsonPropertyName("list_sid")]
         public string ListSid { get; private set; }
 
         ///<summary> Arbitrary string identifier representing a human user associated with an FPA token, assigned by the developer. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> Boolean flag specifying whether the identity can read the Sync List and its Items. </summary> 
-        [JsonProperty("read")]
+        [JsonPropertyName("read")]
         public bool? _Read { get; private set; }
 
         ///<summary> Boolean flag specifying whether the identity can create, update and delete Items of the Sync List. </summary> 
-        [JsonProperty("write")]
+        [JsonPropertyName("write")]
         public bool? Write { get; private set; }
 
         ///<summary> Boolean flag specifying whether the identity can delete the Sync List. </summary> 
-        [JsonProperty("manage")]
+        [JsonPropertyName("manage")]
         public bool? Manage { get; private set; }
 
         ///<summary> Contains an absolute URL for this Sync List Permission. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

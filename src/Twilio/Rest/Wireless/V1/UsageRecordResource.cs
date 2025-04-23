@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -187,7 +187,7 @@ namespace Twilio.Rest.Wireless.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<UsageRecordResource>(json);
+                return JsonSerializer.Deserialize<UsageRecordResource>(json);
             }
             catch (JsonException e)
             {
@@ -203,7 +203,7 @@ namespace Twilio.Rest.Wireless.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -213,19 +213,19 @@ namespace Twilio.Rest.Wireless.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the AccountUsageRecord resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The time period for which usage is reported. Contains `start` and `end` properties that describe the period using GMT date-time values specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. </summary> 
-        [JsonProperty("period")]
+        [JsonPropertyName("period")]
         public object Period { get; private set; }
 
         ///<summary> An object that describes the aggregated Commands usage for all SIMs during the specified period. See [Commands Usage Object](https://www.twilio.com/docs/iot/wireless/api/account-usagerecord-resource#commands-usage-object). </summary> 
-        [JsonProperty("commands")]
+        [JsonPropertyName("commands")]
         public object Commands { get; private set; }
 
         ///<summary> An object that describes the aggregated Data usage for all SIMs over the period. See [Data Usage Object](https://www.twilio.com/docs/iot/wireless/api/account-usagerecord-resource#data-usage-object). </summary> 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public object Data { get; private set; }
 
 

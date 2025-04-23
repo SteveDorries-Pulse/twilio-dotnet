@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -383,7 +383,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsQuestionnairesCategoryResource>(json);
+                return JsonSerializer.Deserialize<InsightsQuestionnairesCategoryResource>(json);
             }
             catch (JsonException e)
             {
@@ -399,7 +399,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -409,19 +409,19 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the category </summary> 
-        [JsonProperty("category_sid")]
+        [JsonPropertyName("category_sid")]
         public string CategorySid { get; private set; }
 
         ///<summary> The name of this category. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

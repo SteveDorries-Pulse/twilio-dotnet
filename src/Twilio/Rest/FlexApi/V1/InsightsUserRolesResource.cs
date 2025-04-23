@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -105,7 +105,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsUserRolesResource>(json);
+                return JsonSerializer.Deserialize<InsightsUserRolesResource>(json);
             }
             catch (JsonException e)
             {
@@ -121,7 +121,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -131,11 +131,11 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> Flex Insights roles for the user </summary> 
-        [JsonProperty("roles")]
+        [JsonPropertyName("roles")]
         public List<string> Roles { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -464,7 +464,7 @@ namespace Twilio.Rest.Microvisor.V1.Device
         {
             try
             {
-                return JsonConvert.DeserializeObject<DeviceSecretResource>(json);
+                return JsonSerializer.Deserialize<DeviceSecretResource>(json);
             }
             catch (JsonException e)
             {
@@ -480,7 +480,7 @@ namespace Twilio.Rest.Microvisor.V1.Device
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -490,19 +490,19 @@ namespace Twilio.Rest.Microvisor.V1.Device
 
     
         ///<summary> A 34-character string that uniquely identifies the parent Device. </summary> 
-        [JsonProperty("device_sid")]
+        [JsonPropertyName("device_sid")]
         public string DeviceSid { get; private set; }
 
         ///<summary> The secret key; up to 100 characters. </summary> 
-        [JsonProperty("key")]
+        [JsonPropertyName("key")]
         public string Key { get; private set; }
 
         ///<summary> The date_rotated </summary> 
-        [JsonProperty("date_rotated")]
+        [JsonPropertyName("date_rotated")]
         public DateTime? DateRotated { get; private set; }
 
         ///<summary> The absolute URL of the Secret. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

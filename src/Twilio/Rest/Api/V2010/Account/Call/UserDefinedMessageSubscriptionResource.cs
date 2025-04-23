@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -205,7 +205,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
         {
             try
             {
-                return JsonConvert.DeserializeObject<UserDefinedMessageSubscriptionResource>(json);
+                return JsonSerializer.Deserialize<UserDefinedMessageSubscriptionResource>(json);
             }
             catch (JsonException e)
             {
@@ -221,7 +221,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -231,23 +231,23 @@ namespace Twilio.Rest.Api.V2010.Account.Call
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that subscribed to the User Defined Messages. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Call](https://www.twilio.com/docs/voice/api/call-resource) the User Defined Message Subscription is associated with. This refers to the Call SID that is producing the User Defined Messages. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The SID that uniquely identifies this User Defined Message Subscription. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The date that this User Defined Message Subscription was created, given in RFC 2822 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The URI of the User Defined Message Subscription Resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

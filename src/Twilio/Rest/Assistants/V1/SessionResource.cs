@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -226,7 +226,7 @@ namespace Twilio.Rest.Assistants.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SessionResource>(json);
+                return JsonSerializer.Deserialize<SessionResource>(json);
             }
             catch (JsonException e)
             {
@@ -242,7 +242,7 @@ namespace Twilio.Rest.Assistants.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -252,31 +252,31 @@ namespace Twilio.Rest.Assistants.V1
 
     
         ///<summary> The Session ID. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Session resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The Assistant ID. </summary> 
-        [JsonProperty("assistant_id")]
+        [JsonPropertyName("assistant_id")]
         public string AssistantId { get; private set; }
 
         ///<summary> True if the session is verified. </summary> 
-        [JsonProperty("verified")]
+        [JsonPropertyName("verified")]
         public bool? Verified { get; private set; }
 
         ///<summary> The unique identity of user for the session. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The date and time in GMT when the Session was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Session was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

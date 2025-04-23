@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -226,7 +226,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance
         {
             try
             {
-                return JsonConvert.DeserializeObject<SupportingDocumentTypeResource>(json);
+                return JsonSerializer.Deserialize<SupportingDocumentTypeResource>(json);
             }
             catch (JsonException e)
             {
@@ -242,7 +242,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -252,23 +252,23 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance
 
     
         ///<summary> The unique string that identifies the Supporting Document Type resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A human-readable description of the Supporting Document Type resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The machine-readable description of the Supporting Document Type resource. </summary> 
-        [JsonProperty("machine_name")]
+        [JsonPropertyName("machine_name")]
         public string MachineName { get; private set; }
 
         ///<summary> The required information for creating a Supporting Document. The required fields will change as regulatory needs change and will differ for businesses and individuals. </summary> 
-        [JsonProperty("fields")]
+        [JsonPropertyName("fields")]
         public List<object> Fields { get; private set; }
 
         ///<summary> The absolute URL of the Supporting Document Type resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

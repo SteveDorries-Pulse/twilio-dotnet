@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -176,7 +176,7 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
         {
             try
             {
-                return JsonConvert.DeserializeObject<SentenceResource>(json);
+                return JsonSerializer.Deserialize<SentenceResource>(json);
             }
             catch (JsonException e)
             {
@@ -192,7 +192,7 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -202,35 +202,35 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
 
     
         ///<summary> The channel number. </summary> 
-        [JsonProperty("media_channel")]
+        [JsonPropertyName("media_channel")]
         public int? MediaChannel { get; private set; }
 
         ///<summary> The index of the sentence in the transcript. </summary> 
-        [JsonProperty("sentence_index")]
+        [JsonPropertyName("sentence_index")]
         public int? SentenceIndex { get; private set; }
 
         ///<summary> Offset from the beginning of the transcript when this sentence starts. </summary> 
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public decimal? StartTime { get; private set; }
 
         ///<summary> Offset from the beginning of the transcript when this sentence ends. </summary> 
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public decimal? EndTime { get; private set; }
 
         ///<summary> Transcript text. </summary> 
-        [JsonProperty("transcript")]
+        [JsonPropertyName("transcript")]
         public string Transcript { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this Sentence. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The confidence </summary> 
-        [JsonProperty("confidence")]
+        [JsonPropertyName("confidence")]
         public decimal? Confidence { get; private set; }
 
         ///<summary> Detailed information for each of the words of the given Sentence. </summary> 
-        [JsonProperty("words")]
+        [JsonPropertyName("words")]
         public List<object> Words { get; private set; }
 
 

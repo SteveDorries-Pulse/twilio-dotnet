@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -295,7 +295,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
         {
             try
             {
-                return JsonConvert.DeserializeObject<TranscriptionResource>(json);
+                return JsonSerializer.Deserialize<TranscriptionResource>(json);
             }
             catch (JsonException e)
             {
@@ -311,7 +311,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -321,31 +321,31 @@ namespace Twilio.Rest.Api.V2010.Account.Call
 
     
         ///<summary> The SID of the Transcription resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created this Transcription resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Call](https://www.twilio.com/docs/voice/api/call-resource) the Transcription resource is associated with. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The user-specified name of this Transcription, if one was given when the Transcription was created. This may be used to stop the Transcription. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public TranscriptionResource.StatusEnum Status { get; private set; }
 
         ///<summary> The date and time in GMT that this resource was last updated, specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The uri </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -252,7 +252,7 @@ namespace Twilio.Rest.PreviewIam.Organizations
         {
             try
             {
-                return JsonConvert.DeserializeObject<AccountResource>(json);
+                return JsonSerializer.Deserialize<AccountResource>(json);
             }
             catch (JsonException e)
             {
@@ -268,7 +268,7 @@ namespace Twilio.Rest.PreviewIam.Organizations
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -278,23 +278,23 @@ namespace Twilio.Rest.PreviewIam.Organizations
 
     
         ///<summary> Twilio account sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Account friendly name </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> Account status </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public AccountResource.StatusEnum Status { get; private set; }
 
         ///<summary> Twilio account sid </summary> 
-        [JsonProperty("owner_sid")]
+        [JsonPropertyName("owner_sid")]
         public string OwnerSid { get; private set; }
 
         ///<summary> The date and time when the account was created in the system </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
 

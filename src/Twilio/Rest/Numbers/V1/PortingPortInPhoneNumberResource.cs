@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -184,7 +184,7 @@ namespace Twilio.Rest.Numbers.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PortingPortInPhoneNumberResource>(json);
+                return JsonSerializer.Deserialize<PortingPortInPhoneNumberResource>(json);
             }
             catch (JsonException e)
             {
@@ -200,7 +200,7 @@ namespace Twilio.Rest.Numbers.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -210,76 +210,76 @@ namespace Twilio.Rest.Numbers.V1
 
     
         ///<summary> The unique identifier for the port in request that this phone number is associated with. </summary> 
-        [JsonProperty("port_in_request_sid")]
+        [JsonPropertyName("port_in_request_sid")]
         public string PortInRequestSid { get; private set; }
 
         ///<summary> The unique identifier for this phone number associated with this port in request. </summary> 
-        [JsonProperty("phone_number_sid")]
+        [JsonPropertyName("phone_number_sid")]
         public string PhoneNumberSid { get; private set; }
 
         ///<summary> URL reference for this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Account Sid or subaccount where the phone number(s) will be Ported. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The number type of the phone number. This can be: toll-free, local, mobile or unknown. This field may be null if the number is not portable or if the portability for a number has not yet been evaluated. </summary> 
-        [JsonProperty("phone_number_type")]
+        [JsonPropertyName("phone_number_type")]
         public string PhoneNumberType { get; private set; }
 
         ///<summary> The timestamp for when this port in phone number was created. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The ISO country code that this number is associated with. This field may be null if the number is not portable or if the portability for a number has not yet been evaluated. </summary> 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; private set; }
 
         ///<summary> Indicates if the phone number is missing required fields such as a PIN or account number. This field may be null if the number is not portable or if the portability for a number has not yet been evaluated. </summary> 
-        [JsonProperty("missing_required_fields")]
+        [JsonPropertyName("missing_required_fields")]
         public bool? MissingRequiredFields { get; private set; }
 
         ///<summary> Timestamp indicating when the Port In Phone Number resource was last modified. </summary> 
-        [JsonProperty("last_updated")]
+        [JsonPropertyName("last_updated")]
         public DateTime? LastUpdated { get; private set; }
 
         ///<summary> Phone number to be ported. This will be in the E164 Format. </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber PhoneNumber { get; private set; }
 
         ///<summary> If the number is portable by Twilio or not. This field may be null if the number portability has not yet been evaluated. If a number is not portable reference the `not_portability_reason_code` and `not_portability_reason` fields for more details </summary> 
-        [JsonProperty("portable")]
+        [JsonPropertyName("portable")]
         public bool? Portable { get; private set; }
 
         ///<summary> The not portability reason code description. This field may be null if the number is portable or if the portability for a number has not yet been evaluated. </summary> 
-        [JsonProperty("not_portability_reason")]
+        [JsonPropertyName("not_portability_reason")]
         public string NotPortabilityReason { get; private set; }
 
         ///<summary> The not portability reason code. This field may be null if the number is portable or if the portability for a number has not yet been evaluated. </summary> 
-        [JsonProperty("not_portability_reason_code")]
+        [JsonPropertyName("not_portability_reason_code")]
         public int? NotPortabilityReasonCode { get; private set; }
 
         ///<summary> The status of the port in phone number. </summary> 
-        [JsonProperty("port_in_phone_number_status")]
+        [JsonPropertyName("port_in_phone_number_status")]
         public string PortInPhoneNumberStatus { get; private set; }
 
         ///<summary> The pin required by the losing carrier to do the port out. </summary> 
-        [JsonProperty("port_out_pin")]
+        [JsonPropertyName("port_out_pin")]
         public int? PortOutPin { get; private set; }
 
         ///<summary> The description of the rejection reason provided by the losing carrier. This field may be null if the number has not been rejected by the losing carrier. </summary> 
-        [JsonProperty("rejection_reason")]
+        [JsonPropertyName("rejection_reason")]
         public string RejectionReason { get; private set; }
 
         ///<summary> The code for the rejection reason provided by the losing carrier. This field may be null if the number has not been rejected by the losing carrier. </summary> 
-        [JsonProperty("rejection_reason_code")]
+        [JsonPropertyName("rejection_reason_code")]
         public int? RejectionReasonCode { get; private set; }
 
         ///<summary> The timestamp the phone number will be ported. This will only be set once a port date has been confirmed. Not all carriers can guarantee a specific time on the port date. Twilio will try its best to get the port completed by this time on the port date. Please subscribe to webhooks for confirmation on when a port has actually been completed. </summary> 
-        [JsonProperty("port_date")]
+        [JsonPropertyName("port_date")]
         public DateTime? PortDate { get; private set; }
 
 

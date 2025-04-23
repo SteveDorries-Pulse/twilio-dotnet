@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -337,7 +337,7 @@ namespace Twilio.Rest.Api.V2010.Account.Queue
         {
             try
             {
-                return JsonConvert.DeserializeObject<MemberResource>(json);
+                return JsonSerializer.Deserialize<MemberResource>(json);
             }
             catch (JsonException e)
             {
@@ -353,7 +353,7 @@ namespace Twilio.Rest.Api.V2010.Account.Queue
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -363,27 +363,27 @@ namespace Twilio.Rest.Api.V2010.Account.Queue
 
     
         ///<summary> The SID of the [Call](https://www.twilio.com/docs/voice/api/call-resource) the Member resource is associated with. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The date that the member was enqueued, given in RFC 2822 format. </summary> 
-        [JsonProperty("date_enqueued")]
+        [JsonPropertyName("date_enqueued")]
         public DateTime? DateEnqueued { get; private set; }
 
         ///<summary> This member's current position in the queue. </summary> 
-        [JsonProperty("position")]
+        [JsonPropertyName("position")]
         public int? Position { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         ///<summary> The number of seconds the member has been in the queue. </summary> 
-        [JsonProperty("wait_time")]
+        [JsonPropertyName("wait_time")]
         public int? WaitTime { get; private set; }
 
         ///<summary> The SID of the Queue the member is in. </summary> 
-        [JsonProperty("queue_sid")]
+        [JsonPropertyName("queue_sid")]
         public string QueueSid { get; private set; }
 
 

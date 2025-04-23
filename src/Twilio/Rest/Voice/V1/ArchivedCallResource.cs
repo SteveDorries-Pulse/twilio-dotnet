@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -115,7 +115,7 @@ namespace Twilio.Rest.Voice.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ArchivedCallResource>(json);
+                return JsonSerializer.Deserialize<ArchivedCallResource>(json);
             }
             catch (JsonException e)
             {
@@ -131,7 +131,7 @@ namespace Twilio.Rest.Voice.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {

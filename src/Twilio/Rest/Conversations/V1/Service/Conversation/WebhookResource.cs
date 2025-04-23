@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -552,7 +552,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Conversation
         {
             try
             {
-                return JsonConvert.DeserializeObject<WebhookResource>(json);
+                return JsonSerializer.Deserialize<WebhookResource>(json);
             }
             catch (JsonException e)
             {
@@ -568,7 +568,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Conversation
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -578,39 +578,39 @@ namespace Twilio.Rest.Conversations.V1.Service.Conversation
 
     
         ///<summary> A 34 character string that uniquely identifies this resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Participant resource is associated with. </summary> 
-        [JsonProperty("chat_service_sid")]
+        [JsonPropertyName("chat_service_sid")]
         public string ChatServiceSid { get; private set; }
 
         ///<summary> The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this webhook. </summary> 
-        [JsonProperty("conversation_sid")]
+        [JsonPropertyName("conversation_sid")]
         public string ConversationSid { get; private set; }
 
         ///<summary> The target of this webhook: `webhook`, `studio`, `trigger` </summary> 
-        [JsonProperty("target")]
+        [JsonPropertyName("target")]
         public string Target { get; private set; }
 
         ///<summary> An absolute API resource URL for this webhook. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The configuration of this webhook. Is defined based on target. </summary> 
-        [JsonProperty("configuration")]
+        [JsonPropertyName("configuration")]
         public object Configuration { get; private set; }
 
         ///<summary> The date that this resource was created. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was last updated. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

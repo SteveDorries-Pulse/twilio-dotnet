@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 
 namespace Twilio.Converters
 {
     
-    public class DateTimeConverter : JsonConverter
+    public class DateTimeConverter : JsonConverter<object>
         {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions serializer)
             {
                 // Serializing List<DateTime> objects
                 if (value is List<DateTime> dateTimes)
@@ -16,46 +17,46 @@ namespace Twilio.Converters
                     writer.WriteStartArray();
                     foreach (var dateTime in dateTimes)
                     {
-                        writer.WriteValue(Serializers.DateTimeIso8601(dateTime));
+                        writer.WriteStringValue(Serializers.DateTimeIso8601(dateTime));
                     }
 
                     writer.WriteEndArray();
                 }
                 else
                 { // Serializing DateTime object
-                    writer.WriteValue(Serializers.DateTimeIso8601((DateTime)value));
+                    writer.WriteStringValue(Serializers.DateTimeIso8601((DateTime)value));
                 }
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object Read(ref Utf8JsonReader reader, Type objectType, JsonSerializerOptions options)
             {
-                if (reader.TokenType == JsonToken.StartArray)
+                if (reader.TokenType == JsonTokenType.StartArray)
                 {
                     var dateTimes = new List<DateTime>();
 
                     while (reader.Read())
                     {
-                        if (reader.TokenType == JsonToken.String)
+                        if (reader.TokenType == JsonTokenType.String)
                         {
-                            if (DateTime.TryParse((string)reader.Value, out DateTime dateTime))
+                            if (DateTime.TryParse(reader.GetString(), out DateTime dateTime))
                             {
                                 dateTimes.Add(dateTime);
                             }
                         }
-                        else if (reader.TokenType == JsonToken.EndArray)
+                        else if (reader.TokenType == JsonTokenType.EndArray)
                         {
                             return dateTimes;
                         }
                     }
                 }
-                else if (reader.TokenType == JsonToken.String)
+                else if (reader.TokenType == JsonTokenType.String)
                 {
-                    if (DateTime.TryParse((string)reader.Value, out DateTime dateTime))
+                    if (DateTime.TryParse(reader.GetString(), out DateTime dateTime))
                     {
                         return dateTime;
                     }
                 }
-                throw new JsonSerializationException("Failed to deserialize DateTime.");
+                throw new JsonException("Failed to deserialize DateTime.");
             }
 
             public override bool CanConvert(Type objectType)
@@ -64,9 +65,9 @@ namespace Twilio.Converters
             }
         }
 
-    public class UriConverter : JsonConverter
+    public class UriConverter : JsonConverter<object>
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions serializer)
         {
             // Serializing List<Uri> objects
             if (value is List<Uri> uris)
@@ -74,46 +75,46 @@ namespace Twilio.Converters
                 writer.WriteStartArray();
                 foreach (var uri in uris)
                 {
-                    writer.WriteValue(Serializers.Url(uri));
+                    writer.WriteStringValue(Serializers.Url(uri));
                 }
 
                 writer.WriteEndArray();
             }
             else
             { // Serializing Uri object
-                writer.WriteValue(Serializers.Url((Uri)value));
+                writer.WriteStringValue(Serializers.Url((Uri)value));
             }
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object Read(ref Utf8JsonReader reader, Type objectType, JsonSerializerOptions serializer)
         {
-            if (reader.TokenType == JsonToken.StartArray)
+            if (reader.TokenType == JsonTokenType.StartArray)
             {
                 var uris = new List<Uri>();
 
                 while (reader.Read())
                 {
-                    if (reader.TokenType == JsonToken.String)
+                    if (reader.TokenType == JsonTokenType.String)
                     {
-                        if (Uri.TryCreate((string)reader.Value, UriKind.RelativeOrAbsolute, out Uri uri))
+                        if (Uri.TryCreate(reader.GetString(), UriKind.RelativeOrAbsolute, out Uri uri))
                         {
                             uris.Add(uri);
                         }
                     }
-                    else if (reader.TokenType == JsonToken.EndArray)
+                    else if (reader.TokenType == JsonTokenType.EndArray)
                     {
                         return uris;
                     }
                 }
             }
-            else if (reader.TokenType == JsonToken.String)
+            else if (reader.TokenType == JsonTokenType.String)
             {
-                if (Uri.TryCreate((string)reader.Value, UriKind.RelativeOrAbsolute, out Uri uri))
+                if (Uri.TryCreate(reader.GetString(), UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     return uri;
                 }
             }
-            throw new JsonSerializationException("Failed to deserialize URI.");
+            throw new JsonException("Failed to deserialize URI.");
         }
         
         public override bool CanConvert(Type objectType)
@@ -122,9 +123,9 @@ namespace Twilio.Converters
         }
     }
 
-    public class JsonObjectConverter : JsonConverter
+    public class JsonObjectConverter : JsonConverter<object>
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions serializer)
         {
             // Serializing List<Uri> objects
             if (value is List<object> objects)
@@ -132,46 +133,46 @@ namespace Twilio.Converters
                 writer.WriteStartArray();
                 foreach (var val in objects)
                 {
-                    writer.WriteValue(Serializers.JsonObject(val));
+                    writer.WriteStringValue(Serializers.JsonObject(val));
                 }
 
                 writer.WriteEndArray();
             }
             else
             { // Serializing Uri object
-                writer.WriteValue(Serializers.JsonObject(value));
+                writer.WriteStringValue(Serializers.JsonObject(value));
             }
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object Read(ref Utf8JsonReader reader, Type objectType,  JsonSerializerOptions serializer)
         {
-            if (reader.TokenType == JsonToken.StartArray)
+            if (reader.TokenType == JsonTokenType.StartArray)
             {
                 var objects = new List<object>();
 
                 while (reader.Read())
                 {
-                    if (reader.TokenType == JsonToken.String)
+                    if (reader.TokenType == JsonTokenType.String)
                     {
-                        if (Uri.TryCreate((string)reader.Value, UriKind.RelativeOrAbsolute, out Uri uri))
+                        if (Uri.TryCreate(reader.GetString(), UriKind.RelativeOrAbsolute, out Uri uri))
                         {
                             objects.Add(uri);
                         }
                     }
-                    else if (reader.TokenType == JsonToken.EndArray)
+                    else if (reader.TokenType == JsonTokenType.EndArray)
                     {
                         return objects;
                     }
                 }
             }
-            else if (reader.TokenType == JsonToken.String)
+            else if (reader.TokenType == JsonTokenType.String)
             {
-                if (Uri.TryCreate((string)reader.Value, UriKind.RelativeOrAbsolute, out Uri uri))
+                if (Uri.TryCreate(reader.GetString(), UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     return uri;
                 }
             }
-            throw new JsonSerializationException("Failed to deserialize object.");
+            throw new JsonException("Failed to deserialize object.");
         }
         
         public override bool CanConvert(Type objectType)

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -473,7 +473,7 @@ namespace Twilio.Rest.Preview.Wireless
         {
             try
             {
-                return JsonConvert.DeserializeObject<RatePlanResource>(json);
+                return JsonSerializer.Deserialize<RatePlanResource>(json);
             }
             catch (JsonException e)
             {
@@ -489,7 +489,7 @@ namespace Twilio.Rest.Preview.Wireless
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -499,59 +499,59 @@ namespace Twilio.Rest.Preview.Wireless
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique_name </summary> 
-        [JsonProperty("unique_name")]
+        [JsonPropertyName("unique_name")]
         public string UniqueName { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The friendly_name </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The data_enabled </summary> 
-        [JsonProperty("data_enabled")]
+        [JsonPropertyName("data_enabled")]
         public bool? DataEnabled { get; private set; }
 
         ///<summary> The data_metering </summary> 
-        [JsonProperty("data_metering")]
+        [JsonPropertyName("data_metering")]
         public string DataMetering { get; private set; }
 
         ///<summary> The data_limit </summary> 
-        [JsonProperty("data_limit")]
+        [JsonPropertyName("data_limit")]
         public int? DataLimit { get; private set; }
 
         ///<summary> The messaging_enabled </summary> 
-        [JsonProperty("messaging_enabled")]
+        [JsonPropertyName("messaging_enabled")]
         public bool? MessagingEnabled { get; private set; }
 
         ///<summary> The voice_enabled </summary> 
-        [JsonProperty("voice_enabled")]
+        [JsonPropertyName("voice_enabled")]
         public bool? VoiceEnabled { get; private set; }
 
         ///<summary> The national_roaming_enabled </summary> 
-        [JsonProperty("national_roaming_enabled")]
+        [JsonPropertyName("national_roaming_enabled")]
         public bool? NationalRoamingEnabled { get; private set; }
 
         ///<summary> The international_roaming </summary> 
-        [JsonProperty("international_roaming")]
+        [JsonPropertyName("international_roaming")]
         public List<string> InternationalRoaming { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

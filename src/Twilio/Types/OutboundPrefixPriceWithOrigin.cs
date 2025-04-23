@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Twilio.Types
 {
@@ -11,31 +11,31 @@ namespace Twilio.Types
         /// <summary>
         /// Destination Prefix list
         /// </summary>
-        [JsonProperty("destination_prefixes")]
+        [JsonPropertyName("destination_prefixes")]
         public List<string> DestinationPrefixes { get; }
 
         /// <summary>
         /// Destination Prefix list
         /// </summary>
-        [JsonProperty("origination_prefixes")]
+        [JsonPropertyName("origination_prefixes")]
         public List<string> OriginationPrefixes { get; }
 
         /// <summary>
         /// Prefix friendly name
         /// </summary>
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; }
 
         /// <summary>
         /// Base price for prefix
         /// </summary>
-        [JsonProperty("base_price")]
+        [JsonPropertyName("base_price")]
         public double? BasePrice { get; }
 
         /// <summary>
         /// Current price of prefix
         /// </summary>
-        [JsonProperty("current_price")]
+        [JsonPropertyName("current_price")]
         public double? CurrentPrice { get; }
 
         /// <summary>

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -105,7 +105,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<DeactivationsResource>(json);
+                return JsonSerializer.Deserialize<DeactivationsResource>(json);
             }
             catch (JsonException e)
             {
@@ -121,7 +121,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -131,7 +131,7 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> Returns an authenticated url that redirects to a file containing the deactivated numbers for the requested day. This url is valid for up to two minutes. </summary> 
-        [JsonProperty("redirect_to")]
+        [JsonPropertyName("redirect_to")]
         public Uri RedirectTo { get; private set; }
 
 

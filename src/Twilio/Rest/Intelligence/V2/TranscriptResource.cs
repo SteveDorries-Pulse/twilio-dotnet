@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -420,7 +420,7 @@ namespace Twilio.Rest.Intelligence.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<TranscriptResource>(json);
+                return JsonSerializer.Deserialize<TranscriptResource>(json);
             }
             catch (JsonException e)
             {
@@ -436,7 +436,7 @@ namespace Twilio.Rest.Intelligence.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -446,63 +446,63 @@ namespace Twilio.Rest.Intelligence.V2
 
     
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Service. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this Transcript. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The date that this Transcript was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Transcript was updated, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public TranscriptResource.StatusEnum Status { get; private set; }
 
         ///<summary> Media Channel describing Transcript Source and Participant Mapping </summary> 
-        [JsonProperty("channel")]
+        [JsonPropertyName("channel")]
         public object Channel { get; private set; }
 
         ///<summary> Data logging allows Twilio to improve the quality of the speech recognition & language understanding services through using customer data to refine, fine tune and evaluate machine learning models. Note: Data logging cannot be activated via API, only via www.twilio.com, as it requires additional consent. </summary> 
-        [JsonProperty("data_logging")]
+        [JsonPropertyName("data_logging")]
         public bool? DataLogging { get; private set; }
 
         ///<summary> The default language code of the audio. </summary> 
-        [JsonProperty("language_code")]
+        [JsonPropertyName("language_code")]
         public string LanguageCode { get; private set; }
 
         ///<summary> The customer_key </summary> 
-        [JsonProperty("customer_key")]
+        [JsonPropertyName("customer_key")]
         public string CustomerKey { get; private set; }
 
         ///<summary> The date that this Transcript's media was started, given in ISO 8601 format. </summary> 
-        [JsonProperty("media_start_time")]
+        [JsonPropertyName("media_start_time")]
         public DateTime? MediaStartTime { get; private set; }
 
         ///<summary> The duration of this Transcript's source </summary> 
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int? Duration { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> If the transcript has been redacted, a redacted alternative of the transcript will be available. </summary> 
-        [JsonProperty("redaction")]
+        [JsonPropertyName("redaction")]
         public bool? Redaction { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

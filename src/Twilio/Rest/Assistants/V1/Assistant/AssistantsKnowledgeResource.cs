@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -314,7 +314,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
         {
             try
             {
-                return JsonConvert.DeserializeObject<AssistantsKnowledgeResource>(json);
+                return JsonSerializer.Deserialize<AssistantsKnowledgeResource>(json);
             }
             catch (JsonException e)
             {
@@ -330,7 +330,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -340,43 +340,43 @@ namespace Twilio.Rest.Assistants.V1.Assistant
 
     
         ///<summary> The type of knowledge source. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> The description of knowledge. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Knowledge resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The details of the knowledge source based on the type. </summary> 
-        [JsonProperty("knowledge_source_details")]
+        [JsonPropertyName("knowledge_source_details")]
         public object KnowledgeSourceDetails { get; private set; }
 
         ///<summary> The name of the knowledge source. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> The status of processing the knowledge source ('QUEUED', 'PROCESSING', 'COMPLETED', 'FAILED') </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; private set; }
 
         ///<summary> The type of knowledge source ('Web', 'Database', 'Text', 'File') </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; private set; }
 
         ///<summary> The url of the knowledge resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public string Url { get; private set; }
 
         ///<summary> The date and time in GMT when the Knowledge was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Knowledge was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

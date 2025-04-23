@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -339,7 +339,7 @@ namespace Twilio.Rest.Api.V2010.Account.Recording.AddOnResult
         {
             try
             {
-                return JsonConvert.DeserializeObject<PayloadResource>(json);
+                return JsonSerializer.Deserialize<PayloadResource>(json);
             }
             catch (JsonException e)
             {
@@ -355,7 +355,7 @@ namespace Twilio.Rest.Api.V2010.Account.Recording.AddOnResult
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -365,47 +365,47 @@ namespace Twilio.Rest.Api.V2010.Account.Recording.AddOnResult
 
     
         ///<summary> The unique string that that we created to identify the Recording AddOnResult Payload resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the AddOnResult to which the payload belongs. </summary> 
-        [JsonProperty("add_on_result_sid")]
+        [JsonPropertyName("add_on_result_sid")]
         public string AddOnResultSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Recording AddOnResult Payload resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The string provided by the vendor that describes the payload. </summary> 
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public string Label { get; private set; }
 
         ///<summary> The SID of the Add-on to which the result belongs. </summary> 
-        [JsonProperty("add_on_sid")]
+        [JsonPropertyName("add_on_sid")]
         public string AddOnSid { get; private set; }
 
         ///<summary> The SID of the Add-on configuration. </summary> 
-        [JsonProperty("add_on_configuration_sid")]
+        [JsonPropertyName("add_on_configuration_sid")]
         public string AddOnConfigurationSid { get; private set; }
 
         ///<summary> The MIME type of the payload. </summary> 
-        [JsonProperty("content_type")]
+        [JsonPropertyName("content_type")]
         public string ContentType { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The SID of the recording to which the AddOnResult resource that contains the payload belongs. </summary> 
-        [JsonProperty("reference_sid")]
+        [JsonPropertyName("reference_sid")]
         public string ReferenceSid { get; private set; }
 
         ///<summary> A list of related resources identified by their relative URIs. </summary> 
-        [JsonProperty("subresource_uris")]
+        [JsonPropertyName("subresource_uris")]
         public Dictionary<string, string> SubresourceUris { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -381,7 +381,7 @@ namespace Twilio.Rest.Messaging.V1.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<ChannelSenderResource>(json);
+                return JsonSerializer.Deserialize<ChannelSenderResource>(json);
             }
             catch (JsonException e)
             {
@@ -397,7 +397,7 @@ namespace Twilio.Rest.Messaging.V1.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -407,39 +407,39 @@ namespace Twilio.Rest.Messaging.V1.Service
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ChannelSender resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/messaging/services) the resource is associated with. </summary> 
-        [JsonProperty("messaging_service_sid")]
+        [JsonPropertyName("messaging_service_sid")]
         public string MessagingServiceSid { get; private set; }
 
         ///<summary> The unique string that we created to identify the ChannelSender resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique string that identifies the sender e.g whatsapp:+123456XXXX. </summary> 
-        [JsonProperty("sender")]
+        [JsonPropertyName("sender")]
         public string Sender { get; private set; }
 
         ///<summary> A string value that identifies the sender type e.g WhatsApp, Messenger. </summary> 
-        [JsonProperty("sender_type")]
+        [JsonPropertyName("sender_type")]
         public string SenderType { get; private set; }
 
         ///<summary> The 2-character [ISO Country Code](https://www.iso.org/iso-3166-country-codes.html) of the number. </summary> 
-        [JsonProperty("country_code")]
+        [JsonPropertyName("country_code")]
         public string CountryCode { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the ChannelSender resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

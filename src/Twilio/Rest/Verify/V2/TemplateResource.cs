@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -166,7 +166,7 @@ namespace Twilio.Rest.Verify.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<TemplateResource>(json);
+                return JsonSerializer.Deserialize<TemplateResource>(json);
             }
             catch (JsonException e)
             {
@@ -182,7 +182,7 @@ namespace Twilio.Rest.Verify.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -192,23 +192,23 @@ namespace Twilio.Rest.Verify.V2
 
     
         ///<summary> A 34 character string that uniquely identifies a Verification Template. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A descriptive string that you create to describe a Template. It can be up to 32 characters long. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> A list of channels that support the Template. Can include: sms, voice. </summary> 
-        [JsonProperty("channels")]
+        [JsonPropertyName("channels")]
         public List<string> Channels { get; private set; }
 
         ///<summary> An object that contains the different translations of the template. Every translation is identified by the language short name and contains its respective information as the approval status, text and created/modified date. </summary> 
-        [JsonProperty("translations")]
+        [JsonPropertyName("translations")]
         public object Translations { get; private set; }
 
 

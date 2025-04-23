@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -244,7 +244,7 @@ namespace Twilio.Rest.FlexApi.V1.PluginConfiguration
         {
             try
             {
-                return JsonConvert.DeserializeObject<ConfiguredPluginResource>(json);
+                return JsonSerializer.Deserialize<ConfiguredPluginResource>(json);
             }
             catch (JsonException e)
             {
@@ -260,7 +260,7 @@ namespace Twilio.Rest.FlexApi.V1.PluginConfiguration
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -270,67 +270,67 @@ namespace Twilio.Rest.FlexApi.V1.PluginConfiguration
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the Flex Plugin resource is installed for. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Flex Plugin Configuration that this Flex Plugin belongs to. </summary> 
-        [JsonProperty("configuration_sid")]
+        [JsonPropertyName("configuration_sid")]
         public string ConfigurationSid { get; private set; }
 
         ///<summary> The SID of the Flex Plugin. </summary> 
-        [JsonProperty("plugin_sid")]
+        [JsonPropertyName("plugin_sid")]
         public string PluginSid { get; private set; }
 
         ///<summary> The SID of the Flex Plugin Version. </summary> 
-        [JsonProperty("plugin_version_sid")]
+        [JsonPropertyName("plugin_version_sid")]
         public string PluginVersionSid { get; private set; }
 
         ///<summary> The phase this Flex Plugin would initialize at runtime. </summary> 
-        [JsonProperty("phase")]
+        [JsonPropertyName("phase")]
         public int? Phase { get; private set; }
 
         ///<summary> The URL of where the Flex Plugin Version JavaScript bundle is hosted on. </summary> 
-        [JsonProperty("plugin_url")]
+        [JsonPropertyName("plugin_url")]
         public string PluginUrl { get; private set; }
 
         ///<summary> The name that uniquely identifies this Flex Plugin resource. </summary> 
-        [JsonProperty("unique_name")]
+        [JsonPropertyName("unique_name")]
         public string UniqueName { get; private set; }
 
         ///<summary> The friendly name of this Flex Plugin resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> A descriptive string that you create to describe the plugin resource. It can be up to 500 characters long </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> Whether the Flex Plugin is archived. The default value is false. </summary> 
-        [JsonProperty("plugin_archived")]
+        [JsonPropertyName("plugin_archived")]
         public bool? PluginArchived { get; private set; }
 
         ///<summary> The latest version of this Flex Plugin Version. </summary> 
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public string Version { get; private set; }
 
         ///<summary> A changelog that describes the changes this Flex Plugin Version brings. </summary> 
-        [JsonProperty("changelog")]
+        [JsonPropertyName("changelog")]
         public string Changelog { get; private set; }
 
         ///<summary> Whether the Flex Plugin Version is archived. The default value is false. </summary> 
-        [JsonProperty("plugin_version_archived")]
+        [JsonPropertyName("plugin_version_archived")]
         public bool? PluginVersionArchived { get; private set; }
 
         ///<summary> Whether to validate the request is authorized to access the Flex Plugin Version. </summary> 
-        [JsonProperty("private")]
+        [JsonPropertyName("private")]
         public bool? Private { get; private set; }
 
         ///<summary> The date and time in GMT when the Flex Plugin was installed specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The absolute URL of the Flex Plugin resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

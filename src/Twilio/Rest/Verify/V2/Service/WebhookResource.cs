@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -531,7 +531,7 @@ namespace Twilio.Rest.Verify.V2.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<WebhookResource>(json);
+                return JsonSerializer.Deserialize<WebhookResource>(json);
             }
             catch (JsonException e)
             {
@@ -547,7 +547,7 @@ namespace Twilio.Rest.Verify.V2.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -557,51 +557,51 @@ namespace Twilio.Rest.Verify.V2.Service
 
     
         ///<summary> The unique string that we created to identify the Webhook resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique SID identifier of the Service. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the webhook. **This value should not contain PII.** </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The array of events that this Webhook is subscribed to. Possible event types: `*, factor.deleted, factor.created, factor.verified, challenge.approved, challenge.denied` </summary> 
-        [JsonProperty("event_types")]
+        [JsonPropertyName("event_types")]
         public List<string> EventTypes { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public WebhookResource.StatusEnum Status { get; private set; }
 
         
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public WebhookResource.VersionEnum Version { get; private set; }
 
         ///<summary> The URL associated with this Webhook. </summary> 
-        [JsonProperty("webhook_url")]
+        [JsonPropertyName("webhook_url")]
         public Uri WebhookUrl { get; private set; }
 
         
-        [JsonProperty("webhook_method")]
+        [JsonPropertyName("webhook_method")]
         public WebhookResource.MethodsEnum WebhookMethod { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the Webhook resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<LinkshorteningMessagingServiceDomainAssociationResource>(json);
+                return JsonSerializer.Deserialize<LinkshorteningMessagingServiceDomainAssociationResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,15 +133,15 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> The unique string that we created to identify the Domain resource. </summary> 
-        [JsonProperty("domain_sid")]
+        [JsonPropertyName("domain_sid")]
         public string DomainSid { get; private set; }
 
         ///<summary> The unique string that identifies the messaging service </summary> 
-        [JsonProperty("messaging_service_sid")]
+        [JsonPropertyName("messaging_service_sid")]
         public string MessagingServiceSid { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

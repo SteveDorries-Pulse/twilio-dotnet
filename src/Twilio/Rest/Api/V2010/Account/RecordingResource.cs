@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -372,7 +372,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<RecordingResource>(json);
+                return JsonSerializer.Deserialize<RecordingResource>(json);
             }
             catch (JsonException e)
             {
@@ -388,7 +388,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -398,79 +398,79 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Recording resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The API version used during the recording. </summary> 
-        [JsonProperty("api_version")]
+        [JsonPropertyName("api_version")]
         public string ApiVersion { get; private set; }
 
         ///<summary> The SID of the [Call](https://www.twilio.com/docs/voice/api/call-resource) the Recording resource is associated with. This will always refer to the parent leg of a two-leg call. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The Conference SID that identifies the conference associated with the recording, if a conference recording. </summary> 
-        [JsonProperty("conference_sid")]
+        [JsonPropertyName("conference_sid")]
         public string ConferenceSid { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The start time of the recording in GMT and in [RFC 2822](https://www.php.net/manual/en/class.datetime.php#datetime.constants.rfc2822) format. </summary> 
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public DateTime? StartTime { get; private set; }
 
         ///<summary> The length of the recording in seconds. </summary> 
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public string Duration { get; private set; }
 
         ///<summary> The unique string that that we created to identify the Recording resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The one-time cost of creating the recording in the `price_unit` currency. </summary> 
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public string Price { get; private set; }
 
         ///<summary> The currency used in the `price` property. Example: `USD`. </summary> 
-        [JsonProperty("price_unit")]
+        [JsonPropertyName("price_unit")]
         public string PriceUnit { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public RecordingResource.StatusEnum Status { get; private set; }
 
         ///<summary> The number of channels in the final recording file. Can be: `1` or `2`. </summary> 
-        [JsonProperty("channels")]
+        [JsonPropertyName("channels")]
         public int? Channels { get; private set; }
 
         
-        [JsonProperty("source")]
+        [JsonPropertyName("source")]
         public RecordingResource.SourceEnum Source { get; private set; }
 
         ///<summary> The error code that describes why the recording is `absent`. The error code is described in our [Error Dictionary](https://www.twilio.com/docs/api/errors). This value is null if the recording `status` is not `absent`. </summary> 
-        [JsonProperty("error_code")]
+        [JsonPropertyName("error_code")]
         public int? ErrorCode { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         ///<summary> How to decrypt the recording if it was encrypted using [Call Recording Encryption](https://www.twilio.com/docs/voice/tutorials/voice-recording-encryption) feature. </summary> 
-        [JsonProperty("encryption_details")]
+        [JsonPropertyName("encryption_details")]
         public object EncryptionDetails { get; private set; }
 
         ///<summary> A list of related resources identified by their relative URIs. </summary> 
-        [JsonProperty("subresource_uris")]
+        [JsonPropertyName("subresource_uris")]
         public Dictionary<string, string> SubresourceUris { get; private set; }
 
         ///<summary> The URL of the media file associated with this recording resource. When stored externally, this is the full URL location of the media file. </summary> 
-        [JsonProperty("media_url")]
+        [JsonPropertyName("media_url")]
         public Uri MediaUrl { get; private set; }
 
 

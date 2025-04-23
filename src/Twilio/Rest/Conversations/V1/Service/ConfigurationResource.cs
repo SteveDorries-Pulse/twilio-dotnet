@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -192,7 +192,7 @@ namespace Twilio.Rest.Conversations.V1.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<ConfigurationResource>(json);
+                return JsonSerializer.Deserialize<ConfigurationResource>(json);
             }
             catch (JsonException e)
             {
@@ -208,7 +208,7 @@ namespace Twilio.Rest.Conversations.V1.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -218,31 +218,31 @@ namespace Twilio.Rest.Conversations.V1.Service
 
     
         ///<summary> The unique string that we created to identify the Service configuration resource. </summary> 
-        [JsonProperty("chat_service_sid")]
+        [JsonPropertyName("chat_service_sid")]
         public string ChatServiceSid { get; private set; }
 
         ///<summary> The conversation-level role assigned to a conversation creator when they join a new conversation. See [Conversation Role](https://www.twilio.com/docs/conversations/api/role-resource) for more info about roles. </summary> 
-        [JsonProperty("default_conversation_creator_role_sid")]
+        [JsonPropertyName("default_conversation_creator_role_sid")]
         public string DefaultConversationCreatorRoleSid { get; private set; }
 
         ///<summary> The conversation-level role assigned to users when they are added to a conversation. See [Conversation Role](https://www.twilio.com/docs/conversations/api/role-resource) for more info about roles. </summary> 
-        [JsonProperty("default_conversation_role_sid")]
+        [JsonPropertyName("default_conversation_role_sid")]
         public string DefaultConversationRoleSid { get; private set; }
 
         ///<summary> The service-level role assigned to users when they are added to the service. See [Conversation Role](https://www.twilio.com/docs/conversations/api/role-resource) for more info about roles. </summary> 
-        [JsonProperty("default_chat_service_role_sid")]
+        [JsonPropertyName("default_chat_service_role_sid")]
         public string DefaultChatServiceRoleSid { get; private set; }
 
         ///<summary> An absolute API resource URL for this service configuration. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Contains an absolute API resource URL to access the push notifications configuration of this service. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> Whether the [Reachability Indicator](https://www.twilio.com/docs/conversations/reachability) is enabled for this Conversations Service. The default is `false`. </summary> 
-        [JsonProperty("reachability_enabled")]
+        [JsonPropertyName("reachability_enabled")]
         public bool? ReachabilityEnabled { get; private set; }
 
 

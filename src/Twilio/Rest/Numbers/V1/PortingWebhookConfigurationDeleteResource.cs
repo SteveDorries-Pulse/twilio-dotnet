@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Numbers.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PortingWebhookConfigurationDeleteResource>(json);
+                return JsonSerializer.Deserialize<PortingWebhookConfigurationDeleteResource>(json);
             }
             catch (JsonException e)
             {
@@ -139,7 +139,7 @@ namespace Twilio.Rest.Numbers.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {

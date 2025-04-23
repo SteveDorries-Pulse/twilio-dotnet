@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -181,7 +181,7 @@ namespace Twilio.Rest.Supersim.V1.Sim
         {
             try
             {
-                return JsonConvert.DeserializeObject<BillingPeriodResource>(json);
+                return JsonSerializer.Deserialize<BillingPeriodResource>(json);
             }
             catch (JsonException e)
             {
@@ -197,7 +197,7 @@ namespace Twilio.Rest.Supersim.V1.Sim
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -207,35 +207,35 @@ namespace Twilio.Rest.Supersim.V1.Sim
 
     
         ///<summary> The SID of the Billing Period. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) the Super SIM belongs to. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Super SIM the Billing Period belongs to. </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         ///<summary> The start time of the Billing Period specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public DateTime? StartTime { get; private set; }
 
         ///<summary> The end time of the Billing Period specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public DateTime? EndTime { get; private set; }
 
         
-        [JsonProperty("period_type")]
+        [JsonPropertyName("period_type")]
         public BillingPeriodResource.BpTypeEnum PeriodType { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

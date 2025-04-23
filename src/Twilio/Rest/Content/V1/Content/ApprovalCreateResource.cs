@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,9 +32,9 @@ namespace Twilio.Rest.Content.V1.Content
     
         public class ContentApprovalRequest
         {
-            [JsonProperty("name")]
+            [JsonPropertyName("name")]
             private string Name {get; set;}
-            [JsonProperty("category")]
+            [JsonPropertyName("category")]
             private string Category {get; set;}
             public ContentApprovalRequest() { }
             public class Builder
@@ -145,7 +145,7 @@ namespace Twilio.Rest.Content.V1.Content
         {
             try
             {
-                return JsonConvert.DeserializeObject<ApprovalCreateResource>(json);
+                return JsonSerializer.Deserialize<ApprovalCreateResource>(json);
             }
             catch (JsonException e)
             {
@@ -161,7 +161,7 @@ namespace Twilio.Rest.Content.V1.Content
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -171,27 +171,27 @@ namespace Twilio.Rest.Content.V1.Content
 
     
         ///<summary> The name </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> The category </summary> 
-        [JsonProperty("category")]
+        [JsonPropertyName("category")]
         public string Category { get; private set; }
 
         ///<summary> The content_type </summary> 
-        [JsonProperty("content_type")]
+        [JsonPropertyName("content_type")]
         public string ContentType { get; private set; }
 
         ///<summary> The status </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; private set; }
 
         ///<summary> The rejection_reason </summary> 
-        [JsonProperty("rejection_reason")]
+        [JsonPropertyName("rejection_reason")]
         public string RejectionReason { get; private set; }
 
         ///<summary> The allow_category_change </summary> 
-        [JsonProperty("allow_category_change")]
+        [JsonPropertyName("allow_category_change")]
         public bool? AllowCategoryChange { get; private set; }
 
 

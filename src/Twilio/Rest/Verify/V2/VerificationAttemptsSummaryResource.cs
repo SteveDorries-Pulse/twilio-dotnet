@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -134,7 +134,7 @@ namespace Twilio.Rest.Verify.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<VerificationAttemptsSummaryResource>(json);
+                return JsonSerializer.Deserialize<VerificationAttemptsSummaryResource>(json);
             }
             catch (JsonException e)
             {
@@ -150,7 +150,7 @@ namespace Twilio.Rest.Verify.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -160,23 +160,23 @@ namespace Twilio.Rest.Verify.V2
 
     
         ///<summary> Total of attempts made according to the provided filters </summary> 
-        [JsonProperty("total_attempts")]
+        [JsonPropertyName("total_attempts")]
         public int? TotalAttempts { get; private set; }
 
         ///<summary> Total of  attempts made that were confirmed by the end user, according to the provided filters. </summary> 
-        [JsonProperty("total_converted")]
+        [JsonPropertyName("total_converted")]
         public int? TotalConverted { get; private set; }
 
         ///<summary> Total of attempts made that were not confirmed by the end user, according to the provided filters. </summary> 
-        [JsonProperty("total_unconverted")]
+        [JsonPropertyName("total_unconverted")]
         public int? TotalUnconverted { get; private set; }
 
         ///<summary> Percentage of the confirmed messages over the total, defined by (total_converted/total_attempts)*100.  </summary> 
-        [JsonProperty("conversion_rate_percentage")]
+        [JsonPropertyName("conversion_rate_percentage")]
         public decimal? ConversionRatePercentage { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

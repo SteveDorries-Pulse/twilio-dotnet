@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -543,7 +543,7 @@ namespace Twilio.Rest.Chat.V2.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<ChannelResource>(json);
+                return JsonSerializer.Deserialize<ChannelResource>(json);
             }
             catch (JsonException e)
             {
@@ -559,7 +559,7 @@ namespace Twilio.Rest.Chat.V2.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -569,59 +569,59 @@ namespace Twilio.Rest.Chat.V2.Service
 
     
         ///<summary> The unique string that we created to identify the Channel resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Channel resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the Channel resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL. </summary> 
-        [JsonProperty("unique_name")]
+        [JsonPropertyName("unique_name")]
         public string UniqueName { get; private set; }
 
         ///<summary> The JSON string that stores application-specific data. If attributes have not been set, `{}` is returned. </summary> 
-        [JsonProperty("attributes")]
+        [JsonPropertyName("attributes")]
         public string Attributes { get; private set; }
 
         
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public ChannelResource.ChannelTypeEnum Type { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The `identity` of the User that created the channel. If the Channel was created by using the API, the value is `system`. </summary> 
-        [JsonProperty("created_by")]
+        [JsonPropertyName("created_by")]
         public string CreatedBy { get; private set; }
 
         ///<summary> The number of Members in the Channel. </summary> 
-        [JsonProperty("members_count")]
+        [JsonPropertyName("members_count")]
         public int? MembersCount { get; private set; }
 
         ///<summary> The number of Messages that have been passed in the Channel. </summary> 
-        [JsonProperty("messages_count")]
+        [JsonPropertyName("messages_count")]
         public int? MessagesCount { get; private set; }
 
         ///<summary> The absolute URL of the Channel resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The absolute URLs of the [Members](https://www.twilio.com/docs/chat/rest/member-resource), [Messages](https://www.twilio.com/docs/chat/rest/message-resource), [Invites](https://www.twilio.com/docs/chat/rest/invite-resource), Webhooks and, if it exists, the last [Message](https://www.twilio.com/docs/chat/rest/message-resource) for the Channel. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

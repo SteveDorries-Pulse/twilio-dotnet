@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -367,7 +367,7 @@ namespace Twilio.Rest.FlexApi.V1.Interaction
         {
             try
             {
-                return JsonConvert.DeserializeObject<InteractionChannelResource>(json);
+                return JsonSerializer.Deserialize<InteractionChannelResource>(json);
             }
             catch (JsonException e)
             {
@@ -383,7 +383,7 @@ namespace Twilio.Rest.FlexApi.V1.Interaction
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -393,35 +393,35 @@ namespace Twilio.Rest.FlexApi.V1.Interaction
 
     
         ///<summary> The unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique string created by Twilio to identify an Interaction resource, prefixed with KD. </summary> 
-        [JsonProperty("interaction_sid")]
+        [JsonPropertyName("interaction_sid")]
         public string InteractionSid { get; private set; }
 
         
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public InteractionChannelResource.TypeEnum Type { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public InteractionChannelResource.ChannelStatusEnum Status { get; private set; }
 
         ///<summary> The Twilio error code for a failed channel. </summary> 
-        [JsonProperty("error_code")]
+        [JsonPropertyName("error_code")]
         public int? ErrorCode { get; private set; }
 
         ///<summary> The error message for a failed channel. </summary> 
-        [JsonProperty("error_message")]
+        [JsonPropertyName("error_message")]
         public string ErrorMessage { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -529,7 +529,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
         {
             try
             {
-                return JsonConvert.DeserializeObject<TaskQueueResource>(json);
+                return JsonSerializer.Deserialize<TaskQueueResource>(json);
             }
             catch (JsonException e)
             {
@@ -545,7 +545,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -555,63 +555,63 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskQueue resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Activity to assign Workers when a task is assigned for them. </summary> 
-        [JsonProperty("assignment_activity_sid")]
+        [JsonPropertyName("assignment_activity_sid")]
         public string AssignmentActivitySid { get; private set; }
 
         ///<summary> The name of the Activity to assign Workers when a task is assigned for them. </summary> 
-        [JsonProperty("assignment_activity_name")]
+        [JsonPropertyName("assignment_activity_name")]
         public string AssignmentActivityName { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The maximum number of Workers to reserve for the assignment of a task in the queue. Can be an integer between 1 and 50, inclusive and defaults to 1. </summary> 
-        [JsonProperty("max_reserved_workers")]
+        [JsonPropertyName("max_reserved_workers")]
         public int? MaxReservedWorkers { get; private set; }
 
         ///<summary> The SID of the Activity to assign Workers once a task is reserved for them. </summary> 
-        [JsonProperty("reservation_activity_sid")]
+        [JsonPropertyName("reservation_activity_sid")]
         public string ReservationActivitySid { get; private set; }
 
         ///<summary> The name of the Activity to assign Workers once a task is reserved for them. </summary> 
-        [JsonProperty("reservation_activity_name")]
+        [JsonPropertyName("reservation_activity_name")]
         public string ReservationActivityName { get; private set; }
 
         ///<summary> The unique string that we created to identify the TaskQueue resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A string describing the Worker selection criteria for any Tasks that enter the TaskQueue. For example `'\"language\" == \"spanish\"'` If no TargetWorkers parameter is provided, Tasks will wait in the TaskQueue until they are either deleted or moved to another TaskQueue. Additional examples on how to describing Worker selection criteria below. Defaults to 1==1. </summary> 
-        [JsonProperty("target_workers")]
+        [JsonPropertyName("target_workers")]
         public string TargetWorkers { get; private set; }
 
         
-        [JsonProperty("task_order")]
+        [JsonPropertyName("task_order")]
         public TaskQueueResource.TaskOrderEnum TaskOrder { get; private set; }
 
         ///<summary> The absolute URL of the TaskQueue resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The SID of the Workspace that contains the TaskQueue. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

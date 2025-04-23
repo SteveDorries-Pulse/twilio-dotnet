@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -211,7 +211,7 @@ namespace Twilio.Rest.Conversations.V1.Configuration
         {
             try
             {
-                return JsonConvert.DeserializeObject<WebhookResource>(json);
+                return JsonSerializer.Deserialize<WebhookResource>(json);
             }
             catch (JsonException e)
             {
@@ -227,7 +227,7 @@ namespace Twilio.Rest.Conversations.V1.Configuration
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -237,31 +237,31 @@ namespace Twilio.Rest.Conversations.V1.Configuration
 
     
         ///<summary> The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         
-        [JsonProperty("method")]
+        [JsonPropertyName("method")]
         public WebhookResource.MethodEnum Method { get; private set; }
 
         ///<summary> The list of webhook event triggers that are enabled for this Service: `onMessageAdded`, `onMessageUpdated`, `onMessageRemoved`, `onConversationUpdated`, `onConversationRemoved`, `onParticipantAdded`, `onParticipantUpdated`, `onParticipantRemoved` </summary> 
-        [JsonProperty("filters")]
+        [JsonPropertyName("filters")]
         public List<string> Filters { get; private set; }
 
         ///<summary> The absolute url the pre-event webhook request should be sent to. </summary> 
-        [JsonProperty("pre_webhook_url")]
+        [JsonPropertyName("pre_webhook_url")]
         public string PreWebhookUrl { get; private set; }
 
         ///<summary> The absolute url the post-event webhook request should be sent to. </summary> 
-        [JsonProperty("post_webhook_url")]
+        [JsonPropertyName("post_webhook_url")]
         public string PostWebhookUrl { get; private set; }
 
         
-        [JsonProperty("target")]
+        [JsonPropertyName("target")]
         public WebhookResource.TargetEnum Target { get; private set; }
 
         ///<summary> An absolute API resource API resource URL for this webhook. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -169,7 +169,7 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions
         {
             try
             {
-                return JsonConvert.DeserializeObject<SettingsResource>(json);
+                return JsonSerializer.Deserialize<SettingsResource>(json);
             }
             catch (JsonException e)
             {
@@ -185,7 +185,7 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -195,11 +195,11 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions
 
     
         ///<summary> `true` if the sub-account will inherit voice dialing permissions from the Master Project; otherwise `false`. </summary> 
-        [JsonProperty("dialing_permissions_inheritance")]
+        [JsonPropertyName("dialing_permissions_inheritance")]
         public bool? DialingPermissionsInheritance { get; private set; }
 
         ///<summary> The absolute URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

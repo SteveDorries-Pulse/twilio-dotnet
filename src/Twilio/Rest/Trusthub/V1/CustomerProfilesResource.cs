@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -485,7 +485,7 @@ namespace Twilio.Rest.Trusthub.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<CustomerProfilesResource>(json);
+                return JsonSerializer.Deserialize<CustomerProfilesResource>(json);
             }
             catch (JsonException e)
             {
@@ -501,7 +501,7 @@ namespace Twilio.Rest.Trusthub.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -511,55 +511,55 @@ namespace Twilio.Rest.Trusthub.V1
 
     
         ///<summary> The unique string that we created to identify the Customer-Profile resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Customer-Profile resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique string of a policy that is associated to the Customer-Profile resource. </summary> 
-        [JsonProperty("policy_sid")]
+        [JsonPropertyName("policy_sid")]
         public string PolicySid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public CustomerProfilesResource.StatusEnum Status { get; private set; }
 
         ///<summary> The date and time in GMT in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format when the resource will be valid until. </summary> 
-        [JsonProperty("valid_until")]
+        [JsonPropertyName("valid_until")]
         public DateTime? ValidUntil { get; private set; }
 
         ///<summary> The email address that will receive updates when the Customer-Profile resource changes status. </summary> 
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; private set; }
 
         ///<summary> The URL we call to inform your application of status changes. </summary> 
-        [JsonProperty("status_callback")]
+        [JsonPropertyName("status_callback")]
         public Uri StatusCallback { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the Customer-Profile resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of the Assigned Items of the Customer-Profile resource. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> The error codes associated with the rejection of the Customer-Profile. </summary> 
-        [JsonProperty("errors")]
+        [JsonPropertyName("errors")]
         public List<object> Errors { get; private set; }
 
 

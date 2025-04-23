@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Pricing.V1.Voice
         {
             try
             {
-                return JsonConvert.DeserializeObject<NumberResource>(json);
+                return JsonSerializer.Deserialize<NumberResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Pricing.V1.Voice
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,32 +133,32 @@ namespace Twilio.Rest.Pricing.V1.Voice
 
     
         ///<summary> The phone number. </summary> 
-        [JsonProperty("number")]
+        [JsonPropertyName("number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber Number { get; private set; }
 
         ///<summary> The name of the country. </summary> 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; private set; }
 
         ///<summary> The [ISO country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). </summary> 
-        [JsonProperty("iso_country")]
+        [JsonPropertyName("iso_country")]
         public string IsoCountry { get; private set; }
 
         ///<summary> The outbound_call_price </summary> 
-        [JsonProperty("outbound_call_price")]
+        [JsonPropertyName("outbound_call_price")]
         public OutboundCallPrice OutboundCallPrice { get; private set; }
 
         ///<summary> The inbound_call_price </summary> 
-        [JsonProperty("inbound_call_price")]
+        [JsonPropertyName("inbound_call_price")]
         public InboundCallPrice InboundCallPrice { get; private set; }
 
         ///<summary> The currency in which prices are measured, specified in [ISO 4127](http://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`). </summary> 
-        [JsonProperty("price_unit")]
+        [JsonPropertyName("price_unit")]
         public string PriceUnit { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

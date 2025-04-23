@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -249,7 +249,7 @@ namespace Twilio.Rest.Intelligence.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<OperatorResource>(json);
+                return JsonSerializer.Deserialize<OperatorResource>(json);
             }
             catch (JsonException e)
             {
@@ -265,7 +265,7 @@ namespace Twilio.Rest.Intelligence.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -275,51 +275,51 @@ namespace Twilio.Rest.Intelligence.V2
 
     
         ///<summary> The unique SID identifier of the Account the Operator belongs to. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this Operator. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A human-readable name of this resource, up to 64 characters. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> A human-readable description of this resource, longer than the friendly name. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> The creator of the Operator. Either Twilio or the creating Account. </summary> 
-        [JsonProperty("author")]
+        [JsonPropertyName("author")]
         public string Author { get; private set; }
 
         ///<summary> Operator Type for this Operator. References an existing Operator Type resource. </summary> 
-        [JsonProperty("operator_type")]
+        [JsonPropertyName("operator_type")]
         public string OperatorType { get; private set; }
 
         ///<summary> Numeric Operator version. Incremented with each update on the resource, used to ensure integrity when updating the Operator. </summary> 
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public int? Version { get; private set; }
 
         
-        [JsonProperty("availability")]
+        [JsonPropertyName("availability")]
         public OperatorResource.AvailabilityEnum Availability { get; private set; }
 
         ///<summary> Operator configuration, following the schema defined by the Operator Type. Only available on Custom Operators created by the Account. </summary> 
-        [JsonProperty("config")]
+        [JsonPropertyName("config")]
         public object Config { get; private set; }
 
         ///<summary> The date that this Operator was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Operator was updated, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -115,7 +115,7 @@ namespace Twilio.Rest.Events.V1.Sink
         {
             try
             {
-                return JsonConvert.DeserializeObject<SinkValidateResource>(json);
+                return JsonSerializer.Deserialize<SinkValidateResource>(json);
             }
             catch (JsonException e)
             {
@@ -131,7 +131,7 @@ namespace Twilio.Rest.Events.V1.Sink
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -141,7 +141,7 @@ namespace Twilio.Rest.Events.V1.Sink
 
     
         ///<summary> Feedback indicating whether the given Sink was validated. </summary> 
-        [JsonProperty("result")]
+        [JsonPropertyName("result")]
         public string Result { get; private set; }
 
 

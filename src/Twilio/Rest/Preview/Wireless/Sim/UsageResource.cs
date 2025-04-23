@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -113,7 +113,7 @@ namespace Twilio.Rest.Preview.Wireless.Sim
         {
             try
             {
-                return JsonConvert.DeserializeObject<UsageResource>(json);
+                return JsonSerializer.Deserialize<UsageResource>(json);
             }
             catch (JsonException e)
             {
@@ -129,7 +129,7 @@ namespace Twilio.Rest.Preview.Wireless.Sim
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -139,39 +139,39 @@ namespace Twilio.Rest.Preview.Wireless.Sim
 
     
         ///<summary> The sim_sid </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         ///<summary> The sim_unique_name </summary> 
-        [JsonProperty("sim_unique_name")]
+        [JsonPropertyName("sim_unique_name")]
         public string SimUniqueName { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The period </summary> 
-        [JsonProperty("period")]
+        [JsonPropertyName("period")]
         public object Period { get; private set; }
 
         ///<summary> The commands_usage </summary> 
-        [JsonProperty("commands_usage")]
+        [JsonPropertyName("commands_usage")]
         public object CommandsUsage { get; private set; }
 
         ///<summary> The commands_costs </summary> 
-        [JsonProperty("commands_costs")]
+        [JsonPropertyName("commands_costs")]
         public object CommandsCosts { get; private set; }
 
         ///<summary> The data_usage </summary> 
-        [JsonProperty("data_usage")]
+        [JsonPropertyName("data_usage")]
         public object DataUsage { get; private set; }
 
         ///<summary> The data_costs </summary> 
-        [JsonProperty("data_costs")]
+        [JsonPropertyName("data_costs")]
         public object DataCosts { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -252,7 +252,7 @@ namespace Twilio.Rest.FlexApi.V1.Interaction.InteractionChannel
         {
             try
             {
-                return JsonConvert.DeserializeObject<InteractionChannelInviteResource>(json);
+                return JsonSerializer.Deserialize<InteractionChannelInviteResource>(json);
             }
             catch (JsonException e)
             {
@@ -268,7 +268,7 @@ namespace Twilio.Rest.FlexApi.V1.Interaction.InteractionChannel
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -278,23 +278,23 @@ namespace Twilio.Rest.FlexApi.V1.Interaction.InteractionChannel
 
     
         ///<summary> The unique string created by Twilio to identify an Interaction Channel Invite resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The Interaction SID for this Channel. </summary> 
-        [JsonProperty("interaction_sid")]
+        [JsonPropertyName("interaction_sid")]
         public string InteractionSid { get; private set; }
 
         ///<summary> The Channel SID for this Invite. </summary> 
-        [JsonProperty("channel_sid")]
+        [JsonPropertyName("channel_sid")]
         public string ChannelSid { get; private set; }
 
         ///<summary> A JSON object representing the routing rules for the Interaction Channel. See [Outbound SMS Example](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#agent-initiated-outbound-interactions) for an example Routing object. The Interactions resource uses TaskRouter for all routing functionality.   All attributes in the Routing object on your Interaction request body are added “as is” to the task. For a list of known attributes consumed by the Flex UI and/or Flex Insights, see [Known Task Attributes](https://www.twilio.com/docs/flex/developer/conversations/interactions-api#task-attributes). </summary> 
-        [JsonProperty("routing")]
+        [JsonPropertyName("routing")]
         public object Routing { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

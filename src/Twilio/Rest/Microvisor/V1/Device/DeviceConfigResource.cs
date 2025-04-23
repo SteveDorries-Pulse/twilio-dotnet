@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -464,7 +464,7 @@ namespace Twilio.Rest.Microvisor.V1.Device
         {
             try
             {
-                return JsonConvert.DeserializeObject<DeviceConfigResource>(json);
+                return JsonSerializer.Deserialize<DeviceConfigResource>(json);
             }
             catch (JsonException e)
             {
@@ -480,7 +480,7 @@ namespace Twilio.Rest.Microvisor.V1.Device
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -490,23 +490,23 @@ namespace Twilio.Rest.Microvisor.V1.Device
 
     
         ///<summary> A 34-character string that uniquely identifies the parent Device. </summary> 
-        [JsonProperty("device_sid")]
+        [JsonPropertyName("device_sid")]
         public string DeviceSid { get; private set; }
 
         ///<summary> The config key; up to 100 characters. </summary> 
-        [JsonProperty("key")]
+        [JsonPropertyName("key")]
         public string Key { get; private set; }
 
         ///<summary> The config value; up to 4096 characters. </summary> 
-        [JsonProperty("value")]
+        [JsonPropertyName("value")]
         public string Value { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the Config. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

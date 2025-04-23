@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -584,7 +584,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<ApplicationResource>(json);
+                return JsonSerializer.Deserialize<ApplicationResource>(json);
             }
             catch (JsonException e)
             {
@@ -600,7 +600,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -610,87 +610,87 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Application resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The API version used to start a new TwiML session. </summary> 
-        [JsonProperty("api_version")]
+        [JsonPropertyName("api_version")]
         public string ApiVersion { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The URL we call using a POST method to send message status information to your application. </summary> 
-        [JsonProperty("message_status_callback")]
+        [JsonPropertyName("message_status_callback")]
         public Uri MessageStatusCallback { get; private set; }
 
         ///<summary> The unique string that that we created to identify the Application resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The HTTP method we use to call `sms_fallback_url`. Can be: `GET` or `POST`. </summary> 
-        [JsonProperty("sms_fallback_method")]
+        [JsonPropertyName("sms_fallback_method")]
         public Twilio.Http.HttpMethod SmsFallbackMethod { get; private set; }
 
         ///<summary> The URL that we call when an error occurs while retrieving or executing the TwiML from `sms_url`. </summary> 
-        [JsonProperty("sms_fallback_url")]
+        [JsonPropertyName("sms_fallback_url")]
         public Uri SmsFallbackUrl { get; private set; }
 
         ///<summary> The HTTP method we use to call `sms_url`. Can be: `GET` or `POST`. </summary> 
-        [JsonProperty("sms_method")]
+        [JsonPropertyName("sms_method")]
         public Twilio.Http.HttpMethod SmsMethod { get; private set; }
 
         ///<summary> The URL we call using a POST method to send status information to your application about SMS messages that refer to the application. </summary> 
-        [JsonProperty("sms_status_callback")]
+        [JsonPropertyName("sms_status_callback")]
         public Uri SmsStatusCallback { get; private set; }
 
         ///<summary> The URL we call when the phone number receives an incoming SMS message. </summary> 
-        [JsonProperty("sms_url")]
+        [JsonPropertyName("sms_url")]
         public Uri SmsUrl { get; private set; }
 
         ///<summary> The URL we call using the `status_callback_method` to send status information to your application. </summary> 
-        [JsonProperty("status_callback")]
+        [JsonPropertyName("status_callback")]
         public Uri StatusCallback { get; private set; }
 
         ///<summary> The HTTP method we use to call `status_callback`. Can be: `GET` or `POST`. </summary> 
-        [JsonProperty("status_callback_method")]
+        [JsonPropertyName("status_callback_method")]
         public Twilio.Http.HttpMethod StatusCallbackMethod { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         ///<summary> Whether we look up the caller's caller-ID name from the CNAM database (additional charges apply). Can be: `true` or `false`. </summary> 
-        [JsonProperty("voice_caller_id_lookup")]
+        [JsonPropertyName("voice_caller_id_lookup")]
         public bool? VoiceCallerIdLookup { get; private set; }
 
         ///<summary> The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`. </summary> 
-        [JsonProperty("voice_fallback_method")]
+        [JsonPropertyName("voice_fallback_method")]
         public Twilio.Http.HttpMethod VoiceFallbackMethod { get; private set; }
 
         ///<summary> The URL that we call when an error occurs retrieving or executing the TwiML requested by `url`. </summary> 
-        [JsonProperty("voice_fallback_url")]
+        [JsonPropertyName("voice_fallback_url")]
         public Uri VoiceFallbackUrl { get; private set; }
 
         ///<summary> The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`. </summary> 
-        [JsonProperty("voice_method")]
+        [JsonPropertyName("voice_method")]
         public Twilio.Http.HttpMethod VoiceMethod { get; private set; }
 
         ///<summary> The URL we call when the phone number assigned to this application receives a call. </summary> 
-        [JsonProperty("voice_url")]
+        [JsonPropertyName("voice_url")]
         public Uri VoiceUrl { get; private set; }
 
         ///<summary> Whether to allow other Twilio accounts to dial this applicaton using Dial verb. Can be: `true` or `false`. </summary> 
-        [JsonProperty("public_application_connect_enabled")]
+        [JsonPropertyName("public_application_connect_enabled")]
         public bool? PublicApplicationConnectEnabled { get; private set; }
 
 

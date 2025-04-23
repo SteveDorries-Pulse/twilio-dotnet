@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -109,7 +109,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsSessionResource>(json);
+                return JsonSerializer.Deserialize<InsightsSessionResource>(json);
             }
             catch (JsonException e)
             {
@@ -125,7 +125,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -135,23 +135,23 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> Unique ID to identify the user's workspace </summary> 
-        [JsonProperty("workspace_id")]
+        [JsonPropertyName("workspace_id")]
         public string WorkspaceId { get; private set; }
 
         ///<summary> The session expiry date and time, given in ISO 8601 format. </summary> 
-        [JsonProperty("session_expiry")]
+        [JsonPropertyName("session_expiry")]
         public string SessionExpiry { get; private set; }
 
         ///<summary> The unique ID for the session </summary> 
-        [JsonProperty("session_id")]
+        [JsonPropertyName("session_id")]
         public string SessionId { get; private set; }
 
         ///<summary> The base URL to fetch reports and dashboards </summary> 
-        [JsonProperty("base_url")]
+        [JsonPropertyName("base_url")]
         public string BaseUrl { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Intelligence.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<OperatorAttachmentsResource>(json);
+                return JsonSerializer.Deserialize<OperatorAttachmentsResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Intelligence.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,15 +133,15 @@ namespace Twilio.Rest.Intelligence.V2
 
     
         ///<summary> The unique SID identifier of the Service. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> List of Operator SIDs attached to the service. Includes both Custom and Pre-built Operators. </summary> 
-        [JsonProperty("operator_sids")]
+        [JsonPropertyName("operator_sids")]
         public List<string> OperatorSids { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

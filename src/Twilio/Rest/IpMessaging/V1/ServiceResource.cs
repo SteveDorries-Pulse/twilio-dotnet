@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -645,7 +645,7 @@ namespace Twilio.Rest.IpMessaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ServiceResource>(json);
+                return JsonSerializer.Deserialize<ServiceResource>(json);
             }
             catch (JsonException e)
             {
@@ -661,7 +661,7 @@ namespace Twilio.Rest.IpMessaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -671,87 +671,87 @@ namespace Twilio.Rest.IpMessaging.V1
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The friendly_name </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The default_service_role_sid </summary> 
-        [JsonProperty("default_service_role_sid")]
+        [JsonPropertyName("default_service_role_sid")]
         public string DefaultServiceRoleSid { get; private set; }
 
         ///<summary> The default_channel_role_sid </summary> 
-        [JsonProperty("default_channel_role_sid")]
+        [JsonPropertyName("default_channel_role_sid")]
         public string DefaultChannelRoleSid { get; private set; }
 
         ///<summary> The default_channel_creator_role_sid </summary> 
-        [JsonProperty("default_channel_creator_role_sid")]
+        [JsonPropertyName("default_channel_creator_role_sid")]
         public string DefaultChannelCreatorRoleSid { get; private set; }
 
         ///<summary> The read_status_enabled </summary> 
-        [JsonProperty("read_status_enabled")]
+        [JsonPropertyName("read_status_enabled")]
         public bool? ReadStatusEnabled { get; private set; }
 
         ///<summary> The reachability_enabled </summary> 
-        [JsonProperty("reachability_enabled")]
+        [JsonPropertyName("reachability_enabled")]
         public bool? ReachabilityEnabled { get; private set; }
 
         ///<summary> The typing_indicator_timeout </summary> 
-        [JsonProperty("typing_indicator_timeout")]
+        [JsonPropertyName("typing_indicator_timeout")]
         public int? TypingIndicatorTimeout { get; private set; }
 
         ///<summary> The consumption_report_interval </summary> 
-        [JsonProperty("consumption_report_interval")]
+        [JsonPropertyName("consumption_report_interval")]
         public int? ConsumptionReportInterval { get; private set; }
 
         ///<summary> The limits </summary> 
-        [JsonProperty("limits")]
+        [JsonPropertyName("limits")]
         public object Limits { get; private set; }
 
         ///<summary> The webhooks </summary> 
-        [JsonProperty("webhooks")]
+        [JsonPropertyName("webhooks")]
         public object Webhooks { get; private set; }
 
         ///<summary> The pre_webhook_url </summary> 
-        [JsonProperty("pre_webhook_url")]
+        [JsonPropertyName("pre_webhook_url")]
         public string PreWebhookUrl { get; private set; }
 
         ///<summary> The post_webhook_url </summary> 
-        [JsonProperty("post_webhook_url")]
+        [JsonPropertyName("post_webhook_url")]
         public string PostWebhookUrl { get; private set; }
 
         ///<summary> The webhook_method </summary> 
-        [JsonProperty("webhook_method")]
+        [JsonPropertyName("webhook_method")]
         public string WebhookMethod { get; private set; }
 
         ///<summary> The webhook_filters </summary> 
-        [JsonProperty("webhook_filters")]
+        [JsonPropertyName("webhook_filters")]
         public List<string> WebhookFilters { get; private set; }
 
         ///<summary> The notifications </summary> 
-        [JsonProperty("notifications")]
+        [JsonPropertyName("notifications")]
         public object Notifications { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

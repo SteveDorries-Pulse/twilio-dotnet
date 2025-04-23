@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -204,7 +204,7 @@ namespace Twilio.Rest.Marketplace.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ModuleDataManagementResource>(json);
+                return JsonSerializer.Deserialize<ModuleDataManagementResource>(json);
             }
             catch (JsonException e)
             {
@@ -220,7 +220,7 @@ namespace Twilio.Rest.Marketplace.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -230,39 +230,39 @@ namespace Twilio.Rest.Marketplace.V1
 
     
         ///<summary> URL to query the subresource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> ModuleSid that identifies this Listing. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A JSON object describing the module and is displayed under the Description tab of the Module detail page. You can define the main body of the description, highlight key features or aspects of the module and if applicable, provide code samples for developers </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public object Description { get; private set; }
 
         ///<summary> A JSON object containing information on how customers can obtain support for the module. Use this parameter to provide details such as contact information and support description. </summary> 
-        [JsonProperty("support")]
+        [JsonPropertyName("support")]
         public object Support { get; private set; }
 
         ///<summary> A JSON object describing the module's privacy and legal policies and is displayed under the Policies tab of the Module detail page. The maximum file size for Policies is 5MB </summary> 
-        [JsonProperty("policies")]
+        [JsonPropertyName("policies")]
         public object Policies { get; private set; }
 
         ///<summary> A JSON object containing essential attributes that define a module. This information is presented on the Module detail page in the Twilio Marketplace Catalog. You can pass the following attributes in the JSON object </summary> 
-        [JsonProperty("module_info")]
+        [JsonPropertyName("module_info")]
         public object ModuleInfo { get; private set; }
 
         ///<summary> A JSON object for providing comprehensive information, instructions, and resources related to the module </summary> 
-        [JsonProperty("documentation")]
+        [JsonPropertyName("documentation")]
         public object Documentation { get; private set; }
 
         ///<summary> A JSON object for providing listing specific configuration. Contains button setup, notification url, among others. </summary> 
-        [JsonProperty("configuration")]
+        [JsonPropertyName("configuration")]
         public object Configuration { get; private set; }
 
         ///<summary> A JSON object for providing Listing specific pricing information. </summary> 
-        [JsonProperty("pricing")]
+        [JsonPropertyName("pricing")]
         public object Pricing { get; private set; }
 
 

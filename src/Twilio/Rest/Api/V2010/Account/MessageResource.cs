@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -669,7 +669,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<MessageResource>(json);
+                return JsonSerializer.Deserialize<MessageResource>(json);
             }
             catch (JsonException e)
             {
@@ -685,7 +685,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -695,84 +695,84 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The text content of the message </summary> 
-        [JsonProperty("body")]
+        [JsonPropertyName("body")]
         public string Body { get; private set; }
 
         ///<summary> The number of segments that make up the complete message. SMS message bodies that exceed the [character limit](https://www.twilio.com/docs/glossary/what-sms-character-limit) are segmented and charged as multiple messages. Note: For messages sent via a Messaging Service, `num_segments` is initially `0`, since a sender hasn't yet been assigned. </summary> 
-        [JsonProperty("num_segments")]
+        [JsonPropertyName("num_segments")]
         public string NumSegments { get; private set; }
 
         
-        [JsonProperty("direction")]
+        [JsonPropertyName("direction")]
         public MessageResource.DirectionEnum Direction { get; private set; }
 
         ///<summary> The sender's phone number (in [E.164](https://en.wikipedia.org/wiki/E.164) format), [alphanumeric sender ID](https://www.twilio.com/docs/sms/quickstart), [Wireless SIM](https://www.twilio.com/docs/iot/wireless/programmable-wireless-send-machine-machine-sms-commands), [short code](https://www.twilio.com/en-us/messaging/channels/sms/short-codes), or  [channel address](https://www.twilio.com/docs/messaging/channels) (e.g., `whatsapp:+15554449999`). For incoming messages, this is the number or channel address of the sender. For outgoing messages, this value is a Twilio phone number, alphanumeric sender ID, short code, or channel address from which the message is sent. </summary> 
-        [JsonProperty("from")]
+        [JsonPropertyName("from")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber From { get; private set; }
 
         ///<summary> The recipient's phone number (in [E.164](https://en.wikipedia.org/wiki/E.164) format) or [channel address](https://www.twilio.com/docs/messaging/channels) (e.g. `whatsapp:+15552229999`) </summary> 
-        [JsonProperty("to")]
+        [JsonPropertyName("to")]
         public string To { get; private set; }
 
         ///<summary> The [RFC 2822](https://datatracker.ietf.org/doc/html/rfc2822#section-3.3) timestamp (in GMT) of when the Message resource was last updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The amount billed for the message in the currency specified by `price_unit`. The `price` is populated after the message has been sent/received, and may not be immediately availalble. View the [Pricing page](https://www.twilio.com/en-us/pricing) for more details. </summary> 
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public string Price { get; private set; }
 
         ///<summary> The description of the `error_code` if the Message `status` is `failed` or `undelivered`. If no error was encountered, the value is `null`. The value returned in this field for a specific error cause is subject to change as Twilio improves errors. Users should not use the `error_code` and `error_message` fields programmatically. </summary> 
-        [JsonProperty("error_message")]
+        [JsonPropertyName("error_message")]
         public string ErrorMessage { get; private set; }
 
         ///<summary> The URI of the Message resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) associated with the Message resource </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The number of media files associated with the Message resource. </summary> 
-        [JsonProperty("num_media")]
+        [JsonPropertyName("num_media")]
         public string NumMedia { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public MessageResource.StatusEnum Status { get; private set; }
 
         ///<summary> The SID of the [Messaging Service](https://www.twilio.com/docs/messaging/api/service-resource) associated with the Message resource. A unique default value is assigned if a Messaging Service is not used. </summary> 
-        [JsonProperty("messaging_service_sid")]
+        [JsonPropertyName("messaging_service_sid")]
         public string MessagingServiceSid { get; private set; }
 
         ///<summary> The unique, Twilio-provided string that identifies the Message resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The [RFC 2822](https://datatracker.ietf.org/doc/html/rfc2822#section-3.3) timestamp (in GMT) of when the Message was sent. For an outgoing message, this is when Twilio sent the message. For an incoming message, this is when Twilio sent the HTTP request to your incoming message webhook URL. </summary> 
-        [JsonProperty("date_sent")]
+        [JsonPropertyName("date_sent")]
         public DateTime? DateSent { get; private set; }
 
         ///<summary> The [RFC 2822](https://datatracker.ietf.org/doc/html/rfc2822#section-3.3) timestamp (in GMT) of when the Message resource was created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The [error code](https://www.twilio.com/docs/api/errors) returned if the Message `status` is `failed` or `undelivered`. If no error was encountered, the value is `null`. The value returned in this field for a specific error cause is subject to change as Twilio improves errors. Users should not use the `error_code` and `error_message` fields programmatically. </summary> 
-        [JsonProperty("error_code")]
+        [JsonPropertyName("error_code")]
         public int? ErrorCode { get; private set; }
 
         ///<summary> The currency in which `price` is measured, in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`). </summary> 
-        [JsonProperty("price_unit")]
+        [JsonPropertyName("price_unit")]
         public string PriceUnit { get; private set; }
 
         ///<summary> The API version used to process the Message </summary> 
-        [JsonProperty("api_version")]
+        [JsonPropertyName("api_version")]
         public string ApiVersion { get; private set; }
 
         ///<summary> A list of related resources identified by their URIs relative to `https://api.twilio.com` </summary> 
-        [JsonProperty("subresource_uris")]
+        [JsonPropertyName("subresource_uris")]
         public Dictionary<string, string> SubresourceUris { get; private set; }
 
 

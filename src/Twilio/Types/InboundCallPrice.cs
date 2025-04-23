@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using Twilio.Converters;
 
 namespace Twilio.Types
@@ -11,13 +11,14 @@ namespace Twilio.Types
         /// <summary>
         /// Types of inbound numbers
         /// </summary>
-        public sealed class TypeEnum : StringEnum {
-            private TypeEnum(string value) : base(value) {}
+        public sealed class TypeEnum : StringEnum
+        {
+            private TypeEnum(string value) : base(value) { }
 
             /// <summary>
             /// Generic constructor
             /// </summary>
-            public TypeEnum() {}
+            public TypeEnum() { }
 
             /// <summary>
             /// Local number type
@@ -43,33 +44,30 @@ namespace Twilio.Types
         /// <summary>
         /// Base price of calls
         /// </summary>
-        [JsonProperty("base_price")]
+        [JsonPropertyName("base_price")]
         public double? BasePrice { get; private set; }
 
         /// <summary>
         /// Current price of calls
         /// </summary>
-        [JsonProperty("current_price")]
+        [JsonPropertyName("current_price")]
         public double? CurrentPrice { get; private set; }
 
         /// <summary>
         /// Type of number
         /// </summary>
-        [JsonProperty("number_type")]
+        [JsonPropertyName("number_type")]
         [JsonConverter(typeof(StringEnumConverter))]
         public TypeEnum NumberType { get; private set; }
 
         /// <summary>
         /// Empty constructor
         /// </summary>
-        public InboundCallPrice() {}
+        public InboundCallPrice() { }
 
         private InboundCallPrice(
-            [JsonProperty("base_price")]
             double? basePrice,
-            [JsonProperty("current_priece")]
             double? currentPrice,
-            [JsonProperty("number_type")]
             TypeEnum numberType
         )
         {

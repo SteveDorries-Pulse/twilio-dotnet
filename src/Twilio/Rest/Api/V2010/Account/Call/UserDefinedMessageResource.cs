@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -125,7 +125,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
         {
             try
             {
-                return JsonConvert.DeserializeObject<UserDefinedMessageResource>(json);
+                return JsonSerializer.Deserialize<UserDefinedMessageResource>(json);
             }
             catch (JsonException e)
             {
@@ -141,7 +141,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -151,19 +151,19 @@ namespace Twilio.Rest.Api.V2010.Account.Call
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created User Defined Message. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Call](https://www.twilio.com/docs/voice/api/call-resource) the User Defined Message is associated with. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The SID that uniquely identifies this User Defined Message. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The date that this User Defined Message was created, given in RFC 2822 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
 

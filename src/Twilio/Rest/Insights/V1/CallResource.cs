@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Insights.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<CallResource>(json);
+                return JsonSerializer.Deserialize<CallResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Insights.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,15 +133,15 @@ namespace Twilio.Rest.Insights.V1
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

@@ -1,13 +1,17 @@
 ﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+
+using Twilio.Http;
+
 
 namespace Twilio.Converters
 {
     /// <summary>
     /// Convert between strings and HttpMethod
     /// </summary>
-    public class HttpMethodConverter : JsonConverter
+    public class HttpMethodConverter : JsonConverter<Twilio.Http.HttpMethod>
     {
         /// <summary>
         /// Write the HTTP method out to json
@@ -15,10 +19,10 @@ namespace Twilio.Converters
         ///
         /// <param name="writer">json writer</param>
         /// <param name="value">value to write serialize</param>
-        /// <param name="serializer">json serialize</param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        /// <param name="options">json serialize</param>
+        public override void Write(Utf8JsonWriter writer, HttpMethod value, JsonSerializerOptions options)
         {
-            var t = JToken.FromObject(value.ToString());
+            var t = JsonNode.Parse(value.ToString());
             t.WriteTo(writer);
         }
 
@@ -29,12 +33,12 @@ namespace Twilio.Converters
         /// <param name="reader">json reader</param>
         /// <param name="objectType">type of object</param>
         /// <param name="existingValue"></param>
-        /// <param name="serializer"></param>
+        /// <param name="options"></param>
         ///
         /// <returns>Deserialized HttpMethod</returns>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override HttpMethod Read(ref Utf8JsonReader reader, Type objectType, JsonSerializerOptions options)
         {
-            var token = reader.Value as string;
+            var token = reader.GetString();
             if (token == null)
             {
                 return null;
@@ -69,6 +73,9 @@ namespace Twilio.Converters
         {
             return objectType == typeof(Http.HttpMethod);
         }
+
+       
+
     }
 }
 

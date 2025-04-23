@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -248,7 +248,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<DomainCertsResource>(json);
+                return JsonSerializer.Deserialize<DomainCertsResource>(json);
             }
             catch (JsonException e)
             {
@@ -264,7 +264,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -274,35 +274,35 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> The unique string that we created to identify the Domain resource. </summary> 
-        [JsonProperty("domain_sid")]
+        [JsonPropertyName("domain_sid")]
         public string DomainSid { get; private set; }
 
         ///<summary> Date that this Domain was last updated. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> Date that the private certificate associated with this domain expires. You will need to update the certificate before that date to ensure your shortened links will continue to work. </summary> 
-        [JsonProperty("date_expires")]
+        [JsonPropertyName("date_expires")]
         public DateTime? DateExpires { get; private set; }
 
         ///<summary> Date that this Domain was registered to the Twilio platform to create a new Domain object. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> Full url path for this domain. </summary> 
-        [JsonProperty("domain_name")]
+        [JsonPropertyName("domain_name")]
         public Uri DomainName { get; private set; }
 
         ///<summary> The unique string that we created to identify this Certificate resource. </summary> 
-        [JsonProperty("certificate_sid")]
+        [JsonPropertyName("certificate_sid")]
         public string CertificateSid { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Optional JSON field describing the status and upload date of a new certificate in the process of validation </summary> 
-        [JsonProperty("cert_in_validation")]
+        [JsonPropertyName("cert_in_validation")]
         public object CertInValidation { get; private set; }
 
 

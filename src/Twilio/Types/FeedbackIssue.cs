@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace Twilio.Types
 {
@@ -10,19 +10,19 @@ namespace Twilio.Types
         /// <summary>
         /// Number of occurrences
         /// </summary>
-        [JsonProperty("count")]
+        [JsonPropertyName("count")]
         public int Count { get; }
 
         /// <summary>
         /// Description of issue
         /// </summary>
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; }
 
         /// <summary>
         /// Percentage of calls affected
         /// </summary>
-        [JsonProperty("percentage_of_total_calls")]
+        [JsonPropertyName("percentage_of_total_calls")]
         public string PercentageOfTotalCalls { get; }
 
         /// <summary>

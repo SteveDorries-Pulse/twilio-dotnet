@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -162,7 +162,7 @@ namespace Twilio.Rest.Content.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<LegacyContentResource>(json);
+                return JsonSerializer.Deserialize<LegacyContentResource>(json);
             }
             catch (JsonException e)
             {
@@ -178,7 +178,7 @@ namespace Twilio.Rest.Content.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -188,47 +188,47 @@ namespace Twilio.Rest.Content.V1
 
     
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The unique string that that we created to identify the Content resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/usage/api/account) that created Content resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A string name used to describe the Content resource. Not visible to the end recipient. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> Two-letter (ISO 639-1) language code (e.g., en) identifying the language the Content resource is in. </summary> 
-        [JsonProperty("language")]
+        [JsonPropertyName("language")]
         public string Language { get; private set; }
 
         ///<summary> Defines the default placeholder values for variables included in the Content resource. e.g. {\"1\": \"Customer_Name\"}. </summary> 
-        [JsonProperty("variables")]
+        [JsonPropertyName("variables")]
         public object Variables { get; private set; }
 
         ///<summary> The [Content types](https://www.twilio.com/docs/content-api/content-types-overview) (e.g. twilio/text) for this Content resource. </summary> 
-        [JsonProperty("types")]
+        [JsonPropertyName("types")]
         public object Types { get; private set; }
 
         ///<summary> The string name of the legacy content template associated with this Content resource, unique across all template names for its account.  Only lowercase letters, numbers and underscores are allowed </summary> 
-        [JsonProperty("legacy_template_name")]
+        [JsonPropertyName("legacy_template_name")]
         public string LegacyTemplateName { get; private set; }
 
         ///<summary> The string body field of the legacy content template associated with this Content resource </summary> 
-        [JsonProperty("legacy_body")]
+        [JsonPropertyName("legacy_body")]
         public string LegacyBody { get; private set; }
 
         ///<summary> The URL of the resource, relative to `https://content.twilio.com`. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

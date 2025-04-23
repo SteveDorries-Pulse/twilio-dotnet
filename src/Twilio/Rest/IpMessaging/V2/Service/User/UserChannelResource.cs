@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -444,7 +444,7 @@ namespace Twilio.Rest.IpMessaging.V2.Service.User
         {
             try
             {
-                return JsonConvert.DeserializeObject<UserChannelResource>(json);
+                return JsonSerializer.Deserialize<UserChannelResource>(json);
             }
             catch (JsonException e)
             {
@@ -460,7 +460,7 @@ namespace Twilio.Rest.IpMessaging.V2.Service.User
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -470,47 +470,47 @@ namespace Twilio.Rest.IpMessaging.V2.Service.User
 
     
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The service_sid </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The channel_sid </summary> 
-        [JsonProperty("channel_sid")]
+        [JsonPropertyName("channel_sid")]
         public string ChannelSid { get; private set; }
 
         ///<summary> The user_sid </summary> 
-        [JsonProperty("user_sid")]
+        [JsonPropertyName("user_sid")]
         public string UserSid { get; private set; }
 
         ///<summary> The member_sid </summary> 
-        [JsonProperty("member_sid")]
+        [JsonPropertyName("member_sid")]
         public string MemberSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public UserChannelResource.ChannelStatusEnum Status { get; private set; }
 
         ///<summary> The last_consumed_message_index </summary> 
-        [JsonProperty("last_consumed_message_index")]
+        [JsonPropertyName("last_consumed_message_index")]
         public int? LastConsumedMessageIndex { get; private set; }
 
         ///<summary> The unread_messages_count </summary> 
-        [JsonProperty("unread_messages_count")]
+        [JsonPropertyName("unread_messages_count")]
         public int? UnreadMessagesCount { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         
-        [JsonProperty("notification_level")]
+        [JsonPropertyName("notification_level")]
         public UserChannelResource.NotificationLevelEnum NotificationLevel { get; private set; }
 
 

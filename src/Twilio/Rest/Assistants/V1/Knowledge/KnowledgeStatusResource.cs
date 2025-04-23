@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Assistants.V1.Knowledge
         {
             try
             {
-                return JsonConvert.DeserializeObject<KnowledgeStatusResource>(json);
+                return JsonSerializer.Deserialize<KnowledgeStatusResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Assistants.V1.Knowledge
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,19 +133,19 @@ namespace Twilio.Rest.Assistants.V1.Knowledge
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Knowledge resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The status of processing the knowledge source ('QUEUED', 'PROCESSING', 'COMPLETED', 'FAILED') </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; }
 
         ///<summary> The last status of processing the knowledge source ('QUEUED', 'PROCESSING', 'COMPLETED', 'FAILED') </summary> 
-        [JsonProperty("last_status")]
+        [JsonPropertyName("last_status")]
         public string LastStatus { get; private set; }
 
         ///<summary> The date and time in GMT when the Knowledge was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

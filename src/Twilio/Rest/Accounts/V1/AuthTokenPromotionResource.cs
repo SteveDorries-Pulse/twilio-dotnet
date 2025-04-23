@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -106,7 +106,7 @@ namespace Twilio.Rest.Accounts.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<AuthTokenPromotionResource>(json);
+                return JsonSerializer.Deserialize<AuthTokenPromotionResource>(json);
             }
             catch (JsonException e)
             {
@@ -122,7 +122,7 @@ namespace Twilio.Rest.Accounts.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -132,23 +132,23 @@ namespace Twilio.Rest.Accounts.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the secondary Auth Token was created for. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The promoted Auth Token that must be used to authenticate future API requests. </summary> 
-        [JsonProperty("auth_token")]
+        [JsonPropertyName("auth_token")]
         public string AuthToken { get; private set; }
 
         ///<summary> The date and time in UTC when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URI for this resource, relative to `https://accounts.twilio.com` </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

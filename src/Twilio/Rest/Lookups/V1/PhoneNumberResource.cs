@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -119,7 +119,7 @@ namespace Twilio.Rest.Lookups.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PhoneNumberResource>(json);
+                return JsonSerializer.Deserialize<PhoneNumberResource>(json);
             }
             catch (JsonException e)
             {
@@ -135,7 +135,7 @@ namespace Twilio.Rest.Lookups.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -145,32 +145,32 @@ namespace Twilio.Rest.Lookups.V1
 
     
         ///<summary> The name of the phone number's owner. If `null`, that information was not available. </summary> 
-        [JsonProperty("caller_name")]
+        [JsonPropertyName("caller_name")]
         public object CallerName { get; private set; }
 
         ///<summary> The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the phone number. </summary> 
-        [JsonProperty("country_code")]
+        [JsonPropertyName("country_code")]
         public string CountryCode { get; private set; }
 
         ///<summary> The phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number. </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber PhoneNumber { get; private set; }
 
         ///<summary> The phone number, in national format. </summary> 
-        [JsonProperty("national_format")]
+        [JsonPropertyName("national_format")]
         public string NationalFormat { get; private set; }
 
         ///<summary> The telecom company that provides the phone number. </summary> 
-        [JsonProperty("carrier")]
+        [JsonPropertyName("carrier")]
         public object Carrier { get; private set; }
 
         ///<summary> A JSON string with the results of the Add-ons you specified in the `add_ons` parameters. For the format of the object, see [Using Add-ons](https://www.twilio.com/docs/add-ons). </summary> 
-        [JsonProperty("add_ons")]
+        [JsonPropertyName("add_ons")]
         public object AddOns { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

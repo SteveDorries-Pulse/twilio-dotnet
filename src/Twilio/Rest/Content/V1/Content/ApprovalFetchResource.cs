@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Content.V1.Content
         {
             try
             {
-                return JsonConvert.DeserializeObject<ApprovalFetchResource>(json);
+                return JsonSerializer.Deserialize<ApprovalFetchResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Content.V1.Content
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,19 +133,19 @@ namespace Twilio.Rest.Content.V1.Content
 
     
         ///<summary> The unique string that that we created to identify the Content resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/usage/api/account) that created Content resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Contains the whatsapp approval information for the Content resource, with fields such as approval status, rejection reason, and category, amongst others. </summary> 
-        [JsonProperty("whatsapp")]
+        [JsonPropertyName("whatsapp")]
         public object Whatsapp { get; private set; }
 
         ///<summary> The URL of the resource, relative to `https://content.twilio.com`. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

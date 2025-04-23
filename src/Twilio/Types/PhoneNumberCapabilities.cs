@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace Twilio.Types
 {
@@ -10,25 +10,25 @@ namespace Twilio.Types
         /// <summary>
         /// MMS capable
         /// </summary>
-        [JsonProperty("mms")]
+        [JsonPropertyName("mms")]
         public bool Mms { get; }
 
         /// <summary>
         /// SMS capable
         /// </summary>
-        [JsonProperty("sms")]
+        [JsonPropertyName("sms")]
         public bool Sms { get; }
 
         /// <summary>
         /// Voice capable
         /// </summary>
-        [JsonProperty("voice")]
+        [JsonPropertyName("voice")]
         public bool Voice { get; }
 
         /// <summary>
         /// Fax capable
         /// </summary>
-        [JsonProperty("fax")]
+        [JsonPropertyName("fax")]
         public bool Fax { get; }
 
         /// <summary>

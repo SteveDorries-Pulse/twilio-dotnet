@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -207,7 +207,7 @@ namespace Twilio.Rest.Insights.V1.Call
         {
             try
             {
-                return JsonConvert.DeserializeObject<MetricResource>(json);
+                return JsonSerializer.Deserialize<MetricResource>(json);
             }
             catch (JsonException e)
             {
@@ -223,7 +223,7 @@ namespace Twilio.Rest.Insights.V1.Call
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -233,39 +233,39 @@ namespace Twilio.Rest.Insights.V1.Call
 
     
         ///<summary> Timestamp of metric sample. Samples are taken every 10 seconds and contain the metrics for the previous 10 seconds. </summary> 
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         public string Timestamp { get; private set; }
 
         ///<summary> The unique SID identifier of the Call. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         
-        [JsonProperty("edge")]
+        [JsonPropertyName("edge")]
         public MetricResource.TwilioEdgeEnum Edge { get; private set; }
 
         
-        [JsonProperty("direction")]
+        [JsonPropertyName("direction")]
         public MetricResource.StreamDirectionEnum Direction { get; private set; }
 
         ///<summary> Contains metrics and properties for the Twilio media gateway of a PSTN call. </summary> 
-        [JsonProperty("carrier_edge")]
+        [JsonPropertyName("carrier_edge")]
         public object CarrierEdge { get; private set; }
 
         ///<summary> Contains metrics and properties for the Twilio media gateway of a SIP Interface or Trunking call. </summary> 
-        [JsonProperty("sip_edge")]
+        [JsonPropertyName("sip_edge")]
         public object SipEdge { get; private set; }
 
         ///<summary> Contains metrics and properties for the SDK sensor library for Client calls. </summary> 
-        [JsonProperty("sdk_edge")]
+        [JsonPropertyName("sdk_edge")]
         public object SdkEdge { get; private set; }
 
         ///<summary> Contains metrics and properties for the Twilio media gateway of a Client call. </summary> 
-        [JsonProperty("client_edge")]
+        [JsonPropertyName("client_edge")]
         public object ClientEdge { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -258,7 +258,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance
         {
             try
             {
-                return JsonConvert.DeserializeObject<RegulationResource>(json);
+                return JsonSerializer.Deserialize<RegulationResource>(json);
             }
             catch (JsonException e)
             {
@@ -274,7 +274,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -284,31 +284,31 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance
 
     
         ///<summary> The unique string that identifies the Regulation resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A human-readable description that is assigned to describe the Regulation resource. Examples can include Germany: Mobile - Business. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The ISO country code of the phone number's country. </summary> 
-        [JsonProperty("iso_country")]
+        [JsonPropertyName("iso_country")]
         public string IsoCountry { get; private set; }
 
         ///<summary> The type of phone number restricted by the regulatory requirement. For example, Germany mobile phone numbers provisioned by businesses require a business name with commercial register proof from the Handelsregisterauszug and a proof of address from Handelsregisterauszug or a trade license by Gewerbeanmeldung. </summary> 
-        [JsonProperty("number_type")]
+        [JsonPropertyName("number_type")]
         public string NumberType { get; private set; }
 
         
-        [JsonProperty("end_user_type")]
+        [JsonPropertyName("end_user_type")]
         public RegulationResource.EndUserTypeEnum EndUserType { get; private set; }
 
         ///<summary> The SID of an object that holds the regulatory information of the phone number country, phone number type, and end user type. </summary> 
-        [JsonProperty("requirements")]
+        [JsonPropertyName("requirements")]
         public object Requirements { get; private set; }
 
         ///<summary> The absolute URL of the Regulation resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

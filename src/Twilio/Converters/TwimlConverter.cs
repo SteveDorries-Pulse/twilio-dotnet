@@ -1,23 +1,24 @@
 using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
 namespace Twilio.Converters
 {
     /// <summary>
     /// Convert between strings and a Twiml
     /// </summary>
-    public class TwimlConverter : JsonConverter
+    public class TwimlConverter : JsonConverter<object>
     {
         /// <summary>
         /// Write value to JsonWriter
         /// </summary>
         /// <param name="writer">Writer to write to</param>
         /// <param name="value">Value to write</param>
-        /// <param name="serializer">unused</param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        /// <param name="options">unused</param>
+        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {
-            var t = JToken.FromObject(value.ToString());
+            var t = JsonNode.Parse(value.ToString());
             t.WriteTo(writer);
         }
 
@@ -27,16 +28,15 @@ namespace Twilio.Converters
         /// <param name="reader">JsonReader to read from</param>
         /// <param name="objectType">unused</param>
         /// <param name="existingValue">unused</param>
-        /// <param name="serializer">unused</param>
+        /// <param name="options">unused</param>
         /// <returns>Converted Twiml</returns>
-        public override object ReadJson(
-            JsonReader reader,
+        public override object Read(
+            ref Utf8JsonReader reader,
             Type objectType,
-            object existingValue,
-            JsonSerializer serializer
+            JsonSerializerOptions options
         )
         {
-            return new Types.Twiml(reader.Value as string);
+            return new Types.Twiml(reader.GetString());
         }
 
         /// <summary>

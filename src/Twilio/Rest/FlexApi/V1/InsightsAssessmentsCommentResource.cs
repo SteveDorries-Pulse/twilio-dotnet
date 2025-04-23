@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -264,7 +264,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsAssessmentsCommentResource>(json);
+                return JsonSerializer.Deserialize<InsightsAssessmentsCommentResource>(json);
             }
             catch (JsonException e)
             {
@@ -280,7 +280,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -290,51 +290,51 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the assessment. </summary> 
-        [JsonProperty("assessment_sid")]
+        [JsonPropertyName("assessment_sid")]
         public string AssessmentSid { get; private set; }
 
         ///<summary> The comment added for assessment. </summary> 
-        [JsonProperty("comment")]
+        [JsonPropertyName("comment")]
         public object Comment { get; private set; }
 
         ///<summary> The offset </summary> 
-        [JsonProperty("offset")]
+        [JsonPropertyName("offset")]
         public decimal? Offset { get; private set; }
 
         ///<summary> The flag indicating if this assessment is part of report  </summary> 
-        [JsonProperty("report")]
+        [JsonPropertyName("report")]
         public bool? Report { get; private set; }
 
         ///<summary> The weightage given to this comment </summary> 
-        [JsonProperty("weight")]
+        [JsonPropertyName("weight")]
         public decimal? Weight { get; private set; }
 
         ///<summary> The id of the agent. </summary> 
-        [JsonProperty("agent_id")]
+        [JsonPropertyName("agent_id")]
         public string AgentId { get; private set; }
 
         ///<summary> The id of the segment. </summary> 
-        [JsonProperty("segment_id")]
+        [JsonPropertyName("segment_id")]
         public string SegmentId { get; private set; }
 
         ///<summary> The name of the user. </summary> 
-        [JsonProperty("user_name")]
+        [JsonPropertyName("user_name")]
         public string UserName { get; private set; }
 
         ///<summary> The email id of the user. </summary> 
-        [JsonProperty("user_email")]
+        [JsonPropertyName("user_email")]
         public string UserEmail { get; private set; }
 
         ///<summary> The timestamp when the record is inserted </summary> 
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         public decimal? Timestamp { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

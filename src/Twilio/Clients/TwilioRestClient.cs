@@ -227,7 +227,7 @@ namespace Twilio.Clients
             RestException restException = null;
             try
             {
-                restException = RestException.FromJson(response.Content);
+                restException = JsonSerializer.Deserialize<RestException>(response.Content);
             }
             catch (JsonException) { /* Allow null check below to handle */ }
 

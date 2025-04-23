@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -271,7 +271,7 @@ namespace Twilio.Rest.Intelligence.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<OperatorTypeResource>(json);
+                return JsonSerializer.Deserialize<OperatorTypeResource>(json);
             }
             catch (JsonException e)
             {
@@ -287,7 +287,7 @@ namespace Twilio.Rest.Intelligence.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -297,59 +297,59 @@ namespace Twilio.Rest.Intelligence.V2
 
     
         ///<summary> A unique name that references an Operator's Operator Type. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this Operator Type. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A human-readable name of this resource, up to 64 characters. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> A human-readable description of this resource, longer than the friendly name. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> Additional documentation for the Operator Type. </summary> 
-        [JsonProperty("docs_link")]
+        [JsonPropertyName("docs_link")]
         public Uri DocsLink { get; private set; }
 
         
-        [JsonProperty("output_type")]
+        [JsonPropertyName("output_type")]
         public OperatorTypeResource.OutputTypeEnum OutputType { get; private set; }
 
         ///<summary> List of languages this Operator Type supports. </summary> 
-        [JsonProperty("supported_languages")]
+        [JsonPropertyName("supported_languages")]
         public List<string> SupportedLanguages { get; private set; }
 
         
-        [JsonProperty("provider")]
+        [JsonPropertyName("provider")]
         public OperatorTypeResource.ProviderEnum Provider { get; private set; }
 
         
-        [JsonProperty("availability")]
+        [JsonPropertyName("availability")]
         public OperatorTypeResource.AvailabilityEnum Availability { get; private set; }
 
         ///<summary> Operators can be created from configurable Operator Types. </summary> 
-        [JsonProperty("configurable")]
+        [JsonPropertyName("configurable")]
         public bool? Configurable { get; private set; }
 
         ///<summary> JSON Schema for configuring an Operator with this Operator Type. Following https://json-schema.org/ </summary> 
-        [JsonProperty("config_schema")]
+        [JsonPropertyName("config_schema")]
         public object ConfigSchema { get; private set; }
 
         ///<summary> The date that this Operator Type was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Operator Type was updated, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

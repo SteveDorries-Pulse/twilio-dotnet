@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -241,7 +241,7 @@ namespace Twilio.Rest.Verify.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<SafelistResource>(json);
+                return JsonSerializer.Deserialize<SafelistResource>(json);
             }
             catch (JsonException e)
             {
@@ -257,7 +257,7 @@ namespace Twilio.Rest.Verify.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -267,15 +267,15 @@ namespace Twilio.Rest.Verify.V2
 
     
         ///<summary> The unique string that we created to identify the SafeList resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The phone number in SafeList. </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; private set; }
 
         ///<summary> The absolute URL of the SafeList resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -112,7 +112,7 @@ namespace Twilio.Rest.Studio.V1.Flow.Execution
         {
             try
             {
-                return JsonConvert.DeserializeObject<ExecutionContextResource>(json);
+                return JsonSerializer.Deserialize<ExecutionContextResource>(json);
             }
             catch (JsonException e)
             {
@@ -128,7 +128,7 @@ namespace Twilio.Rest.Studio.V1.Flow.Execution
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -138,23 +138,23 @@ namespace Twilio.Rest.Studio.V1.Flow.Execution
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ExecutionContext resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution. </summary> 
-        [JsonProperty("context")]
+        [JsonPropertyName("context")]
         public object Context { get; private set; }
 
         ///<summary> The SID of the Flow. </summary> 
-        [JsonProperty("flow_sid")]
+        [JsonPropertyName("flow_sid")]
         public string FlowSid { get; private set; }
 
         ///<summary> The SID of the context's Execution resource. </summary> 
-        [JsonProperty("execution_sid")]
+        [JsonPropertyName("execution_sid")]
         public string ExecutionSid { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

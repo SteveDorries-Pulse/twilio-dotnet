@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -381,7 +381,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance.Bundle
         {
             try
             {
-                return JsonConvert.DeserializeObject<ItemAssignmentResource>(json);
+                return JsonSerializer.Deserialize<ItemAssignmentResource>(json);
             }
             catch (JsonException e)
             {
@@ -397,7 +397,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance.Bundle
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -407,27 +407,27 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance.Bundle
 
     
         ///<summary> The unique string that we created to identify the Item Assignment resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique string that we created to identify the Bundle resource. </summary> 
-        [JsonProperty("bundle_sid")]
+        [JsonPropertyName("bundle_sid")]
         public string BundleSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Item Assignment resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of an object bag that holds information of the different items. </summary> 
-        [JsonProperty("object_sid")]
+        [JsonPropertyName("object_sid")]
         public string ObjectSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The absolute URL of the Identity resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -470,7 +470,7 @@ namespace Twilio.Rest.Studio.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<FlowResource>(json);
+                return JsonSerializer.Deserialize<FlowResource>(json);
             }
             catch (JsonException e)
             {
@@ -486,7 +486,7 @@ namespace Twilio.Rest.Studio.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -496,63 +496,63 @@ namespace Twilio.Rest.Studio.V2
 
     
         ///<summary> The unique string that we created to identify the Flow resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flow resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the Flow. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> JSON representation of flow definition. </summary> 
-        [JsonProperty("definition")]
+        [JsonPropertyName("definition")]
         public object Definition { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public FlowResource.StatusEnum Status { get; private set; }
 
         ///<summary> The latest revision number of the Flow's definition. </summary> 
-        [JsonProperty("revision")]
+        [JsonPropertyName("revision")]
         public int? Revision { get; private set; }
 
         ///<summary> Description of change made in the revision. </summary> 
-        [JsonProperty("commit_message")]
+        [JsonPropertyName("commit_message")]
         public string CommitMessage { get; private set; }
 
         ///<summary> Boolean if the flow definition is valid. </summary> 
-        [JsonProperty("valid")]
+        [JsonPropertyName("valid")]
         public bool? Valid { get; private set; }
 
         ///<summary> List of error in the flow definition. </summary> 
-        [JsonProperty("errors")]
+        [JsonPropertyName("errors")]
         public List<object> Errors { get; private set; }
 
         ///<summary> List of warnings in the flow definition. </summary> 
-        [JsonProperty("warnings")]
+        [JsonPropertyName("warnings")]
         public List<object> Warnings { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The webhook_url </summary> 
-        [JsonProperty("webhook_url")]
+        [JsonPropertyName("webhook_url")]
         public Uri WebhookUrl { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of the Flow's nested resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

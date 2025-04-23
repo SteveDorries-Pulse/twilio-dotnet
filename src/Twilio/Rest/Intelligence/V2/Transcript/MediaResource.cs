@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -110,7 +110,7 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
         {
             try
             {
-                return JsonConvert.DeserializeObject<MediaResource>(json);
+                return JsonSerializer.Deserialize<MediaResource>(json);
             }
             catch (JsonException e)
             {
@@ -126,7 +126,7 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -136,23 +136,23 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
 
     
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Downloadable URL for media, if stored in Twilio AI. </summary> 
-        [JsonProperty("media_url")]
+        [JsonPropertyName("media_url")]
         public Uri MediaUrl { get; private set; }
 
         ///<summary> The unique SID identifier of the Service. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Transcript. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

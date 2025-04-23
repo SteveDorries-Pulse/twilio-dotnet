@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -795,7 +795,7 @@ namespace Twilio.Rest.Api.V2010.Account.Usage
         {
             try
             {
-                return JsonConvert.DeserializeObject<TriggerResource>(json);
+                return JsonSerializer.Deserialize<TriggerResource>(json);
             }
             catch (JsonException e)
             {
@@ -811,7 +811,7 @@ namespace Twilio.Rest.Api.V2010.Account.Usage
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -821,67 +821,67 @@ namespace Twilio.Rest.Api.V2010.Account.Usage
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the trigger monitors. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The API version used to create the resource. </summary> 
-        [JsonProperty("api_version")]
+        [JsonPropertyName("api_version")]
         public string ApiVersion { get; private set; }
 
         ///<summary> The HTTP method we use to call `callback_url`. Can be: `GET` or `POST`. </summary> 
-        [JsonProperty("callback_method")]
+        [JsonPropertyName("callback_method")]
         public Twilio.Http.HttpMethod CallbackMethod { get; private set; }
 
         ///<summary> The URL we call using the `callback_method` when the trigger fires. </summary> 
-        [JsonProperty("callback_url")]
+        [JsonPropertyName("callback_url")]
         public Uri CallbackUrl { get; private set; }
 
         ///<summary> The current value of the field the trigger is watching. </summary> 
-        [JsonProperty("current_value")]
+        [JsonPropertyName("current_value")]
         public string CurrentValue { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the trigger was last fired specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_fired")]
+        [JsonPropertyName("date_fired")]
         public DateTime? DateFired { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The string that you assigned to describe the trigger. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         
-        [JsonProperty("recurring")]
+        [JsonPropertyName("recurring")]
         public TriggerResource.RecurringEnum Recurring { get; private set; }
 
         ///<summary> The unique string that that we created to identify the UsageTrigger resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         
-        [JsonProperty("trigger_by")]
+        [JsonPropertyName("trigger_by")]
         public TriggerResource.TriggerFieldEnum TriggerBy { get; private set; }
 
         ///<summary> The value at which the trigger will fire.  Must be a positive, numeric value. </summary> 
-        [JsonProperty("trigger_value")]
+        [JsonPropertyName("trigger_value")]
         public string TriggerValue { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         
-        [JsonProperty("usage_category")]
+        [JsonPropertyName("usage_category")]
         public TriggerResource.UsageCategoryEnum UsageCategory { get; private set; }
 
         ///<summary> The URI of the [UsageRecord](https://www.twilio.com/docs/usage/api/usage-record) resource this trigger watches, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("usage_record_uri")]
+        [JsonPropertyName("usage_record_uri")]
         public string UsageRecordUri { get; private set; }
 
 

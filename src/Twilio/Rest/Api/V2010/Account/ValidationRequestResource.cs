@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -135,7 +135,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<ValidationRequestResource>(json);
+                return JsonSerializer.Deserialize<ValidationRequestResource>(json);
             }
             catch (JsonException e)
             {
@@ -151,7 +151,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -161,24 +161,24 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for the Caller ID. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Call](https://www.twilio.com/docs/voice/api/call-resource) the Caller ID is associated with. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The phone number to verify in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number. </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber PhoneNumber { get; private set; }
 
         ///<summary> The 6 digit validation code that someone must enter to validate the Caller ID  when `phone_number` is called. </summary> 
-        [JsonProperty("validation_code")]
+        [JsonPropertyName("validation_code")]
         public string ValidationCode { get; private set; }
 
 

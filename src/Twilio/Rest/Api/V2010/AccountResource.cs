@@ -13,9 +13,11 @@
  */
 
 
-using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Twilio.Base;
 using Twilio.Clients;
 using Twilio.Constant;
@@ -404,7 +406,7 @@ namespace Twilio.Rest.Api.V2010
         {
             try
             {
-                return JsonConvert.DeserializeObject<AccountResource>(json);
+                return JsonSerializer.Deserialize<AccountResource>(json);
             }
             catch (JsonException e)
             {
@@ -420,7 +422,7 @@ namespace Twilio.Rest.Api.V2010
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -430,43 +432,43 @@ namespace Twilio.Rest.Api.V2010
 
     
         ///<summary> The authorization token for this account. This token should be kept a secret, so no sharing. </summary> 
-        [JsonProperty("auth_token")]
+        [JsonPropertyName("auth_token")]
         public string AuthToken { get; private set; }
 
         ///<summary> The date that this account was created, in GMT in RFC 2822 format </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this account was last updated, in GMT in RFC 2822 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> A human readable description of this account, up to 64 characters long. By default the FriendlyName is your email address. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The unique 34 character id that represents the parent of this account. The OwnerAccountSid of a parent account is it's own sid. </summary> 
-        [JsonProperty("owner_account_sid")]
+        [JsonPropertyName("owner_account_sid")]
         public string OwnerAccountSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public AccountResource.StatusEnum Status { get; private set; }
 
         ///<summary> A Map of various subresources available for the given Account Instance </summary> 
-        [JsonProperty("subresource_uris")]
+        [JsonPropertyName("subresource_uris")]
         public Dictionary<string, string> SubresourceUris { get; private set; }
 
         
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public AccountResource.TypeEnum Type { get; private set; }
 
         ///<summary> The URI for this resource, relative to `https://api.twilio.com` </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

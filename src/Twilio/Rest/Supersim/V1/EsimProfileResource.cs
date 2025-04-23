@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -333,7 +333,7 @@ namespace Twilio.Rest.Supersim.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<EsimProfileResource>(json);
+                return JsonSerializer.Deserialize<EsimProfileResource>(json);
             }
             catch (JsonException e)
             {
@@ -349,7 +349,7 @@ namespace Twilio.Rest.Supersim.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -359,59 +359,59 @@ namespace Twilio.Rest.Supersim.V1
 
     
         ///<summary> The unique string that we created to identify the eSIM Profile resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) to which the eSIM Profile resource belongs. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID) associated with the Sim resource. </summary> 
-        [JsonProperty("iccid")]
+        [JsonPropertyName("iccid")]
         public string Iccid { get; private set; }
 
         ///<summary> The SID of the [Sim](https://www.twilio.com/docs/iot/supersim/api/sim-resource) resource that this eSIM Profile controls. </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public EsimProfileResource.StatusEnum Status { get; private set; }
 
         ///<summary> Identifier of the eUICC that can claim the eSIM Profile. </summary> 
-        [JsonProperty("eid")]
+        [JsonPropertyName("eid")]
         public string Eid { get; private set; }
 
         ///<summary> Address of the SM-DP+ server from which the Profile will be downloaded. The URL will appear once the eSIM Profile reaches the status `available`. </summary> 
-        [JsonProperty("smdp_plus_address")]
+        [JsonPropertyName("smdp_plus_address")]
         public Uri SmdpPlusAddress { get; private set; }
 
         ///<summary> Unique identifier of the eSIM profile that can be used to identify and download the eSIM profile from the SM-DP+ server. Populated if `generate_matching_id` is set to `true` when creating the eSIM profile reservation. </summary> 
-        [JsonProperty("matching_id")]
+        [JsonPropertyName("matching_id")]
         public string MatchingId { get; private set; }
 
         ///<summary> Combined machine-readable activation code for acquiring an eSIM Profile with the Activation Code download method. Can be used in a QR code to download an eSIM profile. </summary> 
-        [JsonProperty("activation_code")]
+        [JsonPropertyName("activation_code")]
         public string ActivationCode { get; private set; }
 
         ///<summary> Code indicating the failure if the download of the SIM Profile failed and the eSIM Profile is in `failed` state. </summary> 
-        [JsonProperty("error_code")]
+        [JsonPropertyName("error_code")]
         public string ErrorCode { get; private set; }
 
         ///<summary> Error message describing the failure if the download of the SIM Profile failed and the eSIM Profile is in `failed` state. </summary> 
-        [JsonProperty("error_message")]
+        [JsonPropertyName("error_message")]
         public string ErrorMessage { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the eSIM Profile resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

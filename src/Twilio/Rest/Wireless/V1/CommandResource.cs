@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -455,7 +455,7 @@ namespace Twilio.Rest.Wireless.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<CommandResource>(json);
+                return JsonSerializer.Deserialize<CommandResource>(json);
             }
             catch (JsonException e)
             {
@@ -471,7 +471,7 @@ namespace Twilio.Rest.Wireless.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -481,51 +481,51 @@ namespace Twilio.Rest.Wireless.V1
 
     
         ///<summary> The unique string that we created to identify the Command resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Command resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Sim resource](https://www.twilio.com/docs/iot/wireless/api/sim-resource) that the Command was sent to or from. </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         ///<summary> The message being sent to or from the SIM. For text mode messages, this can be up to 160 characters. For binary mode messages, this is a series of up to 140 bytes of data encoded using base64. </summary> 
-        [JsonProperty("command")]
+        [JsonPropertyName("command")]
         public string Command { get; private set; }
 
         
-        [JsonProperty("command_mode")]
+        [JsonPropertyName("command_mode")]
         public CommandResource.CommandModeEnum CommandMode { get; private set; }
 
         
-        [JsonProperty("transport")]
+        [JsonPropertyName("transport")]
         public CommandResource.TransportEnum Transport { get; private set; }
 
         ///<summary> Whether to request a delivery receipt. </summary> 
-        [JsonProperty("delivery_receipt_requested")]
+        [JsonPropertyName("delivery_receipt_requested")]
         public bool? DeliveryReceiptRequested { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public CommandResource.StatusEnum Status { get; private set; }
 
         
-        [JsonProperty("direction")]
+        [JsonPropertyName("direction")]
         public CommandResource.DirectionEnum Direction { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

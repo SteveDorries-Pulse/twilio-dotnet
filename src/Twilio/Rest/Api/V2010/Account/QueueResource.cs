@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -468,7 +468,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<QueueResource>(json);
+                return JsonSerializer.Deserialize<QueueResource>(json);
             }
             catch (JsonException e)
             {
@@ -484,7 +484,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -494,39 +494,39 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The date and time in GMT that this resource was last updated, specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The number of calls currently in the queue. </summary> 
-        [JsonProperty("current_size")]
+        [JsonPropertyName("current_size")]
         public int? CurrentSize { get; private set; }
 
         ///<summary> A string that you assigned to describe this resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The URI of this resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created this Queue resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary>  The average wait time in seconds of the members in this queue. This is calculated at the time of the request. </summary> 
-        [JsonProperty("average_wait_time")]
+        [JsonPropertyName("average_wait_time")]
         public int? AverageWaitTime { get; private set; }
 
         ///<summary> The unique string that that we created to identify this Queue resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The date and time in GMT that this resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary>  The maximum number of calls that can be in the queue. The default is 1000 and the maximum is 5000. </summary> 
-        [JsonProperty("max_size")]
+        [JsonPropertyName("max_size")]
         public int? MaxSize { get; private set; }
 
 

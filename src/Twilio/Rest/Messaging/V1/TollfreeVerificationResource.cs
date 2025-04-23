@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -649,7 +649,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<TollfreeVerificationResource>(json);
+                return JsonSerializer.Deserialize<TollfreeVerificationResource>(json);
             }
             catch (JsonException e)
             {
@@ -665,7 +665,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -675,152 +675,152 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> The unique string to identify Tollfree Verification. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Tollfree Verification resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Customer's Profile Bundle BundleSid. </summary> 
-        [JsonProperty("customer_profile_sid")]
+        [JsonPropertyName("customer_profile_sid")]
         public string CustomerProfileSid { get; private set; }
 
         ///<summary> Tollfree TrustProduct Bundle BundleSid. </summary> 
-        [JsonProperty("trust_product_sid")]
+        [JsonPropertyName("trust_product_sid")]
         public string TrustProductSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The SID of the Regulated Item. </summary> 
-        [JsonProperty("regulated_item_sid")]
+        [JsonPropertyName("regulated_item_sid")]
         public string RegulatedItemSid { get; private set; }
 
         ///<summary> The name of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_name")]
+        [JsonPropertyName("business_name")]
         public string BusinessName { get; private set; }
 
         ///<summary> The address of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_street_address")]
+        [JsonPropertyName("business_street_address")]
         public string BusinessStreetAddress { get; private set; }
 
         ///<summary> The address of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_street_address2")]
+        [JsonPropertyName("business_street_address2")]
         public string BusinessStreetAddress2 { get; private set; }
 
         ///<summary> The city of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_city")]
+        [JsonPropertyName("business_city")]
         public string BusinessCity { get; private set; }
 
         ///<summary> The state/province/region of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_state_province_region")]
+        [JsonPropertyName("business_state_province_region")]
         public string BusinessStateProvinceRegion { get; private set; }
 
         ///<summary> The postal code of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_postal_code")]
+        [JsonPropertyName("business_postal_code")]
         public string BusinessPostalCode { get; private set; }
 
         ///<summary> The country of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_country")]
+        [JsonPropertyName("business_country")]
         public string BusinessCountry { get; private set; }
 
         ///<summary> The website of the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_website")]
+        [JsonPropertyName("business_website")]
         public string BusinessWebsite { get; private set; }
 
         ///<summary> The first name of the contact for the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_contact_first_name")]
+        [JsonPropertyName("business_contact_first_name")]
         public string BusinessContactFirstName { get; private set; }
 
         ///<summary> The last name of the contact for the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_contact_last_name")]
+        [JsonPropertyName("business_contact_last_name")]
         public string BusinessContactLastName { get; private set; }
 
         ///<summary> The email address of the contact for the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_contact_email")]
+        [JsonPropertyName("business_contact_email")]
         public string BusinessContactEmail { get; private set; }
 
         ///<summary> The E.164 formatted phone number of the contact for the business or organization using the Tollfree number. </summary> 
-        [JsonProperty("business_contact_phone")]
+        [JsonPropertyName("business_contact_phone")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber BusinessContactPhone { get; private set; }
 
         ///<summary> The email address to receive the notification about the verification result. . </summary> 
-        [JsonProperty("notification_email")]
+        [JsonPropertyName("notification_email")]
         public string NotificationEmail { get; private set; }
 
         ///<summary> The category of the use case for the Tollfree Number. List as many are applicable.. </summary> 
-        [JsonProperty("use_case_categories")]
+        [JsonPropertyName("use_case_categories")]
         public List<string> UseCaseCategories { get; private set; }
 
         ///<summary> Use this to further explain how messaging is used by the business or organization. </summary> 
-        [JsonProperty("use_case_summary")]
+        [JsonPropertyName("use_case_summary")]
         public string UseCaseSummary { get; private set; }
 
         ///<summary> An example of message content, i.e. a sample message. </summary> 
-        [JsonProperty("production_message_sample")]
+        [JsonPropertyName("production_message_sample")]
         public string ProductionMessageSample { get; private set; }
 
         ///<summary> Link to an image that shows the opt-in workflow. Multiple images allowed and must be a publicly hosted URL. </summary> 
-        [JsonProperty("opt_in_image_urls")]
+        [JsonPropertyName("opt_in_image_urls")]
         public List<string> OptInImageUrls { get; private set; }
 
         
-        [JsonProperty("opt_in_type")]
+        [JsonPropertyName("opt_in_type")]
         public TollfreeVerificationResource.OptInTypeEnum OptInType { get; private set; }
 
         ///<summary> Estimate monthly volume of messages from the Tollfree Number. </summary> 
-        [JsonProperty("message_volume")]
+        [JsonPropertyName("message_volume")]
         public string MessageVolume { get; private set; }
 
         ///<summary> Additional information to be provided for verification. </summary> 
-        [JsonProperty("additional_information")]
+        [JsonPropertyName("additional_information")]
         public string AdditionalInformation { get; private set; }
 
         ///<summary> The SID of the Phone Number associated with the Tollfree Verification. </summary> 
-        [JsonProperty("tollfree_phone_number_sid")]
+        [JsonPropertyName("tollfree_phone_number_sid")]
         public string TollfreePhoneNumberSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public TollfreeVerificationResource.StatusEnum Status { get; private set; }
 
         ///<summary> The absolute URL of the Tollfree Verification resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The rejection reason given when a Tollfree Verification has been rejected. </summary> 
-        [JsonProperty("rejection_reason")]
+        [JsonPropertyName("rejection_reason")]
         public string RejectionReason { get; private set; }
 
         ///<summary> The error code given when a Tollfree Verification has been rejected. </summary> 
-        [JsonProperty("error_code")]
+        [JsonPropertyName("error_code")]
         public int? ErrorCode { get; private set; }
 
         ///<summary> The date and time when the ability to edit a rejected verification expires. </summary> 
-        [JsonProperty("edit_expiration")]
+        [JsonPropertyName("edit_expiration")]
         public DateTime? EditExpiration { get; private set; }
 
         ///<summary> If a rejected verification is allowed to be edited/resubmitted. Some rejection reasons allow editing and some do not. </summary> 
-        [JsonProperty("edit_allowed")]
+        [JsonPropertyName("edit_allowed")]
         public bool? EditAllowed { get; private set; }
 
         ///<summary> A list of rejection reasons and codes describing why a Tollfree Verification has been rejected. </summary> 
-        [JsonProperty("rejection_reasons")]
+        [JsonPropertyName("rejection_reasons")]
         public List<object> RejectionReasons { get; private set; }
 
         ///<summary> The URLs of the documents associated with the Tollfree Verification resource. </summary> 
-        [JsonProperty("resource_links")]
+        [JsonPropertyName("resource_links")]
         public object ResourceLinks { get; private set; }
 
         ///<summary> An optional external reference ID supplied by customer and echoed back on status retrieval. </summary> 
-        [JsonProperty("external_reference_id")]
+        [JsonPropertyName("external_reference_id")]
         public string ExternalReferenceId { get; private set; }
 
 

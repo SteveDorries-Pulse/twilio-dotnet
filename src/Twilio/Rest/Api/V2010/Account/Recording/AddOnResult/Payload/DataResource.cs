@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -122,7 +122,7 @@ namespace Twilio.Rest.Api.V2010.Account.Recording.AddOnResult.Payload
         {
             try
             {
-                return JsonConvert.DeserializeObject<DataResource>(json);
+                return JsonSerializer.Deserialize<DataResource>(json);
             }
             catch (JsonException e)
             {
@@ -138,7 +138,7 @@ namespace Twilio.Rest.Api.V2010.Account.Recording.AddOnResult.Payload
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -148,7 +148,7 @@ namespace Twilio.Rest.Api.V2010.Account.Recording.AddOnResult.Payload
 
     
         ///<summary> The URL to redirect to to get the data returned by the AddOn that was previously stored. </summary> 
-        [JsonProperty("redirect_to")]
+        [JsonPropertyName("redirect_to")]
         public Uri RedirectTo { get; private set; }
 
 

@@ -1,38 +1,41 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Twilio.Exceptions
 {
     /// <summary>
     /// Exception from Twilio API
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
+
     public class RestException : TwilioException
     {
         /// <summary>
         /// Twilio error code
         /// </summary>
-        [JsonProperty("code")]
-        public int Code { get; private set; }
+        [JsonPropertyName("code")]
+        public int Code { get; set; }
 
         /// <summary>
         /// HTTP status code
         /// </summary>
-        [JsonProperty("status")]
-        public int Status { get; private set; }
+        [JsonPropertyName("status")]
+        public int Status { get; set; }
 
         /// <summary>
         /// Error message
         /// </summary>
-        public override string Message {
+        public override string Message
+        {
             get
             {
                 return _message;
             }
+            
         }
 
-        [JsonProperty("message")]
-        private string _message
+        [JsonPropertyName("message")]
+        protected string _message
         {
             get; set;
         }
@@ -40,31 +43,27 @@ namespace Twilio.Exceptions
         /// <summary>
         /// More info if provided
         /// </summary>
-        [JsonProperty("more_info")]
-        public string MoreInfo { get; private set; }
+        [JsonPropertyName("more_info")]
+        public string MoreInfo { get; set; }
 
         /// <summary>
         /// Details if provided
         /// </summary>
-        [JsonProperty("details")]
-        public Dictionary<string, object> Details { get; private set; }
+        [JsonPropertyName("details")]
+        public Dictionary<string, object> Details { get; set; }
 
         /// <summary>
         /// Create an empty RestException
         /// </summary>
-        public RestException() {}
+        public RestException() { }
         private RestException(
-            [JsonProperty("status")]
             int status,
-            [JsonProperty("message")]
             string message,
-            [JsonProperty("code")]
             int code,
-            [JsonProperty("more_info")]
             string moreInfo,
-            [JsonProperty("details")]
             Dictionary<string, object> details
-        ) {
+        )
+        {
             Status = status;
             Code = code;
             _message = message;
@@ -78,7 +77,7 @@ namespace Twilio.Exceptions
         /// <param name="json">JSON string to parse</param>
         public static RestException FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RestException>(json);
+            return JsonSerializer.Deserialize<RestException>(json);
         }
     }
 }

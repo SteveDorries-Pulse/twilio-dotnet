@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Bulkexports.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ExportResource>(json);
+                return JsonSerializer.Deserialize<ExportResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Bulkexports.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,15 +133,15 @@ namespace Twilio.Rest.Bulkexports.V1
 
     
         ///<summary> The type of communication – Messages, Calls, Conferences, and Participants </summary> 
-        [JsonProperty("resource_type")]
+        [JsonPropertyName("resource_type")]
         public string ResourceType { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Contains a dictionary of URL links to nested resources of this Export. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

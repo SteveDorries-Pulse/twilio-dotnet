@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -208,7 +208,7 @@ namespace Twilio.Rest.Verify.V2.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<AccessTokenResource>(json);
+                return JsonSerializer.Deserialize<AccessTokenResource>(json);
             }
             catch (JsonException e)
             {
@@ -224,7 +224,7 @@ namespace Twilio.Rest.Verify.V2.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -234,43 +234,43 @@ namespace Twilio.Rest.Verify.V2.Service
 
     
         ///<summary> A 34 character string that uniquely identifies this Access Token. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Verify Service. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The unique external identifier for the Entity of the Service. </summary> 
-        [JsonProperty("entity_identity")]
+        [JsonPropertyName("entity_identity")]
         public string EntityIdentity { get; private set; }
 
         
-        [JsonProperty("factor_type")]
+        [JsonPropertyName("factor_type")]
         public AccessTokenResource.FactorTypesEnum FactorType { get; private set; }
 
         ///<summary> A human readable description of this factor, up to 64 characters. For a push factor, this can be the device's name. </summary> 
-        [JsonProperty("factor_friendly_name")]
+        [JsonPropertyName("factor_friendly_name")]
         public string FactorFriendlyName { get; private set; }
 
         ///<summary> The access token generated for enrollment, this is an encrypted json web token. </summary> 
-        [JsonProperty("token")]
+        [JsonPropertyName("token")]
         public string Token { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> How long, in seconds, the access token is valid. Max: 5 minutes </summary> 
-        [JsonProperty("ttl")]
+        [JsonPropertyName("ttl")]
         public int? Ttl { get; private set; }
 
         ///<summary> The date that this access token was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
 

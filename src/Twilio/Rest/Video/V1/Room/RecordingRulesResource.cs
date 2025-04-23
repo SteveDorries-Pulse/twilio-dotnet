@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -180,7 +180,7 @@ namespace Twilio.Rest.Video.V1.Room
         {
             try
             {
-                return JsonConvert.DeserializeObject<RecordingRulesResource>(json);
+                return JsonSerializer.Deserialize<RecordingRulesResource>(json);
             }
             catch (JsonException e)
             {
@@ -196,7 +196,7 @@ namespace Twilio.Rest.Video.V1.Room
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -206,19 +206,19 @@ namespace Twilio.Rest.Video.V1.Room
 
     
         ///<summary> The SID of the Room resource for the Recording Rules </summary> 
-        [JsonProperty("room_sid")]
+        [JsonPropertyName("room_sid")]
         public string RoomSid { get; private set; }
 
         ///<summary> A collection of Recording Rules that describe how to include or exclude matching tracks for recording </summary> 
-        [JsonProperty("rules")]
+        [JsonPropertyName("rules")]
         public List<RecordingRule> Rules { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

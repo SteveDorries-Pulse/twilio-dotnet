@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -109,7 +109,7 @@ namespace Twilio.Rest.Accounts.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<BulkContactsResource>(json);
+                return JsonSerializer.Deserialize<BulkContactsResource>(json);
             }
             catch (JsonException e)
             {
@@ -125,7 +125,7 @@ namespace Twilio.Rest.Accounts.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -135,7 +135,7 @@ namespace Twilio.Rest.Accounts.V1
 
     
         ///<summary> A list of objects where each object represents the result of processing a `correlation_id`. Each object contains the following fields: `correlation_id`, a unique 32-character UUID that maps the response to the original request; `error_code`, an integer where 0 indicates success and any non-zero value represents an error; and `error_messages`, an array of strings describing specific validation errors encountered. If the request is successful, the error_messages array will be empty. </summary> 
-        [JsonProperty("items")]
+        [JsonPropertyName("items")]
         public object Items { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -402,7 +402,7 @@ namespace Twilio.Rest.Studio.V1.Flow
         {
             try
             {
-                return JsonConvert.DeserializeObject<EngagementResource>(json);
+                return JsonSerializer.Deserialize<EngagementResource>(json);
             }
             catch (JsonException e)
             {
@@ -418,7 +418,7 @@ namespace Twilio.Rest.Studio.V1.Flow
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -428,47 +428,47 @@ namespace Twilio.Rest.Studio.V1.Flow
 
     
         ///<summary> The unique string that we created to identify the Engagement resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Engagement resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Flow. </summary> 
-        [JsonProperty("flow_sid")]
+        [JsonPropertyName("flow_sid")]
         public string FlowSid { get; private set; }
 
         ///<summary> The SID of the Contact. </summary> 
-        [JsonProperty("contact_sid")]
+        [JsonPropertyName("contact_sid")]
         public string ContactSid { get; private set; }
 
         ///<summary> The phone number, SIP address or Client identifier that triggered this Engagement. Phone numbers are in E.164 format (+16175551212). SIP addresses are formatted as `name@company.com`. Client identifiers are formatted `client:name`. </summary> 
-        [JsonProperty("contact_channel_address")]
+        [JsonPropertyName("contact_channel_address")]
         public string ContactChannelAddress { get; private set; }
 
         ///<summary> The current state of the execution flow. As your flow executes, we save the state in a flow context. Your widgets can access the data in the flow context as variables, either in configuration fields or in text areas as variable substitution. </summary> 
-        [JsonProperty("context")]
+        [JsonPropertyName("context")]
         public object Context { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public EngagementResource.StatusEnum Status { get; private set; }
 
         ///<summary> The date and time in GMT when the Engagement was created in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Engagement was updated in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of the Engagement's nested resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

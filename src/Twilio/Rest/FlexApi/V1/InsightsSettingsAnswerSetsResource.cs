@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -105,7 +105,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsSettingsAnswerSetsResource>(json);
+                return JsonSerializer.Deserialize<InsightsSettingsAnswerSetsResource>(json);
             }
             catch (JsonException e)
             {
@@ -121,7 +121,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -131,23 +131,23 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The lis of answer sets </summary> 
-        [JsonProperty("answer_sets")]
+        [JsonPropertyName("answer_sets")]
         public object AnswerSets { get; private set; }
 
         ///<summary> The list of answer set categories </summary> 
-        [JsonProperty("answer_set_categories")]
+        [JsonPropertyName("answer_set_categories")]
         public object AnswerSetCategories { get; private set; }
 
         ///<summary> The details for not applicable answer set </summary> 
-        [JsonProperty("not_applicable")]
+        [JsonPropertyName("not_applicable")]
         public object NotApplicable { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

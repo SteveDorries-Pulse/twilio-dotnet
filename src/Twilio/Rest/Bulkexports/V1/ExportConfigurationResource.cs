@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -188,7 +188,7 @@ namespace Twilio.Rest.Bulkexports.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ExportConfigurationResource>(json);
+                return JsonSerializer.Deserialize<ExportConfigurationResource>(json);
             }
             catch (JsonException e)
             {
@@ -204,7 +204,7 @@ namespace Twilio.Rest.Bulkexports.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -214,23 +214,23 @@ namespace Twilio.Rest.Bulkexports.V1
 
     
         ///<summary> If true, Twilio will automatically generate every day's file when the day is over. </summary> 
-        [JsonProperty("enabled")]
+        [JsonPropertyName("enabled")]
         public bool? Enabled { get; private set; }
 
         ///<summary> Stores the URL destination for the method specified in webhook_method. </summary> 
-        [JsonProperty("webhook_url")]
+        [JsonPropertyName("webhook_url")]
         public Uri WebhookUrl { get; private set; }
 
         ///<summary> Sets whether Twilio should call a webhook URL when the automatic generation is complete, using GET or POST. The actual destination is set in the webhook_url </summary> 
-        [JsonProperty("webhook_method")]
+        [JsonPropertyName("webhook_method")]
         public string WebhookMethod { get; private set; }
 
         ///<summary> The type of communication – Messages, Calls, Conferences, and Participants </summary> 
-        [JsonProperty("resource_type")]
+        [JsonPropertyName("resource_type")]
         public string ResourceType { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

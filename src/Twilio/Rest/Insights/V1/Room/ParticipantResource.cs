@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -308,7 +308,7 @@ namespace Twilio.Rest.Insights.V1.Room
         {
             try
             {
-                return JsonConvert.DeserializeObject<ParticipantResource>(json);
+                return JsonSerializer.Deserialize<ParticipantResource>(json);
             }
             catch (JsonException e)
             {
@@ -324,7 +324,7 @@ namespace Twilio.Rest.Insights.V1.Room
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -334,71 +334,71 @@ namespace Twilio.Rest.Insights.V1.Room
 
     
         ///<summary> Unique identifier for the participant. </summary> 
-        [JsonProperty("participant_sid")]
+        [JsonPropertyName("participant_sid")]
         public string ParticipantSid { get; private set; }
 
         ///<summary> The application-defined string that uniquely identifies the participant within a Room. </summary> 
-        [JsonProperty("participant_identity")]
+        [JsonPropertyName("participant_identity")]
         public string ParticipantIdentity { get; private set; }
 
         ///<summary> When the participant joined the room. </summary> 
-        [JsonProperty("join_time")]
+        [JsonPropertyName("join_time")]
         public DateTime? JoinTime { get; private set; }
 
         ///<summary> When the participant left the room. </summary> 
-        [JsonProperty("leave_time")]
+        [JsonPropertyName("leave_time")]
         public DateTime? LeaveTime { get; private set; }
 
         ///<summary> Amount of time in seconds the participant was in the room. </summary> 
-        [JsonProperty("duration_sec")]
+        [JsonPropertyName("duration_sec")]
         public long? DurationSec { get; private set; }
 
         ///<summary> Account SID associated with the room. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Unique identifier for the room. </summary> 
-        [JsonProperty("room_sid")]
+        [JsonPropertyName("room_sid")]
         public string RoomSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public ParticipantResource.RoomStatusEnum Status { get; private set; }
 
         ///<summary> Codecs detected from the participant. Can be `VP8`, `H264`, or `VP9`. </summary> 
-        [JsonProperty("codecs")]
+        [JsonPropertyName("codecs")]
         public List<ParticipantResource.CodecEnum> Codecs { get; private set; }
 
         ///<summary> Reason the participant left the room. See [the list of possible values here](https://www.twilio.com/docs/video/troubleshooting/video-log-analyzer-api#end_reason). </summary> 
-        [JsonProperty("end_reason")]
+        [JsonPropertyName("end_reason")]
         public string EndReason { get; private set; }
 
         ///<summary> Errors encountered by the participant. </summary> 
-        [JsonProperty("error_code")]
+        [JsonPropertyName("error_code")]
         public int? ErrorCode { get; private set; }
 
         ///<summary> Twilio error code dictionary link. </summary> 
-        [JsonProperty("error_code_url")]
+        [JsonPropertyName("error_code_url")]
         public string ErrorCodeUrl { get; private set; }
 
         
-        [JsonProperty("media_region")]
+        [JsonPropertyName("media_region")]
         public ParticipantResource.TwilioRealmEnum MediaRegion { get; private set; }
 
         ///<summary> Object containing information about the participant's data from the room. See [below](https://www.twilio.com/docs/video/troubleshooting/video-log-analyzer-api#properties) for more information. </summary> 
-        [JsonProperty("properties")]
+        [JsonPropertyName("properties")]
         public object Properties { get; private set; }
 
         
-        [JsonProperty("edge_location")]
+        [JsonPropertyName("edge_location")]
         public ParticipantResource.EdgeLocationEnum EdgeLocation { get; private set; }
 
         ///<summary> Object containing information about the SDK name and version. See [below](https://www.twilio.com/docs/video/troubleshooting/video-log-analyzer-api#publisher_info) for more information. </summary> 
-        [JsonProperty("publisher_info")]
+        [JsonPropertyName("publisher_info")]
         public object PublisherInfo { get; private set; }
 
         ///<summary> URL of the participant resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

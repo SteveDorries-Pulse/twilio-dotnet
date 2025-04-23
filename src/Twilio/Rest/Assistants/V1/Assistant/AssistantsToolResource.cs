@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -314,7 +314,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
         {
             try
             {
-                return JsonConvert.DeserializeObject<AssistantsToolResource>(json);
+                return JsonSerializer.Deserialize<AssistantsToolResource>(json);
             }
             catch (JsonException e)
             {
@@ -330,7 +330,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -340,47 +340,47 @@ namespace Twilio.Rest.Assistants.V1.Assistant
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Tool resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The description of the tool. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; }
 
         ///<summary> True if the tool is enabled. </summary> 
-        [JsonProperty("enabled")]
+        [JsonPropertyName("enabled")]
         public bool? Enabled { get; }
 
         ///<summary> The tool ID. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; }
 
         ///<summary> The metadata related to method, url, input_schema to used with the Tool. </summary> 
-        [JsonProperty("meta")]
+        [JsonPropertyName("meta")]
         public object Meta { get; }
 
         ///<summary> The name of the tool. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; }
 
         ///<summary> The authentication requirement for the tool. </summary> 
-        [JsonProperty("requires_auth")]
+        [JsonPropertyName("requires_auth")]
         public bool? RequiresAuth { get; }
 
         ///<summary> The type of the tool. ('WEBHOOK') </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; }
 
         ///<summary> The url of the tool resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public string Url { get; private set; }
 
         ///<summary> The date and time in GMT when the Tool was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; }
 
         ///<summary> The date and time in GMT when the Tool was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; }
 
 

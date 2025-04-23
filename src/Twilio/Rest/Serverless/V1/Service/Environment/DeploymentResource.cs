@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -330,7 +330,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Environment
         {
             try
             {
-                return JsonConvert.DeserializeObject<DeploymentResource>(json);
+                return JsonSerializer.Deserialize<DeploymentResource>(json);
             }
             catch (JsonException e)
             {
@@ -346,7 +346,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Environment
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -356,35 +356,35 @@ namespace Twilio.Rest.Serverless.V1.Service.Environment
 
     
         ///<summary> The unique string that we created to identify the Deployment resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Deployment resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Service that the Deployment resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the Environment for the Deployment. </summary> 
-        [JsonProperty("environment_sid")]
+        [JsonPropertyName("environment_sid")]
         public string EnvironmentSid { get; private set; }
 
         ///<summary> The SID of the Build for the deployment. </summary> 
-        [JsonProperty("build_sid")]
+        [JsonPropertyName("build_sid")]
         public string BuildSid { get; private set; }
 
         ///<summary> The date and time in GMT when the Deployment resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Deployment resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the Deployment resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

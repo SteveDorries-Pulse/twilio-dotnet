@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,11 +32,11 @@ namespace Twilio.Rest.PreviewIam.Organizations
     
         public class PublicApiCreateRoleAssignmentRequest
         {
-            [JsonProperty("role_sid")]
+            [JsonPropertyName("role_sid")]
             private string RoleSid {get; set;}
-            [JsonProperty("scope")]
+            [JsonPropertyName("scope")]
             private string Scope {get; set;}
-            [JsonProperty("identity")]
+            [JsonPropertyName("identity")]
             private string Identity {get; set;}
             public PublicApiCreateRoleAssignmentRequest() { }
             public class Builder
@@ -357,7 +357,7 @@ namespace Twilio.Rest.PreviewIam.Organizations
         {
             try
             {
-                return JsonConvert.DeserializeObject<RoleAssignmentResource>(json);
+                return JsonSerializer.Deserialize<RoleAssignmentResource>(json);
             }
             catch (JsonException e)
             {
@@ -373,7 +373,7 @@ namespace Twilio.Rest.PreviewIam.Organizations
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -383,19 +383,19 @@ namespace Twilio.Rest.PreviewIam.Organizations
 
     
         ///<summary> Twilio Role Assignment Sid representing this role assignment </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> Twilio Role Sid representing assigned role </summary> 
-        [JsonProperty("role_sid")]
+        [JsonPropertyName("role_sid")]
         public string RoleSid { get; private set; }
 
         ///<summary> Twilio Sid representing identity of this assignment </summary> 
-        [JsonProperty("scope")]
+        [JsonPropertyName("scope")]
         public string Scope { get; private set; }
 
         ///<summary> Twilio Sid representing scope of this assignment </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
 

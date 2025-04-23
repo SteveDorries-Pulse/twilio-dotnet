@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -318,7 +318,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance.Bundle
         {
             try
             {
-                return JsonConvert.DeserializeObject<EvaluationResource>(json);
+                return JsonSerializer.Deserialize<EvaluationResource>(json);
             }
             catch (JsonException e)
             {
@@ -334,7 +334,7 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance.Bundle
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -344,35 +344,35 @@ namespace Twilio.Rest.Numbers.V2.RegulatoryCompliance.Bundle
 
     
         ///<summary> The unique string that identifies the Evaluation resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Bundle resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique string of a regulation that is associated to the Bundle resource. </summary> 
-        [JsonProperty("regulation_sid")]
+        [JsonPropertyName("regulation_sid")]
         public string RegulationSid { get; private set; }
 
         ///<summary> The unique string that we created to identify the Bundle resource. </summary> 
-        [JsonProperty("bundle_sid")]
+        [JsonPropertyName("bundle_sid")]
         public string BundleSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public EvaluationResource.StatusEnum Status { get; private set; }
 
         ///<summary> The results of the Evaluation which includes the valid and invalid attributes. </summary> 
-        [JsonProperty("results")]
+        [JsonPropertyName("results")]
         public List<object> Results { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

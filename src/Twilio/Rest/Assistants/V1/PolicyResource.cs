@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -170,7 +170,7 @@ namespace Twilio.Rest.Assistants.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<PolicyResource>(json);
+                return JsonSerializer.Deserialize<PolicyResource>(json);
             }
             catch (JsonException e)
             {
@@ -186,7 +186,7 @@ namespace Twilio.Rest.Assistants.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -196,39 +196,39 @@ namespace Twilio.Rest.Assistants.V1
 
     
         ///<summary> The Policy ID. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; private set; }
 
         ///<summary> The name of the policy. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> The description of the policy. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Policy resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the User that created the Policy resource. </summary> 
-        [JsonProperty("user_sid")]
+        [JsonPropertyName("user_sid")]
         public string UserSid { get; private set; }
 
         ///<summary> The type of the policy. </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; }
 
         ///<summary> The details of the policy based on the type. </summary> 
-        [JsonProperty("policy_details")]
+        [JsonPropertyName("policy_details")]
         public object PolicyDetails { get; }
 
         ///<summary> The date and time in GMT when the Policy was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Policy was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

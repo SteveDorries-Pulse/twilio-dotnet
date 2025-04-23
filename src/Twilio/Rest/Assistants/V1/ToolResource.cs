@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,15 +32,15 @@ namespace Twilio.Rest.Assistants.V1
     
         public class AssistantsV1ServiceCreatePolicyRequest
         {
-            [JsonProperty("description")]
+            [JsonPropertyName("description")]
             private string Description {get; set;}
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("name")]
+            [JsonPropertyName("name")]
             private string Name {get; set;}
-            [JsonProperty("policy_details")]
+            [JsonPropertyName("policy_details")]
             private object PolicyDetails {get; set;}
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private string Type {get; set;}
             public AssistantsV1ServiceCreatePolicyRequest() { }
             public class Builder
@@ -82,19 +82,19 @@ namespace Twilio.Rest.Assistants.V1
         }
         public class AssistantsV1ServiceCreateToolRequest
         {
-            [JsonProperty("assistant_id")]
+            [JsonPropertyName("assistant_id")]
             private string AssistantId {get; set;}
-            [JsonProperty("description")]
+            [JsonPropertyName("description")]
             private string Description {get; set;}
-            [JsonProperty("enabled")]
+            [JsonPropertyName("enabled")]
             private bool? Enabled {get; set;}
-            [JsonProperty("meta")]
+            [JsonPropertyName("meta")]
             private object Meta {get; set;}
-            [JsonProperty("name")]
+            [JsonPropertyName("name")]
             private string Name {get; set;}
-            [JsonProperty("policy")]
+            [JsonPropertyName("policy")]
             private AssistantsV1ServiceCreatePolicyRequest Policy {get; set;}
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private string Type {get; set;}
             public AssistantsV1ServiceCreateToolRequest() { }
             public class Builder
@@ -146,19 +146,19 @@ namespace Twilio.Rest.Assistants.V1
         }
         public class AssistantsV1ServiceUpdateToolRequest
         {
-            [JsonProperty("assistant_id")]
+            [JsonPropertyName("assistant_id")]
             private string AssistantId {get; set;}
-            [JsonProperty("description")]
+            [JsonPropertyName("description")]
             private string Description {get; set;}
-            [JsonProperty("enabled")]
+            [JsonPropertyName("enabled")]
             private bool? Enabled {get; set;}
-            [JsonProperty("meta")]
+            [JsonPropertyName("meta")]
             private object Meta {get; set;}
-            [JsonProperty("name")]
+            [JsonPropertyName("name")]
             private string Name {get; set;}
-            [JsonProperty("policy")]
+            [JsonPropertyName("policy")]
             private AssistantsV1ServiceCreatePolicyRequest Policy {get; set;}
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private string Type {get; set;}
             public AssistantsV1ServiceUpdateToolRequest() { }
             public class Builder
@@ -210,23 +210,23 @@ namespace Twilio.Rest.Assistants.V1
         }
         public class AssistantsV1ServicePolicy
         {
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("name")]
+            [JsonPropertyName("name")]
             private string Name {get; set;}
-            [JsonProperty("description")]
+            [JsonPropertyName("description")]
             private string Description {get; set;}
-            [JsonProperty("account_sid")]
+            [JsonPropertyName("account_sid")]
             private string AccountSid {get; set;}
-            [JsonProperty("user_sid")]
+            [JsonPropertyName("user_sid")]
             private string UserSid {get; set;}
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private string Type {get; set;}
-            [JsonProperty("policy_details")]
+            [JsonPropertyName("policy_details")]
             private object PolicyDetails {get; set;}
-            [JsonProperty("date_created")]
+            [JsonPropertyName("date_created")]
             private DateTime? DateCreated {get; set;}
-            [JsonProperty("date_updated")]
+            [JsonPropertyName("date_updated")]
             private DateTime? DateUpdated {get; set;}
             public AssistantsV1ServicePolicy() { }
             public class Builder
@@ -691,7 +691,7 @@ namespace Twilio.Rest.Assistants.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ToolResource>(json);
+                return JsonSerializer.Deserialize<ToolResource>(json);
             }
             catch (JsonException e)
             {
@@ -707,7 +707,7 @@ namespace Twilio.Rest.Assistants.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -717,51 +717,51 @@ namespace Twilio.Rest.Assistants.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Tool resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The description of the tool. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; }
 
         ///<summary> True if the tool is enabled. </summary> 
-        [JsonProperty("enabled")]
+        [JsonPropertyName("enabled")]
         public bool? Enabled { get; }
 
         ///<summary> The tool ID. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; }
 
         ///<summary> The metadata related to method, url, input_schema to used with the Tool. </summary> 
-        [JsonProperty("meta")]
+        [JsonPropertyName("meta")]
         public object Meta { get; }
 
         ///<summary> The name of the tool. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; }
 
         ///<summary> The authentication requirement for the tool. </summary> 
-        [JsonProperty("requires_auth")]
+        [JsonPropertyName("requires_auth")]
         public bool? RequiresAuth { get; }
 
         ///<summary> The type of the tool. ('WEBHOOK') </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; }
 
         ///<summary> The url of the tool resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public string Url { get; private set; }
 
         ///<summary> The date and time in GMT when the Tool was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; }
 
         ///<summary> The date and time in GMT when the Tool was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; }
 
         ///<summary> The Policies associated with the tool. </summary> 
-        [JsonProperty("policies")]
+        [JsonPropertyName("policies")]
         public List<AssistantsV1ServicePolicy> Policies { get; private set; }
 
 

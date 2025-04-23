@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -424,7 +424,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<BrandRegistrationResource>(json);
+                return JsonSerializer.Deserialize<BrandRegistrationResource>(json);
             }
             catch (JsonException e)
             {
@@ -440,7 +440,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -450,87 +450,87 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> The unique string to identify Brand Registration. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Brand Registration resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A2P Messaging Profile Bundle BundleSid. </summary> 
-        [JsonProperty("customer_profile_bundle_sid")]
+        [JsonPropertyName("customer_profile_bundle_sid")]
         public string CustomerProfileBundleSid { get; private set; }
 
         ///<summary> A2P Messaging Profile Bundle BundleSid. </summary> 
-        [JsonProperty("a2p_profile_bundle_sid")]
+        [JsonPropertyName("a2p_profile_bundle_sid")]
         public string A2PProfileBundleSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> Type of brand. One of: \"STANDARD\", \"SOLE_PROPRIETOR\". SOLE_PROPRIETOR is for the low volume, SOLE_PROPRIETOR campaign use case. There can only be one SOLE_PROPRIETOR campaign created per SOLE_PROPRIETOR brand. STANDARD is for all other campaign use cases. Multiple campaign use cases can be created per STANDARD brand. </summary> 
-        [JsonProperty("brand_type")]
+        [JsonPropertyName("brand_type")]
         public string BrandType { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public BrandRegistrationResource.StatusEnum Status { get; private set; }
 
         ///<summary> Campaign Registry (TCR) Brand ID. Assigned only after successful brand registration. </summary> 
-        [JsonProperty("tcr_id")]
+        [JsonPropertyName("tcr_id")]
         public string TcrId { get; private set; }
 
         ///<summary> DEPRECATED. A reason why brand registration has failed. Only applicable when status is FAILED. </summary> 
-        [JsonProperty("failure_reason")]
+        [JsonPropertyName("failure_reason")]
         public string FailureReason { get; private set; }
 
         ///<summary> A list of errors that occurred during the brand registration process. </summary> 
-        [JsonProperty("errors")]
+        [JsonPropertyName("errors")]
         public List<object> Errors { get; private set; }
 
         ///<summary> The absolute URL of the Brand Registration resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The secondary vetting score if it was done. Otherwise, it will be the brand score if it's returned from TCR. It may be null if no score is available. </summary> 
-        [JsonProperty("brand_score")]
+        [JsonPropertyName("brand_score")]
         public int? BrandScore { get; private set; }
 
         ///<summary> DEPRECATED. Feedback on how to improve brand score </summary> 
-        [JsonProperty("brand_feedback")]
+        [JsonPropertyName("brand_feedback")]
         public List<BrandRegistrationResource.BrandFeedbackEnum> BrandFeedback { get; private set; }
 
         
-        [JsonProperty("identity_status")]
+        [JsonPropertyName("identity_status")]
         public BrandRegistrationResource.IdentityStatusEnum IdentityStatus { get; private set; }
 
         ///<summary> Publicly traded company identified in the Russell 3000 Index </summary> 
-        [JsonProperty("russell_3000")]
+        [JsonPropertyName("russell_3000")]
         public bool? Russell3000 { get; private set; }
 
         ///<summary> Identified as a government entity </summary> 
-        [JsonProperty("government_entity")]
+        [JsonPropertyName("government_entity")]
         public bool? GovernmentEntity { get; private set; }
 
         ///<summary> Nonprofit organization tax-exempt status per section 501 of the U.S. tax code. </summary> 
-        [JsonProperty("tax_exempt_status")]
+        [JsonPropertyName("tax_exempt_status")]
         public string TaxExemptStatus { get; private set; }
 
         ///<summary> A flag to disable automatic secondary vetting for brands which it would otherwise be done. </summary> 
-        [JsonProperty("skip_automatic_sec_vet")]
+        [JsonPropertyName("skip_automatic_sec_vet")]
         public bool? SkipAutomaticSecVet { get; private set; }
 
         ///<summary> A boolean that specifies whether brand should be a mock or not. If true, brand will be registered as a mock brand. Defaults to false if no value is provided. </summary> 
-        [JsonProperty("mock")]
+        [JsonPropertyName("mock")]
         public bool? Mock { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

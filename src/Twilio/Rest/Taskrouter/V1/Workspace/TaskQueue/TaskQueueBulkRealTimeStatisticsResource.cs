@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -112,7 +112,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.TaskQueue
         {
             try
             {
-                return JsonConvert.DeserializeObject<TaskQueueBulkRealTimeStatisticsResource>(json);
+                return JsonSerializer.Deserialize<TaskQueueBulkRealTimeStatisticsResource>(json);
             }
             catch (JsonException e)
             {
@@ -128,7 +128,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.TaskQueue
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -138,23 +138,23 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.TaskQueue
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskQueue resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Workspace that contains the TaskQueue. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The real-time statistics for each requested TaskQueue SID. `task_queue_data` returns the following attributes:  `task_queue_sid`: The SID of the TaskQueue from which these statistics were calculated.  `total_available_workers`: The total number of Workers available for Tasks in the TaskQueue.  `total_eligible_workers`: The total number of Workers eligible for Tasks in the TaskQueue, regardless of their Activity state.  `total_tasks`: The total number of Tasks.  `longest_task_waiting_age`: The age of the longest waiting Task.  `longest_task_waiting_sid`: The SID of the longest waiting Task.  `tasks_by_status`: The number of Tasks grouped by their current status.  `tasks_by_priority`: The number of Tasks grouped by priority.  `activity_statistics`: The number of current Workers grouped by Activity.  </summary> 
-        [JsonProperty("task_queue_data")]
+        [JsonPropertyName("task_queue_data")]
         public List<object> TaskQueueData { get; private set; }
 
         ///<summary> The number of TaskQueue statistics received in task_queue_data. </summary> 
-        [JsonProperty("task_queue_response_count")]
+        [JsonPropertyName("task_queue_response_count")]
         public int? TaskQueueResponseCount { get; private set; }
 
         ///<summary> The absolute URL of the TaskQueue statistics resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

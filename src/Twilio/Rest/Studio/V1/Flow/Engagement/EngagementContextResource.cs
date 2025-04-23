@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -112,7 +112,7 @@ namespace Twilio.Rest.Studio.V1.Flow.Engagement
         {
             try
             {
-                return JsonConvert.DeserializeObject<EngagementContextResource>(json);
+                return JsonSerializer.Deserialize<EngagementContextResource>(json);
             }
             catch (JsonException e)
             {
@@ -128,7 +128,7 @@ namespace Twilio.Rest.Studio.V1.Flow.Engagement
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -138,23 +138,23 @@ namespace Twilio.Rest.Studio.V1.Flow.Engagement
 
     
         ///<summary> The SID of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> As your flow executes, we save the state in what's called the Flow Context. Any data in the flow context can be accessed by your widgets as variables, either in configuration fields or in text areas as variable substitution. </summary> 
-        [JsonProperty("context")]
+        [JsonPropertyName("context")]
         public object Context { get; private set; }
 
         ///<summary> The SID of the Engagement. </summary> 
-        [JsonProperty("engagement_sid")]
+        [JsonPropertyName("engagement_sid")]
         public string EngagementSid { get; private set; }
 
         ///<summary> The SID of the Flow. </summary> 
-        [JsonProperty("flow_sid")]
+        [JsonPropertyName("flow_sid")]
         public string FlowSid { get; private set; }
 
         ///<summary> The URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

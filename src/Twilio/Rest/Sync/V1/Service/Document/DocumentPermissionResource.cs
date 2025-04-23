@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -417,7 +417,7 @@ namespace Twilio.Rest.Sync.V1.Service.Document
         {
             try
             {
-                return JsonConvert.DeserializeObject<DocumentPermissionResource>(json);
+                return JsonSerializer.Deserialize<DocumentPermissionResource>(json);
             }
             catch (JsonException e)
             {
@@ -433,7 +433,7 @@ namespace Twilio.Rest.Sync.V1.Service.Document
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -443,35 +443,35 @@ namespace Twilio.Rest.Sync.V1.Service.Document
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Document Permission resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the Sync Document to which the Document Permission applies. </summary> 
-        [JsonProperty("document_sid")]
+        [JsonPropertyName("document_sid")]
         public string DocumentSid { get; private set; }
 
         ///<summary> The application-defined string that uniquely identifies the resource's User within the Service to an FPA token. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> Whether the identity can read the Sync Document. </summary> 
-        [JsonProperty("read")]
+        [JsonPropertyName("read")]
         public bool? _Read { get; private set; }
 
         ///<summary> Whether the identity can update the Sync Document. </summary> 
-        [JsonProperty("write")]
+        [JsonPropertyName("write")]
         public bool? Write { get; private set; }
 
         ///<summary> Whether the identity can delete the Sync Document. </summary> 
-        [JsonProperty("manage")]
+        [JsonPropertyName("manage")]
         public bool? Manage { get; private set; }
 
         ///<summary> The absolute URL of the Sync Document Permission resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

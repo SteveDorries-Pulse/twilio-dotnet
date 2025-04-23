@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -115,7 +115,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<TokenResource>(json);
+                return JsonSerializer.Deserialize<TokenResource>(json);
             }
             catch (JsonException e)
             {
@@ -131,7 +131,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -141,31 +141,31 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Token resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> An array representing the ephemeral credentials and the STUN and TURN server URIs. </summary> 
-        [JsonProperty("ice_servers")]
+        [JsonPropertyName("ice_servers")]
         public List<IceServer> IceServers { get; private set; }
 
         ///<summary> The temporary password that the username will use when authenticating with Twilio. </summary> 
-        [JsonProperty("password")]
+        [JsonPropertyName("password")]
         public string Password { get; private set; }
 
         ///<summary> The duration in seconds for which the username and password are valid. </summary> 
-        [JsonProperty("ttl")]
+        [JsonPropertyName("ttl")]
         public string Ttl { get; private set; }
 
         ///<summary> The temporary username that uniquely identifies a Token. </summary> 
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; private set; }
 
 

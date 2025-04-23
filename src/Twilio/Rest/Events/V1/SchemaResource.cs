@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Events.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SchemaResource>(json);
+                return JsonSerializer.Deserialize<SchemaResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Events.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,23 +133,23 @@ namespace Twilio.Rest.Events.V1
 
     
         ///<summary> The unique identifier of the schema. Each schema can have multiple versions, that share the same id. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Contains a dictionary of URL links to nested resources of this schema. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> The date that the latest schema version was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("latest_version_date_created")]
+        [JsonPropertyName("latest_version_date_created")]
         public DateTime? LatestVersionDateCreated { get; private set; }
 
         ///<summary> The latest version published of this schema. </summary> 
-        [JsonProperty("latest_version")]
+        [JsonPropertyName("latest_version")]
         public int? LatestVersion { get; private set; }
 
 

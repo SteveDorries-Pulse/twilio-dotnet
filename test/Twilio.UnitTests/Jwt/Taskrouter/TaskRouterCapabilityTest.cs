@@ -29,12 +29,12 @@ namespace Twilio.UnitTests.Jwt.Taskrouter
             var token = new DecodedJwt(jwt, AuthToken);
             var payload = token.Payload;
 
-            Assert.Equal(WorkspaceSid, payload["workspace_sid"]);
-            Assert.Equal(WorkerSid, payload["channel"]);
-            Assert.Equal(AccountSid, payload["account_sid"]);
-            Assert.Equal(AccountSid, payload["iss"]);
+            Assert.Equal(WorkspaceSid, payload["workspace_sid"].ToString());
+            Assert.Equal(WorkerSid, payload["channel"].ToString());
+            Assert.Equal(AccountSid, payload["account_sid"].ToString());
+            Assert.Equal(AccountSid, payload["iss"].ToString());
 
-            Assert.True(Convert.ToInt64(payload["exp"]) > BaseJwt.ConvertToUnixTimestamp(DateTime.UtcNow));
+            Assert.True(Convert.ToInt64(payload["exp"].ToString()) > BaseJwt.ConvertToUnixTimestamp(DateTime.UtcNow));
         }
     }
 }

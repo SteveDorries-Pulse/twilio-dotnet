@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -492,7 +492,7 @@ namespace Twilio.Rest.Voice.V1.ConnectionPolicy
         {
             try
             {
-                return JsonConvert.DeserializeObject<ConnectionPolicyTargetResource>(json);
+                return JsonSerializer.Deserialize<ConnectionPolicyTargetResource>(json);
             }
             catch (JsonException e)
             {
@@ -508,7 +508,7 @@ namespace Twilio.Rest.Voice.V1.ConnectionPolicy
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -518,47 +518,47 @@ namespace Twilio.Rest.Voice.V1.ConnectionPolicy
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Target resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Connection Policy that owns the Target. </summary> 
-        [JsonProperty("connection_policy_sid")]
+        [JsonPropertyName("connection_policy_sid")]
         public string ConnectionPolicySid { get; private set; }
 
         ///<summary> The unique string that we created to identify the Target resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The SIP address you want Twilio to route your calls to. This must be a `sip:` schema. `sips` is NOT supported. </summary> 
-        [JsonProperty("target")]
+        [JsonPropertyName("target")]
         public Uri Target { get; private set; }
 
         ///<summary> The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and the default is 10. The lowest number represents the most important target. </summary> 
-        [JsonProperty("priority")]
+        [JsonPropertyName("priority")]
         public int? Priority { get; private set; }
 
         ///<summary> The value that determines the relative share of the load the Target should receive compared to other Targets with the same priority. Can be an integer from 1 to 65535, inclusive, and the default is 10. Targets with higher values receive more load than those with lower ones with the same priority. </summary> 
-        [JsonProperty("weight")]
+        [JsonPropertyName("weight")]
         public int? Weight { get; private set; }
 
         ///<summary> Whether the target is enabled. The default is `true`. </summary> 
-        [JsonProperty("enabled")]
+        [JsonPropertyName("enabled")]
         public bool? Enabled { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

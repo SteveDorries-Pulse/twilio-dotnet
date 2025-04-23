@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -369,7 +369,7 @@ namespace Twilio.Rest.Supersim.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<IpCommandResource>(json);
+                return JsonSerializer.Deserialize<IpCommandResource>(json);
             }
             catch (JsonException e)
             {
@@ -385,7 +385,7 @@ namespace Twilio.Rest.Supersim.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -395,55 +395,55 @@ namespace Twilio.Rest.Supersim.V1
 
     
         ///<summary> The unique string that we created to identify the IP Command resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the IP Command resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Super SIM](https://www.twilio.com/docs/iot/supersim/api/sim-resource) that this IP Command was sent to or from. </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         ///<summary> The [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID) of the [Super SIM](https://www.twilio.com/docs/iot/supersim/api/sim-resource) that this IP Command was sent to or from. </summary> 
-        [JsonProperty("sim_iccid")]
+        [JsonPropertyName("sim_iccid")]
         public string SimIccid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public IpCommandResource.StatusEnum Status { get; private set; }
 
         
-        [JsonProperty("direction")]
+        [JsonPropertyName("direction")]
         public IpCommandResource.DirectionEnum Direction { get; private set; }
 
         ///<summary> The IP address of the device that the IP Command was sent to or received from. For an IP Command sent to a Super SIM, `device_ip` starts out as `null`, and once the IP Command is “sent”, the `device_ip` will be filled out. An IP Command sent from a Super SIM have its `device_ip` always set. </summary> 
-        [JsonProperty("device_ip")]
+        [JsonPropertyName("device_ip")]
         public string DeviceIp { get; private set; }
 
         ///<summary> For an IP Command sent to a Super SIM, it would be the destination port of the IP message. For an IP Command sent from a Super SIM, it would be the source port of the IP message. </summary> 
-        [JsonProperty("device_port")]
+        [JsonPropertyName("device_port")]
         public int? DevicePort { get; private set; }
 
         
-        [JsonProperty("payload_type")]
+        [JsonPropertyName("payload_type")]
         public IpCommandResource.PayloadTypeEnum PayloadType { get; private set; }
 
         ///<summary> The payload that is carried in the IP/UDP message. The payload can be encoded in either text or binary format. For text payload, UTF-8 encoding must be used.  For an IP Command sent to a Super SIM, the payload is appended to the IP/UDP message “as is”. The payload should not exceed 1300 bytes.  For an IP Command sent from a Super SIM, the payload from the received IP/UDP message is extracted and sent in binary encoding. For an IP Command sent from a Super SIM, the payload should not exceed 1300 bytes. If it is larger than 1300 bytes, there might be fragmentation on the upstream and the message may appear truncated. </summary> 
-        [JsonProperty("payload")]
+        [JsonPropertyName("payload")]
         public string Payload { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the IP Command resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

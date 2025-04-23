@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -311,7 +311,7 @@ namespace Twilio.Rest.Microvisor.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<DeviceResource>(json);
+                return JsonSerializer.Deserialize<DeviceResource>(json);
             }
             catch (JsonException e)
             {
@@ -327,7 +327,7 @@ namespace Twilio.Rest.Microvisor.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -337,39 +337,39 @@ namespace Twilio.Rest.Microvisor.V1
 
     
         ///<summary> A 34-character string that uniquely identifies this Device. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A developer-defined string that uniquely identifies the Device. This value must be unique for all Devices on this Account. The `unique_name` value may be used as an alternative to the `sid` in the URL path to address the resource. </summary> 
-        [JsonProperty("unique_name")]
+        [JsonPropertyName("unique_name")]
         public string UniqueName { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Information about the target App and the App reported by this Device. Contains the properties `target_sid`, `date_targeted`, `update_status` (one of `up-to-date`, `pending` and `error`), `update_error_code`, `reported_sid` and `date_reported`. </summary> 
-        [JsonProperty("app")]
+        [JsonPropertyName("app")]
         public object App { get; private set; }
 
         ///<summary> Object specifying whether application logging is enabled for this Device. Contains the properties `enabled` and `date_expires`. </summary> 
-        [JsonProperty("logging")]
+        [JsonPropertyName("logging")]
         public object Logging { get; private set; }
 
         ///<summary> The date that this Device was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Device was last updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The absolute URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

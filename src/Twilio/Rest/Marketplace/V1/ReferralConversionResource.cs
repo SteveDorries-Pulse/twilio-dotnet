@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,7 +32,7 @@ namespace Twilio.Rest.Marketplace.V1
     
         public class CreateReferralConversionRequest
         {
-            [JsonProperty("referral_account_sid")]
+            [JsonPropertyName("referral_account_sid")]
             private string ReferralAccountSid {get; set;}
             public CreateReferralConversionRequest() { }
             public class Builder
@@ -132,7 +132,7 @@ namespace Twilio.Rest.Marketplace.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ReferralConversionResource>(json);
+                return JsonSerializer.Deserialize<ReferralConversionResource>(json);
             }
             catch (JsonException e)
             {
@@ -148,7 +148,7 @@ namespace Twilio.Rest.Marketplace.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -158,7 +158,7 @@ namespace Twilio.Rest.Marketplace.V1
 
     
         ///<summary> The converted_account_sid </summary> 
-        [JsonProperty("converted_account_sid")]
+        [JsonPropertyName("converted_account_sid")]
         public string ConvertedAccountSid { get; private set; }
 
 

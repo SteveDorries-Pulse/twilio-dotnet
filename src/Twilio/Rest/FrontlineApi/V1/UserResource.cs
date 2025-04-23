@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -205,7 +205,7 @@ namespace Twilio.Rest.FrontlineApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<UserResource>(json);
+                return JsonSerializer.Deserialize<UserResource>(json);
             }
             catch (JsonException e)
             {
@@ -221,7 +221,7 @@ namespace Twilio.Rest.FrontlineApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -231,31 +231,31 @@ namespace Twilio.Rest.FrontlineApi.V1
 
     
         ///<summary> The unique string that we created to identify the User resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The application-defined string that uniquely identifies the resource's User. This value is often a username or an email address, and is case-sensitive. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The string that you assigned to describe the User. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The avatar URL which will be shown in Frontline application. </summary> 
-        [JsonProperty("avatar")]
+        [JsonPropertyName("avatar")]
         public string Avatar { get; private set; }
 
         
-        [JsonProperty("state")]
+        [JsonPropertyName("state")]
         public UserResource.StateTypeEnum State { get; private set; }
 
         ///<summary> Whether the User is available for new conversations. Defaults to `false` for new users. </summary> 
-        [JsonProperty("is_available")]
+        [JsonPropertyName("is_available")]
         public bool? IsAvailable { get; private set; }
 
         ///<summary> An absolute API resource URL for this user. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

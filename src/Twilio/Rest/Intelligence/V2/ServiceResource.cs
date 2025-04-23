@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -511,7 +511,7 @@ namespace Twilio.Rest.Intelligence.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<ServiceResource>(json);
+                return JsonSerializer.Deserialize<ServiceResource>(json);
             }
             catch (JsonException e)
             {
@@ -527,7 +527,7 @@ namespace Twilio.Rest.Intelligence.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -537,67 +537,67 @@ namespace Twilio.Rest.Intelligence.V2
 
     
         ///<summary> The unique SID identifier of the Account the Service belongs to. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Instructs the Speech Recognition service to automatically redact PII from all transcripts made on this service. </summary> 
-        [JsonProperty("auto_redaction")]
+        [JsonPropertyName("auto_redaction")]
         public bool? AutoRedaction { get; private set; }
 
         ///<summary> Instructs the Speech Recognition service to automatically redact PII from all transcripts media made on this service. The auto_redaction flag must be enabled, results in error otherwise. </summary> 
-        [JsonProperty("media_redaction")]
+        [JsonPropertyName("media_redaction")]
         public bool? MediaRedaction { get; private set; }
 
         ///<summary> Instructs the Speech Recognition service to automatically transcribe all recordings made on the account. </summary> 
-        [JsonProperty("auto_transcribe")]
+        [JsonPropertyName("auto_transcribe")]
         public bool? AutoTranscribe { get; private set; }
 
         ///<summary> Data logging allows Twilio to improve the quality of the speech recognition & language understanding services through using customer data to refine, fine tune and evaluate machine learning models. Note: Data logging cannot be activated via API, only via www.twilio.com, as it requires additional consent. </summary> 
-        [JsonProperty("data_logging")]
+        [JsonPropertyName("data_logging")]
         public bool? DataLogging { get; private set; }
 
         ///<summary> The date that this Service was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Service was updated, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> A human readable description of this resource, up to 64 characters. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The language code set during Service creation determines the Transcription language for all call recordings processed by that Service. The default is en-US if no language code is set. A Service can only support one language code, and it cannot be updated once it's set. </summary> 
-        [JsonProperty("language_code")]
+        [JsonPropertyName("language_code")]
         public string LanguageCode { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this Service. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> Provides a unique and addressable name to be assigned to this Service, assigned by the developer, to be optionally used in addition to SID. </summary> 
-        [JsonProperty("unique_name")]
+        [JsonPropertyName("unique_name")]
         public string UniqueName { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URL Twilio will request when executing the Webhook. </summary> 
-        [JsonProperty("webhook_url")]
+        [JsonPropertyName("webhook_url")]
         public string WebhookUrl { get; private set; }
 
         
-        [JsonProperty("webhook_http_method")]
+        [JsonPropertyName("webhook_http_method")]
         public ServiceResource.HttpMethodEnum WebhookHttpMethod { get; private set; }
 
         ///<summary> Operator sids attached to this service, read only </summary> 
-        [JsonProperty("read_only_attached_operator_sids")]
+        [JsonPropertyName("read_only_attached_operator_sids")]
         public List<string> ReadOnlyAttachedOperatorSids { get; private set; }
 
         ///<summary> The version number of this Service. </summary> 
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public int? Version { get; private set; }
 
 

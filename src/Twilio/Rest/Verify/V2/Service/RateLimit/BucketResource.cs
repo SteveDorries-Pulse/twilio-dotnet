@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -495,7 +495,7 @@ namespace Twilio.Rest.Verify.V2.Service.RateLimit
         {
             try
             {
-                return JsonConvert.DeserializeObject<BucketResource>(json);
+                return JsonSerializer.Deserialize<BucketResource>(json);
             }
             catch (JsonException e)
             {
@@ -511,7 +511,7 @@ namespace Twilio.Rest.Verify.V2.Service.RateLimit
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -521,39 +521,39 @@ namespace Twilio.Rest.Verify.V2.Service.RateLimit
 
     
         ///<summary> A 34 character string that uniquely identifies this Bucket. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The Twilio-provided string that uniquely identifies the Rate Limit resource. </summary> 
-        [JsonProperty("rate_limit_sid")]
+        [JsonPropertyName("rate_limit_sid")]
         public string RateLimitSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Rate Limit resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Maximum number of requests permitted in during the interval. </summary> 
-        [JsonProperty("max")]
+        [JsonPropertyName("max")]
         public int? Max { get; private set; }
 
         ///<summary> Number of seconds that the rate limit will be enforced over. </summary> 
-        [JsonProperty("interval")]
+        [JsonPropertyName("interval")]
         public int? Interval { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

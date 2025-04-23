@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -596,7 +596,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<FlexFlowResource>(json);
+                return JsonSerializer.Deserialize<FlexFlowResource>(json);
             }
             catch (JsonException e)
             {
@@ -612,7 +612,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -622,59 +622,59 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Flow resource and owns this Workflow. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The unique string that we created to identify the Flex Flow resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The SID of the chat service. </summary> 
-        [JsonProperty("chat_service_sid")]
+        [JsonPropertyName("chat_service_sid")]
         public string ChatServiceSid { get; private set; }
 
         
-        [JsonProperty("channel_type")]
+        [JsonPropertyName("channel_type")]
         public FlexFlowResource.ChannelTypeEnum ChannelType { get; private set; }
 
         ///<summary> The channel contact's Identity. </summary> 
-        [JsonProperty("contact_identity")]
+        [JsonPropertyName("contact_identity")]
         public string ContactIdentity { get; private set; }
 
         ///<summary> Whether the Flex Flow is enabled. </summary> 
-        [JsonProperty("enabled")]
+        [JsonPropertyName("enabled")]
         public bool? Enabled { get; private set; }
 
         
-        [JsonProperty("integration_type")]
+        [JsonPropertyName("integration_type")]
         public FlexFlowResource.IntegrationTypeEnum IntegrationType { get; private set; }
 
         ///<summary> An object that contains specific parameters for the integration. </summary> 
-        [JsonProperty("integration")]
+        [JsonPropertyName("integration")]
         public object Integration { get; private set; }
 
         ///<summary> When enabled, Flex will keep the chat channel active so that it may be used for subsequent interactions with a contact identity. Defaults to `false`. </summary> 
-        [JsonProperty("long_lived")]
+        [JsonPropertyName("long_lived")]
         public bool? LongLived { get; private set; }
 
         ///<summary> When enabled, the Messaging Channel Janitor will remove active Proxy sessions if the associated Task is deleted outside of the Flex UI. Defaults to `false`. </summary> 
-        [JsonProperty("janitor_enabled")]
+        [JsonPropertyName("janitor_enabled")]
         public bool? JanitorEnabled { get; private set; }
 
         ///<summary> The absolute URL of the Flex Flow resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -237,7 +237,7 @@ namespace Twilio.Rest.Bulkexports.V1.Export
         {
             try
             {
-                return JsonConvert.DeserializeObject<DayResource>(json);
+                return JsonSerializer.Deserialize<DayResource>(json);
             }
             catch (JsonException e)
             {
@@ -253,7 +253,7 @@ namespace Twilio.Rest.Bulkexports.V1.Export
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -263,27 +263,27 @@ namespace Twilio.Rest.Bulkexports.V1.Export
 
     
         ///<summary> The redirect_to </summary> 
-        [JsonProperty("redirect_to")]
+        [JsonPropertyName("redirect_to")]
         public Uri RedirectTo { get; private set; }
 
         ///<summary> The ISO 8601 format date of the resources in the file, for a UTC day </summary> 
-        [JsonProperty("day")]
+        [JsonPropertyName("day")]
         public string Day { get; private set; }
 
         ///<summary> The size of the day's data file in bytes </summary> 
-        [JsonProperty("size")]
+        [JsonPropertyName("size")]
         public int? Size { get; private set; }
 
         ///<summary> The ISO 8601 format date when resources is created </summary> 
-        [JsonProperty("create_date")]
+        [JsonPropertyName("create_date")]
         public string CreateDate { get; private set; }
 
         ///<summary> The friendly name specified when creating the job </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The type of communication – Messages, Calls, Conferences, and Participants </summary> 
-        [JsonProperty("resource_type")]
+        [JsonPropertyName("resource_type")]
         public string ResourceType { get; private set; }
 
 

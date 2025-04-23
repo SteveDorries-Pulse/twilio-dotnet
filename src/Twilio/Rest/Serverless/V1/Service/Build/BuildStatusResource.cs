@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -126,7 +126,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Build
         {
             try
             {
-                return JsonConvert.DeserializeObject<BuildStatusResource>(json);
+                return JsonSerializer.Deserialize<BuildStatusResource>(json);
             }
             catch (JsonException e)
             {
@@ -142,7 +142,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Build
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -152,23 +152,23 @@ namespace Twilio.Rest.Serverless.V1.Service.Build
 
     
         ///<summary> The unique string that we created to identify the Build resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Build resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Service that the Build resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public BuildStatusResource.StatusEnum Status { get; private set; }
 
         ///<summary> The absolute URL of the Build Status resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

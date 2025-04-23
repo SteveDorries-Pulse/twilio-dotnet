@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -331,7 +331,7 @@ namespace Twilio.Rest.IpMessaging.V2.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<BindingResource>(json);
+                return JsonSerializer.Deserialize<BindingResource>(json);
             }
             catch (JsonException e)
             {
@@ -347,7 +347,7 @@ namespace Twilio.Rest.IpMessaging.V2.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -357,51 +357,51 @@ namespace Twilio.Rest.IpMessaging.V2.Service
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The service_sid </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The endpoint </summary> 
-        [JsonProperty("endpoint")]
+        [JsonPropertyName("endpoint")]
         public string Endpoint { get; private set; }
 
         ///<summary> The identity </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The credential_sid </summary> 
-        [JsonProperty("credential_sid")]
+        [JsonPropertyName("credential_sid")]
         public string CredentialSid { get; private set; }
 
         
-        [JsonProperty("binding_type")]
+        [JsonPropertyName("binding_type")]
         public BindingResource.BindingTypeEnum BindingType { get; private set; }
 
         ///<summary> The message_types </summary> 
-        [JsonProperty("message_types")]
+        [JsonPropertyName("message_types")]
         public List<string> MessageTypes { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

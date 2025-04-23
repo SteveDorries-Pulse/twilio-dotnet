@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -556,7 +556,7 @@ namespace Twilio.Rest.Chat.V2.Service.Channel
         {
             try
             {
-                return JsonConvert.DeserializeObject<WebhookResource>(json);
+                return JsonSerializer.Deserialize<WebhookResource>(json);
             }
             catch (JsonException e)
             {
@@ -572,7 +572,7 @@ namespace Twilio.Rest.Chat.V2.Service.Channel
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -582,39 +582,39 @@ namespace Twilio.Rest.Chat.V2.Service.Channel
 
     
         ///<summary> The unique string that we created to identify the Channel Webhook resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Channel Webhook resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the Channel Webhook resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the [Channel](https://www.twilio.com/docs/chat/channels) the Channel Webhook resource belongs to. </summary> 
-        [JsonProperty("channel_sid")]
+        [JsonPropertyName("channel_sid")]
         public string ChannelSid { get; private set; }
 
         ///<summary> The type of webhook. Can be: `webhook`, `studio`, or `trigger`. </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; private set; }
 
         ///<summary> The absolute URL of the Channel Webhook resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The JSON string that describes how the channel webhook is configured. The configuration object contains the `url`, `method`, `filters`, and `retry_count` values that are configured by the create and update actions. </summary> 
-        [JsonProperty("configuration")]
+        [JsonPropertyName("configuration")]
         public object Configuration { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

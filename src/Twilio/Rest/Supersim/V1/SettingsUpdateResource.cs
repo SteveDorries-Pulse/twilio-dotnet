@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -185,7 +185,7 @@ namespace Twilio.Rest.Supersim.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SettingsUpdateResource>(json);
+                return JsonSerializer.Deserialize<SettingsUpdateResource>(json);
             }
             catch (JsonException e)
             {
@@ -201,7 +201,7 @@ namespace Twilio.Rest.Supersim.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -211,35 +211,35 @@ namespace Twilio.Rest.Supersim.V1
 
     
         ///<summary> The unique identifier of this Settings Update. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The [ICCID](https://en.wikipedia.org/wiki/SIM_card#ICCID) associated with the SIM. </summary> 
-        [JsonProperty("iccid")]
+        [JsonPropertyName("iccid")]
         public string Iccid { get; private set; }
 
         ///<summary> The SID of the Super SIM to which this Settings Update was applied. </summary> 
-        [JsonProperty("sim_sid")]
+        [JsonPropertyName("sim_sid")]
         public string SimSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public SettingsUpdateResource.StatusEnum Status { get; private set; }
 
         ///<summary> Array containing the different Settings Packages that will be applied to the SIM after the update completes. Each object within the array indicates the name and the version of the Settings Package that will be on the SIM if the update is successful. </summary> 
-        [JsonProperty("packages")]
+        [JsonPropertyName("packages")]
         public List<object> Packages { get; private set; }
 
         ///<summary> The time, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format, when the update successfully completed and the new settings were applied to the SIM. </summary> 
-        [JsonProperty("date_completed")]
+        [JsonPropertyName("date_completed")]
         public DateTime? DateCompleted { get; private set; }
 
         ///<summary> The date that this Settings Update was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Settings Update was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -174,7 +174,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
         {
             try
             {
-                return JsonConvert.DeserializeObject<EventResource>(json);
+                return JsonSerializer.Deserialize<EventResource>(json);
             }
             catch (JsonException e)
             {
@@ -190,7 +190,7 @@ namespace Twilio.Rest.Api.V2010.Account.Call
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -200,11 +200,11 @@ namespace Twilio.Rest.Api.V2010.Account.Call
 
     
         ///<summary> Contains a dictionary representing the request of the call. </summary> 
-        [JsonProperty("request")]
+        [JsonPropertyName("request")]
         public object Request { get; private set; }
 
         ///<summary> Contains a dictionary representing the call response, including a list of the call events. </summary> 
-        [JsonProperty("response")]
+        [JsonPropertyName("response")]
         public object Response { get; private set; }
 
 

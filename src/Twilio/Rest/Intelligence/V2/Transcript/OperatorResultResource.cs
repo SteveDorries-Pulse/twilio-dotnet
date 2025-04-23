@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -260,7 +260,7 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
         {
             try
             {
-                return JsonConvert.DeserializeObject<OperatorResultResource>(json);
+                return JsonSerializer.Deserialize<OperatorResultResource>(json);
             }
             catch (JsonException e)
             {
@@ -276,7 +276,7 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -286,63 +286,63 @@ namespace Twilio.Rest.Intelligence.V2.Transcript
 
     
         
-        [JsonProperty("operator_type")]
+        [JsonPropertyName("operator_type")]
         public OperatorResultResource.OperatorTypeEnum OperatorType { get; private set; }
 
         ///<summary> The name of the applied Language Understanding. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> A 34 character string that identifies this Language Understanding operator sid. </summary> 
-        [JsonProperty("operator_sid")]
+        [JsonPropertyName("operator_sid")]
         public string OperatorSid { get; private set; }
 
         ///<summary> Boolean to tell if extract Language Understanding Processing model matches results. </summary> 
-        [JsonProperty("extract_match")]
+        [JsonPropertyName("extract_match")]
         public bool? ExtractMatch { get; private set; }
 
         ///<summary> Percentage of 'matching' class needed to consider a sentence matches </summary> 
-        [JsonProperty("match_probability")]
+        [JsonPropertyName("match_probability")]
         public decimal? MatchProbability { get; private set; }
 
         ///<summary> Normalized output of extraction stage which matches Label. </summary> 
-        [JsonProperty("normalized_result")]
+        [JsonPropertyName("normalized_result")]
         public string NormalizedResult { get; private set; }
 
         ///<summary> List of mapped utterance object which matches sentences. </summary> 
-        [JsonProperty("utterance_results")]
+        [JsonPropertyName("utterance_results")]
         public List<object> UtteranceResults { get; private set; }
 
         ///<summary> Boolean to tell if Utterance matches results. </summary> 
-        [JsonProperty("utterance_match")]
+        [JsonPropertyName("utterance_match")]
         public bool? UtteranceMatch { get; private set; }
 
         ///<summary> The 'matching' class. This might be available on conversation classify model outputs. </summary> 
-        [JsonProperty("predicted_label")]
+        [JsonPropertyName("predicted_label")]
         public string PredictedLabel { get; private set; }
 
         ///<summary> Percentage of 'matching' class needed to consider a sentence matches. </summary> 
-        [JsonProperty("predicted_probability")]
+        [JsonPropertyName("predicted_probability")]
         public decimal? PredictedProbability { get; private set; }
 
         ///<summary> The labels probabilities. This might be available on conversation classify model outputs. </summary> 
-        [JsonProperty("label_probabilities")]
+        [JsonPropertyName("label_probabilities")]
         public object LabelProbabilities { get; private set; }
 
         ///<summary> List of text extraction results. This might be available on classify-extract model outputs. </summary> 
-        [JsonProperty("extract_results")]
+        [JsonPropertyName("extract_results")]
         public object ExtractResults { get; private set; }
 
         ///<summary> Output of a text generation operator for example Conversation Sumamary. </summary> 
-        [JsonProperty("text_generation_results")]
+        [JsonPropertyName("text_generation_results")]
         public object TextGenerationResults { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this Transcript. </summary> 
-        [JsonProperty("transcript_sid")]
+        [JsonPropertyName("transcript_sid")]
         public string TranscriptSid { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

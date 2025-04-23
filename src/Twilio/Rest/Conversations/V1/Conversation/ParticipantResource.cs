@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -542,7 +542,7 @@ namespace Twilio.Rest.Conversations.V1.Conversation
         {
             try
             {
-                return JsonConvert.DeserializeObject<ParticipantResource>(json);
+                return JsonSerializer.Deserialize<ParticipantResource>(json);
             }
             catch (JsonException e)
             {
@@ -558,7 +558,7 @@ namespace Twilio.Rest.Conversations.V1.Conversation
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -568,51 +568,51 @@ namespace Twilio.Rest.Conversations.V1.Conversation
 
     
         ///<summary> The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this participant. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this participant. </summary> 
-        [JsonProperty("conversation_sid")]
+        [JsonPropertyName("conversation_sid")]
         public string ConversationSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A unique string identifier for the conversation participant as [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource). This parameter is non-null if (and only if) the participant is using the Conversations SDK to communicate. Limited to 256 characters. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set \"{}\" will be returned. </summary> 
-        [JsonProperty("attributes")]
+        [JsonPropertyName("attributes")]
         public string Attributes { get; private set; }
 
         ///<summary> Information about how this participant exchanges messages with the conversation. A JSON parameter consisting of type and address fields of the participant. </summary> 
-        [JsonProperty("messaging_binding")]
+        [JsonPropertyName("messaging_binding")]
         public object MessagingBinding { get; private set; }
 
         ///<summary> The SID of a conversation-level [Role](https://www.twilio.com/docs/conversations/api/role-resource) to assign to the participant. </summary> 
-        [JsonProperty("role_sid")]
+        [JsonPropertyName("role_sid")]
         public string RoleSid { get; private set; }
 
         ///<summary> The date that this resource was created. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was last updated. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> An absolute API resource URL for this participant. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Index of last “read” message in the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for the Participant. </summary> 
-        [JsonProperty("last_read_message_index")]
+        [JsonPropertyName("last_read_message_index")]
         public int? LastReadMessageIndex { get; private set; }
 
         ///<summary> Timestamp of last “read” message in the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for the Participant. </summary> 
-        [JsonProperty("last_read_timestamp")]
+        [JsonPropertyName("last_read_timestamp")]
         public string LastReadTimestamp { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -180,7 +180,7 @@ namespace Twilio.Rest.Insights.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SettingResource>(json);
+                return JsonSerializer.Deserialize<SettingResource>(json);
             }
             catch (JsonException e)
             {
@@ -196,7 +196,7 @@ namespace Twilio.Rest.Insights.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -206,19 +206,19 @@ namespace Twilio.Rest.Insights.V1
 
     
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A boolean flag indicating whether Advanced Features for Voice Insights are enabled. </summary> 
-        [JsonProperty("advanced_features")]
+        [JsonPropertyName("advanced_features")]
         public bool? AdvancedFeatures { get; private set; }
 
         ///<summary> A boolean flag indicating whether Voice Trace is enabled. </summary> 
-        [JsonProperty("voice_trace")]
+        [JsonPropertyName("voice_trace")]
         public bool? VoiceTrace { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

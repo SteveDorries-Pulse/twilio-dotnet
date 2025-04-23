@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -226,7 +226,7 @@ namespace Twilio.Rest.Pricing.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<CountryResource>(json);
+                return JsonSerializer.Deserialize<CountryResource>(json);
             }
             catch (JsonException e)
             {
@@ -242,7 +242,7 @@ namespace Twilio.Rest.Pricing.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -252,27 +252,27 @@ namespace Twilio.Rest.Pricing.V2
 
     
         ///<summary> The name of the country. </summary> 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; private set; }
 
         ///<summary> The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). </summary> 
-        [JsonProperty("iso_country")]
+        [JsonPropertyName("iso_country")]
         public string IsoCountry { get; private set; }
 
         ///<summary> The list of [TerminatingPrefixPrice](https://www.twilio.com/docs/voice/pricing#outbound-prefix-price-with-origin) records. </summary> 
-        [JsonProperty("terminating_prefix_prices")]
+        [JsonPropertyName("terminating_prefix_prices")]
         public List<OutboundPrefixPriceWithOrigin> TerminatingPrefixPrices { get; private set; }
 
         ///<summary> The list of [OriginatingCallPrice](https://www.twilio.com/docs/voice/pricing#inbound-call-price) records. </summary> 
-        [JsonProperty("originating_call_prices")]
+        [JsonPropertyName("originating_call_prices")]
         public List<InboundCallPrice> OriginatingCallPrices { get; private set; }
 
         ///<summary> The currency in which prices are measured, specified in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`). </summary> 
-        [JsonProperty("price_unit")]
+        [JsonPropertyName("price_unit")]
         public string PriceUnit { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

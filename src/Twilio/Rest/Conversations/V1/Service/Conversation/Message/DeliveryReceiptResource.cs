@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -275,7 +275,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Conversation.Message
         {
             try
             {
-                return JsonConvert.DeserializeObject<DeliveryReceiptResource>(json);
+                return JsonSerializer.Deserialize<DeliveryReceiptResource>(json);
             }
             catch (JsonException e)
             {
@@ -291,7 +291,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Conversation.Message
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -301,51 +301,51 @@ namespace Twilio.Rest.Conversations.V1.Service.Conversation.Message
 
     
         ///<summary> The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this participant. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Message resource is associated with. </summary> 
-        [JsonProperty("chat_service_sid")]
+        [JsonPropertyName("chat_service_sid")]
         public string ChatServiceSid { get; private set; }
 
         ///<summary> The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this message. </summary> 
-        [JsonProperty("conversation_sid")]
+        [JsonPropertyName("conversation_sid")]
         public string ConversationSid { get; private set; }
 
         ///<summary> The SID of the message within a [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) the delivery receipt belongs to </summary> 
-        [JsonProperty("message_sid")]
+        [JsonPropertyName("message_sid")]
         public string MessageSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A messaging channel-specific identifier for the message delivered to participant e.g. `SMxx` for SMS, `WAxx` for Whatsapp etc.  </summary> 
-        [JsonProperty("channel_message_sid")]
+        [JsonPropertyName("channel_message_sid")]
         public string ChannelMessageSid { get; private set; }
 
         ///<summary> The unique ID of the participant the delivery receipt belongs to. </summary> 
-        [JsonProperty("participant_sid")]
+        [JsonPropertyName("participant_sid")]
         public string ParticipantSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public DeliveryReceiptResource.DeliveryStatusEnum Status { get; private set; }
 
         ///<summary> The message [delivery error code](https://www.twilio.com/docs/sms/api/message-resource#delivery-related-errors) for a `failed` status,  </summary> 
-        [JsonProperty("error_code")]
+        [JsonPropertyName("error_code")]
         public int? ErrorCode { get; private set; }
 
         ///<summary> The date that this resource was created. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was last updated. `null` if the delivery receipt has not been updated. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> An absolute API resource URL for this delivery receipt. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

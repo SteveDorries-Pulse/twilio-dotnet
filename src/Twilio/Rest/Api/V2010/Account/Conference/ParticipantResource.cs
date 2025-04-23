@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -748,7 +748,7 @@ namespace Twilio.Rest.Api.V2010.Account.Conference
         {
             try
             {
-                return JsonConvert.DeserializeObject<ParticipantResource>(json);
+                return JsonSerializer.Deserialize<ParticipantResource>(json);
             }
             catch (JsonException e)
             {
@@ -764,7 +764,7 @@ namespace Twilio.Rest.Api.V2010.Account.Conference
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -774,63 +774,63 @@ namespace Twilio.Rest.Api.V2010.Account.Conference
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Participant resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Call](https://www.twilio.com/docs/voice/api/call-resource) the Participant resource is associated with. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The user-specified label of this participant, if one was given when the participant was created. This may be used to fetch, update or delete the participant. </summary> 
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public string Label { get; private set; }
 
         ///<summary> The SID of the participant who is being `coached`. The participant being coached is the only participant who can hear the participant who is `coaching`. </summary> 
-        [JsonProperty("call_sid_to_coach")]
+        [JsonPropertyName("call_sid_to_coach")]
         public string CallSidToCoach { get; private set; }
 
         ///<summary> Whether the participant is coaching another call. Can be: `true` or `false`. If not present, defaults to `false` unless `call_sid_to_coach` is defined. If `true`, `call_sid_to_coach` must be defined. </summary> 
-        [JsonProperty("coaching")]
+        [JsonPropertyName("coaching")]
         public bool? Coaching { get; private set; }
 
         ///<summary> The SID of the conference the participant is in. </summary> 
-        [JsonProperty("conference_sid")]
+        [JsonPropertyName("conference_sid")]
         public string ConferenceSid { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> Whether the conference ends when the participant leaves. Can be: `true` or `false` and the default is `false`. If `true`, the conference ends and all other participants drop out when the participant leaves. </summary> 
-        [JsonProperty("end_conference_on_exit")]
+        [JsonPropertyName("end_conference_on_exit")]
         public bool? EndConferenceOnExit { get; private set; }
 
         ///<summary> Whether the participant is muted. Can be `true` or `false`. </summary> 
-        [JsonProperty("muted")]
+        [JsonPropertyName("muted")]
         public bool? Muted { get; private set; }
 
         ///<summary> Whether the participant is on hold. Can be `true` or `false`. </summary> 
-        [JsonProperty("hold")]
+        [JsonPropertyName("hold")]
         public bool? Hold { get; private set; }
 
         ///<summary> Whether the conference starts when the participant joins the conference, if it has not already started. Can be: `true` or `false` and the default is `true`. If `false` and the conference has not started, the participant is muted and hears background music until another participant starts the conference. </summary> 
-        [JsonProperty("start_conference_on_enter")]
+        [JsonPropertyName("start_conference_on_enter")]
         public bool? StartConferenceOnEnter { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public ParticipantResource.StatusEnum Status { get; private set; }
 
         ///<summary> The wait time in milliseconds before participant's call is placed. Only available in the response to a create participant request. </summary> 
-        [JsonProperty("queue_time")]
+        [JsonPropertyName("queue_time")]
         public string QueueTime { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -211,7 +211,7 @@ namespace Twilio.Rest.FlexApi.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<FlexUserResource>(json);
+                return JsonSerializer.Deserialize<FlexUserResource>(json);
             }
             catch (JsonException e)
             {
@@ -227,7 +227,7 @@ namespace Twilio.Rest.FlexApi.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -237,75 +237,75 @@ namespace Twilio.Rest.FlexApi.V2
 
     
         ///<summary> The unique SID of the account that created the resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique ID created by Twilio to identify a Flex instance. </summary> 
-        [JsonProperty("instance_sid")]
+        [JsonPropertyName("instance_sid")]
         public string InstanceSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Twilio Unified User. </summary> 
-        [JsonProperty("user_sid")]
+        [JsonPropertyName("user_sid")]
         public string UserSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Flex User. </summary> 
-        [JsonProperty("flex_user_sid")]
+        [JsonPropertyName("flex_user_sid")]
         public string FlexUserSid { get; private set; }
 
         ///<summary> The unique SID identifier of the worker. </summary> 
-        [JsonProperty("worker_sid")]
+        [JsonPropertyName("worker_sid")]
         public string WorkerSid { get; private set; }
 
         ///<summary> The unique SID identifier of the workspace. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Flex Team. </summary> 
-        [JsonProperty("flex_team_sid")]
+        [JsonPropertyName("flex_team_sid")]
         public string FlexTeamSid { get; private set; }
 
         ///<summary> First name of the User. </summary> 
-        [JsonProperty("first_name")]
+        [JsonPropertyName("first_name")]
         public string FirstName { get; private set; }
 
         ///<summary> Last name of the User. </summary> 
-        [JsonProperty("last_name")]
+        [JsonPropertyName("last_name")]
         public string LastName { get; private set; }
 
         ///<summary> Username of the User. </summary> 
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; private set; }
 
         ///<summary> Email of the User. </summary> 
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; private set; }
 
         ///<summary> Friendly name of the User. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The locale preference of the user. </summary> 
-        [JsonProperty("locale")]
+        [JsonPropertyName("locale")]
         public string Locale { get; private set; }
 
         ///<summary> The roles of the user. </summary> 
-        [JsonProperty("roles")]
+        [JsonPropertyName("roles")]
         public List<string> Roles { get; private set; }
 
         ///<summary> The date that this user was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("created_date")]
+        [JsonPropertyName("created_date")]
         public DateTime? CreatedDate { get; private set; }
 
         ///<summary> The date that this user was updated, given in ISO 8601 format. </summary> 
-        [JsonProperty("updated_date")]
+        [JsonPropertyName("updated_date")]
         public DateTime? UpdatedDate { get; private set; }
 
         ///<summary> The current version of the user. </summary> 
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public int? Version { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

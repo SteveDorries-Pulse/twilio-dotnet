@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -127,7 +127,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Workflow
         {
             try
             {
-                return JsonConvert.DeserializeObject<WorkflowStatisticsResource>(json);
+                return JsonSerializer.Deserialize<WorkflowStatisticsResource>(json);
             }
             catch (JsonException e)
             {
@@ -143,7 +143,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Workflow
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -153,27 +153,27 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace.Workflow
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workflow resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> An object that contains the cumulative statistics for the Workflow. </summary> 
-        [JsonProperty("cumulative")]
+        [JsonPropertyName("cumulative")]
         public object Cumulative { get; private set; }
 
         ///<summary> An object that contains the real-time statistics for the Workflow. </summary> 
-        [JsonProperty("realtime")]
+        [JsonPropertyName("realtime")]
         public object Realtime { get; private set; }
 
         ///<summary> Returns the list of Tasks that are being controlled by the Workflow with the specified SID value. </summary> 
-        [JsonProperty("workflow_sid")]
+        [JsonPropertyName("workflow_sid")]
         public string WorkflowSid { get; private set; }
 
         ///<summary> The SID of the Workspace that contains the Workflow. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The absolute URL of the Workflow statistics resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

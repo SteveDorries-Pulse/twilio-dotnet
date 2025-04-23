@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -348,7 +348,7 @@ namespace Twilio.Rest.Insights.V1.Conference
         {
             try
             {
-                return JsonConvert.DeserializeObject<ConferenceParticipantResource>(json);
+                return JsonSerializer.Deserialize<ConferenceParticipantResource>(json);
             }
             catch (JsonException e)
             {
@@ -364,7 +364,7 @@ namespace Twilio.Rest.Insights.V1.Conference
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -374,111 +374,111 @@ namespace Twilio.Rest.Insights.V1.Conference
 
     
         ///<summary> SID for this participant. </summary> 
-        [JsonProperty("participant_sid")]
+        [JsonPropertyName("participant_sid")]
         public string ParticipantSid { get; private set; }
 
         ///<summary> The user-specified label of this participant. </summary> 
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public string Label { get; private set; }
 
         ///<summary> The unique SID identifier of the Conference. </summary> 
-        [JsonProperty("conference_sid")]
+        [JsonPropertyName("conference_sid")]
         public string ConferenceSid { get; private set; }
 
         ///<summary> Unique SID identifier of the call that generated the Participant resource. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         
-        [JsonProperty("call_direction")]
+        [JsonPropertyName("call_direction")]
         public ConferenceParticipantResource.CallDirectionEnum CallDirection { get; private set; }
 
         ///<summary> Caller ID of the calling party. </summary> 
-        [JsonProperty("from")]
+        [JsonPropertyName("from")]
         public string From { get; private set; }
 
         ///<summary> Called party. </summary> 
-        [JsonProperty("to")]
+        [JsonPropertyName("to")]
         public string To { get; private set; }
 
         
-        [JsonProperty("call_status")]
+        [JsonPropertyName("call_status")]
         public ConferenceParticipantResource.CallStatusEnum CallStatus { get; private set; }
 
         ///<summary> ISO alpha-2 country code of the participant based on caller ID or called number. </summary> 
-        [JsonProperty("country_code")]
+        [JsonPropertyName("country_code")]
         public string CountryCode { get; private set; }
 
         ///<summary> Boolean. Indicates whether participant had startConferenceOnEnter=true or endConferenceOnExit=true. </summary> 
-        [JsonProperty("is_moderator")]
+        [JsonPropertyName("is_moderator")]
         public bool? IsModerator { get; private set; }
 
         ///<summary> ISO 8601 timestamp of participant join event. </summary> 
-        [JsonProperty("join_time")]
+        [JsonPropertyName("join_time")]
         public DateTime? JoinTime { get; private set; }
 
         ///<summary> ISO 8601 timestamp of participant leave event. </summary> 
-        [JsonProperty("leave_time")]
+        [JsonPropertyName("leave_time")]
         public DateTime? LeaveTime { get; private set; }
 
         ///<summary> Participant durations in seconds. </summary> 
-        [JsonProperty("duration_seconds")]
+        [JsonPropertyName("duration_seconds")]
         public int? DurationSeconds { get; private set; }
 
         ///<summary> Add Participant API only. Estimated time in queue at call creation. </summary> 
-        [JsonProperty("outbound_queue_length")]
+        [JsonPropertyName("outbound_queue_length")]
         public int? OutboundQueueLength { get; private set; }
 
         ///<summary> Add Participant API only. Actual time in queue in seconds. </summary> 
-        [JsonProperty("outbound_time_in_queue")]
+        [JsonPropertyName("outbound_time_in_queue")]
         public int? OutboundTimeInQueue { get; private set; }
 
         
-        [JsonProperty("jitter_buffer_size")]
+        [JsonPropertyName("jitter_buffer_size")]
         public ConferenceParticipantResource.JitterBufferSizeEnum JitterBufferSize { get; private set; }
 
         ///<summary> Boolean. Indicated whether participant was a coach. </summary> 
-        [JsonProperty("is_coach")]
+        [JsonPropertyName("is_coach")]
         public bool? IsCoach { get; private set; }
 
         ///<summary> Call SIDs coached by this participant. </summary> 
-        [JsonProperty("coached_participants")]
+        [JsonPropertyName("coached_participants")]
         public List<string> CoachedParticipants { get; private set; }
 
         
-        [JsonProperty("participant_region")]
+        [JsonPropertyName("participant_region")]
         public ConferenceParticipantResource.RegionEnum ParticipantRegion { get; private set; }
 
         
-        [JsonProperty("conference_region")]
+        [JsonPropertyName("conference_region")]
         public ConferenceParticipantResource.RegionEnum ConferenceRegion { get; private set; }
 
         
-        [JsonProperty("call_type")]
+        [JsonPropertyName("call_type")]
         public ConferenceParticipantResource.CallTypeEnum CallType { get; private set; }
 
         
-        [JsonProperty("processing_state")]
+        [JsonPropertyName("processing_state")]
         public ConferenceParticipantResource.ProcessingStateEnum ProcessingState { get; private set; }
 
         ///<summary> Participant properties and metadata. </summary> 
-        [JsonProperty("properties")]
+        [JsonPropertyName("properties")]
         public object Properties { get; private set; }
 
         ///<summary> Object containing information of actions taken by participants. Contains a dictionary of URL links to nested resources of this Conference Participant. </summary> 
-        [JsonProperty("events")]
+        [JsonPropertyName("events")]
         public object Events { get; private set; }
 
         ///<summary> Object. Contains participant call quality metrics. </summary> 
-        [JsonProperty("metrics")]
+        [JsonPropertyName("metrics")]
         public object Metrics { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

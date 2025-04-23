@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -168,7 +168,7 @@ namespace Twilio.Rest.Assistants.V1.Session
         {
             try
             {
-                return JsonConvert.DeserializeObject<MessageResource>(json);
+                return JsonSerializer.Deserialize<MessageResource>(json);
             }
             catch (JsonException e)
             {
@@ -184,7 +184,7 @@ namespace Twilio.Rest.Assistants.V1.Session
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -194,43 +194,43 @@ namespace Twilio.Rest.Assistants.V1.Session
 
     
         ///<summary> The message ID. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Message resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The Assistant ID. </summary> 
-        [JsonProperty("assistant_id")]
+        [JsonPropertyName("assistant_id")]
         public string AssistantId { get; private set; }
 
         ///<summary> The Session ID. </summary> 
-        [JsonProperty("session_id")]
+        [JsonPropertyName("session_id")]
         public string SessionId { get; private set; }
 
         ///<summary> The identity of the user. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The role of the user associated with the message. </summary> 
-        [JsonProperty("role")]
+        [JsonPropertyName("role")]
         public string Role { get; private set; }
 
         ///<summary> The content of the message. </summary> 
-        [JsonProperty("content")]
+        [JsonPropertyName("content")]
         public object Content { get; private set; }
 
         ///<summary> The metadata of the message. </summary> 
-        [JsonProperty("meta")]
+        [JsonPropertyName("meta")]
         public object Meta { get; private set; }
 
         ///<summary> The date and time in GMT when the Message was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Message was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

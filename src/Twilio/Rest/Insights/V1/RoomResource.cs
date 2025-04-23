@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -372,7 +372,7 @@ namespace Twilio.Rest.Insights.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<RoomResource>(json);
+                return JsonSerializer.Deserialize<RoomResource>(json);
             }
             catch (JsonException e)
             {
@@ -388,7 +388,7 @@ namespace Twilio.Rest.Insights.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -398,107 +398,107 @@ namespace Twilio.Rest.Insights.V1
 
     
         ///<summary> Account SID associated with this room. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Unique identifier for the room. </summary> 
-        [JsonProperty("room_sid")]
+        [JsonPropertyName("room_sid")]
         public string RoomSid { get; private set; }
 
         ///<summary> Room friendly name. </summary> 
-        [JsonProperty("room_name")]
+        [JsonPropertyName("room_name")]
         public string RoomName { get; private set; }
 
         ///<summary> Creation time of the room. </summary> 
-        [JsonProperty("create_time")]
+        [JsonPropertyName("create_time")]
         public DateTime? CreateTime { get; private set; }
 
         ///<summary> End time for the room. </summary> 
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public DateTime? EndTime { get; private set; }
 
         
-        [JsonProperty("room_type")]
+        [JsonPropertyName("room_type")]
         public RoomResource.RoomTypeEnum RoomType { get; private set; }
 
         
-        [JsonProperty("room_status")]
+        [JsonPropertyName("room_status")]
         public RoomResource.RoomStatusEnum RoomStatus { get; private set; }
 
         ///<summary> Webhook provided for status callbacks. </summary> 
-        [JsonProperty("status_callback")]
+        [JsonPropertyName("status_callback")]
         public Uri StatusCallback { get; private set; }
 
         ///<summary> HTTP method provided for status callback URL. </summary> 
-        [JsonProperty("status_callback_method")]
+        [JsonPropertyName("status_callback_method")]
         public Twilio.Http.HttpMethod StatusCallbackMethod { get; private set; }
 
         
-        [JsonProperty("created_method")]
+        [JsonPropertyName("created_method")]
         public RoomResource.CreatedMethodEnum CreatedMethod { get; private set; }
 
         
-        [JsonProperty("end_reason")]
+        [JsonPropertyName("end_reason")]
         public RoomResource.EndReasonEnum EndReason { get; private set; }
 
         ///<summary> Max number of total participants allowed by the application settings. </summary> 
-        [JsonProperty("max_participants")]
+        [JsonPropertyName("max_participants")]
         public int? MaxParticipants { get; private set; }
 
         ///<summary> Number of participants. May include duplicate identities for participants who left and rejoined. </summary> 
-        [JsonProperty("unique_participants")]
+        [JsonPropertyName("unique_participants")]
         public int? UniqueParticipants { get; private set; }
 
         ///<summary> Unique number of participant identities. </summary> 
-        [JsonProperty("unique_participant_identities")]
+        [JsonPropertyName("unique_participant_identities")]
         public int? UniqueParticipantIdentities { get; private set; }
 
         ///<summary> Actual number of concurrent participants. </summary> 
-        [JsonProperty("concurrent_participants")]
+        [JsonPropertyName("concurrent_participants")]
         public int? ConcurrentParticipants { get; private set; }
 
         ///<summary> Maximum number of participants allowed in the room at the same time allowed by the application settings. </summary> 
-        [JsonProperty("max_concurrent_participants")]
+        [JsonPropertyName("max_concurrent_participants")]
         public int? MaxConcurrentParticipants { get; private set; }
 
         ///<summary> Codecs used by participants in the room. Can be `VP8`, `H264`, or `VP9`. </summary> 
-        [JsonProperty("codecs")]
+        [JsonPropertyName("codecs")]
         public List<RoomResource.CodecEnum> Codecs { get; private set; }
 
         
-        [JsonProperty("media_region")]
+        [JsonPropertyName("media_region")]
         public RoomResource.TwilioRealmEnum MediaRegion { get; private set; }
 
         ///<summary> Total room duration from create time to end time. </summary> 
-        [JsonProperty("duration_sec")]
+        [JsonPropertyName("duration_sec")]
         public long? DurationSec { get; private set; }
 
         ///<summary> Combined amount of participant time in the room. </summary> 
-        [JsonProperty("total_participant_duration_sec")]
+        [JsonPropertyName("total_participant_duration_sec")]
         public long? TotalParticipantDurationSec { get; private set; }
 
         ///<summary> Combined amount of recorded seconds for participants in the room. </summary> 
-        [JsonProperty("total_recording_duration_sec")]
+        [JsonPropertyName("total_recording_duration_sec")]
         public long? TotalRecordingDurationSec { get; private set; }
 
         
-        [JsonProperty("processing_state")]
+        [JsonPropertyName("processing_state")]
         public RoomResource.ProcessingStateEnum ProcessingState { get; private set; }
 
         ///<summary> Boolean indicating if recording is enabled for the room. </summary> 
-        [JsonProperty("recording_enabled")]
+        [JsonPropertyName("recording_enabled")]
         public bool? RecordingEnabled { get; private set; }
 
         
-        [JsonProperty("edge_location")]
+        [JsonPropertyName("edge_location")]
         public RoomResource.EdgeLocationEnum EdgeLocation { get; private set; }
 
         ///<summary> URL for the room resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Room subresources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

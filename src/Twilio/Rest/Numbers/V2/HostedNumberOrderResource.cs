@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -552,7 +552,7 @@ namespace Twilio.Rest.Numbers.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<HostedNumberOrderResource>(json);
+                return JsonSerializer.Deserialize<HostedNumberOrderResource>(json);
             }
             catch (JsonException e)
             {
@@ -568,7 +568,7 @@ namespace Twilio.Rest.Numbers.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -578,105 +578,105 @@ namespace Twilio.Rest.Numbers.V2
 
     
         ///<summary> A 34 character string that uniquely identifies this HostedNumberOrder. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies the account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies the [IncomingPhoneNumber](https://www.twilio.com/docs/phone-numbers/api/incomingphonenumber-resource) resource that represents the phone number being hosted. </summary> 
-        [JsonProperty("incoming_phone_number_sid")]
+        [JsonPropertyName("incoming_phone_number_sid")]
         public string IncomingPhoneNumberSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies the Address resource that represents the address of the owner of this phone number. </summary> 
-        [JsonProperty("address_sid")]
+        [JsonPropertyName("address_sid")]
         public string AddressSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies the [Authorization Document](https://www.twilio.com/docs/phone-numbers/hosted-numbers/hosted-numbers-api/authorization-document-resource) the user needs to sign. </summary> 
-        [JsonProperty("signing_document_sid")]
+        [JsonPropertyName("signing_document_sid")]
         public string SigningDocumentSid { get; private set; }
 
         ///<summary> Phone number to be hosted. This must be in [E.164](https://en.wikipedia.org/wiki/E.164) format, e.g., +16175551212 </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber PhoneNumber { get; private set; }
 
         ///<summary> The capabilities </summary> 
-        [JsonProperty("capabilities")]
+        [JsonPropertyName("capabilities")]
         public PhoneNumberCapabilities Capabilities { get; private set; }
 
         ///<summary> A 128 character string that is a human-readable text that describes this resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public HostedNumberOrderResource.StatusEnum Status { get; private set; }
 
         ///<summary> A message that explains why a hosted_number_order went to status \"action-required\" </summary> 
-        [JsonProperty("failure_reason")]
+        [JsonPropertyName("failure_reason")]
         public string FailureReason { get; private set; }
 
         ///<summary> The date this resource was created, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was updated, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> Email of the owner of this phone number that is being hosted. </summary> 
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; private set; }
 
         ///<summary> A list of emails that LOA document for this HostedNumberOrder will be carbon copied to. </summary> 
-        [JsonProperty("cc_emails")]
+        [JsonPropertyName("cc_emails")]
         public List<string> CcEmails { get; private set; }
 
         ///<summary> The URL of this HostedNumberOrder. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The title of the person authorized to sign the Authorization Document for this phone number. </summary> 
-        [JsonProperty("contact_title")]
+        [JsonPropertyName("contact_title")]
         public string ContactTitle { get; private set; }
 
         ///<summary> The contact phone number of the person authorized to sign the Authorization Document. </summary> 
-        [JsonProperty("contact_phone_number")]
+        [JsonPropertyName("contact_phone_number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber ContactPhoneNumber { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies the bulk hosting request associated with this HostedNumberOrder. </summary> 
-        [JsonProperty("bulk_hosting_request_sid")]
+        [JsonPropertyName("bulk_hosting_request_sid")]
         public string BulkHostingRequestSid { get; private set; }
 
         ///<summary> The next step you need to take to complete the hosted number order and request it successfully. </summary> 
-        [JsonProperty("next_step")]
+        [JsonPropertyName("next_step")]
         public string NextStep { get; private set; }
 
         ///<summary> The number of attempts made to verify ownership via a call for the hosted phone number. </summary> 
-        [JsonProperty("verification_attempts")]
+        [JsonPropertyName("verification_attempts")]
         public int? VerificationAttempts { get; private set; }
 
         ///<summary> The Call SIDs that identify the calls placed to verify ownership. </summary> 
-        [JsonProperty("verification_call_sids")]
+        [JsonPropertyName("verification_call_sids")]
         public List<string> VerificationCallSids { get; private set; }
 
         ///<summary> The number of seconds to wait before initiating the ownership verification call. Can be a value between 0 and 60, inclusive. </summary> 
-        [JsonProperty("verification_call_delay")]
+        [JsonPropertyName("verification_call_delay")]
         public int? VerificationCallDelay { get; private set; }
 
         ///<summary> The numerical extension to dial when making the ownership verification call. </summary> 
-        [JsonProperty("verification_call_extension")]
+        [JsonPropertyName("verification_call_extension")]
         public string VerificationCallExtension { get; private set; }
 
         ///<summary> The digits the user must pass in the ownership verification call. </summary> 
-        [JsonProperty("verification_code")]
+        [JsonPropertyName("verification_code")]
         public string VerificationCode { get; private set; }
 
         
-        [JsonProperty("verification_type")]
+        [JsonPropertyName("verification_type")]
         public HostedNumberOrderResource.VerificationTypeEnum VerificationType { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -338,7 +338,7 @@ namespace Twilio.Rest.Api.V2010.Account.Recording
         {
             try
             {
-                return JsonConvert.DeserializeObject<TranscriptionResource>(json);
+                return JsonSerializer.Deserialize<TranscriptionResource>(json);
             }
             catch (JsonException e)
             {
@@ -354,7 +354,7 @@ namespace Twilio.Rest.Api.V2010.Account.Recording
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -364,55 +364,55 @@ namespace Twilio.Rest.Api.V2010.Account.Recording
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Transcription resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The API version used to create the transcription. </summary> 
-        [JsonProperty("api_version")]
+        [JsonPropertyName("api_version")]
         public string ApiVersion { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The duration of the transcribed audio in seconds. </summary> 
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public string Duration { get; private set; }
 
         ///<summary> The charge for the transcript in the currency associated with the account. This value is populated after the transcript is complete so it may not be available immediately. </summary> 
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public decimal? Price { get; private set; }
 
         ///<summary> The currency in which `price` is measured, in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`). </summary> 
-        [JsonProperty("price_unit")]
+        [JsonPropertyName("price_unit")]
         public string PriceUnit { get; private set; }
 
         ///<summary> The SID of the [Recording](https://www.twilio.com/docs/voice/api/recording) from which the transcription was created. </summary> 
-        [JsonProperty("recording_sid")]
+        [JsonPropertyName("recording_sid")]
         public string RecordingSid { get; private set; }
 
         ///<summary> The unique string that that we created to identify the Transcription resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public TranscriptionResource.StatusEnum Status { get; private set; }
 
         ///<summary> The text content of the transcription. </summary> 
-        [JsonProperty("transcription_text")]
+        [JsonPropertyName("transcription_text")]
         public string TranscriptionText { get; private set; }
 
         ///<summary> The transcription type. </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

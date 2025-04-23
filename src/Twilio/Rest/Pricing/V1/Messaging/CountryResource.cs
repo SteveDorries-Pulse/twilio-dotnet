@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -226,7 +226,7 @@ namespace Twilio.Rest.Pricing.V1.Messaging
         {
             try
             {
-                return JsonConvert.DeserializeObject<CountryResource>(json);
+                return JsonSerializer.Deserialize<CountryResource>(json);
             }
             catch (JsonException e)
             {
@@ -242,7 +242,7 @@ namespace Twilio.Rest.Pricing.V1.Messaging
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -252,27 +252,27 @@ namespace Twilio.Rest.Pricing.V1.Messaging
 
     
         ///<summary> The name of the country. </summary> 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; private set; }
 
         ///<summary> The [ISO country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). </summary> 
-        [JsonProperty("iso_country")]
+        [JsonPropertyName("iso_country")]
         public string IsoCountry { get; private set; }
 
         ///<summary> The list of [OutboundSMSPrice](https://www.twilio.com/docs/sms/api/pricing#outbound-sms-price) records that represent the price to send a message for each MCC/MNC applicable in this country. </summary> 
-        [JsonProperty("outbound_sms_prices")]
+        [JsonPropertyName("outbound_sms_prices")]
         public List<OutboundSmsPrice> OutboundSmsPrices { get; private set; }
 
         ///<summary> The list of [InboundPrice](https://www.twilio.com/docs/sms/api/pricing#inbound-price) records that describe the price to receive an inbound SMS to the different Twilio phone number types supported in this country </summary> 
-        [JsonProperty("inbound_sms_prices")]
+        [JsonPropertyName("inbound_sms_prices")]
         public List<InboundSmsPrice> InboundSmsPrices { get; private set; }
 
         ///<summary> The currency in which prices are measured, specified in [ISO 4127](http://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`). </summary> 
-        [JsonProperty("price_unit")]
+        [JsonPropertyName("price_unit")]
         public string PriceUnit { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

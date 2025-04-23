@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -342,7 +342,7 @@ namespace Twilio.Rest.Chat.V2.Service.User
         {
             try
             {
-                return JsonConvert.DeserializeObject<UserBindingResource>(json);
+                return JsonSerializer.Deserialize<UserBindingResource>(json);
             }
             catch (JsonException e)
             {
@@ -358,7 +358,7 @@ namespace Twilio.Rest.Chat.V2.Service.User
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -368,51 +368,51 @@ namespace Twilio.Rest.Chat.V2.Service.User
 
     
         ///<summary> The unique string that we created to identify the User Binding resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the User Binding resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the User Binding resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The unique endpoint identifier for the User Binding. The format of the value depends on the `binding_type`. </summary> 
-        [JsonProperty("endpoint")]
+        [JsonPropertyName("endpoint")]
         public string Endpoint { get; private set; }
 
         ///<summary> The application-defined string that uniquely identifies the resource's [User](https://www.twilio.com/docs/chat/rest/user-resource) within the [Service](https://www.twilio.com/docs/chat/rest/service-resource). See [access tokens](https://www.twilio.com/docs/chat/create-tokens) for more info. </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
         ///<summary> The SID of the [User](https://www.twilio.com/docs/chat/rest/user-resource) with the User Binding resource.  See [push notification configuration](https://www.twilio.com/docs/chat/push-notification-configuration) for more info. </summary> 
-        [JsonProperty("user_sid")]
+        [JsonPropertyName("user_sid")]
         public string UserSid { get; private set; }
 
         ///<summary> The SID of the [Credential](https://www.twilio.com/docs/chat/rest/credential-resource) for the binding. See [push notification configuration](https://www.twilio.com/docs/chat/push-notification-configuration) for more info. </summary> 
-        [JsonProperty("credential_sid")]
+        [JsonPropertyName("credential_sid")]
         public string CredentialSid { get; private set; }
 
         
-        [JsonProperty("binding_type")]
+        [JsonPropertyName("binding_type")]
         public UserBindingResource.BindingTypeEnum BindingType { get; private set; }
 
         ///<summary> The [Programmable Chat message types](https://www.twilio.com/docs/chat/push-notification-configuration#push-types) the binding is subscribed to. </summary> 
-        [JsonProperty("message_types")]
+        [JsonPropertyName("message_types")]
         public List<string> MessageTypes { get; private set; }
 
         ///<summary> The absolute URL of the User Binding resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

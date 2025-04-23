@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -557,7 +557,7 @@ namespace Twilio.Rest.Sync.V1.Service.SyncMap
         {
             try
             {
-                return JsonConvert.DeserializeObject<SyncMapItemResource>(json);
+                return JsonSerializer.Deserialize<SyncMapItemResource>(json);
             }
             catch (JsonException e)
             {
@@ -573,7 +573,7 @@ namespace Twilio.Rest.Sync.V1.Service.SyncMap
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -583,47 +583,47 @@ namespace Twilio.Rest.Sync.V1.Service.SyncMap
 
     
         ///<summary> The unique, user-defined key for the Map Item. </summary> 
-        [JsonProperty("key")]
+        [JsonPropertyName("key")]
         public string Key { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Map Item resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the Sync Map that contains the Map Item. </summary> 
-        [JsonProperty("map_sid")]
+        [JsonPropertyName("map_sid")]
         public string MapSid { get; private set; }
 
         ///<summary> The absolute URL of the Map Item resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The current revision of the Map Item, represented as a string. </summary> 
-        [JsonProperty("revision")]
+        [JsonPropertyName("revision")]
         public string Revision { get; private set; }
 
         ///<summary> An arbitrary, schema-less object that the Map Item stores. Can be up to 16 KiB in length. </summary> 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public object Data { get; private set; }
 
         ///<summary> The date and time in GMT when the Map Item expires and will be deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. If the Map Item does not expire, this value is `null`.  The Map Item might not be deleted immediately after it expires. </summary> 
-        [JsonProperty("date_expires")]
+        [JsonPropertyName("date_expires")]
         public DateTime? DateExpires { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The identity of the Map Item's creator. If the Map Item is created from the client SDK, the value matches the Access Token's `identity` field. If the Map Item was created from the REST API, the value is `system`. </summary> 
-        [JsonProperty("created_by")]
+        [JsonPropertyName("created_by")]
         public string CreatedBy { get; private set; }
 
 

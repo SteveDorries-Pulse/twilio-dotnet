@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -585,7 +585,7 @@ namespace Twilio.Rest.Verify.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<ServiceResource>(json);
+                return JsonSerializer.Deserialize<ServiceResource>(json);
             }
             catch (JsonException e)
             {
@@ -601,7 +601,7 @@ namespace Twilio.Rest.Verify.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -611,83 +611,83 @@ namespace Twilio.Rest.Verify.V2
 
     
         ///<summary> The unique string that we created to identify the Service resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The name that appears in the body of your verification messages. It can be up to 30 characters long and can include letters, numbers, spaces, dashes, underscores. Phone numbers, special characters or links are NOT allowed. **This value should not contain PII.** </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The length of the verification code to generate. </summary> 
-        [JsonProperty("code_length")]
+        [JsonPropertyName("code_length")]
         public int? CodeLength { get; private set; }
 
         ///<summary> Whether to perform a lookup with each verification started and return info about the phone number. </summary> 
-        [JsonProperty("lookup_enabled")]
+        [JsonPropertyName("lookup_enabled")]
         public bool? LookupEnabled { get; private set; }
 
         ///<summary> Whether to pass PSD2 transaction parameters when starting a verification. </summary> 
-        [JsonProperty("psd2_enabled")]
+        [JsonPropertyName("psd2_enabled")]
         public bool? Psd2Enabled { get; private set; }
 
         ///<summary> Whether to skip sending SMS verifications to landlines. Requires `lookup_enabled`. </summary> 
-        [JsonProperty("skip_sms_to_landlines")]
+        [JsonPropertyName("skip_sms_to_landlines")]
         public bool? SkipSmsToLandlines { get; private set; }
 
         ///<summary> Whether to ask the user to press a number before delivering the verify code in a phone call. </summary> 
-        [JsonProperty("dtmf_input_required")]
+        [JsonPropertyName("dtmf_input_required")]
         public bool? DtmfInputRequired { get; private set; }
 
         ///<summary> The name of an alternative text-to-speech service to use in phone calls. Applies only to TTS languages. </summary> 
-        [JsonProperty("tts_name")]
+        [JsonPropertyName("tts_name")]
         public string TtsName { get; private set; }
 
         ///<summary> Whether to add a security warning at the end of an SMS verification body. Disabled by default and applies only to SMS. Example SMS body: `Your AppName verification code is: 1234. Don’t share this code with anyone; our employees will never ask for the code` </summary> 
-        [JsonProperty("do_not_share_warning_enabled")]
+        [JsonPropertyName("do_not_share_warning_enabled")]
         public bool? DoNotShareWarningEnabled { get; private set; }
 
         ///<summary> Whether to allow sending verifications with a custom code instead of a randomly generated one. </summary> 
-        [JsonProperty("custom_code_enabled")]
+        [JsonPropertyName("custom_code_enabled")]
         public bool? CustomCodeEnabled { get; private set; }
 
         ///<summary> Configurations for the Push factors (channel) created under this Service. </summary> 
-        [JsonProperty("push")]
+        [JsonPropertyName("push")]
         public object Push { get; private set; }
 
         ///<summary> Configurations for the TOTP factors (channel) created under this Service. </summary> 
-        [JsonProperty("totp")]
+        [JsonPropertyName("totp")]
         public object Totp { get; private set; }
 
         ///<summary> The default_template_sid </summary> 
-        [JsonProperty("default_template_sid")]
+        [JsonPropertyName("default_template_sid")]
         public string DefaultTemplateSid { get; private set; }
 
         ///<summary> The whatsapp </summary> 
-        [JsonProperty("whatsapp")]
+        [JsonPropertyName("whatsapp")]
         public object Whatsapp { get; private set; }
 
         ///<summary> Whether to allow verifications from the service to reach the stream-events sinks if configured </summary> 
-        [JsonProperty("verify_event_subscription_enabled")]
+        [JsonPropertyName("verify_event_subscription_enabled")]
         public bool? VerifyEventSubscriptionEnabled { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

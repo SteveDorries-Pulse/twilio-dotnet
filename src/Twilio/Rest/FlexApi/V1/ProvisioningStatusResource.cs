@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -117,7 +117,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ProvisioningStatusResource>(json);
+                return JsonSerializer.Deserialize<ProvisioningStatusResource>(json);
             }
             catch (JsonException e)
             {
@@ -133,7 +133,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -143,11 +143,11 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public ProvisioningStatusResource.StatusEnum Status { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

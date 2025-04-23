@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -191,7 +191,7 @@ namespace Twilio.Rest.Video.V1.Room.Participant
         {
             try
             {
-                return JsonConvert.DeserializeObject<SubscribeRulesResource>(json);
+                return JsonSerializer.Deserialize<SubscribeRulesResource>(json);
             }
             catch (JsonException e)
             {
@@ -207,7 +207,7 @@ namespace Twilio.Rest.Video.V1.Room.Participant
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -217,23 +217,23 @@ namespace Twilio.Rest.Video.V1.Room.Participant
 
     
         ///<summary> The SID of the Participant resource for the Subscribe Rules. </summary> 
-        [JsonProperty("participant_sid")]
+        [JsonPropertyName("participant_sid")]
         public string ParticipantSid { get; private set; }
 
         ///<summary> The SID of the Room resource for the Subscribe Rules </summary> 
-        [JsonProperty("room_sid")]
+        [JsonPropertyName("room_sid")]
         public string RoomSid { get; private set; }
 
         ///<summary> A collection of Subscribe Rules that describe how to include or exclude matching tracks. See the [Specifying Subscribe Rules](https://www.twilio.com/docs/video/api/track-subscriptions#specifying-sr) section for further information. </summary> 
-        [JsonProperty("rules")]
+        [JsonPropertyName("rules")]
         public List<SubscribeRule> Rules { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

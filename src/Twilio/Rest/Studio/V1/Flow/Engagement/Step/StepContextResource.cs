@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -117,7 +117,7 @@ namespace Twilio.Rest.Studio.V1.Flow.Engagement.Step
         {
             try
             {
-                return JsonConvert.DeserializeObject<StepContextResource>(json);
+                return JsonSerializer.Deserialize<StepContextResource>(json);
             }
             catch (JsonException e)
             {
@@ -133,7 +133,7 @@ namespace Twilio.Rest.Studio.V1.Flow.Engagement.Step
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -143,27 +143,27 @@ namespace Twilio.Rest.Studio.V1.Flow.Engagement.Step
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the StepContext resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution. </summary> 
-        [JsonProperty("context")]
+        [JsonPropertyName("context")]
         public object Context { get; private set; }
 
         ///<summary> The SID of the Engagement. </summary> 
-        [JsonProperty("engagement_sid")]
+        [JsonPropertyName("engagement_sid")]
         public string EngagementSid { get; private set; }
 
         ///<summary> The SID of the Flow. </summary> 
-        [JsonProperty("flow_sid")]
+        [JsonPropertyName("flow_sid")]
         public string FlowSid { get; private set; }
 
         ///<summary> The SID of the Step the context is associated with. </summary> 
-        [JsonProperty("step_sid")]
+        [JsonPropertyName("step_sid")]
         public string StepSid { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

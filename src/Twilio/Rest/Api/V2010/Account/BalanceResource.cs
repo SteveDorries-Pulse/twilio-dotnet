@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -107,7 +107,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<BalanceResource>(json);
+                return JsonSerializer.Deserialize<BalanceResource>(json);
             }
             catch (JsonException e)
             {
@@ -123,7 +123,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -133,15 +133,15 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The balance of the Account, in units specified by the unit parameter. Balance changes may not be reflected immediately. Child accounts do not contain balance information </summary> 
-        [JsonProperty("balance")]
+        [JsonPropertyName("balance")]
         public string Balance { get; private set; }
 
         ///<summary> The units of currency for the account balance </summary> 
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Currency { get; private set; }
 
 

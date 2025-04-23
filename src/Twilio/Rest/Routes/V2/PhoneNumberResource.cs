@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -184,7 +184,7 @@ namespace Twilio.Rest.Routes.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<PhoneNumberResource>(json);
+                return JsonSerializer.Deserialize<PhoneNumberResource>(json);
             }
             catch (JsonException e)
             {
@@ -200,7 +200,7 @@ namespace Twilio.Rest.Routes.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -210,35 +210,35 @@ namespace Twilio.Rest.Routes.V2
 
     
         ///<summary> The phone number in E.164 format </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies the Inbound Processing Region assignments for this phone number. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A human readable description of the Inbound Processing Region assignments for this phone number, up to 64 characters. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The Inbound Processing Region used for this phone number for voice. </summary> 
-        [JsonProperty("voice_region")]
+        [JsonPropertyName("voice_region")]
         public string VoiceRegion { get; private set; }
 
         ///<summary> The date that this phone number was assigned an Inbound Processing Region, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that the Inbound Processing Region was updated for this phone number, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

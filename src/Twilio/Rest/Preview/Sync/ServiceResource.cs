@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -457,7 +457,7 @@ namespace Twilio.Rest.Preview.Sync
         {
             try
             {
-                return JsonConvert.DeserializeObject<ServiceResource>(json);
+                return JsonSerializer.Deserialize<ServiceResource>(json);
             }
             catch (JsonException e)
             {
@@ -473,7 +473,7 @@ namespace Twilio.Rest.Preview.Sync
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -483,43 +483,43 @@ namespace Twilio.Rest.Preview.Sync
 
     
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The friendly_name </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The webhook_url </summary> 
-        [JsonProperty("webhook_url")]
+        [JsonPropertyName("webhook_url")]
         public Uri WebhookUrl { get; private set; }
 
         ///<summary> The reachability_webhooks_enabled </summary> 
-        [JsonProperty("reachability_webhooks_enabled")]
+        [JsonPropertyName("reachability_webhooks_enabled")]
         public bool? ReachabilityWebhooksEnabled { get; private set; }
 
         ///<summary> The acl_enabled </summary> 
-        [JsonProperty("acl_enabled")]
+        [JsonPropertyName("acl_enabled")]
         public bool? AclEnabled { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -184,7 +184,7 @@ namespace Twilio.Rest.Routes.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<SipDomainResource>(json);
+                return JsonSerializer.Deserialize<SipDomainResource>(json);
             }
             catch (JsonException e)
             {
@@ -200,7 +200,7 @@ namespace Twilio.Rest.Routes.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -210,35 +210,35 @@ namespace Twilio.Rest.Routes.V2
 
     
         ///<summary> The sip_domain </summary> 
-        [JsonProperty("sip_domain")]
+        [JsonPropertyName("sip_domain")]
         public string SipDomain { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The sid </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The account_sid </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The friendly_name </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The voice_region </summary> 
-        [JsonProperty("voice_region")]
+        [JsonPropertyName("voice_region")]
         public string VoiceRegion { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_updated </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
 

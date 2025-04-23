@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -446,7 +446,7 @@ namespace Twilio.Rest.Api.V2010.Account.Usage
         {
             try
             {
-                return JsonConvert.DeserializeObject<RecordResource>(json);
+                return JsonSerializer.Deserialize<RecordResource>(json);
             }
             catch (JsonException e)
             {
@@ -462,7 +462,7 @@ namespace Twilio.Rest.Api.V2010.Account.Usage
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -472,63 +472,63 @@ namespace Twilio.Rest.Api.V2010.Account.Usage
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that accrued the usage. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The API version used to create the resource. </summary> 
-        [JsonProperty("api_version")]
+        [JsonPropertyName("api_version")]
         public string ApiVersion { get; private set; }
 
         ///<summary> Usage records up to date as of this timestamp, formatted as YYYY-MM-DDTHH:MM:SS+00:00. All timestamps are in GMT </summary> 
-        [JsonProperty("as_of")]
+        [JsonPropertyName("as_of")]
         public string AsOf { get; private set; }
 
         
-        [JsonProperty("category")]
+        [JsonPropertyName("category")]
         public RecordResource.CategoryEnum Category { get; private set; }
 
         ///<summary> The number of usage events, such as the number of calls. </summary> 
-        [JsonProperty("count")]
+        [JsonPropertyName("count")]
         public string Count { get; private set; }
 
         ///<summary> The units in which `count` is measured, such as `calls` for calls or `messages` for SMS. </summary> 
-        [JsonProperty("count_unit")]
+        [JsonPropertyName("count_unit")]
         public string CountUnit { get; private set; }
 
         ///<summary> A plain-language description of the usage category. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> The last date for which usage is included in the UsageRecord. The date is specified in GMT and formatted as `YYYY-MM-DD`. </summary> 
-        [JsonProperty("end_date")]
+        [JsonPropertyName("end_date")]
         public DateTime? EndDate { get; private set; }
 
         ///<summary> The total price of the usage in the currency specified in `price_unit` and associated with the account. </summary> 
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public decimal? Price { get; private set; }
 
         ///<summary> The currency in which `price` is measured, in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format, such as `usd`, `eur`, and `jpy`. </summary> 
-        [JsonProperty("price_unit")]
+        [JsonPropertyName("price_unit")]
         public string PriceUnit { get; private set; }
 
         ///<summary> The first date for which usage is included in this UsageRecord. The date is specified in GMT and formatted as `YYYY-MM-DD`. </summary> 
-        [JsonProperty("start_date")]
+        [JsonPropertyName("start_date")]
         public DateTime? StartDate { get; private set; }
 
         ///<summary> A list of related resources identified by their URIs. For more information, see [List Subresources](https://www.twilio.com/docs/usage/api/usage-record#list-subresources). </summary> 
-        [JsonProperty("subresource_uris")]
+        [JsonPropertyName("subresource_uris")]
         public Dictionary<string, string> SubresourceUris { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         ///<summary> The amount used to bill usage and measured in units described in `usage_unit`. </summary> 
-        [JsonProperty("usage")]
+        [JsonPropertyName("usage")]
         public string Usage { get; private set; }
 
         ///<summary> The units in which `usage` is measured, such as `minutes` for calls or `messages` for SMS. </summary> 
-        [JsonProperty("usage_unit")]
+        [JsonPropertyName("usage_unit")]
         public string UsageUnit { get; private set; }
 
 

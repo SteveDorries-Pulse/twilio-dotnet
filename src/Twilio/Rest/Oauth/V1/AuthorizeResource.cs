@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -117,7 +117,7 @@ namespace Twilio.Rest.Oauth.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<AuthorizeResource>(json);
+                return JsonSerializer.Deserialize<AuthorizeResource>(json);
             }
             catch (JsonException e)
             {
@@ -133,7 +133,7 @@ namespace Twilio.Rest.Oauth.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -143,7 +143,7 @@ namespace Twilio.Rest.Oauth.V1
 
     
         ///<summary> The callback URL </summary> 
-        [JsonProperty("redirect_to")]
+        [JsonPropertyName("redirect_to")]
         public Uri RedirectTo { get; private set; }
 
 

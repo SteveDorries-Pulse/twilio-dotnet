@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -381,7 +381,7 @@ namespace Twilio.Rest.Messaging.V1.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<PhoneNumberResource>(json);
+                return JsonSerializer.Deserialize<PhoneNumberResource>(json);
             }
             catch (JsonException e)
             {
@@ -397,7 +397,7 @@ namespace Twilio.Rest.Messaging.V1.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -407,40 +407,40 @@ namespace Twilio.Rest.Messaging.V1.Service
 
     
         ///<summary> The unique string that we created to identify the PhoneNumber resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the PhoneNumber resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/chat/rest/service-resource) the resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number. </summary> 
-        [JsonProperty("phone_number")]
+        [JsonPropertyName("phone_number")]
         [JsonConverter(typeof(PhoneNumberConverter))]
         public Types.PhoneNumber PhoneNumber { get; private set; }
 
         ///<summary> The 2-character [ISO Country Code](https://www.iso.org/iso-3166-country-codes.html) of the number. </summary> 
-        [JsonProperty("country_code")]
+        [JsonPropertyName("country_code")]
         public string CountryCode { get; private set; }
 
         ///<summary> An array of values that describe whether the number can receive calls or messages. Can be: `Voice`, `SMS`, and `MMS`. </summary> 
-        [JsonProperty("capabilities")]
+        [JsonPropertyName("capabilities")]
         public List<string> Capabilities { get; private set; }
 
         ///<summary> The absolute URL of the PhoneNumber resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

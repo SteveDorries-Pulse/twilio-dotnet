@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -575,7 +575,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
         {
             try
             {
-                return JsonConvert.DeserializeObject<TaskResource>(json);
+                return JsonSerializer.Deserialize<TaskResource>(json);
             }
             catch (JsonException e)
             {
@@ -591,7 +591,7 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -601,99 +601,99 @@ namespace Twilio.Rest.Taskrouter.V1.Workspace
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Task resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The number of seconds since the Task was created. </summary> 
-        [JsonProperty("age")]
+        [JsonPropertyName("age")]
         public int? Age { get; private set; }
 
         
-        [JsonProperty("assignment_status")]
+        [JsonPropertyName("assignment_status")]
         public TaskResource.StatusEnum AssignmentStatus { get; private set; }
 
         ///<summary> The JSON string with custom attributes of the work. **Note** If this property has been assigned a value, it will only be displayed in FETCH action that returns a single resource. Otherwise, it will be null. </summary> 
-        [JsonProperty("attributes")]
+        [JsonPropertyName("attributes")]
         public string Attributes { get; private set; }
 
         ///<summary> An object that contains the [Add-on](https://www.twilio.com/docs/add-ons) data for all installed Add-ons. </summary> 
-        [JsonProperty("addons")]
+        [JsonPropertyName("addons")]
         public string Addons { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The date and time in GMT when the Task entered the TaskQueue, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("task_queue_entered_date")]
+        [JsonPropertyName("task_queue_entered_date")]
         public DateTime? TaskQueueEnteredDate { get; private set; }
 
         ///<summary> The current priority score of the Task as assigned to a Worker by the workflow. Tasks with higher priority values will be assigned before Tasks with lower values. </summary> 
-        [JsonProperty("priority")]
+        [JsonPropertyName("priority")]
         public int? Priority { get; private set; }
 
         ///<summary> The reason the Task was canceled or completed, if applicable. </summary> 
-        [JsonProperty("reason")]
+        [JsonPropertyName("reason")]
         public string Reason { get; private set; }
 
         ///<summary> The unique string that we created to identify the Task resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the TaskQueue. </summary> 
-        [JsonProperty("task_queue_sid")]
+        [JsonPropertyName("task_queue_sid")]
         public string TaskQueueSid { get; private set; }
 
         ///<summary> The friendly name of the TaskQueue. </summary> 
-        [JsonProperty("task_queue_friendly_name")]
+        [JsonPropertyName("task_queue_friendly_name")]
         public string TaskQueueFriendlyName { get; private set; }
 
         ///<summary> The SID of the TaskChannel. </summary> 
-        [JsonProperty("task_channel_sid")]
+        [JsonPropertyName("task_channel_sid")]
         public string TaskChannelSid { get; private set; }
 
         ///<summary> The unique name of the TaskChannel. </summary> 
-        [JsonProperty("task_channel_unique_name")]
+        [JsonPropertyName("task_channel_unique_name")]
         public string TaskChannelUniqueName { get; private set; }
 
         ///<summary> The amount of time in seconds that the Task can live before being assigned. </summary> 
-        [JsonProperty("timeout")]
+        [JsonPropertyName("timeout")]
         public int? Timeout { get; private set; }
 
         ///<summary> The SID of the Workflow that is controlling the Task. </summary> 
-        [JsonProperty("workflow_sid")]
+        [JsonPropertyName("workflow_sid")]
         public string WorkflowSid { get; private set; }
 
         ///<summary> The friendly name of the Workflow that is controlling the Task. </summary> 
-        [JsonProperty("workflow_friendly_name")]
+        [JsonPropertyName("workflow_friendly_name")]
         public string WorkflowFriendlyName { get; private set; }
 
         ///<summary> The SID of the Workspace that contains the Task. </summary> 
-        [JsonProperty("workspace_sid")]
+        [JsonPropertyName("workspace_sid")]
         public string WorkspaceSid { get; private set; }
 
         ///<summary> The absolute URL of the Task resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> The date and time in GMT indicating the ordering for routing of the Task specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("virtual_start_time")]
+        [JsonPropertyName("virtual_start_time")]
         public DateTime? VirtualStartTime { get; private set; }
 
         ///<summary> A boolean that indicates if the Task should respect a Worker's capacity and availability during assignment. This field can only be used when the `RoutingTarget` field is set to a Worker SID. By setting `IgnoreCapacity` to a value of `true`, `1`, or `yes`, the Task will be routed to the Worker without respecting their capacity and availability. Any other value will enforce the Worker's capacity and availability. The default value of `IgnoreCapacity` is `true` when the `RoutingTarget` is set to a Worker SID.  </summary> 
-        [JsonProperty("ignore_capacity")]
+        [JsonPropertyName("ignore_capacity")]
         public bool? IgnoreCapacity { get; private set; }
 
         ///<summary> A SID of a Worker, Queue, or Workflow to route a Task to </summary> 
-        [JsonProperty("routing_target")]
+        [JsonPropertyName("routing_target")]
         public string RoutingTarget { get; private set; }
 
 

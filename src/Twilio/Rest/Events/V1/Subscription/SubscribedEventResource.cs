@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -464,7 +464,7 @@ namespace Twilio.Rest.Events.V1.Subscription
         {
             try
             {
-                return JsonConvert.DeserializeObject<SubscribedEventResource>(json);
+                return JsonSerializer.Deserialize<SubscribedEventResource>(json);
             }
             catch (JsonException e)
             {
@@ -480,7 +480,7 @@ namespace Twilio.Rest.Events.V1.Subscription
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -490,23 +490,23 @@ namespace Twilio.Rest.Events.V1.Subscription
 
     
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Type of event being subscribed to. </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; private set; }
 
         ///<summary> The schema version that the Subscription should use. </summary> 
-        [JsonProperty("schema_version")]
+        [JsonPropertyName("schema_version")]
         public int? SchemaVersion { get; private set; }
 
         ///<summary> The unique SID identifier of the Subscription. </summary> 
-        [JsonProperty("subscription_sid")]
+        [JsonPropertyName("subscription_sid")]
         public string SubscriptionSid { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

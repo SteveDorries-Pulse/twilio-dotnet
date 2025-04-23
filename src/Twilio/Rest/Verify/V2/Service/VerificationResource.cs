@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -371,7 +371,7 @@ namespace Twilio.Rest.Verify.V2.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<VerificationResource>(json);
+                return JsonSerializer.Deserialize<VerificationResource>(json);
             }
             catch (JsonException e)
             {
@@ -387,7 +387,7 @@ namespace Twilio.Rest.Verify.V2.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -397,63 +397,63 @@ namespace Twilio.Rest.Verify.V2.Service
 
     
         ///<summary> The unique string that we created to identify the Verification resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Verification resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The phone number or [email](https://www.twilio.com/docs/verify/email) being verified. Phone numbers must be in [E.164 format](https://www.twilio.com/docs/glossary/what-e164). </summary> 
-        [JsonProperty("to")]
+        [JsonPropertyName("to")]
         public string To { get; private set; }
 
         
-        [JsonProperty("channel")]
+        [JsonPropertyName("channel")]
         public VerificationResource.ChannelEnum Channel { get; private set; }
 
         ///<summary> The status of the verification. Can be: `pending`, `approved`, `canceled`, `max_attempts_reached`, `deleted`, `failed` or `expired`. </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; private set; }
 
         ///<summary> Use \"status\" instead. Legacy property indicating whether the verification was successful. </summary> 
-        [JsonProperty("valid")]
+        [JsonPropertyName("valid")]
         public bool? Valid { get; private set; }
 
         ///<summary> Information about the phone number being verified. </summary> 
-        [JsonProperty("lookup")]
+        [JsonPropertyName("lookup")]
         public object Lookup { get; private set; }
 
         ///<summary> The amount of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled. </summary> 
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public string Amount { get; private set; }
 
         ///<summary> The payee of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled. </summary> 
-        [JsonProperty("payee")]
+        [JsonPropertyName("payee")]
         public string Payee { get; private set; }
 
         ///<summary> An array of verification attempt objects containing the channel attempted and the channel-specific transaction SID. </summary> 
-        [JsonProperty("send_code_attempts")]
+        [JsonPropertyName("send_code_attempts")]
         public List<object> SendCodeAttempts { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The set of fields used for a silent network auth (`sna`) verification. Contains a single field with the URL to be invoked to verify the phone number. </summary> 
-        [JsonProperty("sna")]
+        [JsonPropertyName("sna")]
         public object Sna { get; private set; }
 
         ///<summary> The absolute URL of the Verification resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

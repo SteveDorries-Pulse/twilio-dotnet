@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -286,7 +286,7 @@ namespace Twilio.Rest.Verify.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<VerificationAttemptResource>(json);
+                return JsonSerializer.Deserialize<VerificationAttemptResource>(json);
             }
             catch (JsonException e)
             {
@@ -302,7 +302,7 @@ namespace Twilio.Rest.Verify.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -312,47 +312,47 @@ namespace Twilio.Rest.Verify.V2
 
     
         ///<summary> The SID that uniquely identifies the verification attempt resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Verification resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the [Service](https://www.twilio.com/docs/verify/api/service) used to generate the attempt. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the [Verification](https://www.twilio.com/docs/verify/api/verification) that generated the attempt. </summary> 
-        [JsonProperty("verification_sid")]
+        [JsonPropertyName("verification_sid")]
         public string VerificationSid { get; private set; }
 
         ///<summary> The date that this Attempt was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Attempt was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         
-        [JsonProperty("conversion_status")]
+        [JsonPropertyName("conversion_status")]
         public VerificationAttemptResource.ConversionStatusEnum ConversionStatus { get; private set; }
 
         
-        [JsonProperty("channel")]
+        [JsonPropertyName("channel")]
         public VerificationAttemptResource.ChannelsEnum Channel { get; private set; }
 
         ///<summary> An object containing the charge for this verification attempt related to the channel costs and the currency used. The costs related to the succeeded verifications are not included. May not be immediately available. More information on pricing is available [here](https://www.twilio.com/en-us/verify/pricing). </summary> 
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public object Price { get; private set; }
 
         ///<summary> An object containing the channel specific information for an attempt. </summary> 
-        [JsonProperty("channel_data")]
+        [JsonPropertyName("channel_data")]
         public object ChannelData { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

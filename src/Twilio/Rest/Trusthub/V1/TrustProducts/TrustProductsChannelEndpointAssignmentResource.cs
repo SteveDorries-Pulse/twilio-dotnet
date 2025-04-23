@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -393,7 +393,7 @@ namespace Twilio.Rest.Trusthub.V1.TrustProducts
         {
             try
             {
-                return JsonConvert.DeserializeObject<TrustProductsChannelEndpointAssignmentResource>(json);
+                return JsonSerializer.Deserialize<TrustProductsChannelEndpointAssignmentResource>(json);
             }
             catch (JsonException e)
             {
@@ -409,7 +409,7 @@ namespace Twilio.Rest.Trusthub.V1.TrustProducts
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -419,31 +419,31 @@ namespace Twilio.Rest.Trusthub.V1.TrustProducts
 
     
         ///<summary> The unique string that we created to identify the Item Assignment resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique string that we created to identify the CustomerProfile resource. </summary> 
-        [JsonProperty("trust_product_sid")]
+        [JsonPropertyName("trust_product_sid")]
         public string TrustProductSid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Item Assignment resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The type of channel endpoint. eg: phone-number </summary> 
-        [JsonProperty("channel_endpoint_type")]
+        [JsonPropertyName("channel_endpoint_type")]
         public string ChannelEndpointType { get; private set; }
 
         ///<summary> The SID of an channel endpoint </summary> 
-        [JsonProperty("channel_endpoint_sid")]
+        [JsonPropertyName("channel_endpoint_sid")]
         public string ChannelEndpointSid { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The absolute URL of the Identity resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

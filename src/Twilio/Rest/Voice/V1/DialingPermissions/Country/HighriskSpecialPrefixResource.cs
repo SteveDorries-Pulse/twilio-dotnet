@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -168,7 +168,7 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions.Country
         {
             try
             {
-                return JsonConvert.DeserializeObject<HighriskSpecialPrefixResource>(json);
+                return JsonSerializer.Deserialize<HighriskSpecialPrefixResource>(json);
             }
             catch (JsonException e)
             {
@@ -184,7 +184,7 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions.Country
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -194,7 +194,7 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions.Country
 
     
         ///<summary> A prefix is a contiguous number range for a block of E.164 numbers that includes the E.164 assigned country code. For example, a North American Numbering Plan prefix like `+1510720` written like `+1(510) 720` matches all numbers inclusive from `+1(510) 720-0000` to `+1(510) 720-9999`. </summary> 
-        [JsonProperty("prefix")]
+        [JsonPropertyName("prefix")]
         public string Prefix { get; private set; }
 
 

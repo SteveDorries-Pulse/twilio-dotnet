@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -449,7 +449,7 @@ namespace Twilio.Rest.Events.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SubscriptionResource>(json);
+                return JsonSerializer.Deserialize<SubscriptionResource>(json);
             }
             catch (JsonException e)
             {
@@ -465,7 +465,7 @@ namespace Twilio.Rest.Events.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -475,35 +475,35 @@ namespace Twilio.Rest.Events.V1
 
     
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A 34 character string that uniquely identifies this Subscription. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The date that this Subscription was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this Subscription was updated, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> A human readable description for the Subscription </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> The SID of the sink that events selected by this subscription should be sent to. Sink must be active for the subscription to be created. </summary> 
-        [JsonProperty("sink_sid")]
+        [JsonPropertyName("sink_sid")]
         public string SinkSid { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Contains a dictionary of URL links to nested resources of this Subscription. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

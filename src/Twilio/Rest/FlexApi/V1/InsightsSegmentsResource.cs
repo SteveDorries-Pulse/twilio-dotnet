@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -174,7 +174,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsSegmentsResource>(json);
+                return JsonSerializer.Deserialize<InsightsSegmentsResource>(json);
             }
             catch (JsonException e)
             {
@@ -190,7 +190,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -200,91 +200,91 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> To unique id of the segment </summary> 
-        [JsonProperty("segment_id")]
+        [JsonPropertyName("segment_id")]
         public string SegmentId { get; private set; }
 
         ///<summary> The unique id for the conversation. </summary> 
-        [JsonProperty("external_id")]
+        [JsonPropertyName("external_id")]
         public string ExternalId { get; private set; }
 
         ///<summary> The queue </summary> 
-        [JsonProperty("queue")]
+        [JsonPropertyName("queue")]
         public string Queue { get; private set; }
 
         ///<summary> The external_contact </summary> 
-        [JsonProperty("external_contact")]
+        [JsonPropertyName("external_contact")]
         public string ExternalContact { get; private set; }
 
         ///<summary> The uuid for the external_segment_link. </summary> 
-        [JsonProperty("external_segment_link_id")]
+        [JsonPropertyName("external_segment_link_id")]
         public string ExternalSegmentLinkId { get; private set; }
 
         ///<summary> The date of the conversation. </summary> 
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public string Date { get; private set; }
 
         ///<summary> The unique id for the account. </summary> 
-        [JsonProperty("account_id")]
+        [JsonPropertyName("account_id")]
         public string AccountId { get; private set; }
 
         ///<summary> The hyperlink to recording of the task event. </summary> 
-        [JsonProperty("external_segment_link")]
+        [JsonPropertyName("external_segment_link")]
         public string ExternalSegmentLink { get; private set; }
 
         ///<summary> The unique id for the agent. </summary> 
-        [JsonProperty("agent_id")]
+        [JsonPropertyName("agent_id")]
         public string AgentId { get; private set; }
 
         ///<summary> The phone number of the agent. </summary> 
-        [JsonProperty("agent_phone")]
+        [JsonPropertyName("agent_phone")]
         public string AgentPhone { get; private set; }
 
         ///<summary> The name of the agent. </summary> 
-        [JsonProperty("agent_name")]
+        [JsonPropertyName("agent_name")]
         public string AgentName { get; private set; }
 
         ///<summary> The team name to which agent belongs. </summary> 
-        [JsonProperty("agent_team_name")]
+        [JsonPropertyName("agent_team_name")]
         public string AgentTeamName { get; private set; }
 
         ///<summary> he team name to which agent belongs. </summary> 
-        [JsonProperty("agent_team_name_in_hierarchy")]
+        [JsonPropertyName("agent_team_name_in_hierarchy")]
         public string AgentTeamNameInHierarchy { get; private set; }
 
         ///<summary> The link to the agent conversation. </summary> 
-        [JsonProperty("agent_link")]
+        [JsonPropertyName("agent_link")]
         public string AgentLink { get; private set; }
 
         ///<summary> The phone number of the customer. </summary> 
-        [JsonProperty("customer_phone")]
+        [JsonPropertyName("customer_phone")]
         public string CustomerPhone { get; private set; }
 
         ///<summary> The name of the customer. </summary> 
-        [JsonProperty("customer_name")]
+        [JsonPropertyName("customer_name")]
         public string CustomerName { get; private set; }
 
         ///<summary> The link to the customer conversation. </summary> 
-        [JsonProperty("customer_link")]
+        [JsonPropertyName("customer_link")]
         public string CustomerLink { get; private set; }
 
         ///<summary> The offset value for the recording. </summary> 
-        [JsonProperty("segment_recording_offset")]
+        [JsonPropertyName("segment_recording_offset")]
         public string SegmentRecordingOffset { get; private set; }
 
         ///<summary> The media identifiers of the conversation. </summary> 
-        [JsonProperty("media")]
+        [JsonPropertyName("media")]
         public object Media { get; private set; }
 
         ///<summary> The type of the assessment. </summary> 
-        [JsonProperty("assessment_type")]
+        [JsonPropertyName("assessment_type")]
         public object AssessmentType { get; private set; }
 
         ///<summary> The percentage scored on the Assessments. </summary> 
-        [JsonProperty("assessment_percentage")]
+        [JsonPropertyName("assessment_percentage")]
         public object AssessmentPercentage { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

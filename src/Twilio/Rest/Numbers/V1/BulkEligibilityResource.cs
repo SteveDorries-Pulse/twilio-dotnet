@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -170,7 +170,7 @@ namespace Twilio.Rest.Numbers.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<BulkEligibilityResource>(json);
+                return JsonSerializer.Deserialize<BulkEligibilityResource>(json);
             }
             catch (JsonException e)
             {
@@ -186,7 +186,7 @@ namespace Twilio.Rest.Numbers.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -196,31 +196,31 @@ namespace Twilio.Rest.Numbers.V1
 
     
         ///<summary> The SID of the bulk eligibility check that you want to know about. </summary> 
-        [JsonProperty("request_id")]
+        [JsonPropertyName("request_id")]
         public string RequestId { get; private set; }
 
         ///<summary> This is the url of the request that you're trying to reach out to locate the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The result set that contains the eligibility check response for each requested number, each result has at least the following attributes:  phone_number: The requested phone number ,hosting_account_sid: The account sid where the phone number will be hosted, country: Phone number’s country, eligibility_status: Indicates the eligibility status of the PN (Eligible/Ineligible), eligibility_sub_status: Indicates the sub status of the eligibility , ineligibility_reason: Reason for number's ineligibility (if applicable), next_step: Suggested next step in the hosting process based on the eligibility status. </summary> 
-        [JsonProperty("results")]
+        [JsonPropertyName("results")]
         public List<object> Results { get; private set; }
 
         ///<summary> This is the string that you assigned as a friendly name for describing the eligibility check request. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> This is the status of the bulk eligibility check request. (Example: COMPLETE, IN_PROGRESS) </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date_completed </summary> 
-        [JsonProperty("date_completed")]
+        [JsonPropertyName("date_completed")]
         public DateTime? DateCompleted { get; private set; }
 
 

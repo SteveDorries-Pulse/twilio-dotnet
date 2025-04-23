@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -109,7 +109,7 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions
         {
             try
             {
-                return JsonConvert.DeserializeObject<BulkCountryUpdateResource>(json);
+                return JsonSerializer.Deserialize<BulkCountryUpdateResource>(json);
             }
             catch (JsonException e)
             {
@@ -125,7 +125,7 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -135,11 +135,11 @@ namespace Twilio.Rest.Voice.V1.DialingPermissions
 
     
         ///<summary> The number of countries updated </summary> 
-        [JsonProperty("update_count")]
+        [JsonPropertyName("update_count")]
         public int? UpdateCount { get; private set; }
 
         ///<summary> A bulk update request to change voice dialing country permissions stored as a URL-encoded, JSON array of update objects. For example : `[ { \"iso_code\": \"GB\", \"low_risk_numbers_enabled\": \"true\", \"high_risk_special_numbers_enabled\":\"true\", \"high_risk_tollfraud_numbers_enabled\": \"false\" } ]` </summary> 
-        [JsonProperty("update_request")]
+        [JsonPropertyName("update_request")]
         public string UpdateRequest { get; private set; }
 
 

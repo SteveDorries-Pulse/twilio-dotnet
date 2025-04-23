@@ -10,7 +10,7 @@ namespace Twilio.UnitTests.Jwt.Client
     public class ClientCapabilityTest
     {
         private static readonly string AccountSid = "AC123";
-        private static readonly string Secret = "superdupersecretsecret";
+        private static readonly string Secret = "superdupersecretsecretButItMustBeLongEnoughToSatisfyEntropy";
 
         [Fact]
         public void TestEmptyToken()
@@ -20,8 +20,8 @@ namespace Twilio.UnitTests.Jwt.Client
             var token = new DecodedJwt(jwt, Secret);
             var payload = token.Payload;
 
-            Assert.Equal(AccountSid, payload["iss"]);
-            Assert.True(Convert.ToInt64(payload["exp"]) > BaseJwt.ConvertToUnixTimestamp(DateTime.UtcNow));
+            Assert.Equal(AccountSid, payload["iss"].ToString());
+            Assert.True(Convert.ToInt64(payload["exp"].ToString()) > BaseJwt.ConvertToUnixTimestamp(DateTime.UtcNow));
         }
 
         [Fact]
@@ -39,14 +39,14 @@ namespace Twilio.UnitTests.Jwt.Client
             var token = new DecodedJwt(jwt, Secret);
             var payload = token.Payload;
 
-            Assert.Equal(AccountSid, payload["iss"]);
-            Assert.True(Convert.ToInt64(payload["exp"]) > BaseJwt.ConvertToUnixTimestamp(DateTime.UtcNow));
+            Assert.Equal(AccountSid, payload["iss"].ToString());
+            Assert.True(Convert.ToInt64(payload["exp"].ToString()) > BaseJwt.ConvertToUnixTimestamp(DateTime.UtcNow));
 
             Assert.Equal(
                 "scope:client:incoming?clientName=incomingClient " +
                 "scope:stream:subscribe?path=/2010-04-01/Events " +
                 "scope:client:outgoing?appSid=AP123",
-                payload["scope"]
+                payload["scope"].ToString()
             );
         }
     }

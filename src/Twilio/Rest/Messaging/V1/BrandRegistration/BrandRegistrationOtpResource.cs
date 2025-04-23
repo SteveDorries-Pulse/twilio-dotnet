@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -111,7 +111,7 @@ namespace Twilio.Rest.Messaging.V1.BrandRegistration
         {
             try
             {
-                return JsonConvert.DeserializeObject<BrandRegistrationOtpResource>(json);
+                return JsonSerializer.Deserialize<BrandRegistrationOtpResource>(json);
             }
             catch (JsonException e)
             {
@@ -127,7 +127,7 @@ namespace Twilio.Rest.Messaging.V1.BrandRegistration
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -137,11 +137,11 @@ namespace Twilio.Rest.Messaging.V1.BrandRegistration
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Brand Registration resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique string to identify Brand Registration of Sole Proprietor Brand </summary> 
-        [JsonProperty("brand_registration_sid")]
+        [JsonPropertyName("brand_registration_sid")]
         public string BrandRegistrationSid { get; private set; }
 
 

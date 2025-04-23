@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -180,7 +180,7 @@ namespace Twilio.Rest.Studio.V2.Flow
         {
             try
             {
-                return JsonConvert.DeserializeObject<FlowTestUserResource>(json);
+                return JsonSerializer.Deserialize<FlowTestUserResource>(json);
             }
             catch (JsonException e)
             {
@@ -196,7 +196,7 @@ namespace Twilio.Rest.Studio.V2.Flow
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -206,15 +206,15 @@ namespace Twilio.Rest.Studio.V2.Flow
 
     
         ///<summary> Unique identifier of the flow. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> List of test user identities that can test draft versions of the flow. </summary> 
-        [JsonProperty("test_users")]
+        [JsonPropertyName("test_users")]
         public List<string> TestUsers { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

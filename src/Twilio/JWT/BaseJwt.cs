@@ -16,11 +16,9 @@ namespace Twilio.Jwt
     /// </summary>
     public abstract class BaseJwt
     {
-#if !NET35
+
         private static readonly string Algorithm = "HS256";
-#else
-        private static readonly JwtHashAlgorithm Algorithm = JwtHashAlgorithm.HS256;
-#endif
+
 
         /// <summary>
         /// Unique identifier for the JWT
@@ -101,7 +99,7 @@ namespace Twilio.Jwt
             return BuildToken(headers, payload);
         }
 
-#if !NET35
+
         private JwtHeader BuildHeaders()
         {
             return new JwtHeader(new SigningCredentials(
@@ -125,26 +123,7 @@ namespace Twilio.Jwt
             var handler = new JwtSecurityTokenHandler();
             return handler.WriteToken(token);
         }
-#else
-        private Dictionary<string, object> BuildHeaders()
-        {
-            return new Dictionary<string, object>();
-        }
 
-        private Dictionary<string, object> BuildPayload()
-        {
-            return new Dictionary<string, object>
-            {
-                {"iss", _issuer},
-                {"exp", ConvertToUnixTimestamp(_expiration)}
-            };
-        }
-
-        private string BuildToken(Dictionary<string, object> headers, Dictionary<string, object> payload)
-        {
-            return JsonWebToken.Encode(headers, payload, _secret, Algorithm);
-        }
-#endif
 
         /// <summary>
         /// Get seconds since epoch

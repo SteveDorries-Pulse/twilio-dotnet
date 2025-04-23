@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,7 +32,7 @@ namespace Twilio.Rest.Content.V1
     
         public class TwilioText
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
             public TwilioText() { }
             public class Builder
@@ -54,9 +54,9 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioMedia
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("media")]
+            [JsonPropertyName("media")]
             private List<string> Media {get; set;}
             public TwilioMedia() { }
             public class Builder
@@ -83,11 +83,11 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioLocation
         {
-            [JsonProperty("latitude")]
+            [JsonPropertyName("latitude")]
             private decimal? Latitude {get; set;}
-            [JsonProperty("longitude")]
+            [JsonPropertyName("longitude")]
             private decimal? Longitude {get; set;}
-            [JsonProperty("label")]
+            [JsonPropertyName("label")]
             private string Label {get; set;}
             public TwilioLocation() { }
             public class Builder
@@ -119,11 +119,11 @@ namespace Twilio.Rest.Content.V1
         }
         public class ListItem
         {
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("item")]
+            [JsonPropertyName("item")]
             private string Item {get; set;}
-            [JsonProperty("description")]
+            [JsonPropertyName("description")]
             private string Description {get; set;}
             public ListItem() { }
             public class Builder
@@ -155,11 +155,11 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioListPicker
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("button")]
+            [JsonPropertyName("button")]
             private string Button {get; set;}
-            [JsonProperty("items")]
+            [JsonPropertyName("items")]
             private List<ListItem> Items {get; set;}
             public TwilioListPicker() { }
             public class Builder
@@ -192,15 +192,15 @@ namespace Twilio.Rest.Content.V1
         public class CallToActionAction
         {
             [JsonConverter(typeof(StringEnumConverter))]
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private ContentResource.CallToActionActionType Type {get; set;}
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("url")]
+            [JsonPropertyName("url")]
             private string Url {get; set;}
-            [JsonProperty("phone")]
+            [JsonPropertyName("phone")]
             private string Phone {get; set;}
-            [JsonProperty("code")]
+            [JsonPropertyName("code")]
             private string Code {get; set;}
             public CallToActionAction() { }
             public class Builder
@@ -242,9 +242,9 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioCallToAction
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("actions")]
+            [JsonPropertyName("actions")]
             private List<CallToActionAction> Actions {get; set;}
             public TwilioCallToAction() { }
             public class Builder
@@ -272,11 +272,11 @@ namespace Twilio.Rest.Content.V1
         public class QuickReplyAction
         {
             [JsonConverter(typeof(StringEnumConverter))]
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private ContentResource.QuickReplyActionType Type {get; set;}
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
             public QuickReplyAction() { }
             public class Builder
@@ -308,9 +308,9 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioQuickReply
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("actions")]
+            [JsonPropertyName("actions")]
             private List<QuickReplyAction> Actions {get; set;}
             public TwilioQuickReply() { }
             public class Builder
@@ -338,17 +338,17 @@ namespace Twilio.Rest.Content.V1
         public class CardAction
         {
             [JsonConverter(typeof(StringEnumConverter))]
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private ContentResource.CardActionType Type {get; set;}
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("url")]
+            [JsonPropertyName("url")]
             private string Url {get; set;}
-            [JsonProperty("phone")]
+            [JsonPropertyName("phone")]
             private string Phone {get; set;}
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("code")]
+            [JsonPropertyName("code")]
             private string Code {get; set;}
             public CardAction() { }
             public class Builder
@@ -395,13 +395,13 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioCard
         {
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("subtitle")]
+            [JsonPropertyName("subtitle")]
             private string Subtitle {get; set;}
-            [JsonProperty("media")]
+            [JsonPropertyName("media")]
             private List<string> Media {get; set;}
-            [JsonProperty("actions")]
+            [JsonPropertyName("actions")]
             private List<CardAction> Actions {get; set;}
             public TwilioCard() { }
             public class Builder
@@ -438,17 +438,17 @@ namespace Twilio.Rest.Content.V1
         }
         public class CatalogItem
         {
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("section_title")]
+            [JsonPropertyName("section_title")]
             private string SectionTitle {get; set;}
-            [JsonProperty("name")]
+            [JsonPropertyName("name")]
             private string Name {get; set;}
-            [JsonProperty("media_url")]
+            [JsonPropertyName("media_url")]
             private string MediaUrl {get; set;}
-            [JsonProperty("price")]
+            [JsonPropertyName("price")]
             private decimal? Price {get; set;}
-            [JsonProperty("description")]
+            [JsonPropertyName("description")]
             private string Description {get; set;}
             public CatalogItem() { }
             public class Builder
@@ -495,17 +495,17 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioCatalog
         {
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("subtitle")]
+            [JsonPropertyName("subtitle")]
             private string Subtitle {get; set;}
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("items")]
+            [JsonPropertyName("items")]
             private List<CatalogItem> Items {get; set;}
-            [JsonProperty("dynamic_items")]
+            [JsonPropertyName("dynamic_items")]
             private string DynamicItems {get; set;}
             public TwilioCatalog() { }
             public class Builder
@@ -553,15 +553,15 @@ namespace Twilio.Rest.Content.V1
         public class CarouselAction
         {
             [JsonConverter(typeof(StringEnumConverter))]
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private ContentResource.CarouselActionType Type {get; set;}
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("url")]
+            [JsonPropertyName("url")]
             private string Url {get; set;}
-            [JsonProperty("phone")]
+            [JsonPropertyName("phone")]
             private string Phone {get; set;}
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
             public CarouselAction() { }
             public class Builder
@@ -603,13 +603,13 @@ namespace Twilio.Rest.Content.V1
         }
         public class CarouselCard
         {
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("media")]
+            [JsonPropertyName("media")]
             private string Media {get; set;}
-            [JsonProperty("actions")]
+            [JsonPropertyName("actions")]
             private List<CarouselAction> Actions {get; set;}
             public CarouselCard() { }
             public class Builder
@@ -646,9 +646,9 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioCarousel
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("cards")]
+            [JsonPropertyName("cards")]
             private List<CarouselCard> Cards {get; set;}
             public TwilioCarousel() { }
             public class Builder
@@ -675,9 +675,9 @@ namespace Twilio.Rest.Content.V1
         }
         public class FlowsPageComponentSelectItem
         {
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
             public FlowsPageComponentSelectItem() { }
             public class Builder
@@ -704,13 +704,13 @@ namespace Twilio.Rest.Content.V1
         }
         public class FlowsPageComponent
         {
-            [JsonProperty("label")]
+            [JsonPropertyName("label")]
             private string Label {get; set;}
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private string Type {get; set;}
-            [JsonProperty("text")]
+            [JsonPropertyName("text")]
             private string Text {get; set;}
-            [JsonProperty("options")]
+            [JsonPropertyName("options")]
             private List<FlowsPageComponentSelectItem> Options {get; set;}
             public FlowsPageComponent() { }
             public class Builder
@@ -747,15 +747,15 @@ namespace Twilio.Rest.Content.V1
         }
         public class FlowsPage
         {
-            [JsonProperty("id")]
+            [JsonPropertyName("id")]
             private string Id {get; set;}
-            [JsonProperty("next_page_id")]
+            [JsonPropertyName("next_page_id")]
             private string NextPageId {get; set;}
-            [JsonProperty("title")]
+            [JsonPropertyName("title")]
             private string Title {get; set;}
-            [JsonProperty("subtitle")]
+            [JsonPropertyName("subtitle")]
             private string Subtitle {get; set;}
-            [JsonProperty("layout")]
+            [JsonPropertyName("layout")]
             private List<FlowsPageComponent> Layout {get; set;}
             public FlowsPage() { }
             public class Builder
@@ -797,17 +797,17 @@ namespace Twilio.Rest.Content.V1
         }
         public class TwilioFlows
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("button_text")]
+            [JsonPropertyName("button_text")]
             private string ButtonText {get; set;}
-            [JsonProperty("subtitle")]
+            [JsonPropertyName("subtitle")]
             private string Subtitle {get; set;}
-            [JsonProperty("media_url")]
+            [JsonPropertyName("media_url")]
             private string MediaUrl {get; set;}
-            [JsonProperty("pages")]
+            [JsonPropertyName("pages")]
             private List<FlowsPage> Pages {get; set;}
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private string Type {get; set;}
             public TwilioFlows() { }
             public class Builder
@@ -854,15 +854,15 @@ namespace Twilio.Rest.Content.V1
         }
         public class WhatsappCard
         {
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("footer")]
+            [JsonPropertyName("footer")]
             private string Footer {get; set;}
-            [JsonProperty("media")]
+            [JsonPropertyName("media")]
             private List<string> Media {get; set;}
-            [JsonProperty("header_text")]
+            [JsonPropertyName("header_text")]
             private string HeaderText {get; set;}
-            [JsonProperty("actions")]
+            [JsonPropertyName("actions")]
             private List<CardAction> Actions {get; set;}
             public WhatsappCard() { }
             public class Builder
@@ -905,9 +905,9 @@ namespace Twilio.Rest.Content.V1
         public class AuthenticationAction
         {
             [JsonConverter(typeof(StringEnumConverter))]
-            [JsonProperty("type")]
+            [JsonPropertyName("type")]
             private ContentResource.AuthenticationActionType Type {get; set;}
-            [JsonProperty("copy_code_text")]
+            [JsonPropertyName("copy_code_text")]
             private string CopyCodeText {get; set;}
             public AuthenticationAction() { }
             public class Builder
@@ -934,11 +934,11 @@ namespace Twilio.Rest.Content.V1
         }
         public class WhatsappAuthentication
         {
-            [JsonProperty("add_security_recommendation")]
+            [JsonPropertyName("add_security_recommendation")]
             private bool? AddSecurityRecommendation {get; set;}
-            [JsonProperty("code_expiration_minutes")]
+            [JsonPropertyName("code_expiration_minutes")]
             private decimal? CodeExpirationMinutes {get; set;}
-            [JsonProperty("actions")]
+            [JsonPropertyName("actions")]
             private List<AuthenticationAction> Actions {get; set;}
             public WhatsappAuthentication() { }
             public class Builder
@@ -970,29 +970,29 @@ namespace Twilio.Rest.Content.V1
         }
         public class Types
         {
-            [JsonProperty("twilio/text")]
+            [JsonPropertyName("twilio/text")]
             private TwilioText TwilioText {get; set;}
-            [JsonProperty("twilio/media")]
+            [JsonPropertyName("twilio/media")]
             private TwilioMedia TwilioMedia {get; set;}
-            [JsonProperty("twilio/location")]
+            [JsonPropertyName("twilio/location")]
             private TwilioLocation TwilioLocation {get; set;}
-            [JsonProperty("twilio/list-picker")]
+            [JsonPropertyName("twilio/list-picker")]
             private TwilioListPicker TwilioListPicker {get; set;}
-            [JsonProperty("twilio/call-to-action")]
+            [JsonPropertyName("twilio/call-to-action")]
             private TwilioCallToAction TwilioCallToAction {get; set;}
-            [JsonProperty("twilio/quick-reply")]
+            [JsonPropertyName("twilio/quick-reply")]
             private TwilioQuickReply TwilioQuickReply {get; set;}
-            [JsonProperty("twilio/card")]
+            [JsonPropertyName("twilio/card")]
             private TwilioCard TwilioCard {get; set;}
-            [JsonProperty("twilio/catalog")]
+            [JsonPropertyName("twilio/catalog")]
             private TwilioCatalog TwilioCatalog {get; set;}
-            [JsonProperty("twilio/carousel")]
+            [JsonPropertyName("twilio/carousel")]
             private TwilioCarousel TwilioCarousel {get; set;}
-            [JsonProperty("twilio/flows")]
+            [JsonPropertyName("twilio/flows")]
             private TwilioFlows TwilioFlows {get; set;}
-            [JsonProperty("whatsapp/card")]
+            [JsonPropertyName("whatsapp/card")]
             private WhatsappCard WhatsappCard {get; set;}
-            [JsonProperty("whatsapp/authentication")]
+            [JsonPropertyName("whatsapp/authentication")]
             private WhatsappAuthentication WhatsappAuthentication {get; set;}
             public Types() { }
             public class Builder
@@ -1069,13 +1069,13 @@ namespace Twilio.Rest.Content.V1
         }
         public class ContentCreateRequest
         {
-            [JsonProperty("friendly_name")]
+            [JsonPropertyName("friendly_name")]
             private string FriendlyName {get; set;}
-            [JsonProperty("variables")]
+            [JsonPropertyName("variables")]
             private Dictionary<string, string> Variables {get; set;}
-            [JsonProperty("language")]
+            [JsonPropertyName("language")]
             private string Language {get; set;}
-            [JsonProperty("types")]
+            [JsonPropertyName("types")]
             private Types Types {get; set;}
             public ContentCreateRequest() { }
             public class Builder
@@ -1511,7 +1511,7 @@ namespace Twilio.Rest.Content.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ContentResource>(json);
+                return JsonSerializer.Deserialize<ContentResource>(json);
             }
             catch (JsonException e)
             {
@@ -1527,7 +1527,7 @@ namespace Twilio.Rest.Content.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -1537,43 +1537,43 @@ namespace Twilio.Rest.Content.V1
 
     
         ///<summary> The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The unique string that that we created to identify the Content resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/usage/api/account) that created Content resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A string name used to describe the Content resource. Not visible to the end recipient. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> Two-letter (ISO 639-1) language code (e.g., en) identifying the language the Content resource is in. </summary> 
-        [JsonProperty("language")]
+        [JsonPropertyName("language")]
         public string Language { get; private set; }
 
         ///<summary> Defines the default placeholder values for variables included in the Content resource. e.g. {\"1\": \"Customer_Name\"}. </summary> 
-        [JsonProperty("variables")]
+        [JsonPropertyName("variables")]
         public object Variables { get; private set; }
 
         ///<summary> The [Content types](https://www.twilio.com/docs/content-api/content-types-overview) (e.g. twilio/text) for this Content resource. </summary> 
-        [JsonProperty("types")]
+        [JsonPropertyName("types")]
         public object _Types { get; private set; }
 
         ///<summary> The URL of the resource, relative to `https://content.twilio.com`. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> A list of links related to the Content resource, such as approval_fetch and approval_create </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

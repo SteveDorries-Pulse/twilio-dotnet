@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -259,7 +259,7 @@ namespace Twilio.Rest.Api.V2010.Account.IncomingPhoneNumber.AssignedAddOn
         {
             try
             {
-                return JsonConvert.DeserializeObject<AssignedAddOnExtensionResource>(json);
+                return JsonSerializer.Deserialize<AssignedAddOnExtensionResource>(json);
             }
             catch (JsonException e)
             {
@@ -275,7 +275,7 @@ namespace Twilio.Rest.Api.V2010.Account.IncomingPhoneNumber.AssignedAddOn
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -285,39 +285,39 @@ namespace Twilio.Rest.Api.V2010.Account.IncomingPhoneNumber.AssignedAddOn
 
     
         ///<summary> The unique string that that we created to identify the resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Phone Number to which the Add-on is assigned. </summary> 
-        [JsonProperty("resource_sid")]
+        [JsonPropertyName("resource_sid")]
         public string ResourceSid { get; private set; }
 
         ///<summary> The SID that uniquely identifies the assigned Add-on installation. </summary> 
-        [JsonProperty("assigned_add_on_sid")]
+        [JsonPropertyName("assigned_add_on_sid")]
         public string AssignedAddOnSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> A string that you assigned to describe the Product this Extension is used within. </summary> 
-        [JsonProperty("product_name")]
+        [JsonPropertyName("product_name")]
         public string ProductName { get; private set; }
 
         ///<summary> An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource. </summary> 
-        [JsonProperty("unique_name")]
+        [JsonPropertyName("unique_name")]
         public string UniqueName { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
         ///<summary> Whether the Extension will be invoked. </summary> 
-        [JsonProperty("enabled")]
+        [JsonPropertyName("enabled")]
         public bool? Enabled { get; private set; }
 
 

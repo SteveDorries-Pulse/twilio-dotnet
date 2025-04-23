@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -237,7 +237,7 @@ namespace Twilio.Rest.Marketplace.V1.AvailableAddOn
         {
             try
             {
-                return JsonConvert.DeserializeObject<AvailableAddOnExtensionResource>(json);
+                return JsonSerializer.Deserialize<AvailableAddOnExtensionResource>(json);
             }
             catch (JsonException e)
             {
@@ -253,7 +253,7 @@ namespace Twilio.Rest.Marketplace.V1.AvailableAddOn
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -263,27 +263,27 @@ namespace Twilio.Rest.Marketplace.V1.AvailableAddOn
 
     
         ///<summary> The unique string that we created to identify the AvailableAddOnExtension resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the AvailableAddOn resource to which this extension applies. </summary> 
-        [JsonProperty("available_add_on_sid")]
+        [JsonPropertyName("available_add_on_sid")]
         public string AvailableAddOnSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The name of the Product this Extension is used within. </summary> 
-        [JsonProperty("product_name")]
+        [JsonPropertyName("product_name")]
         public string ProductName { get; private set; }
 
         ///<summary> An application-defined string that uniquely identifies the resource. </summary> 
-        [JsonProperty("unique_name")]
+        [JsonPropertyName("unique_name")]
         public string UniqueName { get; private set; }
 
         ///<summary> The absolute URL of the resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

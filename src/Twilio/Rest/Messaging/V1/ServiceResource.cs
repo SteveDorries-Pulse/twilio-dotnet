@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -567,7 +567,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ServiceResource>(json);
+                return JsonSerializer.Deserialize<ServiceResource>(json);
             }
             catch (JsonException e)
             {
@@ -583,7 +583,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -593,95 +593,95 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> The unique string that we created to identify the Service resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URL we call using `inbound_method` when a message is received by any phone number or short code in the Service. When this property is `null`, receiving inbound messages is disabled. All messages sent to the Twilio phone number or short code will not be logged and received on the Account. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `inbound_request_url` defined for the Messaging Service. </summary> 
-        [JsonProperty("inbound_request_url")]
+        [JsonPropertyName("inbound_request_url")]
         public Uri InboundRequestUrl { get; private set; }
 
         ///<summary> The HTTP method we use to call `inbound_request_url`. Can be `GET` or `POST`. </summary> 
-        [JsonProperty("inbound_method")]
+        [JsonPropertyName("inbound_method")]
         public Twilio.Http.HttpMethod InboundMethod { get; private set; }
 
         ///<summary> The URL that we call using `fallback_method` if an error occurs while retrieving or executing the TwiML from the Inbound Request URL. If the `use_inbound_webhook_on_number` field is enabled then the webhook url defined on the phone number will override the `fallback_url` defined for the Messaging Service. </summary> 
-        [JsonProperty("fallback_url")]
+        [JsonPropertyName("fallback_url")]
         public Uri FallbackUrl { get; private set; }
 
         ///<summary> The HTTP method we use to call `fallback_url`. Can be: `GET` or `POST`. </summary> 
-        [JsonProperty("fallback_method")]
+        [JsonPropertyName("fallback_method")]
         public Twilio.Http.HttpMethod FallbackMethod { get; private set; }
 
         ///<summary> The URL we call to [pass status updates](https://www.twilio.com/docs/sms/api/message-resource#message-status-values) about message delivery. </summary> 
-        [JsonProperty("status_callback")]
+        [JsonPropertyName("status_callback")]
         public Uri StatusCallback { get; private set; }
 
         ///<summary> Whether to enable [Sticky Sender](https://www.twilio.com/docs/messaging/services#sticky-sender) on the Service instance. </summary> 
-        [JsonProperty("sticky_sender")]
+        [JsonPropertyName("sticky_sender")]
         public bool? StickySender { get; private set; }
 
         ///<summary> Whether to enable the [MMS Converter](https://www.twilio.com/docs/messaging/services#mms-converter) for messages sent through the Service instance. </summary> 
-        [JsonProperty("mms_converter")]
+        [JsonPropertyName("mms_converter")]
         public bool? MmsConverter { get; private set; }
 
         ///<summary> Whether to enable [Smart Encoding](https://www.twilio.com/docs/messaging/services#smart-encoding) for messages sent through the Service instance. </summary> 
-        [JsonProperty("smart_encoding")]
+        [JsonPropertyName("smart_encoding")]
         public bool? SmartEncoding { get; private set; }
 
         
-        [JsonProperty("scan_message_content")]
+        [JsonPropertyName("scan_message_content")]
         public ServiceResource.ScanMessageContentEnum ScanMessageContent { get; private set; }
 
         ///<summary> [OBSOLETE] Former feature used to fallback to long code sender after certain short code message failures. </summary> 
-        [JsonProperty("fallback_to_long_code")]
+        [JsonPropertyName("fallback_to_long_code")]
         public bool? FallbackToLongCode { get; private set; }
 
         ///<summary> Whether to enable [Area Code Geomatch](https://www.twilio.com/docs/messaging/services#area-code-geomatch) on the Service Instance. </summary> 
-        [JsonProperty("area_code_geomatch")]
+        [JsonPropertyName("area_code_geomatch")]
         public bool? AreaCodeGeomatch { get; private set; }
 
         ///<summary> Reserved. </summary> 
-        [JsonProperty("synchronous_validation")]
+        [JsonPropertyName("synchronous_validation")]
         public bool? SynchronousValidation { get; private set; }
 
         ///<summary> How long, in seconds, messages sent from the Service are valid. Can be an integer from `1` to `14,400`. </summary> 
-        [JsonProperty("validity_period")]
+        [JsonPropertyName("validity_period")]
         public int? ValidityPeriod { get; private set; }
 
         ///<summary> The absolute URL of the Service resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The absolute URLs of related resources. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
         ///<summary> A string that describes the scenario in which the Messaging Service will be used. Possible values are `notifications`, `marketing`, `verification`, `discussion`, `poll`, `undeclared`. </summary> 
-        [JsonProperty("usecase")]
+        [JsonPropertyName("usecase")]
         public string Usecase { get; private set; }
 
         ///<summary> Whether US A2P campaign is registered for this Service. </summary> 
-        [JsonProperty("us_app_to_person_registered")]
+        [JsonPropertyName("us_app_to_person_registered")]
         public bool? UsAppToPersonRegistered { get; private set; }
 
         ///<summary> A boolean value that indicates either the webhook url configured on the phone number will be used or `inbound_request_url`/`fallback_url` url will be called when a message is received from the phone number. If this field is enabled then the webhook url defined on the phone number will override the `inbound_request_url`/`fallback_url` defined for the Messaging Service. </summary> 
-        [JsonProperty("use_inbound_webhook_on_number")]
+        [JsonPropertyName("use_inbound_webhook_on_number")]
         public bool? UseInboundWebhookOnNumber { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -424,7 +424,7 @@ namespace Twilio.Rest.Serverless.V1.Service
         {
             try
             {
-                return JsonConvert.DeserializeObject<BuildResource>(json);
+                return JsonSerializer.Deserialize<BuildResource>(json);
             }
             catch (JsonException e)
             {
@@ -440,7 +440,7 @@ namespace Twilio.Rest.Serverless.V1.Service
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -450,51 +450,51 @@ namespace Twilio.Rest.Serverless.V1.Service
 
     
         ///<summary> The unique string that we created to identify the Build resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Build resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Service that the Build resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public BuildResource.StatusEnum Status { get; private set; }
 
         ///<summary> The list of Asset Version resource SIDs that are included in the Build. </summary> 
-        [JsonProperty("asset_versions")]
+        [JsonPropertyName("asset_versions")]
         public List<object> AssetVersions { get; private set; }
 
         ///<summary> The list of Function Version resource SIDs that are included in the Build. </summary> 
-        [JsonProperty("function_versions")]
+        [JsonPropertyName("function_versions")]
         public List<object> FunctionVersions { get; private set; }
 
         ///<summary> A list of objects that describe the Dependencies included in the Build. Each object contains the `name` and `version` of the dependency. </summary> 
-        [JsonProperty("dependencies")]
+        [JsonPropertyName("dependencies")]
         public List<object> Dependencies { get; private set; }
 
         
-        [JsonProperty("runtime")]
+        [JsonPropertyName("runtime")]
         public BuildResource.RuntimeEnum Runtime { get; private set; }
 
         ///<summary> The date and time in GMT when the Build resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the Build resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the Build resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The links </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

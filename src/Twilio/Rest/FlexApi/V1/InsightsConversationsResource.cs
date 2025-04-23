@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -170,7 +170,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsConversationsResource>(json);
+                return JsonSerializer.Deserialize<InsightsConversationsResource>(json);
             }
             catch (JsonException e)
             {
@@ -186,7 +186,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -196,19 +196,19 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> The id of the account. </summary> 
-        [JsonProperty("account_id")]
+        [JsonPropertyName("account_id")]
         public string AccountId { get; private set; }
 
         ///<summary> The unique id of the conversation </summary> 
-        [JsonProperty("conversation_id")]
+        [JsonPropertyName("conversation_id")]
         public string ConversationId { get; private set; }
 
         ///<summary> The count of segments for a conversation </summary> 
-        [JsonProperty("segment_count")]
+        [JsonPropertyName("segment_count")]
         public int? SegmentCount { get; private set; }
 
         ///<summary> The Segments of a conversation </summary> 
-        [JsonProperty("segments")]
+        [JsonPropertyName("segments")]
         public List<object> Segments { get; private set; }
 
 

@@ -1,26 +1,32 @@
 ﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Twilio.Types;
+
 
 namespace Twilio.Converters
 {
     /// <summary>
     /// Convert between strings and a PhoneNumber
     /// </summary>
-    public class PhoneNumberConverter : JsonConverter
+    public class PhoneNumberConverter : JsonConverter<PhoneNumber>
     {
         /// <summary>
         /// Write value to JsonWriter
         /// </summary>
         /// <param name="writer">Writer to write to</param>
         /// <param name="value">Value to write</param>
-        /// <param name="serializer">unsued</param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        /// <param name="options">unsued</param>
+        public override void Write(Utf8JsonWriter writer, PhoneNumber value, JsonSerializerOptions options)
         {
-            var t = value.ToString() != null
-                                            ? JToken.FromObject(value.ToString())
-                                            : JValue.CreateNull();
-            t.WriteTo(writer);
+            if (value == null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                writer.WriteStringValue(value.ToString());
+            }
         }
 
         /// <summary>
@@ -31,24 +37,15 @@ namespace Twilio.Converters
         /// <param name="existingValue">unused</param>
         /// <param name="serializer">unsued</param>
         /// <returns>Converted PhoneNumber</returns>
-        public override object ReadJson(
-            JsonReader reader,
+        public override PhoneNumber Read(
+            ref Utf8JsonReader reader,
             Type objectType,
-            object existingValue,
-            JsonSerializer serializer
+            JsonSerializerOptions options
         )
         {
-            return new Types.PhoneNumber(reader.Value as string);
+            return new(reader.GetString());
         }
 
-        /// <summary>
-        /// Determines if an object converted to a PhoneNumber
-        /// </summary>
-        /// <param name="objectType">Type of object</param>
-        /// <returns>true if an object can be converted; false otherwise</returns>
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(Enum);
-        }
+
     }
 }

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -462,7 +462,7 @@ namespace Twilio.Rest.Trusthub.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SupportingDocumentResource>(json);
+                return JsonSerializer.Deserialize<SupportingDocumentResource>(json);
             }
             catch (JsonException e)
             {
@@ -478,7 +478,7 @@ namespace Twilio.Rest.Trusthub.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -488,43 +488,43 @@ namespace Twilio.Rest.Trusthub.V1
 
     
         ///<summary> The unique string created by Twilio to identify the Supporting Document resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Document resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The string that you assigned to describe the resource. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The image type uploaded in the Supporting Document container. </summary> 
-        [JsonProperty("mime_type")]
+        [JsonPropertyName("mime_type")]
         public string MimeType { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public SupportingDocumentResource.StatusEnum Status { get; private set; }
 
         ///<summary> The type of the Supporting Document. </summary> 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; private set; }
 
         ///<summary> The set of parameters that are the attributes of the Supporting Documents resource which are listed in the Supporting Document Types. </summary> 
-        [JsonProperty("attributes")]
+        [JsonPropertyName("attributes")]
         public object Attributes { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The absolute URL of the Supporting Document resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

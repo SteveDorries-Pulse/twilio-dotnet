@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -181,7 +181,7 @@ namespace Twilio.Rest.Conversations.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ConfigurationResource>(json);
+                return JsonSerializer.Deserialize<ConfigurationResource>(json);
             }
             catch (JsonException e)
             {
@@ -197,7 +197,7 @@ namespace Twilio.Rest.Conversations.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -207,31 +207,31 @@ namespace Twilio.Rest.Conversations.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this configuration. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the default [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) used when creating a conversation. </summary> 
-        [JsonProperty("default_chat_service_sid")]
+        [JsonPropertyName("default_chat_service_sid")]
         public string DefaultChatServiceSid { get; private set; }
 
         ///<summary> The SID of the default [Messaging Service](https://www.twilio.com/docs/messaging/api/service-resource) used when creating a conversation. </summary> 
-        [JsonProperty("default_messaging_service_sid")]
+        [JsonPropertyName("default_messaging_service_sid")]
         public string DefaultMessagingServiceSid { get; private set; }
 
         ///<summary> Default ISO8601 duration when conversation will be switched to `inactive` state. Minimum value for this timer is 1 minute. </summary> 
-        [JsonProperty("default_inactive_timer")]
+        [JsonPropertyName("default_inactive_timer")]
         public string DefaultInactiveTimer { get; private set; }
 
         ///<summary> Default ISO8601 duration when conversation will be switched to `closed` state. Minimum value for this timer is 10 minutes. </summary> 
-        [JsonProperty("default_closed_timer")]
+        [JsonPropertyName("default_closed_timer")]
         public string DefaultClosedTimer { get; private set; }
 
         ///<summary> An absolute API resource URL for this global configuration. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Contains absolute API resource URLs to access the webhook and default service configurations. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

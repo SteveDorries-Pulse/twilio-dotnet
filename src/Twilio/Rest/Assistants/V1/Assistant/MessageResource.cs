@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -32,15 +32,15 @@ namespace Twilio.Rest.Assistants.V1.Assistant
     
         public class AssistantsV1ServiceAssistantSendMessageRequest
         {
-            [JsonProperty("identity")]
+            [JsonPropertyName("identity")]
             private string Identity {get; set;}
-            [JsonProperty("session_id")]
+            [JsonPropertyName("session_id")]
             private string SessionId {get; set;}
-            [JsonProperty("body")]
+            [JsonPropertyName("body")]
             private string Body {get; set;}
-            [JsonProperty("webhook")]
+            [JsonPropertyName("webhook")]
             private string Webhook {get; set;}
-            [JsonProperty("mode")]
+            [JsonPropertyName("mode")]
             private string Mode {get; set;}
             public AssistantsV1ServiceAssistantSendMessageRequest() { }
             public class Builder
@@ -166,7 +166,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
         {
             try
             {
-                return JsonConvert.DeserializeObject<MessageResource>(json);
+                return JsonSerializer.Deserialize<MessageResource>(json);
             }
             catch (JsonException e)
             {
@@ -182,7 +182,7 @@ namespace Twilio.Rest.Assistants.V1.Assistant
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -192,31 +192,31 @@ namespace Twilio.Rest.Assistants.V1.Assistant
 
     
         ///<summary> success or failure based on whether the request successfully generated a response. </summary> 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; }
 
         ///<summary> If successful, this property will denote whether the response was flagged or not. </summary> 
-        [JsonProperty("flagged")]
+        [JsonPropertyName("flagged")]
         public bool? Flagged { get; private set; }
 
         ///<summary> This property will denote whether the request was aborted or not. </summary> 
-        [JsonProperty("aborted")]
+        [JsonPropertyName("aborted")]
         public bool? Aborted { get; private set; }
 
         ///<summary> The unique name for the session. </summary> 
-        [JsonProperty("session_id")]
+        [JsonPropertyName("session_id")]
         public string SessionId { get; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that sent the Message. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; }
 
         ///<summary> If successful, the body of the generated response </summary> 
-        [JsonProperty("body")]
+        [JsonPropertyName("body")]
         public string Body { get; private set; }
 
         ///<summary> The error message if generation was not successful </summary> 
-        [JsonProperty("error")]
+        [JsonPropertyName("error")]
         public string Error { get; private set; }
 
 

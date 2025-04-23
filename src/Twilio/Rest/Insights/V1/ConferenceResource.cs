@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -352,7 +352,7 @@ namespace Twilio.Rest.Insights.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<ConferenceResource>(json);
+                return JsonSerializer.Deserialize<ConferenceResource>(json);
             }
             catch (JsonException e)
             {
@@ -368,7 +368,7 @@ namespace Twilio.Rest.Insights.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -378,95 +378,95 @@ namespace Twilio.Rest.Insights.V1
 
     
         ///<summary> The unique SID identifier of the Conference. </summary> 
-        [JsonProperty("conference_sid")]
+        [JsonPropertyName("conference_sid")]
         public string ConferenceSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> Custom label for the conference resource, up to 64 characters. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> Conference creation date and time in ISO 8601 format. </summary> 
-        [JsonProperty("create_time")]
+        [JsonPropertyName("create_time")]
         public DateTime? CreateTime { get; private set; }
 
         ///<summary> Timestamp in ISO 8601 format when the conference started. Conferences do not start until at least two participants join, at least one of whom has startConferenceOnEnter=true. </summary> 
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public DateTime? StartTime { get; private set; }
 
         ///<summary> Conference end date and time in ISO 8601 format. </summary> 
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public DateTime? EndTime { get; private set; }
 
         ///<summary> Conference duration in seconds. </summary> 
-        [JsonProperty("duration_seconds")]
+        [JsonPropertyName("duration_seconds")]
         public int? DurationSeconds { get; private set; }
 
         ///<summary> Duration of the between conference start event and conference end event in seconds. </summary> 
-        [JsonProperty("connect_duration_seconds")]
+        [JsonPropertyName("connect_duration_seconds")]
         public int? ConnectDurationSeconds { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public ConferenceResource.ConferenceStatusEnum Status { get; private set; }
 
         ///<summary> Maximum number of concurrent participants as specified by the configuration. </summary> 
-        [JsonProperty("max_participants")]
+        [JsonPropertyName("max_participants")]
         public int? MaxParticipants { get; private set; }
 
         ///<summary> Actual maximum number of concurrent participants in the conference. </summary> 
-        [JsonProperty("max_concurrent_participants")]
+        [JsonPropertyName("max_concurrent_participants")]
         public int? MaxConcurrentParticipants { get; private set; }
 
         ///<summary> Unique conference participants based on caller ID. </summary> 
-        [JsonProperty("unique_participants")]
+        [JsonPropertyName("unique_participants")]
         public int? UniqueParticipants { get; private set; }
 
         
-        [JsonProperty("end_reason")]
+        [JsonPropertyName("end_reason")]
         public ConferenceResource.ConferenceEndReasonEnum EndReason { get; private set; }
 
         ///<summary> Call SID of the participant whose actions ended the conference. </summary> 
-        [JsonProperty("ended_by")]
+        [JsonPropertyName("ended_by")]
         public string EndedBy { get; private set; }
 
         
-        [JsonProperty("mixer_region")]
+        [JsonPropertyName("mixer_region")]
         public ConferenceResource.RegionEnum MixerRegion { get; private set; }
 
         
-        [JsonProperty("mixer_region_requested")]
+        [JsonPropertyName("mixer_region_requested")]
         public ConferenceResource.RegionEnum MixerRegionRequested { get; private set; }
 
         ///<summary> Boolean. Indicates whether recording was enabled at the conference mixer. </summary> 
-        [JsonProperty("recording_enabled")]
+        [JsonPropertyName("recording_enabled")]
         public bool? RecordingEnabled { get; private set; }
 
         ///<summary> Potential issues detected by Twilio during the conference. </summary> 
-        [JsonProperty("detected_issues")]
+        [JsonPropertyName("detected_issues")]
         public object DetectedIssues { get; private set; }
 
         ///<summary> Tags for detected conference conditions and participant behaviors which may be of interest. </summary> 
-        [JsonProperty("tags")]
+        [JsonPropertyName("tags")]
         public List<ConferenceResource.TagEnum> Tags { get; private set; }
 
         ///<summary> Object. Contains details about conference tags including severity. </summary> 
-        [JsonProperty("tag_info")]
+        [JsonPropertyName("tag_info")]
         public object TagInfo { get; private set; }
 
         
-        [JsonProperty("processing_state")]
+        [JsonPropertyName("processing_state")]
         public ConferenceResource.ProcessingStateEnum ProcessingState { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> Contains a dictionary of URL links to nested resources of this Conference. </summary> 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Dictionary<string, string> Links { get; private set; }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -274,7 +274,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Environment
         {
             try
             {
-                return JsonConvert.DeserializeObject<LogResource>(json);
+                return JsonSerializer.Deserialize<LogResource>(json);
             }
             catch (JsonException e)
             {
@@ -290,7 +290,7 @@ namespace Twilio.Rest.Serverless.V1.Service.Environment
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -300,51 +300,51 @@ namespace Twilio.Rest.Serverless.V1.Service.Environment
 
     
         ///<summary> The unique string that we created to identify the Log resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Log resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the Service that the Log resource is associated with. </summary> 
-        [JsonProperty("service_sid")]
+        [JsonPropertyName("service_sid")]
         public string ServiceSid { get; private set; }
 
         ///<summary> The SID of the environment in which the log occurred. </summary> 
-        [JsonProperty("environment_sid")]
+        [JsonPropertyName("environment_sid")]
         public string EnvironmentSid { get; private set; }
 
         ///<summary> The SID of the build that corresponds to the log. </summary> 
-        [JsonProperty("build_sid")]
+        [JsonPropertyName("build_sid")]
         public string BuildSid { get; private set; }
 
         ///<summary> The SID of the deployment that corresponds to the log. </summary> 
-        [JsonProperty("deployment_sid")]
+        [JsonPropertyName("deployment_sid")]
         public string DeploymentSid { get; private set; }
 
         ///<summary> The SID of the function whose invocation produced the log. </summary> 
-        [JsonProperty("function_sid")]
+        [JsonPropertyName("function_sid")]
         public string FunctionSid { get; private set; }
 
         ///<summary> The SID of the request associated with the log. </summary> 
-        [JsonProperty("request_sid")]
+        [JsonPropertyName("request_sid")]
         public string RequestSid { get; private set; }
 
         
-        [JsonProperty("level")]
+        [JsonPropertyName("level")]
         public LogResource.LevelEnum Level { get; private set; }
 
         ///<summary> The log message. </summary> 
-        [JsonProperty("message")]
+        [JsonPropertyName("message")]
         public string Message { get; private set; }
 
         ///<summary> The date and time in GMT when the Log resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The absolute URL of the Log resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

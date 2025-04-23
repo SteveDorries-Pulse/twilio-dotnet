@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -205,7 +205,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Configuration
         {
             try
             {
-                return JsonConvert.DeserializeObject<WebhookResource>(json);
+                return JsonSerializer.Deserialize<WebhookResource>(json);
             }
             catch (JsonException e)
             {
@@ -221,7 +221,7 @@ namespace Twilio.Rest.Conversations.V1.Service.Configuration
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -231,31 +231,31 @@ namespace Twilio.Rest.Conversations.V1.Service.Configuration
 
     
         ///<summary> The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this service. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique ID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) this conversation belongs to. </summary> 
-        [JsonProperty("chat_service_sid")]
+        [JsonPropertyName("chat_service_sid")]
         public string ChatServiceSid { get; private set; }
 
         ///<summary> The absolute url the pre-event webhook request should be sent to. </summary> 
-        [JsonProperty("pre_webhook_url")]
+        [JsonPropertyName("pre_webhook_url")]
         public Uri PreWebhookUrl { get; private set; }
 
         ///<summary> The absolute url the post-event webhook request should be sent to. </summary> 
-        [JsonProperty("post_webhook_url")]
+        [JsonPropertyName("post_webhook_url")]
         public Uri PostWebhookUrl { get; private set; }
 
         ///<summary> The list of events that your configured webhook targets will receive. Events not configured here will not fire. Possible values are `onParticipantAdd`, `onParticipantAdded`, `onDeliveryUpdated`, `onConversationUpdated`, `onConversationRemove`, `onParticipantRemove`, `onConversationUpdate`, `onMessageAdd`, `onMessageRemoved`, `onParticipantUpdated`, `onConversationAdded`, `onMessageAdded`, `onConversationAdd`, `onConversationRemoved`, `onParticipantUpdate`, `onMessageRemove`, `onMessageUpdated`, `onParticipantRemoved`, `onMessageUpdate` or `onConversationStateUpdated`. </summary> 
-        [JsonProperty("filters")]
+        [JsonPropertyName("filters")]
         public List<string> Filters { get; private set; }
 
         
-        [JsonProperty("method")]
+        [JsonPropertyName("method")]
         public WebhookResource.MethodEnum Method { get; private set; }
 
         ///<summary> An absolute API resource URL for this webhook. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

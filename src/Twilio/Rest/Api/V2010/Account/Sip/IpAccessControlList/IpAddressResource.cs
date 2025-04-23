@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -503,7 +503,7 @@ namespace Twilio.Rest.Api.V2010.Account.Sip.IpAccessControlList
         {
             try
             {
-                return JsonConvert.DeserializeObject<IpAddressResource>(json);
+                return JsonSerializer.Deserialize<IpAddressResource>(json);
             }
             catch (JsonException e)
             {
@@ -519,7 +519,7 @@ namespace Twilio.Rest.Api.V2010.Account.Sip.IpAccessControlList
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -529,39 +529,39 @@ namespace Twilio.Rest.Api.V2010.Account.Sip.IpAccessControlList
 
     
         ///<summary> A 34 character string that uniquely identifies this resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique id of the Account that is responsible for this resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> A human readable descriptive text for this resource, up to 255 characters long. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> An IP address in dotted decimal notation from which you want to accept traffic. Any SIP requests from this IP address will be allowed by Twilio. IPv4 only supported today. </summary> 
-        [JsonProperty("ip_address")]
+        [JsonPropertyName("ip_address")]
         public string IpAddress { get; private set; }
 
         ///<summary> An integer representing the length of the CIDR prefix to use with this IP address when accepting traffic. By default the entire IP address is used. </summary> 
-        [JsonProperty("cidr_prefix_length")]
+        [JsonPropertyName("cidr_prefix_length")]
         public int? CidrPrefixLength { get; private set; }
 
         ///<summary> The unique id of the IpAccessControlList resource that includes this resource. </summary> 
-        [JsonProperty("ip_access_control_list_sid")]
+        [JsonPropertyName("ip_access_control_list_sid")]
         public string IpAccessControlListSid { get; private set; }
 
         ///<summary> The date that this resource was created, given as GMT in [RFC 2822](https://www.php.net/manual/en/class.datetime.php#datetime.constants.rfc2822) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was last updated, given as GMT in [RFC 2822](https://www.php.net/manual/en/class.datetime.php#datetime.constants.rfc2822) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URI for this resource, relative to `https://api.twilio.com` </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

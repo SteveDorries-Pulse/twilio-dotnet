@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -419,7 +419,7 @@ namespace Twilio.Rest.FlexApi.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<InsightsQuestionnairesQuestionResource>(json);
+                return JsonSerializer.Deserialize<InsightsQuestionnairesQuestionResource>(json);
             }
             catch (JsonException e)
             {
@@ -435,7 +435,7 @@ namespace Twilio.Rest.FlexApi.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -445,43 +445,43 @@ namespace Twilio.Rest.FlexApi.V1
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Insights resource and owns this resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The SID of the question </summary> 
-        [JsonProperty("question_sid")]
+        [JsonPropertyName("question_sid")]
         public string QuestionSid { get; private set; }
 
         ///<summary> The question. </summary> 
-        [JsonProperty("question")]
+        [JsonPropertyName("question")]
         public string Question { get; private set; }
 
         ///<summary> The description for the question. </summary> 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; private set; }
 
         ///<summary> The Category for the question. </summary> 
-        [JsonProperty("category")]
+        [JsonPropertyName("category")]
         public object Category { get; private set; }
 
         ///<summary> The answer_set for the question. </summary> 
-        [JsonProperty("answer_set_id")]
+        [JsonPropertyName("answer_set_id")]
         public string AnswerSetId { get; private set; }
 
         ///<summary> The flag  to enable for disable NA for answer. </summary> 
-        [JsonProperty("allow_na")]
+        [JsonPropertyName("allow_na")]
         public bool? AllowNa { get; private set; }
 
         ///<summary> Integer value that tells a particular question is used by how many questionnaires </summary> 
-        [JsonProperty("usage")]
+        [JsonPropertyName("usage")]
         public int? Usage { get; private set; }
 
         ///<summary> Set of answers for the question </summary> 
-        [JsonProperty("answer_set")]
+        [JsonPropertyName("answer_set")]
         public object AnswerSet { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

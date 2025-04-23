@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -322,7 +322,7 @@ namespace Twilio.Rest.Trusthub.V1.TrustProducts
         {
             try
             {
-                return JsonConvert.DeserializeObject<TrustProductsEvaluationsResource>(json);
+                return JsonSerializer.Deserialize<TrustProductsEvaluationsResource>(json);
             }
             catch (JsonException e)
             {
@@ -338,7 +338,7 @@ namespace Twilio.Rest.Trusthub.V1.TrustProducts
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -348,35 +348,35 @@ namespace Twilio.Rest.Trusthub.V1.TrustProducts
 
     
         ///<summary> The unique string that identifies the Evaluation resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the trust_product resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique string of a policy that is associated to the trust_product resource. </summary> 
-        [JsonProperty("policy_sid")]
+        [JsonPropertyName("policy_sid")]
         public string PolicySid { get; private set; }
 
         ///<summary> The unique string that we created to identify the trust_product resource. </summary> 
-        [JsonProperty("trust_product_sid")]
+        [JsonPropertyName("trust_product_sid")]
         public string TrustProductSid { get; private set; }
 
         
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public TrustProductsEvaluationsResource.StatusEnum Status { get; private set; }
 
         ///<summary> The results of the Evaluation which includes the valid and invalid attributes. </summary> 
-        [JsonProperty("results")]
+        [JsonPropertyName("results")]
         public List<object> Results { get; private set; }
 
         ///<summary> The date_created </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

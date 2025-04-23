@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -112,7 +112,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<RequestManagedCertResource>(json);
+                return JsonSerializer.Deserialize<RequestManagedCertResource>(json);
             }
             catch (JsonException e)
             {
@@ -128,7 +128,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -138,39 +138,39 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> The unique string that we created to identify the Domain resource. </summary> 
-        [JsonProperty("domain_sid")]
+        [JsonPropertyName("domain_sid")]
         public string DomainSid { get; private set; }
 
         ///<summary> Date that this Domain was last updated. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> Date that this Domain was registered to the Twilio platform to create a new Domain object. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> Date that the private certificate associated with this domain expires. This is the expiration date of your existing cert. </summary> 
-        [JsonProperty("date_expires")]
+        [JsonPropertyName("date_expires")]
         public DateTime? DateExpires { get; private set; }
 
         ///<summary> Full url path for this domain. </summary> 
-        [JsonProperty("domain_name")]
+        [JsonPropertyName("domain_name")]
         public Uri DomainName { get; private set; }
 
         ///<summary> The unique string that we created to identify this Certificate resource. </summary> 
-        [JsonProperty("certificate_sid")]
+        [JsonPropertyName("certificate_sid")]
         public string CertificateSid { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> A boolean flag indicating if the certificate is managed by Twilio. </summary> 
-        [JsonProperty("managed")]
+        [JsonPropertyName("managed")]
         public bool? Managed { get; private set; }
 
         ///<summary> A boolean flag indicating if a managed certificate needs to be fulfilled by Twilio. </summary> 
-        [JsonProperty("requesting")]
+        [JsonPropertyName("requesting")]
         public bool? Requesting { get; private set; }
 
 

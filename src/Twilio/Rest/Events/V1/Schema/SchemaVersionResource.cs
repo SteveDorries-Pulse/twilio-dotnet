@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -237,7 +237,7 @@ namespace Twilio.Rest.Events.V1.Schema
         {
             try
             {
-                return JsonConvert.DeserializeObject<SchemaVersionResource>(json);
+                return JsonSerializer.Deserialize<SchemaVersionResource>(json);
             }
             catch (JsonException e)
             {
@@ -253,7 +253,7 @@ namespace Twilio.Rest.Events.V1.Schema
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -263,23 +263,23 @@ namespace Twilio.Rest.Events.V1.Schema
 
     
         ///<summary> The unique identifier of the schema. Each schema can have multiple versions, that share the same id. </summary> 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; private set; }
 
         ///<summary> The version of this schema. </summary> 
-        [JsonProperty("schema_version")]
+        [JsonPropertyName("schema_version")]
         public int? SchemaVersion { get; private set; }
 
         ///<summary> The date the schema version was created, given in ISO 8601 format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The URL of this resource. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
         ///<summary> The raw </summary> 
-        [JsonProperty("raw")]
+        [JsonPropertyName("raw")]
         public Uri Raw { get; private set; }
 
 

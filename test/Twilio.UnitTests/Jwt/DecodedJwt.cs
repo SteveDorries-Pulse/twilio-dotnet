@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Twilio.UnitTests.Jwt
 {
@@ -38,7 +38,7 @@ namespace Twilio.UnitTests.Jwt
         {
             var bytes = Base64UrlDecode(part);
             var json = Encoding.UTF8.GetString(bytes);
-            var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+            var data = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 
             return data;
         }

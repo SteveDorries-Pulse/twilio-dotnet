@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -204,7 +204,7 @@ namespace Twilio.Rest.Insights.V1.Call
         {
             try
             {
-                return JsonConvert.DeserializeObject<EventResource>(json);
+                return JsonSerializer.Deserialize<EventResource>(json);
             }
             catch (JsonException e)
             {
@@ -220,7 +220,7 @@ namespace Twilio.Rest.Insights.V1.Call
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -230,47 +230,47 @@ namespace Twilio.Rest.Insights.V1.Call
 
     
         ///<summary> Event time. </summary> 
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         public string Timestamp { get; private set; }
 
         ///<summary> The unique SID identifier of the Call. </summary> 
-        [JsonProperty("call_sid")]
+        [JsonPropertyName("call_sid")]
         public string CallSid { get; private set; }
 
         ///<summary> The unique SID identifier of the Account. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         
-        [JsonProperty("edge")]
+        [JsonPropertyName("edge")]
         public EventResource.TwilioEdgeEnum Edge { get; private set; }
 
         ///<summary> Event group. </summary> 
-        [JsonProperty("group")]
+        [JsonPropertyName("group")]
         public string Group { get; private set; }
 
         
-        [JsonProperty("level")]
+        [JsonPropertyName("level")]
         public EventResource.LevelEnum Level { get; private set; }
 
         ///<summary> Event name. </summary> 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; private set; }
 
         ///<summary> Represents the connection between Twilio and our immediate carrier partners. The events here describe the call lifecycle as reported by Twilio's carrier media gateways. </summary> 
-        [JsonProperty("carrier_edge")]
+        [JsonPropertyName("carrier_edge")]
         public object CarrierEdge { get; private set; }
 
         ///<summary> Represents the Twilio media gateway for SIP interface and SIP trunking calls. The events here describe the call lifecycle as reported by Twilio's public media gateways. </summary> 
-        [JsonProperty("sip_edge")]
+        [JsonPropertyName("sip_edge")]
         public object SipEdge { get; private set; }
 
         ///<summary> Represents the Voice SDK running locally in the browser or in the Android/iOS application. The events here are emitted by the Voice SDK in response to certain call progress events, network changes, or call quality conditions. </summary> 
-        [JsonProperty("sdk_edge")]
+        [JsonPropertyName("sdk_edge")]
         public object SdkEdge { get; private set; }
 
         ///<summary> Represents the Twilio media gateway for Client calls. The events here describe the call lifecycle as reported by Twilio's Voice SDK media gateways. </summary> 
-        [JsonProperty("client_edge")]
+        [JsonPropertyName("client_edge")]
         public object ClientEdge { get; private set; }
 
 

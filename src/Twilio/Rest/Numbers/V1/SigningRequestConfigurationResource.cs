@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -233,7 +233,7 @@ namespace Twilio.Rest.Numbers.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<SigningRequestConfigurationResource>(json);
+                return JsonSerializer.Deserialize<SigningRequestConfigurationResource>(json);
             }
             catch (JsonException e)
             {
@@ -249,7 +249,7 @@ namespace Twilio.Rest.Numbers.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -259,35 +259,35 @@ namespace Twilio.Rest.Numbers.V1
 
     
         ///<summary> The SID of the document  that includes the logo that will appear in the LOA. To upload documents follow the following guide: https://www.twilio.com/docs/phone-numbers/regulatory/getting-started/create-new-bundle-public-rest-apis#supporting-document-create  </summary> 
-        [JsonProperty("logo_sid")]
+        [JsonPropertyName("logo_sid")]
         public string LogoSid { get; private set; }
 
         ///<summary> This is the string that you assigned as a friendly name for describing the creation of the configuration. </summary> 
-        [JsonProperty("friendly_name")]
+        [JsonPropertyName("friendly_name")]
         public string FriendlyName { get; private set; }
 
         ///<summary> The product or service for which is requesting the signature. </summary> 
-        [JsonProperty("product")]
+        [JsonPropertyName("product")]
         public string Product { get; private set; }
 
         ///<summary> The country ISO code to apply the configuration. </summary> 
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; private set; }
 
         ///<summary> Subject of the email that the end client will receive ex: “Twilio Hosting Request”, maximum length of 255 characters. </summary> 
-        [JsonProperty("email_subject")]
+        [JsonPropertyName("email_subject")]
         public string EmailSubject { get; private set; }
 
         ///<summary> Content of the email that the end client will receive ex: “This is a Hosting request from Twilio, please check the document and sign it”, maximum length of 5,000 characters. </summary> 
-        [JsonProperty("email_message")]
+        [JsonPropertyName("email_message")]
         public string EmailMessage { get; private set; }
 
         ///<summary> Url the end client will be redirected after signing a document. </summary> 
-        [JsonProperty("url_redirection")]
+        [JsonPropertyName("url_redirection")]
         public string UrlRedirection { get; private set; }
 
         ///<summary> The url </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

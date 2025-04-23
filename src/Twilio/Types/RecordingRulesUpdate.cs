@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Twilio.Converters;
 
 /// <summary>
@@ -9,11 +9,10 @@ namespace Twilio.Types
 {
     public class RecordingRulesUpdate
     {
-        [JsonProperty("rules")]
+        [JsonPropertyName("rules")]
         public List<RecordingRule> Rules { get; private set; }
 
-        public RecordingRulesUpdate (
-            [JsonProperty("rules")]
+        public RecordingRulesUpdate(
             List<RecordingRule> rules
         )
         {

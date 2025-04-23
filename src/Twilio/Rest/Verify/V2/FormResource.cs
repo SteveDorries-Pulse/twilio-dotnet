@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -119,7 +119,7 @@ namespace Twilio.Rest.Verify.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<FormResource>(json);
+                return JsonSerializer.Deserialize<FormResource>(json);
             }
             catch (JsonException e)
             {
@@ -135,7 +135,7 @@ namespace Twilio.Rest.Verify.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -145,19 +145,19 @@ namespace Twilio.Rest.Verify.V2
 
     
         
-        [JsonProperty("form_type")]
+        [JsonPropertyName("form_type")]
         public FormResource.FormTypesEnum FormType { get; private set; }
 
         ///<summary> Object that contains the available forms for this type. This available forms are given in the standard [JSON Schema](https://json-schema.org/) format </summary> 
-        [JsonProperty("forms")]
+        [JsonPropertyName("forms")]
         public object Forms { get; private set; }
 
         ///<summary> Additional information for the available forms for this type. E.g. The separator string used for `binding` in a Factor push. </summary> 
-        [JsonProperty("form_meta")]
+        [JsonPropertyName("form_meta")]
         public object FormMeta { get; private set; }
 
         ///<summary> The URL to access the forms for this type. </summary> 
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; private set; }
 
 

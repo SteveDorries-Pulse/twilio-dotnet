@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Twilio.Types
 {
@@ -11,25 +11,25 @@ namespace Twilio.Types
         /// <summary>
         /// Ice Server credential
         /// </summary>
-        [JsonProperty("credential")]
+        [JsonPropertyName("credential")]
         public string Credential { get; }
 
         /// <summary>
         /// Username for server
         /// </summary>
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; }
 
         /// <summary>
         /// Server URL
         /// </summary>
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; }
 
          /// <summary>
          /// Server URL
          /// </summary>
-         [JsonProperty("urls")]
+         [JsonPropertyName("urls")]
          public Uri Urls { get; }
 
         /// <summary>

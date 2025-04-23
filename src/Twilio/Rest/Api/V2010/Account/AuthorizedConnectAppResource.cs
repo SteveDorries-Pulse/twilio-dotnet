@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -250,7 +250,7 @@ namespace Twilio.Rest.Api.V2010.Account
         {
             try
             {
-                return JsonConvert.DeserializeObject<AuthorizedConnectAppResource>(json);
+                return JsonSerializer.Deserialize<AuthorizedConnectAppResource>(json);
             }
             catch (JsonException e)
             {
@@ -266,7 +266,7 @@ namespace Twilio.Rest.Api.V2010.Account
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -276,35 +276,35 @@ namespace Twilio.Rest.Api.V2010.Account
 
     
         ///<summary> The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the AuthorizedConnectApp resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The company name set for the Connect App. </summary> 
-        [JsonProperty("connect_app_company_name")]
+        [JsonPropertyName("connect_app_company_name")]
         public string ConnectAppCompanyName { get; private set; }
 
         ///<summary> A detailed description of the Connect App. </summary> 
-        [JsonProperty("connect_app_description")]
+        [JsonPropertyName("connect_app_description")]
         public string ConnectAppDescription { get; private set; }
 
         ///<summary> The name of the Connect App. </summary> 
-        [JsonProperty("connect_app_friendly_name")]
+        [JsonPropertyName("connect_app_friendly_name")]
         public string ConnectAppFriendlyName { get; private set; }
 
         ///<summary> The public URL for the Connect App. </summary> 
-        [JsonProperty("connect_app_homepage_url")]
+        [JsonPropertyName("connect_app_homepage_url")]
         public Uri ConnectAppHomepageUrl { get; private set; }
 
         ///<summary> The SID that we assigned to the Connect App. </summary> 
-        [JsonProperty("connect_app_sid")]
+        [JsonPropertyName("connect_app_sid")]
         public string ConnectAppSid { get; private set; }
 
         ///<summary> The set of permissions that you authorized for the Connect App.  Can be: `get-all` or `post-all`. </summary> 
-        [JsonProperty("permissions")]
+        [JsonPropertyName("permissions")]
         public List<AuthorizedConnectAppResource.PermissionEnum> Permissions { get; private set; }
 
         ///<summary> The URI of the resource, relative to `https://api.twilio.com`. </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 

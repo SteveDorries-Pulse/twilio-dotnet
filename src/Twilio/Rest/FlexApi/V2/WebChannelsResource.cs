@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -125,7 +125,7 @@ namespace Twilio.Rest.FlexApi.V2
         {
             try
             {
-                return JsonConvert.DeserializeObject<WebChannelsResource>(json);
+                return JsonSerializer.Deserialize<WebChannelsResource>(json);
             }
             catch (JsonException e)
             {
@@ -141,7 +141,7 @@ namespace Twilio.Rest.FlexApi.V2
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -151,11 +151,11 @@ namespace Twilio.Rest.FlexApi.V2
 
     
         ///<summary> The unique string representing the [Conversation resource](https://www.twilio.com/docs/conversations/api/conversation-resource) created. </summary> 
-        [JsonProperty("conversation_sid")]
+        [JsonPropertyName("conversation_sid")]
         public string ConversationSid { get; private set; }
 
         ///<summary> The unique string representing the User created and should be authorized to participate in the Conversation. For more details, see [User Identity & Access Tokens](https://www.twilio.com/docs/conversations/identity). </summary> 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; private set; }
 
 

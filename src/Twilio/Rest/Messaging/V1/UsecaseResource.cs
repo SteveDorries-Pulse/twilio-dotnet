@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -102,7 +102,7 @@ namespace Twilio.Rest.Messaging.V1
         {
             try
             {
-                return JsonConvert.DeserializeObject<UsecaseResource>(json);
+                return JsonSerializer.Deserialize<UsecaseResource>(json);
             }
             catch (JsonException e)
             {
@@ -118,7 +118,7 @@ namespace Twilio.Rest.Messaging.V1
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -128,7 +128,7 @@ namespace Twilio.Rest.Messaging.V1
 
     
         ///<summary> Human readable use case details (usecase, description and purpose) of Messaging Service Use Cases. </summary> 
-        [JsonProperty("usecases")]
+        [JsonPropertyName("usecases")]
         public List<object> Usecases { get; private set; }
 
 

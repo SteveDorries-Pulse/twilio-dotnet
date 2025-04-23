@@ -13,7 +13,7 @@
  */
 
 
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using Twilio.Base;
@@ -491,7 +491,7 @@ namespace Twilio.Rest.Api.V2010.Account.Sip.CredentialList
         {
             try
             {
-                return JsonConvert.DeserializeObject<CredentialResource>(json);
+                return JsonSerializer.Deserialize<CredentialResource>(json);
             }
             catch (JsonException e)
             {
@@ -507,7 +507,7 @@ namespace Twilio.Rest.Api.V2010.Account.Sip.CredentialList
     {
         try
         {
-            return JsonConvert.SerializeObject(model);
+            return JsonSerializer.Serialize(model);
         }
         catch (JsonException e)
         {
@@ -517,31 +517,31 @@ namespace Twilio.Rest.Api.V2010.Account.Sip.CredentialList
 
     
         ///<summary> A 34 character string that uniquely identifies this resource. </summary> 
-        [JsonProperty("sid")]
+        [JsonPropertyName("sid")]
         public string Sid { get; private set; }
 
         ///<summary> The unique id of the Account that is responsible for this resource. </summary> 
-        [JsonProperty("account_sid")]
+        [JsonPropertyName("account_sid")]
         public string AccountSid { get; private set; }
 
         ///<summary> The unique id that identifies the credential list that includes this credential. </summary> 
-        [JsonProperty("credential_list_sid")]
+        [JsonPropertyName("credential_list_sid")]
         public string CredentialListSid { get; private set; }
 
         ///<summary> The username for this credential. </summary> 
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; private set; }
 
         ///<summary> The date that this resource was created, given as GMT in [RFC 2822](https://www.php.net/manual/en/class.datetime.php#datetime.constants.rfc2822) format. </summary> 
-        [JsonProperty("date_created")]
+        [JsonPropertyName("date_created")]
         public DateTime? DateCreated { get; private set; }
 
         ///<summary> The date that this resource was last updated, given as GMT in [RFC 2822](https://www.php.net/manual/en/class.datetime.php#datetime.constants.rfc2822) format. </summary> 
-        [JsonProperty("date_updated")]
+        [JsonPropertyName("date_updated")]
         public DateTime? DateUpdated { get; private set; }
 
         ///<summary> The URI for this resource, relative to `https://api.twilio.com` </summary> 
-        [JsonProperty("uri")]
+        [JsonPropertyName("uri")]
         public string Uri { get; private set; }
 
 
